@@ -16,22 +16,32 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。   遗憾是一种风吹不散，时间也无法侵蚀的东西。 再完满的爱意若没有维系也会随着时间自然淡化，再真挚的情义也难免被名利纠缠在俗世里，退化为现实的枷锁；那些深沉的恨意在复仇以后，随着敌人的消散也一同在漫天风沙里一点点弥散，教人迷茫无所措。 但遗憾不一样。那是经年岁月中，无可挽回的无可奈何，时空流逝下">
+    <meta name="description" content="BeforeGatech 组的主要算法优化策略：  首先，选择当前的 SOTA 算法 对 SOTA 算法进行 Profiling，找到性能瓶颈 以增量式优化为主   RT-NeRFMotivation认为：目前 NeRF 效率低有两个主要原因：  The commonly used uniform point sampling method 朴素的采样方法）   The required dens">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【行见录】遗憾篇">
-<meta property="og:url" content="http://example.com/2023/04/16/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/index.html">
+<meta property="og:title" content="【PaperReading】RTNeRF &amp; Instant3D">
+<meta property="og:url" content="http://example.com/2023/05/05/Paper-RTNeRFAndInstant3D/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。   遗憾是一种风吹不散，时间也无法侵蚀的东西。 再完满的爱意若没有维系也会随着时间自然淡化，再真挚的情义也难免被名利纠缠在俗世里，退化为现实的枷锁；那些深沉的恨意在复仇以后，随着敌人的消散也一同在漫天风沙里一点点弥散，教人迷茫无所措。 但遗憾不一样。那是经年岁月中，无可挽回的无可奈何，时空流逝下">
+<meta property="og:description" content="BeforeGatech 组的主要算法优化策略：  首先，选择当前的 SOTA 算法 对 SOTA 算法进行 Profiling，找到性能瓶颈 以增量式优化为主   RT-NeRFMotivation认为：目前 NeRF 效率低有两个主要原因：  The commonly used uniform point sampling method 朴素的采样方法）   The required dens">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-21T15:08:35.419Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/nerfmodel.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorfprof.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tsnsorfprof-2080ti.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorf-prof-legend.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/effrendpipel.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/vdro.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RTRes.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-10-07.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-11-58.png">
+<meta property="article:published_time" content="2023-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-22T07:03:55.677Z">
 <meta property="article:author" content="Yunxiang He">
-<meta property="article:tag" content="散文">
+<meta property="article:tag" content="Neural Rendering, Architiecture, Hardware-Software Co-Design">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/nerfmodel.png">
   
   
   
-  <title>【行见录】遗憾篇 - Hypoxanthine&#39;s Blog</title>
+  <title>【PaperReading】RTNeRF &amp; Instant3D - Hypoxanthine&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【行见录】遗憾篇"></span>
+            <span id="subtitle" data-typed-text="【PaperReading】RTNeRF &amp; Instant3D"></span>
           
         </div>
 
@@ -208,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-16 00:00" pubdate>
-          2023年4月16日 凌晨
+        <time datetime="2023-05-05 00:00" pubdate>
+          2023年5月5日 凌晨
         </time>
       </span>
     
@@ -220,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          874 字
         
       </span>
     
@@ -231,7 +241,7 @@
         
         
         
-          9 分钟
+          8 分钟
         
       </span>
     
@@ -268,27 +278,134 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【行见录】遗憾篇</h1>
+            <h1 id="seo-header">【PaperReading】RTNeRF &amp; Instant3D</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。</p>
-</blockquote>
+                <h1 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h1><p>Gatech 组的主要算法优化策略：</p>
+<ul>
+<li>首先，选择当前的 SOTA 算法</li>
+<li>对 SOTA 算法进行 Profiling，找到性能瓶颈</li>
+<li>以增量式优化为主</li>
+</ul>
 <hr>
-<p>遗憾是一种风吹不散，时间也无法侵蚀的东西。</p>
-<p>再完满的爱意若没有维系也会随着时间自然淡化，再真挚的情义也难免被名利纠缠在俗世里，退化为现实的枷锁；那些深沉的恨意在复仇以后，随着敌人的消散也一同在漫天风沙里一点点弥散，教人迷茫无所措。</p>
-<p>但遗憾不一样。那是经年岁月中，无可挽回的无可奈何，时空流逝下，深黄的定格。它会褪色却不会淡化，天地不移，江流石不转。它是如此沉重，我们无知觉的拿起，却得用一生的时间去学着放下。</p>
-<p>或者说，所谓放下，说对自身刻意的欺骗，用那些美好光明的虚幻涂鸦去遮掩那些无法被更改的刻痕。</p>
-<p>遗憾是在知道一切无可更改之后的浇不开的块垒。《诡秘之主》里克莱恩被命运胁迫着一路向神位前行，最终却发现梦想回到的家乡已经成为了几万年前的历史；《盘龙》中林雷一路挣扎历经生死，才知道为了救自己燃烧完灵魂的那个德林爷爷再也不能出现在自己面前。那些故事里的遗憾是如此重，让那些能背负命运的主角们——以及作为读者的我们无法放下。</p>
-<p>而现实中的遗憾或许未必一样如山岳般沉重，但你一样放不下它们，只能被选择与它们和解。</p>
-<p>正如高考结束的很多年里，我仍然会做起那些梦。</p>
-<p>那些梦可能是某次考试前的紧张，某次挫败后的懊恼，某些难以言喻的悸动，又或者某些美好灿烂的幻想。那是一段非常沉重而纯粹的回忆。它是如此的沉重，就像是要背着巍峨高山一步一步踏出深深的脚印；它又是如此纯粹，目标是那样的明确，所有人都以不同的方式向着它前进。</p>
-<p>但存在并不代表实现。事实上对于大多数像我这样的人来说，一步一步走下去留下的注定是遗憾，一次一次的努力所证明的是自己的平庸。</p>
-<p>遗憾就是这样，你做着莫欺少年穷的美梦咬牙前行之后，蓦然回首，发现除了与生活与平庸和解以外，失去了别的选择。你终于可以笑着说“原来我也是一个普普通通的人啊”。那些曾经最玄奇最伟大飘渺的幻想被红尘掩埋，埋在那个名叫年少的坟墓里。然后你就再也不需要证明什么了。随着时间的流逝你慢慢老去，然后被人们淡忘，消失在漫长时光的冲刷下，成为历史记录里某个数字的组成部分。</p>
-<p>而此时再看来，在流淌的岁月里沉淀的记忆，已经零零碎碎。剩下的是一片金色的阳光，某个恬静的面庞，还有那个真的相信自己可以倾尽山海的热忱和赤诚。在等若干年后，等自己已经被打磨得圆滑，等着头发变得灰白，等面颊上不可逆转的长出皱纹，我会不会仍然为当年那些年少轻狂——或者未曾年少轻狂——而感到遗憾和后悔？我不知道，也没有人知道。命运的伏线太多，在千百次的推演间我也未曾找到我想要的最优解。那些美好的幻想，永远与我隔着天堑，因为我的平凡和笨拙。</p>
-<p>在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。</p>
+<h1 id="RT-NeRF"><a href="#RT-NeRF" class="headerlink" title="RT-NeRF"></a>RT-NeRF</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>认为：目前 NeRF 效率低有两个主要原因：</p>
+<ol>
+<li>The commonly used <strong>uniform point sampling</strong> method<ul>
+<li>朴素的采样方法）</li>
+</ul>
+</li>
+<li>The required dense <strong>accesses and computations</strong> for <strong>embeddings</strong><ul>
+<li>密集的 Embedding 访问和计算</li>
+</ul>
+</li>
+</ol>
+<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/nerfmodel.png" srcset="/img/loading.gif" lazyload title="NeRF Model">
+
+<h3 id="先验信息：-Sparsities-of-pre-existing-points"><a href="#先验信息：-Sparsities-of-pre-existing-points" class="headerlink" title="先验信息： Sparsities of pre-existing points"></a>先验信息： Sparsities of pre-existing points</h3><p>最终有效的采样点应该具有稀疏性</p>
+<h2 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h2><ol>
+<li>Directly computing the geometry of pre-existing points based on the corresponding non-zero cubes of the occupancy grid<ul>
+<li>通过预计算已经存在于 Occupancy Grid 的几何元素，减少采样点数量</li>
+</ul>
+</li>
+<li>Leverages a coarse-grained view-dependent rendering ordering scheme to avoid processing invisible points<ul>
+<li>通过一个粗粒度的排序，减少对某些不可见点的运算</li>
+<li>Object Ordered 思想</li>
+</ul>
+</li>
+</ol>
+<h2 id="Profiling"><a href="#Profiling" class="headerlink" title="Profiling"></a>Profiling</h2><p>对 TensoRF 的 Rendering Pipeline 进行 Profiling。</p>
+<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorfprof.png" srcset="/img/loading.gif" lazyload>
+
+<hr>
+<h2 id="Profiling-1"><a href="#Profiling-1" class="headerlink" title="Profiling"></a>Profiling</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tsnsorfprof-2080ti.png" srcset="/img/loading.gif" lazyload>
+<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorf-prof-legend.png" srcset="/img/loading.gif" lazyload>
+
+<hr>
+<h2 id="Locate-the-pre-existing-points"><a href="#Locate-the-pre-existing-points" class="headerlink" title="Locate the pre-existing points"></a>Locate the pre-existing points</h2><p>All the candidate points <strong>are uniformly sampled along rays</strong> and then the existence of pre-existing points are identified via a <strong>query process</strong> based on the occupancy grid.</p>
+<p>首先在光线上进行一次预采样，通过 Occupancy Grid 来查询点的存在与否</p>
+<h3 id="两个-Inefficiency"><a href="#两个-Inefficiency" class="headerlink" title="两个 Inefficiency:"></a>两个 Inefficiency:</h3><ol>
+<li>The sparsity of the occupancy grid is not leveraged<ul>
+<li>没有利用 Occupancy Grid 的稀疏性先验</li>
+</ul>
+</li>
+<li>The DRAM accesses to the occupancy grid are irregular because the emitted rays can come from any direction, and thus the order of their accesses to the occupancy grid can not be predicted in advance.<ul>
+<li>由于 Ray 的方向并不能预知，Occupancy 的 DRAM-Access 很随机，Locality 差</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Proposed-Solution？"><a href="#Proposed-Solution？" class="headerlink" title="Proposed Solution？"></a>Proposed Solution？</h2><p>Directly computes the coordinates of pre-existing points by looping over the non-zero cubes of the occupancy grid.</p>
+<ul>
+<li>按照 <strong>固定的顺序</strong> 访问 Occupancy Grid（也即所谓的“Cube”）</li>
+</ul>
+<h2 id="Efficient-Rendering-Pipeline"><a href="#Efficient-Rendering-Pipeline" class="headerlink" title="Efficient Rendering Pipeline"></a>Efficient Rendering Pipeline</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/effrendpipel.png" srcset="/img/loading.gif" lazyload width="800">
+
+
+<ol>
+<li>将 Occupancy Grid 中的每个 Non-zero cube 近似为一个球，以方便后续步骤的计算；</li>
+<li>将上述的球投射到要渲染的图像上，成为一个椭圆（Oval）；</li>
+<li>根据待渲染的图像中的 <strong>regular arrangement of points</strong> ，即一个点对应一个像素，确定椭圆内的点；</li>
+<li>使用 Line-Sphere intersections 的解析解来计算出沿着光线射线并且在球内的点的 Geometries。</li>
+</ol>
+<p>只有 Pre-exist points 会被包含在循环中。解决了：</p>
+<ol>
+<li>Occupancy Grid 的 Sparsity 没有被充分利用</li>
+<li>在 SOTA Rendering Pipeline 中， DRAM Access 的不规则性</li>
+</ol>
+<h2 id="Early-Termination-Volume-Rendering"><a href="#Early-Termination-Volume-Rendering" class="headerlink" title="Early Termination: Volume Rendering"></a>Early Termination: Volume Rendering</h2><p>在图形学中，Volume Rendering Integral 的离散化计算主要有两种：</p>
+<ul>
+<li>Front-to-back composition: 从前向后积分<ul>
+<li>$\begin{cases}\hat{C_i}&#x3D;\hat{C}<em>{i+1} + \hat{T</em>{i+1}}C_i\\hat{T_i}&#x3D;\hat{T}_{i+1}(1-\alpha_i)\end{cases}$</li>
+</ul>
+</li>
+<li>Back-to-front composition： 从后向前积分<ul>
+<li>$\begin{cases}\hat{C_i}&#x3D;\hat{C_{i-1}}(1-\alpha_i)\\hat{T}<em>i&#x3D;\hat{T}</em>{i-1}(1-\alpha_i)\end{cases}$</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="View-Dependent-Rendering-Ordering"><a href="#View-Dependent-Rendering-Ordering" class="headerlink" title="View-Dependent Rendering Ordering"></a>View-Dependent Rendering Ordering</h2><p>主要 Motivation 来自于：</p>
+<ul>
+<li>Early Termination 要求我们在进行点采样的时候按照 Ray Marching 的顺序进行（从前向后）</li>
+<li>如果先访问了暂时还没有 Marching 到的点，那这个数值显然不能拿来计算，相当于是一次无效访问</li>
+<li>如果能让渲染的计算本身变得有序，就能获得更好的 Locality！</li>
+</ul>
+<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/vdro.png" srcset="/img/loading.gif" lazyload>
+
+<ol>
+<li>将 Occupancy Grid 分割成八个 Subspace</li>
+<li>先计算最接近 View Origin（光线的原点）的子空间将会先进入计算</li>
+<li>接下来，途中标注 <code>2</code> 的部分再进入计算，再接下来是剩下的</li>
+</ol>
+<hr>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RTRes.png" srcset="/img/loading.gif" lazyload>
+
+<hr>
+<h1 id="Instant-3D"><a href="#Instant-3D" class="headerlink" title="Instant 3D"></a>Instant 3D</h1><p>回顾一下Gatech 组的主要算法优化策略：</p>
+<ul>
+<li>首先，选择当前的 SOTA 算法</li>
+<li>对 SOTA 算法进行 Profiling，找到性能瓶颈</li>
+<li>以增量式优化为主</li>
+</ul>
+<h2 id="选择当前的-SOTA-算法"><a href="#选择当前的-SOTA-算法" class="headerlink" title="选择当前的 SOTA 算法"></a>选择当前的 SOTA 算法</h2><p>—— Instant NGP</p>
+<h2 id="对-SOTA-算法进行-Profiling"><a href="#对-SOTA-算法进行-Profiling" class="headerlink" title="对 SOTA 算法进行 Profiling"></a>对 SOTA 算法进行 Profiling</h2><p>认为 NGP 的主要瓶颈是对 3D Feature 进行三线性插值</p>
+<h2 id="Different-paces-of-Color-and-Density-During-Training"><a href="#Different-paces-of-Color-and-Density-During-Training" class="headerlink" title="Different paces of Color and Density During Training"></a>Different paces of Color and Density During Training</h2><p>重建质量对于 Color 和 Density特征 具有不同的敏感性</p>
+<ul>
+<li>因为 NeRF 本身重建的 Loss 是 RGB-Based，并没有引入几何形状的约束，几何形状的重建本身是“赠品”</li>
+<li>因此，Color 部分并不需要和 Density 部分相同的精度（Color 部分粗糙一些也不影响重建效果）</li>
+</ul>
+<h2 id="两个优化："><a href="#两个优化：" class="headerlink" title="两个优化："></a>两个优化：</h2><ol>
+<li>两个网格的尺寸不需要一样</li>
+<li>两个网格的更新频率不需要一样</li>
+</ol>
+<h3 id="网格尺寸"><a href="#网格尺寸" class="headerlink" title="网格尺寸"></a>网格尺寸</h3><p>遍历了一下两个网格尺寸的比例，找了一些有代表性的结果：</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-10-07.png" srcset="/img/loading.gif" lazyload alt="w:500"></p>
+<p>Color Grid 可以使用更小的大小</p>
+<h3 id="更新频率"><a href="#更新频率" class="headerlink" title="更新频率"></a>更新频率</h3><p>遍历了一下两个网格更新频率的比例，找了一些有代表性的结果：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-11-58.png" srcset="/img/loading.gif" lazyload alt="w:500"></p>
+<p>Density Grid 可以使用更小的更新频率</p>
+<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><p>We can trim down the runtime by $83.0%$ as compared to the most efficient NeRF training algorithm [24] on the same edge GPU Xavier NX.</p>
 
                 
               </div>
@@ -301,7 +418,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%A3%E6%96%87/" class="print-no-link">#散文</a>
+        <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" class="print-no-link">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
       
     </div>
   
@@ -313,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【行见录】遗憾篇</div>
-      <div>http://example.com/2023/04/16/行见录-遗憾篇/</div>
+      <div>【PaperReading】RTNeRF &amp; Instant3D</div>
+      <div>http://example.com/2023/05/05/Paper-RTNeRFAndInstant3D/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月16日</div>
+          <div>2023年5月5日</div>
         </div>
       
       
@@ -358,9 +475,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/05/Paper-RTNeRFAndInstant3D/" title="【PaperReading】RTNeRF &amp; Instant3D">
+                      <a href="/2023/06/21/Paper-NeuRex/" title="【PaperReading】NeuRex">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【PaperReading】RTNeRF &amp; Instant3D</span>
+                        <span class="hidden-mobile">【PaperReading】NeuRex</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -368,8 +485,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/10/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" title="【唐宋文学精华 期末论文】婉约词中的风骨">
-                        <span class="hidden-mobile">【唐宋文学精华 期末论文】婉约词中的风骨</span>
+                      <a href="/2023/04/16/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/" title="【行见录】遗憾篇">
+                        <span class="hidden-mobile">【行见录】遗憾篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
