@@ -16,25 +16,22 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="3D Gaussian Splatting for Real-Time Radiance Field Rendering Backgrounds Anisotropic（各向异性的） 3D Gaussians Splatting Method（抛雪球法） Tiling（数据分块）  Background 01: Anisotropic（各向异性的） 3D Gaussians$$G(\mathbf">
+    <meta name="description" content="“青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，只剩下一抹浅浅的泡影。” ——行见录·相逢篇   从别后，忆相逢，几回魂梦与君同。今宵剩把银釭照，犹恐相逢是梦中。 ——晏几道《鹧鸪天》   什么是相逢？ 小的时候，每天回家看到迎接自己的父母，称得上相逢吗？ 每天早上从宿舍起来看到正在学习的舍友，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【PaperReading】3D Gaussian Splattting">
-<meta property="og:url" content="http://example.com/2023/07/20/Paper-3DGaussian/index.html">
+<meta property="og:title" content="【行见录】相逢篇">
+<meta property="og:url" content="http://example.com/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="3D Gaussian Splatting for Real-Time Radiance Field Rendering Backgrounds Anisotropic（各向异性的） 3D Gaussians Splatting Method（抛雪球法） Tiling（数据分块）  Background 01: Anisotropic（各向异性的） 3D Gaussians$$G(\mathbf">
+<meta property="og:description" content="“青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，只剩下一抹浅浅的泡影。” ——行见录·相逢篇   从别后，忆相逢，几回魂梦与君同。今宵剩把银釭照，犹恐相逢是梦中。 ——晏几道《鹧鸪天》   什么是相逢？ 小的时候，每天回家看到迎接自己的父母，称得上相逢吗？ 每天早上从宿舍起来看到正在学习的舍友，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/overview.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Densify.png">
-<meta property="article:published_time" content="2023-07-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-22T07:04:25.369Z">
+<meta property="article:published_time" content="2022-12-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-21T15:08:33.045Z">
 <meta property="article:author" content="Yunxiang He">
-<meta property="article:tag" content="Neural Rendering, Architiecture, Hardware-Software Co-Design">
+<meta property="article:tag" content="散文">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/overview.png">
   
   
   
-  <title>【PaperReading】3D Gaussian Splattting - Hypoxanthine&#39;s Blog</title>
+  <title>【行见录】相逢篇 - Hypoxanthine&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【PaperReading】3D Gaussian Splattting"></span>
+            <span id="subtitle" data-typed-text="【行见录】相逢篇"></span>
           
         </div>
 
@@ -211,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-20 00:00" pubdate>
-          2023年7月20日 凌晨
+        <time datetime="2022-12-18 00:00" pubdate>
+          2022年12月18日 凌晨
         </time>
       </span>
     
@@ -223,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          946 字
+          1.8k 字
         
       </span>
     
@@ -234,7 +231,7 @@
         
         
         
-          8 分钟
+          16 分钟
         
       </span>
     
@@ -271,167 +268,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【PaperReading】3D Gaussian Splattting</h1>
+            <h1 id="seo-header">【行见录】相逢篇</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering"><a href="#3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering" class="headerlink" title="3D Gaussian Splatting for Real-Time Radiance Field Rendering"></a>3D Gaussian Splatting for Real-Time Radiance Field Rendering</h1><hr>
-<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><ol>
-<li>Anisotropic（各向异性的） 3D Gaussians</li>
-<li>Splatting Method（抛雪球法）</li>
-<li>Tiling（数据分块）</li>
-</ol>
-<h3 id="Background-01-Anisotropic（各向异性的）-3D-Gaussians"><a href="#Background-01-Anisotropic（各向异性的）-3D-Gaussians" class="headerlink" title="Background 01: Anisotropic（各向异性的） 3D Gaussians"></a>Background 01: Anisotropic（各向异性的） 3D Gaussians</h3><p>$$G(\mathbf x)&#x3D;\exp\big(-\frac{1}{2}(\mathbf x)^T\Sigma^{-1}(\mathbf x)\big)$$</p>
-<ul>
-<li>“位置”用均值 $\mathbf \mu$ 来刻画</li>
-<li>“形状”用 3D 协方差矩阵 $\Sigma$ 来刻画</li>
-</ul>
-<h3 id="Background-02：-Splatting-Method（抛雪球法）"><a href="#Background-02：-Splatting-Method（抛雪球法）" class="headerlink" title="Background 02： Splatting Method（抛雪球法）"></a>Background 02： Splatting Method（抛雪球法）</h3><ul>
-<li>把 Fields 中每个 Voxel（Point）看作一个“能量源“</li>
-<li>每个 Voxel 向图像平面投影</li>
-<li>用以 Voxel 的投影点为中心的重建核将体素的“能量”“扩散”到图像像素上。<ul>
-<li>在这篇论文里，其“重建核”是 3D Gaussian Function</li>
-</ul>
-</li>
-</ul>
-<h3 id="Background-03：-Tiling（数据分块）"><a href="#Background-03：-Tiling（数据分块）" class="headerlink" title="Background 03： Tiling（数据分块）"></a>Background 03： Tiling（数据分块）</h3><ul>
-<li>GPU 上各种内存的访问速度为： <ul>
-<li>$\text{Global memory} &lt;&lt; \text{Shared memory} &lt; \text{Register}$</li>
-</ul>
-</li>
-<li>Global memory 大而慢， Shared memory 小而快</li>
-<li>减少内存访问延迟的一个重要方向就是要<strong>尽量减少 Global memory 的访问</strong></li>
-<li>常见的策略：Tiling —— 将数据分片，然后将每个小分片缓存到 Shared Memory 中。</li>
-</ul>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
-<li>NeRFs: Implicit scene representation<ul>
-<li>MLP + Volumetric ray-marching</li>
-<li>“is <strong>costly</strong> and can result in <strong>noise</strong>“</li>
-</ul>
-</li>
-<li>传统的 Explicit Representation<ul>
-<li>优点：适合 GPU&#x2F;CUDA-based rasterization</li>
-<li>缺点：传统重建方法（MVS）在场景的恢复上具有局限性（这是 Neural Rendering 的优势所在）</li>
-</ul>
-</li>
-</ul>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/overview.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>Input: Images + Sparse Point Clouds（Generated by SFM）</li>
-<li>Initialize：Generate 3D Gaussian for every point</li>
-<li>Training：Optimization + Adaptive Density Control</li>
-<li>Rendering：Tile-based Rasterizer</li>
-</ul>
-<h2 id="3D-Gaussian-and-it’s-Projection"><a href="#3D-Gaussian-and-it’s-Projection" class="headerlink" title="3D Gaussian and it’s Projection"></a>3D Gaussian and it’s Projection</h2><p>3D Gaussian 使用 $\mu$ 和 $\Sigma$ 表征：<br>$$G(\mathbf x)&#x3D;\exp\big(-\frac{1}{2}(\mathbf x)^T\Sigma^{-1}(\mathbf x)\big)$$</p>
-<p>其投影变换使用一个 相机矩阵 $W$ 和其 Jacobian $J$：<br>$$\Sigma’ &#x3D; JW\Sigma W^TJ^T$$</p>
-<h2 id="3D-Gaussian’s-Optimization"><a href="#3D-Gaussian’s-Optimization" class="headerlink" title="3D Gaussian’s Optimization"></a>3D Gaussian’s Optimization</h2><ul>
-<li>直接优化协方差矩阵？<ul>
-<li>协方差矩阵只在半正定时才有物理意义</li>
-<li>梯度下降很难确保其有效性</li>
-</ul>
-</li>
-<li>将 $\Sigma$ 分解为 Scale Matrix $S$ 和 Rotation Matrix $R$：<br>$$\Sigma &#x3D; RSS^TR^T$$</li>
-</ul>
-<div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <div>
-
-
-<h3 id="优化对象"><a href="#优化对象" class="headerlink" title="优化对象"></a>优化对象</h3><ul>
-<li><p>Position $\mathbf p$</p>
-</li>
-<li><p>不透明度 $\alpha$</p>
-</li>
-<li><p>协方差 $\Sigma$</p>
-</li>
-<li><p>表征颜色的球谐函数系数 $\text{SH}$</p>
-</div>
-
-<div></li>
-</ul>
-<h3 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h3><ul>
-<li><p>随机梯度下降</p>
-</li>
-<li><p>对于 $\alpha$ 使用 Sigmoid 激活函数</p>
-</li>
-<li><p>对于 $\Sigma$ 的 Scale 部分，使用指数激活函数</p>
-</li>
-<li><p>Loss 表示为 L1 和 D-SSIM 的组合：</p>
-<ul>
-<li><p>$\mathcal{L} &#x3D; (1-\lambda)\mathcal{L} + \lambda\mathcal{L}_{\text{D-SSIM}}$</p>
-</div>
-</div></li>
-</ul>
-</li>
-</ul>
-<h2 id="Adaptive-Control-of-Gaussians"><a href="#Adaptive-Control-of-Gaussians" class="headerlink" title="Adaptive Control of Gaussians"></a>Adaptive Control of Gaussians</h2><ul>
-<li>每 100 个 iter 进行一次密集化（Densify）</li>
-<li>密集化的同时，移除 $\alpha &lt;\epsilon_\alpha$ 的 Gauss Function</li>
-</ul>
-<h2 id="Densification-Overview"><a href="#Densification-Overview" class="headerlink" title="Densification Overview"></a>Densification Overview</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Densify.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="Object-of-Densification"><a href="#Object-of-Densification" class="headerlink" title="Object of Densification"></a>Object of Densification</h2><ul>
-<li>缺失几何特征的区域（”under-reconstruction”）</li>
-<li>Gaussian 覆盖场景中大面积区域的情况（通常对应于”over-reconstruction”</li>
-</ul>
-<p>这两种情况都具有较大的 View-space Positional Gradients。<br>—— 对于**梯度大于 $\tau_{\text{pos}}$ 的 Gaussian **进行密集化！</p>
-<h2 id="Process-of-Densification"><a href="#Process-of-Densification" class="headerlink" title="Process of Densification"></a>Process of Densification</h2><ul>
-<li>对于 Scale 比较小的 Gaussian：<ul>
-<li>Clone 一份，并向梯度方向移动</li>
-</ul>
-</li>
-<li>对于 Scale 比较大的 Gaussian：<ul>
-<li>分割成两个 $\text{Scale}<em>{\text{New}} &#x3D; \text{Scale}</em>{\text{Old}}&#x2F;1.6$ 的小 Gaussian </li>
-<li>小 Gaussian 的位置通过采样确定</li>
-</ul>
-</li>
-</ul>
-<h2 id="Fast-Differentiable-Rasterizer-Overview"><a href="#Fast-Differentiable-Rasterizer-Overview" class="headerlink" title="Fast Differentiable Rasterizer Overview"></a>Fast Differentiable Rasterizer Overview</h2><ul>
-<li>将屏幕分成 $16×16$ 个 tile</li>
-<li>针对 view-frustum 和每个 tile 对 3D Gaussian 进行裁剪。<ul>
-<li>只保留与 view-frustum 相交的置信区间为99%的 Gaussian </li>
-<li>拒绝在极端位置（均值接近 near plane 和远离 view-frustrum）上的 Gaussian</li>
-</ul>
-</li>
-<li>Instantiate each Gaussian<ul>
-<li>每个 Gaussian 分配一个 Key</li>
-<li>Key 由其 View space depth 和 tile ID 组成</li>
-</ul>
-</li>
-<li>Do GPU Radix sort，generate List for each tile</li>
-<li>Rasterization</li>
-</ul>
-<h2 id="GPU-Radix-sort"><a href="#GPU-Radix-sort" class="headerlink" title="GPU Radix sort"></a>GPU Radix sort</h2><ul>
-<li>一种非比较型<strong>整数排序</strong>算法，时间复杂度为 $O(n)$</li>
-<li>在 GPU 中具有成熟的实现</li>
-<li>NVIDIA&#x2F;CUB 库即有现成的实现方式</li>
-</ul>
-<h2 id="Radix-Sort-原理"><a href="#Radix-Sort-原理" class="headerlink" title="Radix Sort 原理"></a>Radix Sort 原理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">RadixSort</span>(<span class="hljs-params">arr: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>):<br>    length = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">str</span>(<span class="hljs-built_in">max</span>(arr)))<br>    <br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        一共需要进行 length 轮排序</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 每一轮排序内部：用桶 Bucket 装对应第 k 位为 0~9 的数</span><br>        <span class="hljs-comment">## GPU Radix Sort 应该是 二进制长度</span><br>        buckets = [[] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)]<br>        <span class="hljs-keyword">for</span> number <span class="hljs-keyword">in</span> arr:<br>            key = number // (<span class="hljs-number">10</span> ** k) % <span class="hljs-number">10</span><br>            buckets[key].append(number)<br>        <span class="hljs-comment"># 重排 arr</span><br>        arr.clear()<br>        arr = [number <span class="hljs-keyword">for</span> bucket <span class="hljs-keyword">in</span> buckets <span class="hljs-keyword">for</span> number <span class="hljs-keyword">in</span> bucket]<br>    <span class="hljs-keyword">return</span> arr<br></code></pre></td></tr></table></figure>
-
-<h2 id="Detail-of-Rasterization"><a href="#Detail-of-Rasterization" class="headerlink" title="Detail of Rasterization"></a>Detail of Rasterization</h2><ul>
-<li>Input：每个 tile 拥有一个 list，包含其对应的所有 Gaussian<ul>
-<li>这里的 Gaussian 已经排序完成，可以直接进行 Rasterization</li>
-</ul>
-</li>
-<li>启动一个 thread block<ul>
-<li>首先把数据 Load 到 Shared Memory 中</li>
-<li>对每个像素，按顺序遍历 List 来对 Color 和 $\alpha$ 进行 Integration</li>
-<li>如果像素的 $\alpha &#x3D; 1$ ，终止这个线程</li>
-</ul>
-</li>
-</ul>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
-<li>质量：充分训练后超过 MipNeRF-360</li>
-<li>Inference 速度：130+FPS</li>
-<li>Memory Usage：NeRF Synthetic-Lego：81.7 MB（ Explicit Representation，和场景大小相关）</li>
-</ul>
-<hr>
-<h1 id="My-Discussion"><a href="#My-Discussion" class="headerlink" title="My Discussion"></a>My Discussion</h1><h2 id="Memory-bound-vs-Compute-bound"><a href="#Memory-bound-vs-Compute-bound" class="headerlink" title="Memory bound vs. Compute bound?"></a>Memory bound vs. Compute bound?</h2><blockquote>
-<p>The most compact representations (such as the MLP network in Mildenhall et al. [2020] or the low-rank decomposition in Chen et al. [2022b]) require many FLOPS to query, and the fastest representations (such as the sparse 3D data structures used in Yu et al. [2021] and Hedman et al. [2021]) consume large amounts of graphics memory —— MERF</p>
+                <blockquote>
+<p>“青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，只剩下一抹浅浅的泡影。”</p>
+<p>——行见录·相逢篇</p>
 </blockquote>
-<ul>
-<li>3D Gaussian 把计算量转化为内存占用，但是在这个 Trade Off 中在其他参数中表现非常优秀</li>
-<li>是一种 Based on GPU 的优化，充分利用了 GPU 的结构特性</li>
-</ul>
+<blockquote>
+<p>从别后，忆相逢，几回魂梦与君同。今宵剩把银釭照，犹恐相逢是梦中。</p>
+<p>——晏几道《鹧鸪天》</p>
+</blockquote>
+<hr>
+<p>什么是相逢？</p>
+<p>小的时候，每天回家看到迎接自己的父母，称得上相逢吗？</p>
+<p>每天早上从宿舍起来看到正在学习的舍友，称得上相逢吗？</p>
+<p>每天在去考勤的路上与某位教授擦肩而过，称得上相逢吗？</p>
+<p>我觉得不算。</p>
+<p>西方语言学中有一个叫做“语码”的概念。在一个有着相同文化传统的群体里，一个语言符号，可以引发人们共同（“普遍”）的联想。这时候，这个语言符号（语码），就像一个按钮，按下它，就会引起这个有着相同文化传统的群体里的人比较接近的联想。</p>
+<p>相逢就是这样一个语码。听到相逢这两个字，就好像看到明媚的春天里的狂奔，在春风中飞扬的花瓣擦过自己的脸庞，而恍然未觉的你只是看着眼前与你相见的人，她的眼睛是如此的明亮而深邃，就像是每个深夜入梦时头顶的星空。</p>
+<p>青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，剩下一道泡影。</p>
+<p>曾几何时，我也经历过这样的相逢：</p>
+<blockquote>
+<p>今年天气去年新，昨夜凭窗望月明。</p>
+<p>红笺急草封心意，字字句句重千金。</p>
+<p>春天树，夏天云，风景难寄此时情。</p>
+<p>乘我小舟轻渡浪，江流回转始逢君。</p>
+</blockquote>
+<p>那时的相逢这样的。你会紧张到无法入眠，看着窗外逐渐温暖却爽朗清新的天气，看着窗外的明月在干净的夜空下莹莹烁烁，在淡淡的层云间洒下薄薄的辉光。你沉思良久，有好多好多想说的话，又害怕自己说不出口，只好提笔，用信的格式写下那些无从抒发的心绪。你是如此郑重、真诚和热忱，每一句话都从最深的心底发出，你相信你永远也不会违背自己现在所说的一切。</p>
+<p>春夏之交，你望着那些绿树层云，它们都是相逢路上的注解，这些淡漠的风景怎能抒发那种迫切又梦幻的心情？在渡过浩渺的长江的时候，你想到苏轼曾经在这里写下“渺沧海之一粟”，但这样的宽广浩瀚在相逢的迫切下也显得如此微茫。在几个小时的奔波之后，你终于满头大汗的见到了你想见的人，阳光斜斜地穿过树荫，落在她微侧的脸庞上，你看着她清澈的眼睛，感到如此兴奋和幸福，就好像整个世界都被你收入眼里。</p>
+<p>哪怕你知道这次相见之后，就是……永别。</p>
+<p>但这一瞬间也已经足够。</p>
+<p>我们说相逢的欢喜是永恒的，而它又会以极快的速度逝去。永恒是什么？永恒刻画的是深度，从不是持续的时间。消失的喜悦留下的梦幻一般的回忆被各种各样的思绪填满，越是长久，越是深沉，最后酿成夹杂喜怒哀乐的一句感慨，藏着当年的小心翼翼和满心期盼，藏着未说出口的话，藏到你自己都忘却，藏到岁月的尘埃把它们掩埋。</p>
+<p>是啊，每个生命都在时间的洪流里疾行，本来也没有多少时间给我们留下来蹉跎和温存。</p>
+<p>相逢这种东西太易碎了，“江南无所有，聊赠一枝春”，又或者“正是江南好风景，落花时节又逢君”，都是不敢言说的相思和喜悦。大都好物不坚牢，彩云易散琉璃脆。相逢是如此的美妙，以致于我们不敢直言，怕一说出口它就变成了梦幻和泡影。</p>
+<p>刘慈欣在《球状闪电》的结尾也曾经写过一种“相逢”：</p>
+<blockquote>
+<p>我猛地睁开双眼，就在书桌上的紫水晶花瓶上，出现了一朵蓝色的玫瑰，但玫瑰在我看到它的瞬间就消失了，只剩空花瓶静静地立在那里。但那朵玫瑰的每一个细节都印在我的脑海中，它充满了生机，透出一种冰雪的灵气。</p>
+</blockquote>
+<blockquote>
+<p>我以后再也没有看到蓝色玫瑰，但知道它在那里就够了。有时夜深人静，我就将水晶花瓶移到窗前，然后背对着它站着，这时我往往能闻到缥缈的花香，就知道它肯定已经在那里了，心灵的眼睛能看清它的每一个细节。我用心来抚摸着它的每一个花瓣，看它在来自窗外的夜风中微微摇曳……它是一朵我只能用心来看的花。</p>
+</blockquote>
+<blockquote>
+<p>不过，我还是希望在此生再用自己的眼睛看到一次蓝色玫瑰，据丁仪说，从量子力学的角度来讲，人的死亡过程就是由一个强观察者变为弱观察者再变为非观察者的过程，当我变成弱观察者时，玫瑰的概率云向毁灭态的坍缩速度就会慢一些，我就有希望看到它。</p>
+</blockquote>
+<blockquote>
+<p>当我走到人生的尽头，当我在弥留之际最后一次睁开眼睛，那时我所有的知性和记忆都消失在过去的深渊中，又回到童年纯真的感觉和梦幻之中，那就是量子玫瑰向我微笑的时候。</p>
+</blockquote>
+<p>这就是相逢。蓝色的玫瑰引着我们从时间的长河里腾空，跨越一生的时光，回到那个你不曾回去的年岁。那是你从别后就一直在回忆的东西。我想，当玫瑰在我离去的那一刻开放的时候，再现的玫瑰正如同晏几道的相逢一样，那一瞬间，往昔的杨柳明月桃花清风都再一次浮现在眼前，栩栩如生一如当年；那一刻再短暂得像是春天的清晨树梢滑落的露水，却又被一帧帧拉长，慢放到足以回忆起一生的欢喜和忧伤。我想晏几道在人生的终点闭上双眼的时候，或许是含着期待去的。在离去的那一个，一生的岁月如走马灯一般略过眼前的时候，他终于可以再一次回味那时候的欢喜，回味那个彩袖飞舞的相逢。</p>
 
                 
               </div>
@@ -444,7 +330,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" class="print-no-link">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
+        <a href="/tags/%E6%95%A3%E6%96%87/" class="print-no-link">#散文</a>
       
     </div>
   
@@ -456,8 +342,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【PaperReading】3D Gaussian Splattting</div>
-      <div>http://example.com/2023/07/20/Paper-3DGaussian/</div>
+      <div>【行见录】相逢篇</div>
+      <div>http://example.com/2022/12/18/个人创作/行见录/行见录-相逢篇/</div>
     </div>
     <div class="license-meta">
       
@@ -469,7 +355,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月20日</div>
+          <div>2022年12月18日</div>
         </div>
       
       
@@ -501,9 +387,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/15/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" title="【宋词导读 读书报告】宋词中的感性和理性">
+                      <a href="/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" title="【唐宋文学精华 期末论文】婉约词中的风骨">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【宋词导读 读书报告】宋词中的感性和理性</span>
+                        <span class="hidden-mobile">【唐宋文学精华 期末论文】婉约词中的风骨</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -511,8 +397,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/21/Paper-NeuRex/" title="【PaperReading】NeuRex">
-                        <span class="hidden-mobile">【PaperReading】NeuRex</span>
+                      <a href="/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/" title="【中华文明通论 期末论文】元代之后陆上丝绸之路凋敝的必然性">
+                        <span class="hidden-mobile">【中华文明通论 期末论文】元代之后陆上丝绸之路凋敝的必然性</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
