@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>【环境配置】CUDA环境配置</title>
-    <link href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/"/>
-    <url>/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/</url>
+    <title>【环境配置】C与C++的编译环境</title>
+    <link href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"/>
+    <url>/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="C-C-编译环境的配置"><a href="#C-C-编译环境的配置" class="headerlink" title="C &amp; C++ 编译环境的配置"></a>C &amp; C++ 编译环境的配置</h1><h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><h2 id="Compiler-On-Linux（以-Ubuntu-为例）"><a href="#Compiler-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Compiler On Linux（以 Ubuntu 为例）"></a>Compiler On Linux（以 Ubuntu 为例）</h2><h2 id="Compiler-On-Windows（MingW）"><a href="#Compiler-On-Windows（MingW）" class="headerlink" title="Compiler On Windows（MingW）"></a>Compiler On Windows（MingW）</h2><h2 id="Compiler-On-Windows（Visual-Studio）"><a href="#Compiler-On-Windows（Visual-Studio）" class="headerlink" title="Compiler On Windows（Visual Studio）"></a>Compiler On Windows（Visual Studio）</h2>]]></content>
     
     
     <categories>
@@ -29,11 +29,11 @@
   
   
   <entry>
-    <title>【环境配置】C与C++的编译环境</title>
-    <link href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/"/>
-    <url>/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/</url>
+    <title>【环境配置】CUDA环境配置</title>
+    <link href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/"/>
+    <url>/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="CUDA-环境配置"><a href="#CUDA-环境配置" class="headerlink" title="CUDA 环境配置"></a>CUDA 环境配置</h1><h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><h2 id="CUDA-On-Linux（以-Ubuntu-为例）"><a href="#CUDA-On-Linux（以-Ubuntu-为例）" class="headerlink" title="CUDA On Linux（以 Ubuntu 为例）"></a>CUDA On Linux（以 Ubuntu 为例）</h2>]]></content>
     
     
     <categories>
