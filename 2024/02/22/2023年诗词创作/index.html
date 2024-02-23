@@ -16,38 +16,22 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="NeuRex: A Case for Neural Rendering Acceleration Seoul National University 首尔大学   Modern Neural Rendering目前神经渲染中的典型模型 NeRF: Neural Radiance Field NSDF: Neural Signed Distance Field GIA: Gigapixel Imag">
+    <meta name="description" content="序言诗词创作扬州游垂柳寂寂水波青，烟雨秋声入邗城。二十四桥人如水，谁见桥边红药生？ 鹧鸪天 · 病中有感寒月已照老病身，谩说思绪更销魂。心事故事何曾问，已非旧地旧时分。 风猎猎，夜沉沉，无花无酒无故人。不敢凭眺西南望，灯火楼间万点尘。 鹧鸪天 · 读稼轩《代人赋》有感细数分明日落迟，随风寒露竟铺石。若非昨夜白头梦，不信人间有相思。 云摇荡，月参差，尽似催我作新诗。莫问何物无尽处，须知天地有穷时。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【PaperReading】NeuRex">
-<meta property="og:url" content="http://example.com/2023/06/21/PaperReading/Paper-NeuRex/index.html">
+<meta property="og:title" content="2023~2024 诗词创作">
+<meta property="og:url" content="http://example.com/2024/02/22/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="NeuRex: A Case for Neural Rendering Acceleration Seoul National University 首尔大学   Modern Neural Rendering目前神经渲染中的典型模型 NeRF: Neural Radiance Field NSDF: Neural Signed Distance Field GIA: Gigapixel Imag">
+<meta property="og:description" content="序言诗词创作扬州游垂柳寂寂水波青，烟雨秋声入邗城。二十四桥人如水，谁见桥边红药生？ 鹧鸪天 · 病中有感寒月已照老病身，谩说思绪更销魂。心事故事何曾问，已非旧地旧时分。 风猎猎，夜沉沉，无花无酒无故人。不敢凭眺西南望，灯火楼间万点尘。 鹧鸪天 · 读稼轩《代人赋》有感细数分明日落迟，随风寒露竟铺石。若非昨夜白头梦，不信人间有相思。 云摇荡，月参差，尽似催我作新诗。莫问何物无尽处，须知天地有穷时。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Pipeline.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NeRFWithNGP.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPPara.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPFeaturePipeline.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LatencyBreakdown.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/HashTableAccess.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Exeflow.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/rh.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/arc.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedOnGPU.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedUpPart.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RenderQuality.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/ResImages.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SourceOfGain.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/bachgrid.png">
-<meta property="article:published_time" content="2023-06-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-22T15:45:03.556Z">
+<meta property="article:published_time" content="2024-02-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-23T12:12:53.149Z">
 <meta property="article:author" content="Yunxiang He">
-<meta property="article:tag" content="Neural Rendering, Architiecture, Hardware-Software Co-Design">
+<meta property="article:tag" content="NeRF, Computer Architecture, ASIC">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Pipeline.png">
   
   
   
-  <title>【PaperReading】NeuRex - Hypoxanthine&#39;s Blog</title>
+  <title>2023~2024 诗词创作 - Hypoxanthine&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【PaperReading】NeuRex"></span>
+            <span id="subtitle" data-typed-text="2023~2024 诗词创作"></span>
           
         </div>
 
@@ -224,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-21 00:00" pubdate>
-          2023年6月21日 凌晨
+        <time datetime="2024-02-22 00:00" pubdate>
+          2024年2月22日 凌晨
         </time>
       </span>
     
@@ -236,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          767 字
+          226 字
         
       </span>
     
@@ -247,7 +231,7 @@
         
         
         
-          7 分钟
+          2 分钟
         
       </span>
     
@@ -284,159 +268,18 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【PaperReading】NeuRex</h1>
+            <h1 id="seo-header">2023~2024 诗词创作</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="NeuRex-A-Case-for-Neural-Rendering-Acceleration"><a href="#NeuRex-A-Case-for-Neural-Rendering-Acceleration" class="headerlink" title="NeuRex: A Case for Neural Rendering Acceleration"></a>NeuRex: A Case for Neural Rendering Acceleration</h1><blockquote>
-<p>Seoul National University 首尔大学</p>
-</blockquote>
-<hr>
-<h1 id="Modern-Neural-Rendering"><a href="#Modern-Neural-Rendering" class="headerlink" title="Modern Neural Rendering"></a>Modern Neural Rendering</h1><h2 id="目前神经渲染中的典型模型"><a href="#目前神经渲染中的典型模型" class="headerlink" title="目前神经渲染中的典型模型"></a>目前神经渲染中的典型模型</h2><ul>
-<li>NeRF: Neural Radiance Field</li>
-<li>NSDF: Neural Signed Distance Field</li>
-<li>GIA: Gigapixel Image Approximation</li>
-<li>NVR: Neural Volume Rendering</li>
-</ul>
-<h2 id="Modern-Neural-Rendering-Pipeline"><a href="#Modern-Neural-Rendering-Pipeline" class="headerlink" title="Modern Neural Rendering Pipeline"></a>Modern Neural Rendering Pipeline</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Pipeline.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="Input-Encoding-Multi-Resolution-Hash-Encoding"><a href="#Input-Encoding-Multi-Resolution-Hash-Encoding" class="headerlink" title="Input Encoding: Multi-Resolution Hash Encoding"></a>Input Encoding: Multi-Resolution Hash Encoding</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NeRFWithNGP.png" srcset="/img/loading.gif" lazyload alt="h:500"></p>
-<h2 id="Computations-Of-Multi-Resolution-Hash-Encoding"><a href="#Computations-Of-Multi-Resolution-Hash-Encoding" class="headerlink" title="Computations Of Multi-Resolution Hash Encoding"></a>Computations Of Multi-Resolution Hash Encoding</h2><h3 id="Default-Parameters-Of-NGP"><a href="#Default-Parameters-Of-NGP" class="headerlink" title="Default Parameters Of NGP"></a>Default Parameters Of NGP</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPPara.png" srcset="/img/loading.gif" lazyload alt="h:350"></p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPFeaturePipeline.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li>$N_\text{point}$ 个 Input Position</li>
-<li>通过十六个 Hash Table，每个 Table 取 $F&#x3D;2$ 个 Feature<ul>
-<li>形成 $N_\text{Point}\times 32$ 大小的 Input Feature Matrix</li>
-</ul>
-</li>
-<li>以上 Input Feature Matrix 输入 The Density MLP<ul>
-<li>得到 $N_\text{Point}\times 16$ 大小的 Position Feature</li>
-</ul>
-</li>
-<li>Direction 被 （SH）Encoding 成 $N_\text{Point}\times 16$ 大小的 Direction Feature</li>
-<li>以上两个 Feature 被拼成 $N_\text{Point}\times 32$ 大小的 Feature 输入 Color MLP中，输出最终预测的颜色。</li>
-</ul>
-<hr>
-<h1 id="Motivation-Latency-Breakdown"><a href="#Motivation-Latency-Breakdown" class="headerlink" title="Motivation: Latency Breakdown"></a>Motivation: Latency Breakdown</h1><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LatencyBreakdown.png" srcset="/img/loading.gif" lazyload></p>
-<p>瓶颈：</p>
-<ul>
-<li>ENC：Hash Encoding</li>
-<li>MLP：Feature Computation</li>
-</ul>
-<hr>
-<h1 id="Observations"><a href="#Observations" class="headerlink" title="Observations"></a>Observations</h1><h2 id="Performance-portability-of-multi-resolution-hash-encodings"><a href="#Performance-portability-of-multi-resolution-hash-encodings" class="headerlink" title="Performance portability of multi-resolution hash encodings"></a>Performance portability of multi-resolution hash encodings</h2><ul>
-<li>尽管哈希表查找的时间复杂度是 $𝑂(1)$，但<strong>这不是一种适合硬件的操作</strong>。<ul>
-<li>理想的 Hash Function 输出 随机的 Index，<strong>没有 Locality</strong><ul>
-<li>会频繁发生 <strong>Off-Chip Memory Access</strong></li>
-</ul>
-</li>
-<li>每次的 Access 仅使用 4 Byte 数据（For $F&#x3D;2$），<strong>带宽大量浪费</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="一种目前的解决方案"><a href="#一种目前的解决方案" class="headerlink" title="一种目前的解决方案"></a>一种目前的解决方案</h2><ul>
-<li>按层次加载 Hash Table</li>
-<li>每次先遍历所有的点，把这层 Hash Table 对应的 Feature 取出来</li>
-<li>再 Load 下一层 Hash Table</li>
-<li>仍然很慢</li>
-</ul>
-<h2 id="Serialized-execution-of-rendering-pipeline"><a href="#Serialized-execution-of-rendering-pipeline" class="headerlink" title="Serialized execution of rendering pipeline"></a>Serialized execution of rendering pipeline</h2><ul>
-<li>目前花费渲染时间最多的两个主要操作是哈希编码（ENC）和特征计算（MLP）</li>
-<li>这两个主要操作会串行执行<ul>
-<li>ENC对存储带宽要求较高，而MLP需要更多的计算资源</li>
-</ul>
-</li>
-<li>在完成所有 Hash Table 查找之前，MLP 无法进行</li>
-</ul>
-<h2 id="Difference-in-access-characteristics-across-different-levels-of-hash-tables"><a href="#Difference-in-access-characteristics-across-different-levels-of-hash-tables" class="headerlink" title="Difference in access characteristics across different levels of hash tables."></a>Difference in access characteristics across different levels of hash tables.</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/HashTableAccess.png" srcset="/img/loading.gif" lazyload alt="h:350"></p>
-<ul>
-<li>对于没有哈希冲突的分辨率级别（例如， $𝐿&#x3D;1$ ）<ul>
-<li>哈希表条目仅被分配给体素网格的单个顶点</li>
-<li>一个体素中有大量的采样位置共享相同的顶点</li>
-<li>访问在几个条目上有一定的局部化，并且每个条目的访问次数很高</li>
-</ul>
-</li>
-<li>对于更细的分辨率级别（例如，$𝐿&#x3D;13$ ）<ul>
-<li>访问更均匀（且随机）地分布在哈希表条目之间</li>
-<li>每个条目的访问次数非常低。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="NeuRex-Neural-Graphics-Engine"><a href="#NeuRex-Neural-Graphics-Engine" class="headerlink" title="NeuRex: Neural Graphics Engine"></a>NeuRex: Neural Graphics Engine</h1><h2 id="Execution-FLow"><a href="#Execution-FLow" class="headerlink" title="Execution FLow"></a>Execution FLow</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Exeflow.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="Restricted-Hashing"><a href="#Restricted-Hashing" class="headerlink" title="Restricted Hashing"></a>Restricted Hashing</h2><ul>
-<li>将 Input Coordinate Grid 划分为若干 Subgrids <ul>
-<li>每个 Subgrid 都拥有每个层级的大型哈希表的一部分</li>
-</ul>
-</li>
-<li>在处理另一个子网格之前，先完成所有分辨率下的一个子网格的处理。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/rh.png" srcset="/img/loading.gif" lazyload alt="h:400"></p>
-<hr>
-<h2 id="Architecture-Overview"><a href="#Architecture-Overview" class="headerlink" title="Architecture Overview"></a>Architecture Overview</h2><div style="display: grid; grid-template-columns: 1fr 1fr;">
-  <div>
-
-
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/arc.png" srcset="/img/loading.gif" lazyload alt="h:400"><br>  </div></p>
-  <div>
-两个主要模块：
-
-
-<ul>
-<li><p>Encoding Engine（EE）</p>
-<ul>
-<li>主要负责 Hash Table Lookups 和 Interpola</li>
-</ul>
-</li>
-<li><p>Tensor Compute Engine（TCE）</p>
-<ul>
-<li>脉动阵列实现 MLP 计算</li>
-</ul>
-</div>
-</div></li>
-</ul>
-<hr>
-<h1 id="Experiment-Evaluation"><a href="#Experiment-Evaluation" class="headerlink" title="Experiment &amp; Evaluation"></a>Experiment &amp; Evaluation</h1><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedOnGPU.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="NeuRex-Performance"><a href="#NeuRex-Performance" class="headerlink" title="NeuRex Performance"></a>NeuRex Performance</h2><ul>
-<li>NeuRex-Server: $2.88\times$</li>
-<li>NeuRex-Edge: $9.17\times$<ul>
-<li>On-Chip Cache 比较小的时候，对 Hash Table 的 Random Access 成为性能瓶颈</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedUpPart.png" srcset="/img/loading.gif" lazyload alt="h:450"></p>
-<ul>
-<li>与GPU相比，NeuRex的峰值计算吞吐量较低</li>
-<li>但它执行MLP计算的速度更快<ul>
-<li>全连接层层较小，GPU Tensor Core 的利用率较低，而 NeuRex 中的 TCE 实现了更高的计算利用率</li>
-</ul>
-</li>
-<li>NeuRex 的整体加速度（图13）高于对 ENC 和 MLP 的单独加速度<ul>
-<li>这两个操作在原始执行流中是串行的，而 NeuRex 通过受限制的哈希使它们可以重叠执行。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Rendering-Quality"><a href="#Rendering-Quality" class="headerlink" title="Rendering Quality"></a>Rendering Quality</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RenderQuality.png" srcset="/img/loading.gif" lazyload alt="h:420"></p>
-<ul>
-<li>Restricted Hashing 限制了每个 Batch 只能访问单个 Subgrid Buffer 内的输入编码。</li>
-<li>增加哈希表大小对性能影响较小，因为每次只需加载部分 Entries 到芯片上。<ul>
-<li>配置了一个 4 倍大的哈希表（ Ours-LT ；每个级别 8MB ），以进一步提高 PSNR 而不影响性能</li>
-<li>结果显示，Ours-LT在最坏情况下仅导致PSNR轻微下降 $1.1%$ ，在其他几个场景中，甚至产生比 Org-Hash 更高的 PSNR 值。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/ResImages.png" srcset="/img/loading.gif" lazyload alt="h:350"></p>
-<blockquote>
-<p>DT: Default Table Size</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SourceOfGain.png" srcset="/img/loading.gif" lazyload alt="h:400"></p>
-<ul>
-<li>GC: Grid Cache</li>
-<li>RH: Restricted Hashing</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/bachgrid.png" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><h1 id="诗词创作"><a href="#诗词创作" class="headerlink" title="诗词创作"></a>诗词创作</h1><h2 id="扬州游"><a href="#扬州游" class="headerlink" title="扬州游"></a>扬州游</h2><p>垂柳寂寂水波青，烟雨秋声入邗城。<br>二十四桥人如水，谁见桥边红药生？</p>
+<h2 id="鹧鸪天-·-病中有感"><a href="#鹧鸪天-·-病中有感" class="headerlink" title="鹧鸪天 · 病中有感"></a>鹧鸪天 · 病中有感</h2><p>寒月已照老病身，谩说思绪更销魂。<br>心事故事何曾问，已非旧地旧时分。</p>
+<p>风猎猎，夜沉沉，无花无酒无故人。<br>不敢凭眺西南望，灯火楼间万点尘。</p>
+<h2 id="鹧鸪天-·-读稼轩《代人赋》有感"><a href="#鹧鸪天-·-读稼轩《代人赋》有感" class="headerlink" title="鹧鸪天 · 读稼轩《代人赋》有感"></a>鹧鸪天 · 读稼轩《代人赋》有感</h2><p>细数分明日落迟，随风寒露竟铺石。<br>若非昨夜白头梦，不信人间有相思。</p>
+<p>云摇荡，月参差，尽似催我作新诗。<br>莫问何物无尽处，须知天地有穷时。</p>
+<h2 id="鹧鸪天-·-海南游"><a href="#鹧鸪天-·-海南游" class="headerlink" title="鹧鸪天 · 海南游"></a>鹧鸪天 · 海南游</h2><p>茶暖楼高与笑谈，棕榈叶里望晴滩。<br>云生风气潮将退，日落沙明月已残。</p>
+<p>听旧事，更经年，青天碧海未桑田。<br>人生易老天难老，多少悲欢一梦间。</p>
 
                 
               </div>
@@ -455,7 +298,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Paper-Reading/" class="category-chain-item">Paper Reading</a>
+  <a href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/" class="category-chain-item">诗与词</a>
   
   
 
@@ -467,13 +310,6 @@
     </div>
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" class="print-no-link">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
-      
-    </div>
-  
 </div>
 
 
@@ -482,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【PaperReading】NeuRex</div>
-      <div>http://example.com/2023/06/21/PaperReading/Paper-NeuRex/</div>
+      <div>2023~2024 诗词创作</div>
+      <div>http://example.com/2024/02/22/2023年诗词创作/</div>
     </div>
     <div class="license-meta">
       
@@ -495,7 +331,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月21日</div>
+          <div>2024年2月22日</div>
         </div>
       
       
@@ -527,9 +363,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/20/PaperReading/Paper-3DGaussian/" title="【PaperReading】3D Gaussian Splattting">
+                      <a href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/" title="【环境配置】C与C++的编译环境">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【PaperReading】3D Gaussian Splattting</span>
+                        <span class="hidden-mobile">【环境配置】C与C++的编译环境</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -537,8 +373,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" title="【PaperReading】RTNeRF &amp; Instant3D">
-                        <span class="hidden-mobile">【PaperReading】RTNeRF &amp; Instant3D</span>
+                      <a href="/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" title="【宋词导读 读书报告】宋词中的感性和理性">
+                        <span class="hidden-mobile">【宋词导读 读书报告】宋词中的感性和理性</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
