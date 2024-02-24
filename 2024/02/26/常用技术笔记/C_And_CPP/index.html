@@ -16,18 +16,22 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="C &amp; C++ 编译环境的配置常用术语Compiler On Linux（以 Ubuntu 为例）Compiler On Windows（MingW）Compiler On Windows（Visual Studio）">
+    <meta name="description" content="写在前面环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。 关于比较完整的，适合上课使用的 C&amp;C++ 环境配置，可以参考视频 GKxx: C&#x2F;C++环境配置。这里对其内容做一个梳理和总结，方便懒得看视频的同学。 常用术语 编辑器：用于编辑代码文本的工具。 On Windows：记事本，VS Code…… On Linux：Vim，Emacs……   编译器：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【环境配置】C与C++的编译环境">
-<meta property="og:url" content="http://example.com/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C%E4%B8%8EC++%E7%9A%84%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:url" content="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="C &amp; C++ 编译环境的配置常用术语Compiler On Linux（以 Ubuntu 为例）Compiler On Windows（MingW）Compiler On Windows（Visual Studio）">
+<meta property="og:description" content="写在前面环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。 关于比较完整的，适合上课使用的 C&amp;C++ 环境配置，可以参考视频 GKxx: C&#x2F;C++环境配置。这里对其内容做一个梳理和总结，方便懒得看视频的同学。 常用术语 编辑器：用于编辑代码文本的工具。 On Windows：记事本，VS Code…… On Linux：Vim，Emacs……   编译器：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-23T12:22:37.791Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env3.png">
+<meta property="article:published_time" content="2024-02-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-24T06:13:16.774Z">
 <meta property="article:author" content="Yunxiang He">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env.png">
   
   
   
@@ -208,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-23 00:00" pubdate>
-          2024年2月23日 凌晨
+        <time datetime="2024-02-26 00:00" pubdate>
+          2024年2月26日 凌晨
         </time>
       </span>
     
@@ -220,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          23 字
+          727 字
         
       </span>
     
@@ -231,7 +235,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -273,7 +277,65 @@
             
               <div class="markdown-body">
                 
-                <h1 id="C-C-编译环境的配置"><a href="#C-C-编译环境的配置" class="headerlink" title="C &amp; C++ 编译环境的配置"></a>C &amp; C++ 编译环境的配置</h1><h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><h2 id="Compiler-On-Linux（以-Ubuntu-为例）"><a href="#Compiler-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Compiler On Linux（以 Ubuntu 为例）"></a>Compiler On Linux（以 Ubuntu 为例）</h2><h2 id="Compiler-On-Windows（MingW）"><a href="#Compiler-On-Windows（MingW）" class="headerlink" title="Compiler On Windows（MingW）"></a>Compiler On Windows（MingW）</h2><h2 id="Compiler-On-Windows（Visual-Studio）"><a href="#Compiler-On-Windows（Visual-Studio）" class="headerlink" title="Compiler On Windows（Visual Studio）"></a>Compiler On Windows（Visual Studio）</h2>
+                <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。</p>
+<p>关于比较完整的，适合上课使用的 C&amp;C++ 环境配置，可以参考视频 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1id4y1n7Kw/?spm_id_from=333.337.search-card.all.click&vd_source=3bbc7395fdcea11b679cb15cd7812635">GKxx: C&#x2F;C++环境配置</a>。这里对其内容做一个梳理和总结，方便懒得看视频的同学。</p>
+<h1 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h1><ul>
+<li>编辑器：用于编辑代码文本的工具。<ul>
+<li>On Windows：记事本，VS Code……</li>
+<li>On Linux：Vim，Emacs……</li>
+</ul>
+</li>
+<li>编译器：用于<strong>将源代码转换为可执行文件（“计算机能看懂的代码”）</strong>的工具。<ul>
+<li>On Windows：MSVC</li>
+<li>On Linux：GCC, Clang</li>
+</ul>
+</li>
+<li>IDE（Integrated Development Environment）：集成开发环境，包含编辑器、编译器、调试器等工具。<ul>
+<li>On Windows：Visual Studio……</li>
+<li>On Linux：CLion, Eclipse……</li>
+</ul>
+</li>
+</ul>
+<h1 id="Compiler-On-Linux（以-Ubuntu-为例）"><a href="#Compiler-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Compiler On Linux（以 Ubuntu 为例）"></a>Compiler On Linux（以 Ubuntu 为例）</h1><p>Linux 上我们一般使用 gcc 编译器，它是 GNU Compiler Collection 的缩写，是一个由 GNU 开发的编程语言编译器。</p>
+<h2 id="默认版本的安装"><a href="#默认版本的安装" class="headerlink" title="默认版本的安装"></a>默认版本的安装</h2><p>以 Ubuntu 为例，我们通常直接使用系统自带的 <code>apt</code> 工具来安装软件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update <span class="hljs-comment"># 更新软件源。</span><br>sudo apt install build-essential <span class="hljs-comment"># Build-essential 是一个包，包含了编译器、链接器等工具。</span><br></code></pre></td></tr></table></figure>
+
+<p>然后我们可以查看安装是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc --version<br></code></pre></td></tr></table></figure>
+
+<p>如果安装成功，会显示类似如下的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0<br>Copyright (C) 2021 Free Software Foundation, Inc.<br>This is free software; see the <span class="hljs-built_in">source</span> <span class="hljs-keyword">for</span> copying conditions.  There is NO<br>warranty; not even <span class="hljs-keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br></code></pre></td></tr></table></figure>
+<h2 id="gcc-11-的安装"><a href="#gcc-11-的安装" class="headerlink" title="gcc-11 的安装"></a>gcc-11 的安装</h2><p>我们可以通过添加软件源的方式来安装 gcc-11：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-add-repository ppa:ubuntu-toolchain-r/test<br>sudo apt install gcc-11 g++-11<br></code></pre></td></tr></table></figure>
+
+<h1 id="Compiler-On-Windows（MingW）"><a href="#Compiler-On-Windows（MingW）" class="headerlink" title="Compiler On Windows（MingW）"></a>Compiler On Windows（MingW）</h1><p>Windows 不能直接使用 gcc，但我们可以安装 MinGW（<strong>Min</strong>imalist <strong>G</strong>NU for <strong>W</strong>indows）来使用 gcc。</p>
+<p>事实上，由于 MinGW 已经很久没有更新了，所以我们一般使用 MinGW-w64，它是 MinGW 的一个分支，支持 64 位系统。</p>
+<h2 id="下载与解压"><a href="#下载与解压" class="headerlink" title="下载与解压"></a>下载与解压</h2><p>我们在 <a target="_blank" rel="noopener" href="https://winlibs.com/">Winlibs</a> 中进行下载：</p>
+<ul>
+<li>在 <strong>Download</strong> 下选择 <strong>UCRT runtime</strong> 中标有 <strong>(LATEST)</strong> 的那个 release 里的 Win64 Zip archive（建议选带有 LLVM&#x2F;Clang 的）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/brechtsanders/winlibs_mingw/releases/download/12.2.0-15.0.7-10.0.0-ucrt-r4/winlibs-x86_64-posix-seh-gcc-12.2.0-llvm-15.0.7-mingw-w64ucrt-10.0.0-r4.zip">GCC 12.2.0 + Clang 15.0.7 + MinGW-w64 10.0.0 (UCRT) release 64, Win64 Zip</a></li>
+<li>解压后将 <code>mingw64</code> 这个文件夹放在 C 盘或 D 盘，<strong>路径最好简单一点，不要给自己找麻烦</strong>，例如 <code>C:\mingw64</code> 或者 <code>D:\mingw64</code>。</li>
+</ul>
+<h2 id="环境变量的配置"><a href="#环境变量的配置" class="headerlink" title="环境变量的配置"></a>环境变量的配置</h2><ul>
+<li><p>按 <code>Win</code> 键，输入 <code>env</code>（或者在 <code>此电脑</code> 上右键，选择 <code>属性</code>，然后选择 <code>高级系统设置</code>，再选择 <code>环境变量</code>），即可看到<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击它，进入编辑界面</p>
+</li>
+<li><p>通过编辑 <code>Path</code>：</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env2.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>新建一个环境变量，输入 <code>mingw64\bin</code> 的绝对路径（在文件管理器中复制路径，然后粘贴到这里），类似于：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env3.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在命令行中输入 <code>gcc --version</code>，如果出现类似的信息：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">gcc.exe (MinGW<span class="hljs-literal">-W64</span> x86_64<span class="hljs-literal">-ucrt-posix-seh</span>，built by Brecht Sanders) <span class="hljs-number">12.2</span>.<span class="hljs-number">0</span><br>Copyright (C) <span class="hljs-number">2022</span> Free Software Foundation， Inc.<br>This is free software; see the source <span class="hljs-keyword">for</span> copying<br>conditions.There is NO<br>warranty; not even <span class="hljs-keyword">for</span> MERCHANTABILITY OP FITNESS <span class="hljs-keyword">FOR</span> A PARTICULAR PURPOSE<br></code></pre></td></tr></table></figure>
+
+<h1 id="Compiler-On-Windows（Visual-Studio）"><a href="#Compiler-On-Windows（Visual-Studio）" class="headerlink" title="Compiler On Windows（Visual Studio）"></a>Compiler On Windows（Visual Studio）</h1><p>个人不推荐使用 Visual Studio：</p>
+<ol>
+<li>VS 在只需要写一些小程序的初学阶段并不好用，会掩盖程序编译执行的一些非常基础的细节</li>
+<li>VS 的安装包非常大，而且安装过程非常繁琐</li>
+</ol>
+<p>如果你一定要使用 VS，这里贴个教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71110525">VS On Windows的安装</a></p>
+
                 
               </div>
             
@@ -319,7 +381,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>【环境配置】C与C++的编译环境</div>
-      <div>http://example.com/2024/02/23/常用技术笔记/C与C++的编译环境/</div>
+      <div>http://example.com/2024/02/26/常用技术笔记/C_And_CPP/</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +393,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月23日</div>
+          <div>2024年2月26日</div>
         </div>
       
       
@@ -363,12 +425,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/" title="【环境配置】SSH 远程连接">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【环境配置】SSH 远程连接</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/23/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" title="【环境配置】CUDA环境配置">
-                        <span class="hidden-mobile">【环境配置】CUDA环境配置</span>
+                      <a href="/2024/02/22/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" title="2023~2024 诗词创作">
+                        <span class="hidden-mobile">2023~2024 诗词创作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
