@@ -16,18 +16,20 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="前置知识什么是 CUDA？CUDA On Linux（以 Ubuntu 为例）CUDA On Windows">
+    <meta name="description" content="前置知识什么是 CUDA？CUDA 的全称是统一计算设备架构（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。 CUDA Driver 和 CUDA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【环境配置】CUDA环境配置">
 <meta property="og:url" content="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="前置知识什么是 CUDA？CUDA On Linux（以 Ubuntu 为例）CUDA On Windows">
+<meta property="og:description" content="前置知识什么是 CUDA？CUDA 的全称是统一计算设备架构（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。 CUDA Driver 和 CUDA">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png">
 <meta property="article:published_time" content="2024-02-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-24T06:14:15.152Z">
+<meta property="article:modified_time" content="2024-02-26T04:29:34.100Z">
 <meta property="article:author" content="Yunxiang He">
 <meta property="article:tag" content="环境配置">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png">
   
   
   
@@ -220,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14 字
+          347 字
         
       </span>
     
@@ -231,7 +233,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -273,7 +275,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h2 id="什么是-CUDA？"><a href="#什么是-CUDA？" class="headerlink" title="什么是 CUDA？"></a>什么是 CUDA？</h2><h1 id="CUDA-On-Linux（以-Ubuntu-为例）"><a href="#CUDA-On-Linux（以-Ubuntu-为例）" class="headerlink" title="CUDA On Linux（以 Ubuntu 为例）"></a>CUDA On Linux（以 Ubuntu 为例）</h1><h1 id="CUDA-On-Windows"><a href="#CUDA-On-Windows" class="headerlink" title="CUDA On Windows"></a>CUDA On Windows</h1>
+                <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h2 id="什么是-CUDA？"><a href="#什么是-CUDA？" class="headerlink" title="什么是 CUDA？"></a>什么是 CUDA？</h2><p>CUDA 的全称是<strong>统一计算设备架构</strong>（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。</p>
+<p>在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。</p>
+<h2 id="CUDA-Driver-和-CUDA-Runtime"><a href="#CUDA-Driver-和-CUDA-Runtime" class="headerlink" title="CUDA Driver 和 CUDA Runtime"></a>CUDA Driver 和 CUDA Runtime</h2><h3 id="CUDA-Driver"><a href="#CUDA-Driver" class="headerlink" title="CUDA Driver"></a>CUDA Driver</h3><p>CUDA Driver 是 CUDA 的<strong>驱动</strong>，有点类似 GPU 的“操作系统”，一个硬件设备上只会有一个版本。</p>
+<p>我们可以通过 <code>nvidia-smi</code> 命令查看当前系统中的 CUDA Driver 版本。</p>
+<h3 id="CUDA-Runtime"><a href="#CUDA-Runtime" class="headerlink" title="CUDA Runtime"></a>CUDA Runtime</h3><p>CUDA Runtime 是 CUDA 的<strong>运行时库</strong>，是一个软件库，用于在程序中调用 GPU 的计算资源。一个系统中可以有很多个 CUDA Runtime，不同的程序可能会使用不同的 CUDA Runtime。</p>
+<p>我们可以通过 <code>nvcc --version</code> 命令查看当前系统中的 CUDA Runtime 版本。通常，CUDA Runtime 的路径是 <code>/usr/local/cuda-xxx</code>。</p>
+<h1 id="CUDA-On-Linux（以-Ubuntu-为例）"><a href="#CUDA-On-Linux（以-Ubuntu-为例）" class="headerlink" title="CUDA On Linux（以 Ubuntu 为例）"></a>CUDA On Linux（以 Ubuntu 为例）</h1><p>首先，进入 NVIDIA 的官网，进入对应的下载页面：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png" srcset="/img/loading.gif" lazyload></p>
+<p>你需要依次选择这些项目，以便获得合适的安装包。</p>
+<p>通常，最后一项推荐选择 <code>runfile</code>，这是一个自解压文件，你可以通过命令行来安装。</p>
+<h1 id="CUDA-On-Windows"><a href="#CUDA-On-Windows" class="headerlink" title="CUDA On Windows"></a>CUDA On Windows</h1><p>Windows 下的 CUDA 安装相对来说更加简单，只需要下载对应的安装包，然后一路下一步即可。</p>
+
                 
               </div>
             
