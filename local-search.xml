@@ -33,9 +33,21 @@
     <link href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/"/>
     <url>/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="Python-On-Windows"><a href="#Python-On-Windows" class="headerlink" title="Python On Windows"></a>Python On Windows</h1><h2 id="原生-Python-安装"><a href="#原生-Python-安装" class="headerlink" title="原生 Python 安装"></a>原生 Python 安装</h2><p>Windows 的 Python 安装可以直接使用微软应用商店：</p><ul><li><a href="https://apps.microsoft.com/detail/9nj46sx7x90p?activetab=pivot:overviewtab&rtc=1&hl=zh-cn&gl=CN">Python 的安装</a></li><li><a href="https://learn.microsoft.com/zh-cn/windows/python/beginners">Python 的使用</a></li></ul><p>如果无法访问微软应用商店，你可能需要使用一些科学上网的工具。</p><h2 id="Conda-的安装"><a href="#Conda-的安装" class="headerlink" title="Conda 的安装"></a>Conda 的安装</h2><p>在 <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">官网</a> 下载对应的安装包，然后执行安装包即可。</p><h1 id="Python-On-Linux（以-Ubuntu-为例）"><a href="#Python-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Python On Linux（以 Ubuntu 为例）"></a>Python On Linux（以 Ubuntu 为例）</h1><h2 id="原生-Python-安装-1"><a href="#原生-Python-安装-1" class="headerlink" title="原生 Python 安装"></a>原生 Python 安装</h2><p>Ubuntu 22.04 应该已经安装了 Python 3，可以通过以下命令查看版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 --version<br></code></pre></td></tr></table></figure><p>即可看到。</p><p>值得注意的是，直接输入 <code>python</code> 可能会找不到 Python 3，这是因为没有设置软链接的原因，这时候你需要输入 <code>python3</code>。</p><p>当然，我们经常会使用到虚拟环境，这时候使用 Conda 会更合适。</p><h2 id="Conda-的安装-1"><a href="#Conda-的安装-1" class="headerlink" title="Conda 的安装"></a>Conda 的安装</h2><p>我们不推荐使用 Anaconda，而是推荐使用 Miniconda，因为 Miniconda 更加轻量级，而且可以自定义安装。</p><p>在 <a href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">官网</a> 下载对应的安装包，然后执行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure><p>然后一路回车，只有两点可能需要注意：</p><ol><li>选择安装路径。默认安装在 <code>~/miniconda3</code>，你可以选择其他路径。</li><li>是否将 Conda 加入 PATH。如果你选择了不加入，那么你需要手动将 Conda 加入 PATH。建议选择加入。</li></ol><p>安装完成后，你需要重启终端，或者使用 <code>source ~/.bashrc</code> ，然后执行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda --version<br></code></pre></td></tr></table></figure><p>如果看到版本号，那么说明安装成功。</p>]]></content>
     
     
+    <categories>
+      
+      <category>常用技术笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>环境配置</tag>
+      
+    </tags>
     
   </entry>
   
