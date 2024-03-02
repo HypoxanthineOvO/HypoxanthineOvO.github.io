@@ -16,24 +16,22 @@
   <meta name="author" content="Yunxiang He">
   <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
   
-    <meta name="description" content="前置知识什么是 CUDA？CUDA 的全称是统一计算设备架构（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。 CUDA Driver 和 CUDA">
+    <meta name="description" content="前端仿真首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是： Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等） 环境搭建在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。 首先，我们需要保证环境变量里存在 vcs 和 verdi 。例如，大部分环境下，可以使用 module load 来进行环境变量的加载。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【环境配置】CUDA环境配置">
-<meta property="og:url" content="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/index.html">
+<meta property="og:title" content="使用 VCS 与 Verdi 的前端仿真流程">
+<meta property="og:url" content="http://example.com/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/index.html">
 <meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
-<meta property="og:description" content="前置知识什么是 CUDA？CUDA 的全称是统一计算设备架构（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。 CUDA Driver 和 CUDA">
+<meta property="og:description" content="前端仿真首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是： Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等） 环境搭建在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。 首先，我们需要保证环境变量里存在 vcs 和 verdi 。例如，大部分环境下，可以使用 module load 来进行环境变量的加载。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png">
-<meta property="article:published_time" content="2024-02-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T04:29:34.100Z">
+<meta property="article:published_time" content="2024-03-02T14:16:59.000Z">
+<meta property="article:modified_time" content="2024-03-02T14:22:19.341Z">
 <meta property="article:author" content="Yunxiang He">
-<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="数字电路, 仿真, VCS, Verdi,">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png">
   
   
   
-  <title>【环境配置】CUDA环境配置 - Hypoxanthine&#39;s Blog</title>
+  <title>使用 VCS 与 Verdi 的前端仿真流程 - Hypoxanthine&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【环境配置】CUDA环境配置"></span>
+            <span id="subtitle" data-typed-text="使用 VCS 与 Verdi 的前端仿真流程"></span>
           
         </div>
 
@@ -210,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-26 00:00" pubdate>
-          2024年2月26日 凌晨
+        <time datetime="2024-03-02 22:16" pubdate>
+          2024年3月2日 晚上
         </time>
       </span>
     
@@ -222,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          347 字
+          451 字
         
       </span>
     
@@ -233,7 +231,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -270,22 +268,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【环境配置】CUDA环境配置</h1>
+            <h1 id="seo-header">使用 VCS 与 Verdi 的前端仿真流程</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h2 id="什么是-CUDA？"><a href="#什么是-CUDA？" class="headerlink" title="什么是 CUDA？"></a>什么是 CUDA？</h2><p>CUDA 的全称是<strong>统一计算设备架构</strong>（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。</p>
-<p>在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。</p>
-<h2 id="CUDA-Driver-和-CUDA-Runtime"><a href="#CUDA-Driver-和-CUDA-Runtime" class="headerlink" title="CUDA Driver 和 CUDA Runtime"></a>CUDA Driver 和 CUDA Runtime</h2><h3 id="CUDA-Driver"><a href="#CUDA-Driver" class="headerlink" title="CUDA Driver"></a>CUDA Driver</h3><p>CUDA Driver 是 CUDA 的<strong>驱动</strong>，有点类似 GPU 的“操作系统”，一个硬件设备上只会有一个版本。</p>
-<p>我们可以通过 <code>nvidia-smi</code> 命令查看当前系统中的 CUDA Driver 版本。</p>
-<h3 id="CUDA-Runtime"><a href="#CUDA-Runtime" class="headerlink" title="CUDA Runtime"></a>CUDA Runtime</h3><p>CUDA Runtime 是 CUDA 的<strong>运行时库</strong>，是一个软件库，用于在程序中调用 GPU 的计算资源。一个系统中可以有很多个 CUDA Runtime，不同的程序可能会使用不同的 CUDA Runtime。</p>
-<p>我们可以通过 <code>nvcc --version</code> 命令查看当前系统中的 CUDA Runtime 版本。通常，CUDA Runtime 的路径是 <code>/usr/local/cuda-xxx</code>。</p>
-<h1 id="CUDA-On-Linux（以-Ubuntu-为例）"><a href="#CUDA-On-Linux（以-Ubuntu-为例）" class="headerlink" title="CUDA On Linux（以 Ubuntu 为例）"></a>CUDA On Linux（以 Ubuntu 为例）</h1><p>首先，进入 NVIDIA 的官网，进入对应的下载页面：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png" srcset="/img/loading.gif" lazyload></p>
-<p>你需要依次选择这些项目，以便获得合适的安装包。</p>
-<p>通常，最后一项推荐选择 <code>runfile</code>，这是一个自解压文件，你可以通过命令行来安装。</p>
-<h1 id="CUDA-On-Windows"><a href="#CUDA-On-Windows" class="headerlink" title="CUDA On Windows"></a>CUDA On Windows</h1><p>Windows 下的 CUDA 安装相对来说更加简单，只需要下载对应的安装包，然后一路下一步即可。</p>
+                <h1 id="前端仿真"><a href="#前端仿真" class="headerlink" title="前端仿真"></a>前端仿真</h1><p>首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是：</p>
+<p>Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等）</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。</p>
+<p>首先，我们需要保证环境变量里存在 <code>vcs</code> 和 <code>verdi</code> 。例如，大部分环境下，可以使用 <code>module load</code> 来进行环境变量的加载。</p>
+<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><p>这里以我们实现一个 Adder 为例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">.<br>├── Design<br>│   ├── Filelist<br>│   │   └── filelist<br>│   └── RTL<br>│       └── Adder.v<br>├── Flow<br>├── Makefile<br>└── Verification<br>    └── TestBench<br>        └── tb_0.v<br></code></pre></td></tr></table></figure>
 
+<ul>
+<li>Design：设计文件夹<ul>
+<li>Filelist：用于向 VCS，Verdi 等</li>
+<li>RTL：工程文件</li>
+</ul>
+</li>
+<li>Flow：执行流程，包括 Syn，Lint 等子文件夹</li>
+<li>Verification：用于验证的文件夹<ul>
+<li>Testbench</li>
+<li>Testcase</li>
+</ul>
+</li>
+<li>Makefile：脚本</li>
+</ul>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h2 id="Example-1：Adder"><a href="#Example-1：Adder" class="headerlink" title="Example 1：Adder"></a>Example 1：Adder</h2><p>首先以一个简单的加法器为例子。这里的 Testbench 中的时钟纯属于摆设。</p>
+<h3 id="Adder-v"><a href="#Adder-v" class="headerlink" title="Adder.v"></a>Adder.v</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-keyword">module</span> Adder( <br>    <span class="hljs-keyword">input</span> a, <br>    <span class="hljs-keyword">input</span> b, <br>    <span class="hljs-keyword">output</span> out <br>);<br>    <span class="hljs-keyword">assign</span> out = a + b;<br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="filelist"><a href="#filelist" class="headerlink" title="filelist"></a>filelist</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">/home/heyx1/Demo/Design/RTL/Adder.v<br><br>/home/heyx1/Demo/Verification/TestBench/tb_0.v<br></code></pre></td></tr></table></figure>
+
+<h3 id="tb-0-v"><a href="#tb-0-v" class="headerlink" title="tb_0.v"></a>tb_0.v</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs verilog"><span class="hljs-meta">`<span class="hljs-keyword">timescale</span> 1ns / 1ps    </span><span class="hljs-comment">//时间单位1ns，精度1ps</span><br><br><span class="hljs-keyword">module</span> tb_0 ();<br>	<span class="hljs-comment">// Clock and reset</span><br>	<span class="hljs-keyword">reg</span> clk;<br>	<span class="hljs-keyword">reg</span> reset;<br><br>	<span class="hljs-comment">// Input and Output signal</span><br>	<span class="hljs-keyword">reg</span> in_a;<br>	<span class="hljs-keyword">reg</span> in_b;<br>	<span class="hljs-keyword">wire</span> out_q;<br><br>	<span class="hljs-comment">// 例化被测模块</span><br>	Adder adder (<br>		<span class="hljs-variable">.a</span>     (in_a),<br>		<span class="hljs-variable">.b</span>     (in_b),<br>		<span class="hljs-variable">.out</span>     (out_q)<br>	);<br><br>	<span class="hljs-comment">// Generate Clock</span><br>	<span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span><br>		clk = <span class="hljs-number">1&#x27;b0</span>;<br>		<span class="hljs-keyword">forever</span> #<span class="hljs-number">1</span> clk = ~clk;<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">// Generate Reset</span><br>	<span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span><br>		reset = <span class="hljs-number">1&#x27;b1</span>;<br>		#<span class="hljs-number">10</span> reset = <span class="hljs-number">1&#x27;b0</span>;<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">// Generate signal</span><br>	<span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span><br>	<span class="hljs-built_in">$monitor</span>(<span class="hljs-string">&quot;time=%3d, in_a=%b, in_b=%b, q=%2b \n&quot;</span>,<br>			<span class="hljs-built_in">$time</span>, in_a, in_b, out_q);<br>			<br>	in_a = <span class="hljs-number">1&#x27;b0</span>;<br>	in_b = <span class="hljs-number">1&#x27;b0</span>;<br>	#<span class="hljs-number">20</span><br>	in_a = <span class="hljs-number">1&#x27;b1</span>;<br>	#<span class="hljs-number">20</span><br>	in_a = <span class="hljs-number">1&#x27;b0</span>;<br>	in_b = <span class="hljs-number">1&#x27;b1</span>;<br>	#<span class="hljs-number">20</span><br>	in_a = <span class="hljs-number">1&#x27;b1</span>;<br><br>	<br>	<span class="hljs-built_in">$finish</span>;<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">initial</span> <span class="hljs-keyword">begin</span><br>		$fsdbDumpfile(<span class="hljs-string">&quot;tb_0.fsdb&quot;</span>);<br>		$fsdbDumpvars(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;tb_0&quot;</span>);<br>		#<span class="hljs-number">10000</span><br><br>		<span class="hljs-built_in">$finish</span>;<br>	<span class="hljs-keyword">end</span><br>  <br><span class="hljs-keyword">endmodule</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>我们把常见操作编写到脚本里，这样可以方便的进行操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs bash">TC=OurTC<br>TB=tb_0<br><br>initialize:<br>	module load synopsys/vcs/R-2020.12-SP<br>	module load synopsys/verdi/R-2020.12-SP2<br>compile:<br>	@<span class="hljs-built_in">echo</span> $(TC)<br>	<span class="hljs-built_in">mkdir</span> <span class="hljs-built_in">log</span><br>	vcs	-f &#123;BASE_PATH_TO_PROJECT&#125;/Design/Filelist/filelist \<br>		-l ./log/test.log \<br>		-full64 \<br>		-debug_acc+pp+dmptf \<br>		-debug_region+cell+encrypt \<br>		-debug_access \<br>		-sverilog \<br>		-top $(TB) \<br>		-R \<br>		-fgp \<br>		-V -Mupdate -full64  -sverilog +v2k +notimingcheck +no_tchk_msg \<br>		+lint=all \<br>		-timescale=1ns/1ps -notice \<br>		-cm line+cond+tgl+fsm+branch -cm_dir ../cov/$(TC).vdb \<br><br>verdi:<br>	verdi \<br>		-sv \<br>		-f &#123;BASE_PATH_TO_PROJECT&#125;/Demo/Design/Filelist/filelist \<br>		-ssf $(TB).fsdb &amp; <br><br>clear:<br>	<span class="hljs-built_in">rm</span> -rf verdiLog<br>	<span class="hljs-built_in">rm</span> -rf simv.daidir<br>	<span class="hljs-built_in">rm</span> -rf <span class="hljs-built_in">log</span><br>	<span class="hljs-built_in">rm</span> -rf csrc<br>	<span class="hljs-built_in">rm</span> .fsm.sch.verilog.xml<br>	<span class="hljs-built_in">rm</span> novas_dump.log<br>	<span class="hljs-built_in">rm</span> cm.log<br>	<span class="hljs-built_in">rm</span> simv<br>	<span class="hljs-built_in">rm</span> ucli.key<br><br>clear_all:<br>	make clear<br>	<span class="hljs-built_in">rm</span> tb_0.fsdb<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -303,8 +320,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">常用技术笔记</a>
+  <a href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/" class="category-chain-item">数字电路设计与实践</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/" class="category-chain-item">工程</a>
+  
+  
+
   
 
       </span>
@@ -318,7 +342,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="print-no-link">#环境配置</a>
+        <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" class="print-no-link">#数字电路, 仿真, VCS, Verdi,</a>
       
     </div>
   
@@ -330,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【环境配置】CUDA环境配置</div>
-      <div>http://example.com/2024/02/26/常用技术笔记/CUDA/</div>
+      <div>使用 VCS 与 Verdi 的前端仿真流程</div>
+      <div>http://example.com/2024/03/02/数字电路设计与实践/前端仿真/</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月26日</div>
+          <div>2024年3月2日</div>
         </div>
       
       
@@ -375,18 +399,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/" title="使用 VCS 与 Verdi 的前端仿真流程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用 VCS 与 Verdi 的前端仿真流程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" title="【环境配置】Python 环境与 Conda">
-                        <span class="hidden-mobile">【环境配置】Python 环境与 Conda</span>
+                      <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" title="【环境配置】CUDA环境配置">
+                        <span class="hidden-mobile">【环境配置】CUDA环境配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
