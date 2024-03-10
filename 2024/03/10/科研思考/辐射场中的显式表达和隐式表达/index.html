@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yunxiang He">
+  <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
+  
+    <meta name="description" content="光场（Light Field）和辐射场（Radiance Field）光场被定义为 “空间中光线集合的完备表示” 。采集并且显示光场，就能在视觉上重现真实世界。  全光函数（Plenoptic Function）包含7个维度，是表示光场的数学模型。  与之类似的概念还有“辐射场”。光场是以人眼为中心对光线集合进行描述，而辐射场则以发光表面为中心来描述光线集合。两者是等效的描述。  人眼位于三维世界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="辐射场中的显式表达和隐式表达">
+<meta property="og:url" content="http://example.com/2024/03/10/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E8%BE%90%E5%B0%84%E5%9C%BA%E4%B8%AD%E7%9A%84%E6%98%BE%E5%BC%8F%E8%A1%A8%E8%BE%BE%E5%92%8C%E9%9A%90%E5%BC%8F%E8%A1%A8%E8%BE%BE/index.html">
+<meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
+<meta property="og:description" content="光场（Light Field）和辐射场（Radiance Field）光场被定义为 “空间中光线集合的完备表示” 。采集并且显示光场，就能在视觉上重现真实世界。  全光函数（Plenoptic Function）包含7个维度，是表示光场的数学模型。  与之类似的概念还有“辐射场”。光场是以人眼为中心对光线集合进行描述，而辐射场则以发光表面为中心来描述光线集合。两者是等效的描述。  人眼位于三维世界">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LightField.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RadianceField.png">
+<meta property="article:published_time" content="2024-03-10T12:05:56.000Z">
+<meta property="article:modified_time" content="2024-03-10T12:07:05.035Z">
+<meta property="article:author" content="Yunxiang He">
+<meta property="article:tag" content="NeRF, Computer Architecture, ASIC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LightField.png">
+  
+  
+  
+  <title>辐射场中的显式表达和隐式表达 - Hypoxanthine&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hypoxanthine&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="辐射场中的显式表达和隐式表达"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-10 20:05" pubdate>
+          2024年3月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">辐射场中的显式表达和隐式表达</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="光场（Light-Field）和辐射场（Radiance-Field）"><a href="#光场（Light-Field）和辐射场（Radiance-Field）" class="headerlink" title="光场（Light Field）和辐射场（Radiance Field）"></a>光场（Light Field）和辐射场（Radiance Field）</h1><p>光场被定义为 <strong>“空间中光线集合的完备表示”</strong> 。采集并且显示光场，就能在视觉上重现真实世界。</p>
+<ul>
+<li>全光函数（Plenoptic Function）包含7个维度，是表示光场的数学模型。</li>
+</ul>
+<p>与之类似的概念还有“辐射场”。光场是以人眼为中心对光线集合进行描述，而辐射场则以发光表面为中心来描述光线集合。两者是等效的描述。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LightField.png" srcset="/img/loading.gif" lazyload></p>
+<p>人眼位于三维世界中不同的位置进行观察所看到的图像不同，用 $(x, y, z)$ 表示人眼在三维空间中的位置坐标。光线可以从不同的角度进入人眼，用 $(\theta, \phi)$ 表示进入人眼光线的水平夹角和垂直夹角。每条光线具有不同的颜色和亮度，可以用光线的波长 $λ$ 来统一表示。进入人眼的光线随着时间 $t$ 的推移会发生变化。这七个参数可以描述三维世界中的光线，被称之为“全光函数”（Plenoptic Function）：<br>$$P(x, y, z, \theta, \phi, λ, t)$$</p>
+<p>如果以物体的表面为中心来描述光线集合，我们就得到了辐射场。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RadianceField.png" srcset="/img/loading.gif" lazyload></p>
+<p>比起光场来说，辐射场更适合用于描述“场景”。从某个角度来说，“场”的客观存在并不一定需要用人眼去观测。</p>
+<p>在 NeRF（Neural Radiance Field）使用神经网络去拟合辐射场之后，就掀起了一阵使用辐射场来描述场景的热潮，其大体分为显式表达和隐式表达两种类型。</p>
+<h1 id="Overview：Explicit-Representation-And-Implicit-Representation"><a href="#Overview：Explicit-Representation-And-Implicit-Representation" class="headerlink" title="Overview：Explicit Representation And Implicit Representation"></a>Overview：Explicit Representation And Implicit Representation</h1><p>接下来，我们讨论的主要是“辐射场”中的显式表示和隐式表示。在这里我们做一些简化的假设：</p>
+<ol>
+<li>去除时间轴。我们只讨论静态场景。动态场景暂时可以理解为沿时间方向的静态场景的叠加。</li>
+<li>我们将光线的波长 $\lambda$ 分解为 $(R, G, B, \sigma)$ 四个参数，可以简单的表示某个点的颜色和密度。</li>
+</ol>
+<p>在这些假设下，我们来分析显式表达和隐式表达的区别。</p>
+<h2 id="隐式表达"><a href="#隐式表达" class="headerlink" title="隐式表达"></a>隐式表达</h2><p>所谓隐式表达，就是不直接写出场景的表达式，而是通过某个函数去描述我们所需要的值。RF 系列作品中，最为纯粹的隐式表达就是 NeRF（Neural Radiance Field）。作为神经渲染的开山之作，NeRF 完全使用 MLP 对辐射场进行拟合。</p>
+<p>值得注意的是，NeRF 的 Encoding 操作（包括 Positional Encoding，使用傅立叶编码和 SH Encoding，使用球谐编码）完全不需要参数（不是“超参数”），其本质只是把点的位置和方向信息从低频空间转化到高频空间，从而解决 MLP 不擅长学习高频细节的问题。（有研究表明，在使用梯度下降的时候，MLP 优先拟合场景中平滑的信息，随后才会“过拟合”到高频细节）。</p>
+<p>隐式表达最大的问题是：慢。NeRF 使用了 8 层 256 宽度的 MLP，渲染一张图片需要数以秒记的时间。但其参数量也非常小，原因可能是 MLP 这种形式的拟合器是对数据的一种良好的压缩。</p>
+<h2 id="显式表达"><a href="#显式表达" class="headerlink" title="显式表达"></a>显式表达</h2><p>显式表达直接存储空间中点的特征。从某种程度上来说，在辐射场里，显式表达约等于“基于点的表达”（Point-Based Representation）。例如：我们可以将空间划分为“网格”（Grid），或者直接存储“体素”（Voxel）。</p>
+<p>在 RF 系列作品中，较为出名的、使用了显式表达的方法有：</p>
+<ul>
+<li>Point NeRF。存储空间中的显式点特征，但仍然使用 Ray Marching 去进行采样。采样之后，根据不同点云到采样点的距离进行获取特征并插值。</li>
+<li>Plenoxels：用八叉树显示表示空间信息，并且对八叉树直接进行优化。</li>
+<li>3D Gaussian Splatting：最为纯粹的显式表达，用各向异性的高斯点云拟合场景，使用 <strong>光栅化管线</strong> 进行投影操作，从而达到足够快的渲染速度。</li>
+<li>Binary Opacity Grids 采样 Grid 编码场景，并 Baking 成 Mesh。</li>
+</ul>
+<p>显式表达的速度普遍快于隐式表达，但与之相应的代价是内存消耗的快速增长。而众所周知的是，内存在如今仍然是一个相当昂贵的资源。因此，纯粹采用显式表达未必是最优选择。</p>
+<h1 id="显示表达和隐式表达的结合"><a href="#显示表达和隐式表达的结合" class="headerlink" title="显示表达和隐式表达的结合"></a>显示表达和隐式表达的结合</h1><p>事实上，大部分神经渲染工作并没有完全抛弃 MLP。例如 Instant NGP 虽然采用 Hash Table 编码场景，但仍然使用了小型 MLP 作为解码器。小型的 MLP 运算速度并不慢，又能良好的压缩数据，因此仍然是可以被考虑的选择。</p>
+<h2 id="显式表达和隐式表达的分析"><a href="#显式表达和隐式表达的分析" class="headerlink" title="显式表达和隐式表达的分析"></a>显式表达和隐式表达的分析</h2><p>以 Synthetic 场景为例：</p>
+<ul>
+<li>NeRF：5MB，&lt;&#x3D;1 FPS</li>
+<li>Instant NGP：28MB，30+FPS</li>
+<li>Gaussian：100MB，100+FPS</li>
+<li>Plenoxels：1G+，慢的不谈了</li>
+</ul>
+<p>……</p>
+<p>可以看出，显式表示确实需要巨大的内存开销。因此，如何平衡：</p>
+<ul>
+<li>显式表达的高质量和快速渲染</li>
+<li>隐式表达的内存开销</li>
+</ul>
+<p>就成为一个重要的课题。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>辐射场中的显式表达和隐式表达</div>
+      <div>http://example.com/2024/03/10/科研思考/辐射场中的显式表达和隐式表达/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yunxiang He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/08/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/Testbench%E7%BC%96%E5%86%99%E5%9F%BA%E7%A1%80/" title="【数字IC设计】Testbench 编写基础">
+                        <span class="hidden-mobile">【数字IC设计】Testbench 编写基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
