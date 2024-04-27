@@ -1,0 +1,1345 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yunxiang He">
+  <meta name="keywords" content="NeRF, Computer Architecture, ASIC">
+  
+    <meta name="description" content="0. Overview0.0. What is OS?OS is an special layer of Software.  Provides application SW access to HW resources Convenient abstraction of complex HW devices Protected access to shared resources Securit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CS130】Midterm Review">
+<meta property="og:url" content="http://example.com/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/index.html">
+<meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
+<meta property="og:description" content="0. Overview0.0. What is OS?OS is an special layer of Software.  Provides application SW access to HW resources Convenient abstraction of complex HW devices Protected access to shared resources Securit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%204.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%207.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%209.png">
+<meta property="article:published_time" content="2023-11-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-27T05:34:43.428Z">
+<meta property="article:author" content="Yunxiang He">
+<meta property="article:tag" content="CourseReview">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png">
+  
+  
+  
+  <title>【CS130】Midterm Review - Hypoxanthine&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hypoxanthine&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【CS130】Midterm Review"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-11-22 00:00" pubdate>
+          2023年11月22日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【CS130】Midterm Review</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="0-Overview"><a href="#0-Overview" class="headerlink" title="0. Overview"></a>0. Overview</h1><h2 id="0-0-What-is-OS"><a href="#0-0-What-is-OS" class="headerlink" title="0.0. What is OS?"></a>0.0. What is OS?</h2><p><strong>OS is an special layer of Software.</strong></p>
+<ul>
+<li>Provides application SW access to HW resources</li>
+<li>Convenient abstraction of complex HW devices</li>
+<li>Protected access to shared resources</li>
+<li>Security and authentication</li>
+<li>Communication amongst logical entities</li>
+</ul>
+<h2 id="0-1-OS’s-Basic-Behaviors"><a href="#0-1-OS’s-Basic-Behaviors" class="headerlink" title="0.1. OS’s Basic Behaviors"></a>0.1. OS’s Basic Behaviors</h2><ul>
+<li>Translate programs to processes</li>
+<li>Deals with context switch</li>
+<li>Scheduling, Protection</li>
+<li>I&#x2F;O</li>
+<li>Loading</li>
+</ul>
+<h2 id="0-2-OS-Boot"><a href="#0-2-OS-Boot" class="headerlink" title="0.2. OS Boot"></a>0.2. OS Boot</h2><ol>
+<li>Initialization at a fixed memory location</li>
+<li>Bootstrap Loader</li>
+<li>Loads Kernel</li>
+</ol>
+<h2 id="0-3-Three-Roles-Of-OS"><a href="#0-3-Three-Roles-Of-OS" class="headerlink" title="0.3. Three Roles Of OS"></a>0.3. Three Roles Of OS</h2><h3 id="OS-is-an-illusionist"><a href="#OS-is-an-illusionist" class="headerlink" title="OS is an illusionist"></a>OS is an illusionist</h3><ul>
+<li>Provide clean, easy-to-use abstractions of physical resources<ul>
+<li>Infinite memory, dedicated（专心的，一致的） machine</li>
+<li>Higher level objects: FIles, users, messages……</li>
+<li>Masking Limitations, Virtualization</li>
+</ul>
+</li>
+</ul>
+<h3 id="OS-is-a-Referee"><a href="#OS-is-a-Referee" class="headerlink" title="OS is a Referee"></a>OS is a Referee</h3><ul>
+<li>Manage protection, isolation, and sharing of resources</li>
+</ul>
+<h3 id="OS-is-a-glue"><a href="#OS-is-a-glue" class="headerlink" title="OS is a glue"></a>OS is a glue</h3><ul>
+<li>Storage, Networking</li>
+<li>Sharing, authorization</li>
+</ul>
+<h1 id="1-Four-Basic-OS-Concepts"><a href="#1-Four-Basic-OS-Concepts" class="headerlink" title="1. Four Basic OS Concepts"></a>1. Four Basic OS Concepts</h1><h2 id="1-0-Overview"><a href="#1-0-Overview" class="headerlink" title="1.0. Overview"></a>1.0. Overview</h2><h3 id="Abstractions-of-Underlying-HW"><a href="#Abstractions-of-Underlying-HW" class="headerlink" title="Abstractions of Underlying HW"></a>Abstractions of Underlying HW</h3><ul>
+<li>Processor → Thread</li>
+<li>Memory → Address Space</li>
+<li>Disks, SSDs,… → Files</li>
+<li>Networks → Sockets</li>
+<li>Machines → Processes</li>
+</ul>
+<h3 id="Basic-OS-Concepts"><a href="#Basic-OS-Concepts" class="headerlink" title="Basic OS Concepts"></a>Basic OS Concepts</h3><ol>
+<li>Thread<ul>
+<li>Execution Context</li>
+<li>Fully Describes Program State</li>
+<li>PC, Regs, Execution Flags, Stack…</li>
+</ul>
+</li>
+<li>Address Space<ul>
+<li>Set of memory address accessible to program</li>
+<li>May be distinct from memory space of physical machine ( in which case programs operate in a virtual machine )</li>
+</ul>
+</li>
+<li>Process<ul>
+<li>An instance of Running Program</li>
+<li>Protected Address Space + One &#x2F; More Threads</li>
+</ul>
+</li>
+<li>Dual-Mode Operation &#x2F; Protection<ul>
+<li>Only the “System” can access certain resources</li>
+<li>Combined with translation, isolates programs from each other, and isolates OS from programs.</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-1-Thread"><a href="#1-1-Thread" class="headerlink" title="1.1. Thread"></a>1.1. Thread</h2><p>Thread is <strong>single unique execution context.</strong></p>
+<ul>
+<li>A thread is suspended（挂起，即不执行）when its state is not loaded (resident，常驻 ) into the processor.<ul>
+<li>Resident: Register hold the root state of the thread. Include the PC Regs and currently executing instruction.</li>
+</ul>
+</li>
+<li>Illusion of Multiple Processors<ul>
+<li><strong>Threads are virtual cores!</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Thread-Control-Block（TCB）"><a href="#Thread-Control-Block（TCB）" class="headerlink" title="Thread Control Block（TCB）"></a>Thread Control Block（TCB）</h3><ul>
+<li>Holds contents of registers when thread is not running</li>
+<li>Contains:<ul>
+<li>Execution State: CPU Registers, Pprogram Counter (PC), Pointer to Stack (SP)</li>
+<li>Scheduling info: State, Priority, CPU time</li>
+<li>Various Pointers (for implementing scheduling queues)</li>
+<li>Pointer to Enclosing Process (PCB)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Super-scalar-and-Hyper-threading"><a href="#Super-scalar-and-Hyper-threading" class="headerlink" title="Super scalar and Hyper threading"></a>Super scalar and Hyper threading</h3><ul>
+<li>Super scalar processors can execute multiple instructions that are independent.</li>
+<li>Hyper threading duplicates register state to make a second “thread”, allowing more instructions to run.（本质上是通过寄存器的复制来创建额外线程）</li>
+</ul>
+<h2 id="1-2-Address-Space"><a href="#1-2-Address-Space" class="headerlink" title="1.2. Address Space"></a>1.2. Address Space</h2><p>Address space is <strong>the set of accessible addresses</strong> + <strong>state associated with them</strong>.</p>
+<ul>
+<li><p>Space Size?</p>
+<ul>
+<li>For 32 Bit: $2^{32} &#x3D; 4\text{GB}$</li>
+<li>For 64 Bit: $2^{64}\approx 10^{18}\text{Bytes}$</li>
+</ul>
+</li>
+<li><p>Four Segment:</p>
+<ul>
+<li>Stack</li>
+<li>Heap</li>
+<li>Static Data</li>
+<li>Code.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%201.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="OS-Protection"><a href="#OS-Protection" class="headerlink" title="OS Protection?"></a>OS Protection?</h3><ul>
+<li>OS must protect itself from user programs<ul>
+<li>Reliability, Security, Privacy, Fairness</li>
+</ul>
+</li>
+<li>OS must protect user programs from one another</li>
+</ul>
+<p><strong>Simple Protection: Base &amp; Bound</strong></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%202.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="1-3-Process"><a href="#1-3-Process" class="headerlink" title="1.3. Process"></a>1.3. Process</h2><p><strong>Execution environment with Restricted Rights</strong>.</p>
+<blockquote>
+<p>Fundamental tradeoff between protection and efficiency</p>
+</blockquote>
+<ul>
+<li>(Protected) Address Space with One or More Threads</li>
+<li>Owns memory ( Address Space )</li>
+<li>Owns file descriptors, file system context, …</li>
+<li>Encapsulate（封装） one or more threads sharing processes resources</li>
+</ul>
+<h3 id="Why-Processes"><a href="#Why-Processes" class="headerlink" title="Why Processes ?"></a>Why Processes ?</h3><ul>
+<li><strong>Protected from each other</strong></li>
+<li><strong>OS protected from them</strong></li>
+</ul>
+<h3 id="Multi-Threaded-Processes"><a href="#Multi-Threaded-Processes" class="headerlink" title="Multi-Threaded Processes"></a>Multi-Threaded Processes</h3><ul>
+<li><strong>Threads encapsulate Concurrency</strong><ul>
+<li>“Active” component（主动的组件，推动程序向前）</li>
+</ul>
+</li>
+<li><strong>Address Spaces encapsulate Protection</strong><ul>
+<li>“Passive ” part（被动的部分，存储机制的提供者）</li>
+<li>Keeps buggy program from trashing the system</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-Dual-Mode-Operation"><a href="#1-4-Dual-Mode-Operation" class="headerlink" title="1.4. Dual Mode Operation"></a>1.4. Dual Mode Operation</h2><ul>
+<li>Only the “system” has the ability to access certain resources</li>
+<li>OS and HW protected from user programs</li>
+<li>User programs isolated from one another</li>
+<li>Hardware provides at least two modes ( Kernel Mode and User Mode )<ul>
+<li>Need: A bit of state, Certain operations only permitted in system &#x2F; kernel.</li>
+<li>User → Kernel Transition: Set System Mode, Saves User PC</li>
+<li>Kernel → User Transition: Clear System Mode, Restores Appropriate User PC.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%203.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="2-Process-Management"><a href="#2-Process-Management" class="headerlink" title="2. Process Management"></a>2. Process Management</h1><p>Process: OS abstraction of what is needed to run a single program.</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%204.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2-0-Process-Control-Block-Compare-with-TCB"><a href="#2-0-Process-Control-Block-Compare-with-TCB" class="headerlink" title="2.0. Process Control Block ( Compare with TCB! )"></a>2.0. Process Control Block ( Compare with TCB! )</h2><aside>
+💡 POSIX: Portable Operation System Interfaces in UNIX.
+It’s the **Interface for application programmers**
+
+</aside>
+
+<ul>
+<li>Process Status (running, ready, blocked, …)</li>
+<li>Register state (when not ready)</li>
+<li>Process ID (PID), User, Executable, Priority, …</li>
+<li>Execution time, …</li>
+<li>Memory space, translation, …</li>
+<li>Kernel Scheduler maintains a data structure containing the PCBs</li>
+</ul>
+<p>In Context switch, we save the current process’s state to it’s PCB, and reload another process’s state. </p>
+<h2 id="2-1-System-Call"><a href="#2-1-System-Call" class="headerlink" title="2.1. System Call"></a>2.1. System Call</h2><ul>
+<li><strong>Vector through well-defined syscall entry points</strong><ul>
+<li>“定义良好的 System Call 入口“</li>
+<li>Table mapping system call number to handle</li>
+</ul>
+</li>
+<li>Locate argunments<ul>
+<li>In registers or on user stack</li>
+</ul>
+</li>
+<li>Copy arguments<ul>
+<li>From user memory into kernel memory</li>
+<li>Protect kernel from malicious code evading checked</li>
+</ul>
+</li>
+<li>Validate arguments<ul>
+<li>Protect kernel from errors in user code</li>
+</ul>
+</li>
+<li>Copy results back<ul>
+<li>Into user memory</li>
+</ul>
+</li>
+</ul>
+<p>There are also <strong>Hardware Support</strong> for Interrupt Control !</p>
+<ul>
+<li>Not be visible to the user process</li>
+</ul>
+<h2 id="2-2-Web-Server"><a href="#2-2-Web-Server" class="headerlink" title="2.2. Web Server"></a>2.2. Web Server</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%205.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2-3-Process-Creation"><a href="#2-3-Process-Creation" class="headerlink" title="2.3. Process Creation"></a>2.3. Process Creation</h2><h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3><ul>
+<li>Return &gt; 0<ul>
+<li>Running in <strong>Parent Process</strong></li>
+<li>Return value is PID of new child!</li>
+</ul>
+</li>
+<li>Return &#x3D; 0<ul>
+<li>Running in new <strong>Child Process</strong></li>
+</ul>
+</li>
+<li>Return &lt; 0<ul>
+<li>Error</li>
+</ul>
+</li>
+</ul>
+<p><strong>All state of original process</strong> is <strong>duplicated</strong> in both Parent and Child process</p>
+<blockquote>
+<p>值得注意的是，<code>fork()</code> 后面的所有代码都会被子线程执行<br>考点经常结合逻辑运算符的短路特性。<br>e.g.1. <code>if(fork() || fork()) fork();</code> 就会产生 5 个子线程。<br>e.g.2. <code>fork() &amp;&amp; fork() || fork()</code> 会产生 4 个子线程</p>
+</blockquote>
+<h3 id="Unix-Process-Management"><a href="#Unix-Process-Management" class="headerlink" title="Unix Process Management"></a>Unix Process Management</h3><ul>
+<li><p><code>fork</code></p>
+<ul>
+<li>Create a copy of current process, and start it running</li>
+</ul>
+</li>
+<li><p><code>exec</code></p>
+<ul>
+<li>Change the program being run by the current process</li>
+<li>在 Fork 之后使用，替换 Process 的 Memory Space</li>
+</ul>
+</li>
+<li><p><code>wait</code></p>
+<ul>
+<li>Wait for a process to finish</li>
+<li>Return status information and the pid of terminated process: <code>pid = wait(&amp;status);</code></li>
+</ul>
+</li>
+<li><p><code>kill</code></p>
+<ul>
+<li>Send a signal to another process</li>
+</ul>
+</li>
+<li><p><code>exit</code></p>
+<ul>
+<li>Process asks OS to delete it</li>
+<li>return status data from child to parent</li>
+</ul>
+</li>
+<li><p><code>abort</code></p>
+<ul>
+<li>Process terminate the execution of children process</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-Threads"><a href="#2-4-Threads" class="headerlink" title="2.4. Threads"></a>2.4. Threads</h2><p>Motivation: <strong>OS need to be able to handle multiple things at once.</strong></p>
+<h3 id="Thread-States"><a href="#Thread-States" class="headerlink" title="Thread States"></a>Thread States</h3><ul>
+<li>State shared by all thread in process &#x2F; address space<ul>
+<li>Content of memory ( Global Variables, Heap )</li>
+<li>I &#x2F; O State ( File Descriptors, Network connection, … )</li>
+</ul>
+</li>
+<li>State “Private” to each thread<ul>
+<li>Kept in TCB</li>
+<li>CPU Registers ( Include PC! )</li>
+<li>Execution stack<ul>
+<li>Parameters, Temporary Variables</li>
+<li>Return PCs are kept while called procedures are executing.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Actual-Thread-Operations"><a href="#Actual-Thread-Operations" class="headerlink" title="Actual Thread Operations"></a>Actual Thread Operations</h3><ul>
+<li><code>thread_fork(func, args)</code><ul>
+<li>Create a new thread to run <code>func(args)</code>.</li>
+</ul>
+</li>
+<li><code>thread_yield()</code><ul>
+<li>Relinquish processor voluntarily.（自愿放弃处理器的使用权或控制权。）</li>
+</ul>
+</li>
+<li><code>thread_join(thread)</code><ul>
+<li>In parent, wait for forked thread to exit, then return</li>
+</ul>
+</li>
+<li><code>thread_exit()</code><ul>
+<li>Quit thread and clean up, wake up joiner if any.</li>
+</ul>
+</li>
+<li>pThreads</li>
+</ul>
+<h3 id="The-core-of-Concurrency"><a href="#The-core-of-Concurrency" class="headerlink" title="The core of Concurrency"></a>The core of Concurrency</h3><p>That’s the Dispatch（调度程序、调度器） Loop!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">Loop &#123;<br>		RunThread();<br>		ChooseNextThread();<br>		SaveSyayeOfCPU(CurrentTCB);<br>		LoadStateOfCPU(NextTCB);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Running the thread:</p>
+<ul>
+<li>Load it’s state (Reg, PC, Stack pt) into CPU.</li>
+<li>Load enviroment (VM,…)</li>
+<li>Jump to the PC</li>
+</ul>
+<h3 id="Events-Let-Dispatcherget-control-back"><a href="#Events-Let-Dispatcherget-control-back" class="headerlink" title="Events: Let Dispatcherget control back"></a>Events: Let Dispatcherget control back</h3><ul>
+<li>Internal event: Thread returns control voluntarily<ul>
+<li>Blocking on I&#x2F;O</li>
+<li>Waiting on a “signal” frin itger thread</li>
+<li>Thread executes a <code>yield()</code></li>
+</ul>
+</li>
+<li>External Events: Thread get preempted<ul>
+<li>Interrupts: signals from HW or SW that stop the running code and jump to kernel</li>
+<li>Timer: like an alarm clock that goes off every some may milliseconds</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-Comparison"><a href="#2-5-Comparison" class="headerlink" title="2.5. Comparison"></a>2.5. Comparison</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Same Process</th>
+<th>Diff. Process</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switch Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Protection Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Sharing Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Same core</th>
+<th>Diff. Core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switch Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Protection Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Sharing Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+</tbody></table>
+<h2 id="2-6-Multi-Thread-Processes"><a href="#2-6-Multi-Thread-Processes" class="headerlink" title="2.6. Multi-Thread Processes"></a>2.6. Multi-Thread Processes</h2><ul>
+<li>PCB points to multiple TCBs</li>
+</ul>
+<h3 id="Multi-Threading-Models"><a href="#Multi-Threading-Models" class="headerlink" title="Multi-Threading Models"></a>Multi-Threading Models</h3><ul>
+<li>Many-to-One<ul>
+<li>User-level threads mapped to single kernel thread</li>
+<li>One thread blocking causes all to block</li>
+</ul>
+</li>
+<li>One-to-One<ul>
+<li>Each User-level thread maps to kernel thread</li>
+<li>Creating a user-level thread creates a kernel thread</li>
+<li>More concurrency, more overhead</li>
+</ul>
+</li>
+<li>Many-to-Many<ul>
+<li>Allows many user-level threads to be mapped to many kernel threads</li>
+<li>Allow OS to create a sufficient number of kernel threads.</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Synchronization"><a href="#3-Synchronization" class="headerlink" title="3. Synchronization"></a>3. Synchronization</h1><h2 id="3-1-Definitions"><a href="#3-1-Definitions" class="headerlink" title="3.1. Definitions"></a>3.1. Definitions</h2><h3 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h3><p>An operation that always run to completion or not at all</p>
+<ul>
+<li><strong>Indivisible</strong>: Cannot be stopped in the middle and state cannot bemodified by someone else in the middle.</li>
+<li><strong>Fundamental building block</strong>: If no atomic operations, then have no way for threads to work together.</li>
+</ul>
+<h3 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h3><p>Using atomic operations to ensure cooperation between threads</p>
+<h3 id="Mutual-Exclusion"><a href="#Mutual-Exclusion" class="headerlink" title="Mutual Exclusion"></a>Mutual Exclusion</h3><p>Ensuring that only one thread does a particular thing at a time.</p>
+<h3 id="Critical-Section"><a href="#Critical-Section" class="headerlink" title="Critical Section"></a>Critical Section</h3><p>Piece of code that only one thread can execute at once.</p>
+<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>Prevents someone from doing something.</p>
+<ul>
+<li><strong>Lock</strong> before <strong>entering critical section</strong> and before <strong>accessing shared data</strong></li>
+<li><strong>Unlock</strong> when leaving, after accessing shared data</li>
+<li>Wait if locked<ul>
+<li><strong>Important idea: all synchronization involves waiting</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-“Too-Much-Milk”"><a href="#3-2-“Too-Much-Milk”" class="headerlink" title="3.2. “Too Much Milk”"></a>3.2. “Too Much Milk”</h2><p>Solved with lock:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">milkLock.Acquire();<br><span class="hljs-keyword">if</span> (noMilk) buy milk;<br>milkLock.Release();<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Section of code between <code>Acquire()</code> and <code>Release()</code> called a “Critical Section”</p>
+</blockquote>
+<p>Use lock, the <strong>critical section is very short</strong> !</p>
+<h2 id="3-3-Lock"><a href="#3-3-Lock" class="headerlink" title="3.3. Lock"></a>3.3. Lock</h2><h3 id="Basic-Inplementation"><a href="#Basic-Inplementation" class="headerlink" title="Basic Inplementation"></a>Basic Inplementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> value = FREE;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c">Acquire() &#123;<br>		disable interrupts;<br>		<span class="hljs-keyword">if</span> (value == BUSY) &#123;<br>				put thread on wait <span class="hljs-built_in">queue</span>;<br>				Go to <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span>;<br>				<span class="hljs-comment">// Enable?</span><br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>				value = BUSY;<br>		&#125;<br>		enable interrupts;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">Release() &#123;<br>		disable interrupts;<br>		<span class="hljs-keyword">if</span> (anyone on wait <span class="hljs-built_in">queue</span>) &#123;<br>				take thread off wait <span class="hljs-built_in">queue</span>;<br>				Place on ready <span class="hljs-built_in">queue</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>				value = FREE;<br>		&#125;<br>		enable interrupts;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Why do we need to disable interrupts?</p>
+<ul>
+<li>Avoid interruption between checking and setting lock value</li>
+<li>Otherwise two threads could think that they both have lock</li>
+</ul>
+<p>When we enable interrupt?</p>
+<ul>
+<li><p>Before <code>put thread on wait queue;</code> ?</p>
+<ul>
+<li>Release can check the queue and not wakeup thread</li>
+</ul>
+</li>
+<li><p>Between <code>put...</code> and <code>Go to sleep();</code> ?</p>
+<ul>
+<li>Release puts the thread on the ready queue, but the thread still think it needs to go to sleep</li>
+<li>Misses wakeup and still holds lock ( Calls Deadlock! )</li>
+</ul>
+</li>
+<li><p>How to solve?</p>
+</li>
+<li><p>When the sleeping thread wakes up, returns to acquire and re-enable interrupts.</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%206.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Atomic-Read-Modify-Write-Instructions"><a href="#Atomic-Read-Modify-Write-Instructions" class="headerlink" title="Atomic Read Modify Write Instructions"></a>Atomic Read Modify Write Instructions</h3><p>These instructions read a value and write a new value atomically</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c">test&amp;<span class="hljs-title function_">set</span><span class="hljs-params">(&amp;address)</span>&#123;<br>	result = Mem[address];<br>	Mem[address] = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">compare&amp;<span class="hljs-title">swap</span><span class="hljs-params">(&amp;address, reg1, reg2)</span> </span>&#123;<br>	<span class="hljs-keyword">if</span> (reg1 == Mem[address]) &#123;<br>		Mem[address] = reg2;<br>		<span class="hljs-keyword">return</span> success;<br>	&#125;<br>	<span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-keyword">return</span> failure;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Impelment-Lock-with-test-set"><a href="#Impelment-Lock-with-test-set" class="headerlink" title="Impelment Lock with test&amp;set"></a>Impelment Lock with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> value = <span class="hljs-number">0</span>; <span class="hljs-comment">// FREE</span><br>Acquire() &#123;<br>		<span class="hljs-keyword">while</span>(test&amp;<span class="hljs-built_in">set</span>(value));<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">Release</span>() &#123;<br>		value = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Busy-Waiting: thread consumes cycles while waiting!</strong></p>
+<ul>
+<li>For multi-processors: every test&amp;set is a write, which makes value ping-pong around in cache (using lots of network BW)</li>
+<li>It will cause Priority Inversion!</li>
+</ul>
+<h3 id="Solution-test-test-set-Multi-Processor-Spin-Locks"><a href="#Solution-test-test-set-Multi-Processor-Spin-Locks" class="headerlink" title="Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)"></a>Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> mylock = <span class="hljs-number">0</span>; <span class="hljs-comment">// Free</span><br>Acquire() &#123;<br>		<span class="hljs-keyword">do</span> &#123;<br>		<span class="hljs-keyword">while</span>(mylock); <span class="hljs-comment">// Wait until might be free</span><br>		&#125; <span class="hljs-keyword">while</span>(test&amp;<span class="hljs-built_in">set</span>(&amp;mylock)); <span class="hljs-comment">// exit if get lock</span><br>&#125;<br>Release() &#123;<br>		mylock = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Solve Multi-processors Problem.</li>
+<li>Still Busy Waiting!</li>
+</ul>
+<h3 id="Better-Locks-with-test-set"><a href="#Better-Locks-with-test-set" class="headerlink" title="Better Locks with test&amp;set"></a>Better Locks with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> guard = <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span> value = FREE;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">Acquire() &#123;<br>		<span class="hljs-keyword">while</span>(test&amp;<span class="hljs-built_in">set</span>(guard));<br>		<span class="hljs-keyword">if</span> (value == BUSY) &#123;<br>				Put thread on wait <span class="hljs-built_in">queue</span>;<br>				Go to <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span> &amp; guard = <span class="hljs-number">0</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>				value = BUSY;<br>				guard = <span class="hljs-number">0</span>;<br>		&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c">Release() &#123;<br>		<span class="hljs-keyword">while</span>(test&amp;<span class="hljs-built_in">set</span>(guard));<br>		<span class="hljs-keyword">if</span> anyone on wait <span class="hljs-built_in">queue</span> &#123;<br>				Take thread off wait <span class="hljs-built_in">queue</span>;<br>				Place on ready <span class="hljs-built_in">queue</span>;<br>		&#125;<br>		<span class="hljs-keyword">else</span> &#123;<br>				value = FREE;<br>		&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-4-Semaphore"><a href="#3-4-Semaphore" class="headerlink" title="3.4. Semaphore"></a>3.4. Semaphore</h2><p>Semaphore has a non-negative integer value and supports the following two atomic operations:</p>
+<ul>
+<li><p><code>P()</code> : Waits for semaphore to become positive, then decrements it by 1.</p>
+<ul>
+<li>Also called <code>wait()</code></li>
+</ul>
+</li>
+<li><p><code>V()</code> : Increments the semaphore by 1, waking up a waiting P if any.</p>
+<ul>
+<li>Also called <code>signal()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">while</span>(S) &#123;<br>	<span class="hljs-keyword">while</span>(S &lt;= <span class="hljs-number">0</span>);<br>	S--;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">signal(S) &#123;<br>	S++;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
+<li>Binary Semaphore (Block&#x2F;Resume Semaphore)<ul>
+<li>Int range only between 0 and 1 (with initial value &#x3D; 1)</li>
+<li>Same as a Mutex Lock.</li>
+</ul>
+</li>
+<li>Counring Semaphore, for scheduling constrainrs ( with initial value &#x3D; 0)<ul>
+<li>Allow thread 1 to wait for thread 2</li>
+</ul>
+</li>
+</ul>
+<h3 id="Lock-vs-Semaphore"><a href="#Lock-vs-Semaphore" class="headerlink" title="Lock vs Semaphore"></a>Lock vs Semaphore</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Advantage</th>
+<th>Disadvantage</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Locks</td>
+<td>A lock allows only one thread to enter the section or resource that’s locked at a time, simple to use.</td>
+<td>Locks can lead to problems like deadlocks if not used carefully.</td>
+<td>Locks are more suitable when you need to ensure that only one thread can access a resource at a time, such as writing to a shared source. (Other reasonable answers are acceptable.)</td>
+</tr>
+<tr>
+<td>Semaphores</td>
+<td>Semaphores can control access of multiple threads to one or more resources</td>
+<td>Semaphores can be more complex to use correctly compared to locks, and misuse can lead to problems such as deadlocks and starvation.</td>
+<td>Semaphores are suitable for Producer and Consumer case where there exists threads producing data and threads consuming data. (Other reasonable answers are acceptable.)</td>
+</tr>
+</tbody></table>
+<h2 id="3-5-Monitors"><a href="#3-5-Monitors" class="headerlink" title="3.5. Monitors"></a>3.5. Monitors</h2><p>A lock and zero or more condition variables for managing concurrent access to shared data.</p>
+<ul>
+<li>Lock: Provides Mutual Exclusion to shared data</li>
+<li>Condition Variable: A queue of threads waiting for something inside a critical section</li>
+</ul>
+<h3 id="Condition-Variables"><a href="#Condition-Variables" class="headerlink" title="Condition Variables"></a>Condition Variables</h3><p>Allow <code>wait(&amp;lock)</code> , <code>signal()</code> and <code>broadcast()</code> operations.</p>
+<ul>
+<li><strong>Rule: Must hold lock when doing condition variable ops</strong></li>
+</ul>
+<h2 id="3-6-Deadlock-and-Starvation"><a href="#3-6-Deadlock-and-Starvation" class="headerlink" title="3.6. Deadlock and Starvation"></a>3.6. Deadlock and Starvation</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>Resources</p>
+<ul>
+<li>Serially reusable resources (CPU cycles, memory space, I&#x2F;O devices, files); Consumable resources (message, buffer of information, interrupts)</li>
+</ul>
+</li>
+<li><p>Comparision</p>
+<ul>
+<li>Deadlock → Starvation</li>
+<li>Starvation can and, Deadlock can’t end without external intervention</li>
+</ul>
+</li>
+<li><p>Deadlock</p>
+<ul>
+<li>Two or more processes are waiting indefinitely for an event that can be caused by only of the waiting processes</li>
+</ul>
+</li>
+<li><p>Starvation</p>
+<ul>
+<li>Indefinite blocking</li>
+<li>A process may never be removed from the semaphore queue in which it’s suspended</li>
+</ul>
+</li>
+</ul>
+<h3 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h3><ul>
+<li>Definitions<ul>
+<li>A process is deadlocked if it’s waiting for an event that will never occur</li>
+</ul>
+</li>
+<li>Conditions:<ul>
+<li>Mutual exclusion</li>
+<li>Hold and wait</li>
+<li>No preemption</li>
+<li>Circular wait</li>
+</ul>
+</li>
+<li>Deadlock Management<ul>
+<li>死锁预防是在<strong>系统设计和资源分配阶段</strong>采取措施防止死锁的发生，而死锁避免是<strong>在运行时</strong>动态地检测和避免可能导致死锁的状态。</li>
+</ul>
+<ol>
+<li>Prevention（预防）<ul>
+<li>Ensure that at least one of the necessary conditions for deadlock cannot hold.</li>
+<li>Mutual Exclusion<ul>
+<li>No issue for sharable resources</li>
+<li>Can not deny this for non-sharable resources</li>
+</ul>
+</li>
+<li>Hold and wait（确保当一个进程请求资源时，它不持有其他资源。）<ul>
+<li>Guarantee that when a process requests a resource, it does not hold other resources</li>
+</ul>
+</li>
+<li>No Preemption（如果一个持有某些资源的进程请求无法立即分配的另一个资源，该进程将释放当前持有的资源，并将被抢占的资源添加到等待列表中。只有当该进程能够重新获取其原有的资源以及请求的新资源时，才会重新启动。）<ul>
+<li>If a process that is holding some resources requests another resource that cannot be immediately allocated to it, the process releases the resources currently being held.</li>
+<li>Preempted resources are added to the list of resources for which the process is waiting</li>
+<li>Process will be restarted only when it can regain its old resources as well as the new<br>  ones that is requesting.</li>
+</ul>
+</li>
+<li>Circular wait（避免无限的资源申请：对所有资源类型进行全局排序，并要求进程按照递增的枚举顺序请求资源。如果持有类型为N的资源，进程只能请求类型大于N的资源。）<ul>
+<li>Impose a total ordering of all resource types</li>
+<li>Require that processes request resources in increasing order of enumeration</li>
+<li>If a resource of type N is held, process can only request resources of types &gt; N</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Avoidance（避免）<ul>
+<li><p>Require additional Apriori information</p>
+<ul>
+<li>Simplest and Most useful Mode<ul>
+<li>Maximum number of resources</li>
+</ul>
+</li>
+<li>Deadlock-Avoidance algorithm<ul>
+<li>Resource-Allocation state to ensure that there can never be a circular-wait condition</li>
+<li>Resource-Allocation State<ul>
+<li>the number of available and allocated resources</li>
+<li>the maximum demands of the processes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Safe state</p>
+<p>  <img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%207.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>When a process requests an available resource, must decide if immediate allocation leaves the system in a safe state</li>
+<li>System in safe sate → there exists a safe sequence of all processes</li>
+<li>Banker’s Algorithm</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Detection<ul>
+<li>Allow deadlocks to occur but then rely on the operating system to detect the deadlock and deal with it</li>
+</ul>
+</li>
+<li>Recovery<ul>
+<li>Process Termination</li>
+<li>Resource Preemption</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="Bank-Algorithm"><a href="#Bank-Algorithm" class="headerlink" title="Bank Algorithm"></a>Bank Algorithm</h3><p>银行家算法的实质就是<strong>要设法保证系统动态分配资源后不进入不安全状态，以避免可能产生的死锁。</strong>即没当进程提出资源请求且系统的资源能够满足该请求时，系统将判断满足此次资源请求后系统状态是否安全，如果判断结果为安全，则给该进程分配资源，否则不分配资源，申请资源的进程将阻塞。</p>
+<p>银行家算法的执行有个前提条件，即要求进程预先提出自己的最大资源请求，并假设系统拥有固定的资源总量。下面介绍银行家算法所用的主要的数据结构。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%209.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/" class="category-chain-item">CS130</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CourseReview/" class="print-no-link">#CourseReview</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【CS130】Midterm Review</div>
+      <div>http://example.com/2023/11/22/本科课程/CS130/Midterm-Cheatsheet/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yunxiang He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年11月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" title="2023~2024 诗词创作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2023~2024 诗词创作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/20/PaperReading/Paper-3DGaussian/" title="【PaperReading】3D Gaussian Splattting">
+                        <span class="hidden-mobile">【PaperReading】3D Gaussian Splattting</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
