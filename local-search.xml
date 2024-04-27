@@ -8,7 +8,7 @@
     <link href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/"/>
     <url>/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/</url>
     
-    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>以下为我在上海科技大学所上的所有课程</p><h1 id="Couuse-Lists"><a href="#Couuse-Lists" class="headerlink" title="Couuse Lists"></a>Couuse Lists</h1><h2 id="21-Fall（大一上学期）"><a href="#21-Fall（大一上学期）" class="headerlink" title="21 Fall（大一上学期）"></a>21 Fall（大一上学期）</h2><ol><li>SI100B 信息科学与技术导论</li><li></li></ol><h2 id="22-Spring（大一下学期）"><a href="#22-Spring（大一下学期）" class="headerlink" title="22 Spring（大一下学期）"></a>22 Spring（大一下学期）</h2><h2 id="22-Fall（大二上学期）"><a href="#22-Fall（大二上学期）" class="headerlink" title="22 Fall（大二上学期）"></a>22 Fall（大二上学期）</h2><ol><li>CS101 数据结构与算法</li><li>SI140</li></ol><h2 id="23-Spring（大二下学期）"><a href="#23-Spring（大二下学期）" class="headerlink" title="23 Spring（大二下学期）"></a>23 Spring（大二下学期）</h2><ol><li>CS110 计算机体系结构</li><li>EE150 信号与系统</li><li>CS182 机器学习引论</li></ol><h2 id="23-Fall（大三-上学期）"><a href="#23-Fall（大三-上学期）" class="headerlink" title="23 Fall（大三 上学期）"></a>23 Fall（大三 上学期）</h2><ol><li>CS181 人工智能 I</li><li>CS130 操作系统</li></ol><h2 id="23-Spring（大三-下学期）"><a href="#23-Spring（大三-下学期）" class="headerlink" title="23 Spring（大三 下学期）"></a>23 Spring（大三 下学期）</h2><ol><li>EE116 基于FPGA 的硬件系统设计</li><li>SI114H 计算科学与工程</li></ol>]]></content>
+    <content type="html"><![CDATA[<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>以下为我在上海科技大学所上的所有课程</p><h1 id="Course-Lists"><a href="#Course-Lists" class="headerlink" title="Course Lists"></a>Course Lists</h1><h2 id="21-Fall（大一上学期）"><a href="#21-Fall（大一上学期）" class="headerlink" title="21 Fall（大一上学期）"></a>21 Fall（大一上学期）</h2><ol><li>SI100B 信息科学与技术导论</li><li>GEMA1009 数学分析 I</li><li>MATH1112 线性代数 I</li></ol><h2 id="22-Spring（大一下学期）"><a href="#22-Spring（大一下学期）" class="headerlink" title="22 Spring（大一下学期）"></a>22 Spring（大一下学期）</h2><ol><li>CS100 计算机编程</li><li>GEMA1010 数学分析 II</li><li>SI120 离散数学</li></ol><h2 id="22-Fall（大二上学期）"><a href="#22-Fall（大二上学期）" class="headerlink" title="22 Fall（大二上学期）"></a>22 Fall（大二上学期）</h2><ol><li>CS101 数据结构与算法</li><li>SI140A 面向信息科学的概率论与数理统计</li><li>CS171 计算机图形学</li><li>GEHA1152 唐宋文学精华</li></ol><h2 id="23-Spring（大二下学期）"><a href="#23-Spring（大二下学期）" class="headerlink" title="23 Spring（大二下学期）"></a>23 Spring（大二下学期）</h2><ol><li>CS110 计算机体系结构</li><li>EE150 信号与系统</li><li>EE150L 信号与系统实验</li><li>CS182 机器学习引论</li></ol><h2 id="23-Fall（大三-上学期）"><a href="#23-Fall（大三-上学期）" class="headerlink" title="23 Fall（大三 上学期）"></a>23 Fall（大三 上学期）</h2><ol><li>CS181 人工智能 I</li><li>CS130 操作系统<ul><li><a href="">Midterm Review</a></li><li><a href="">Final Review</a></li></ul></li><li>GEHA1117 宋词导读</li><li>GESS1023 毛泽东思想和中国特色社会主义理论体系概论</li></ol><h2 id="23-Spring（大三-下学期）"><a href="#23-Spring（大三-下学期）" class="headerlink" title="23 Spring（大三 下学期）"></a>23 Spring（大三 下学期）</h2><ol><li>EE116 基于FPGA 的硬件系统设计</li><li>SI114H 计算科学与工程</li></ol>]]></content>
     
     
     <categories>
@@ -212,7 +212,7 @@
   
   
   <entry>
-    <title>【环境配置】C与C++的编译环境</title>
+    <title>【环境配置】C 与 C++ 的编译环境</title>
     <link href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/"/>
     <url>/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/</url>
     
