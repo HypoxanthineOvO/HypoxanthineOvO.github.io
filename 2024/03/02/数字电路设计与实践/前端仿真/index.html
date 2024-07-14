@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【数字IC设计】使用 VCS 与 Verdi 的前端仿真流程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前端仿真首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是： Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等） 环境搭建在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。 首先，我们需要保证环境变量里存在 vcs 和 verdi 。例如，大部分环境下，可以使用 module load 来进行环境变量的加载。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数字IC设计】使用 VCS 与 Verdi 的前端仿真流程">
+<meta property="og:url" content="http://example.com/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前端仿真首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是： Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等） 环境搭建在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。 首先，我们需要保证环境变量里存在 vcs 和 verdi 。例如，大部分环境下，可以使用 module load 来进行环境变量的加载。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-02T14:16:59.000Z">
+<meta property="article:modified_time" content="2024-03-03T03:36:11.656Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数字电路, 仿真, VCS, Verdi,">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数字电路设计与实践/前端仿真" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/" class="article-date">
+  <time class="dt-published" datetime="2024-03-02T14:16:59.000Z" itemprop="datePublished">2024-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a>►<a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【数字IC设计】使用 VCS 与 Verdi 的前端仿真流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前端仿真"><a href="#前端仿真" class="headerlink" title="前端仿真"></a>前端仿真</h1><p>首先，本地新建项目一般需要一个工程文件夹，其文件结构大致是：</p>
+<p>Design（RTL，filelist），Flow（Syn，Lint等等），VRF（Verify）（tb，tc等等）</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>在这里，我们使用 VCS 和 Verdi 进行前端仿真和波形查看。</p>
+<p>首先，我们需要保证环境变量里存在 <code>vcs</code> 和 <code>verdi</code> 。例如，大部分环境下，可以使用 <code>module load</code> 来进行环境变量的加载。</p>
+<h1 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h1><p>这里以我们实现一个 Adder 为例子</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── Design</span><br><span class="line">│   ├── Filelist</span><br><span class="line">│   │   └── filelist</span><br><span class="line">│   └── RTL</span><br><span class="line">│       └── Adder.v</span><br><span class="line">├── Flow</span><br><span class="line">├── Makefile</span><br><span class="line">└── Verification</span><br><span class="line">    └── TestBench</span><br><span class="line">        └── tb_0.v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Design：设计文件夹<ul>
+<li>Filelist：用于向 VCS，Verdi 等</li>
+<li>RTL：工程文件</li>
+</ul>
+</li>
+<li>Flow：执行流程，包括 Syn，Lint 等子文件夹</li>
+<li>Verification：用于验证的文件夹<ul>
+<li>Testbench</li>
+<li>Testcase</li>
+</ul>
+</li>
+<li>Makefile：脚本</li>
+</ul>
+<h1 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h1><h2 id="Example-1：Adder"><a href="#Example-1：Adder" class="headerlink" title="Example 1：Adder"></a>Example 1：Adder</h2><p>首先以一个简单的加法器为例子。这里的 Testbench 中的时钟纯属于摆设。</p>
+<h3 id="Adder-v"><a href="#Adder-v" class="headerlink" title="Adder.v"></a>Adder.v</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Adder( </span><br><span class="line">    <span class="keyword">input</span> a, </span><br><span class="line">    <span class="keyword">input</span> b, </span><br><span class="line">    <span class="keyword">output</span> out </span><br><span class="line">);</span><br><span class="line">    <span class="keyword">assign</span> out = a + b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="filelist"><a href="#filelist" class="headerlink" title="filelist"></a>filelist</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/home/heyx1/Demo/Design/RTL/Adder.v</span><br><span class="line"></span><br><span class="line">/home/heyx1/Demo/Verification/TestBench/tb_0.v</span><br></pre></td></tr></table></figure>
+
+<h3 id="tb-0-v"><a href="#tb-0-v" class="headerlink" title="tb_0.v"></a>tb_0.v</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns / 1ps    </span><span class="comment">//时间单位1ns，精度1ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> tb_0 ();</span><br><span class="line">	<span class="comment">// Clock and reset</span></span><br><span class="line">	<span class="keyword">reg</span> clk;</span><br><span class="line">	<span class="keyword">reg</span> reset;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Input and Output signal</span></span><br><span class="line">	<span class="keyword">reg</span> in_a;</span><br><span class="line">	<span class="keyword">reg</span> in_b;</span><br><span class="line">	<span class="keyword">wire</span> out_q;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 例化被测模块</span></span><br><span class="line">	Adder adder (</span><br><span class="line">		<span class="variable">.a</span>     (in_a),</span><br><span class="line">		<span class="variable">.b</span>     (in_b),</span><br><span class="line">		<span class="variable">.out</span>     (out_q)</span><br><span class="line">	);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Generate Clock</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">		<span class="keyword">forever</span> #<span class="number">1</span> clk = ~clk;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Generate Reset</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		reset = <span class="number">1&#x27;b1</span>;</span><br><span class="line">		#<span class="number">10</span> reset = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Generate signal</span></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">	<span class="built_in">$monitor</span>(<span class="string">&quot;time=%3d, in_a=%b, in_b=%b, q=%2b \n&quot;</span>,</span><br><span class="line">			<span class="built_in">$time</span>, in_a, in_b, out_q);</span><br><span class="line">			</span><br><span class="line">	in_a = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	in_b = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	#<span class="number">20</span></span><br><span class="line">	in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line">	#<span class="number">20</span></span><br><span class="line">	in_a = <span class="number">1&#x27;b0</span>;</span><br><span class="line">	in_b = <span class="number">1&#x27;b1</span>;</span><br><span class="line">	#<span class="number">20</span></span><br><span class="line">	in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">$finish</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">		$fsdbDumpfile(<span class="string">&quot;tb_0.fsdb&quot;</span>);</span><br><span class="line">		$fsdbDumpvars(<span class="number">0</span>, <span class="string">&quot;tb_0&quot;</span>);</span><br><span class="line">		#<span class="number">10000</span></span><br><span class="line"></span><br><span class="line">		<span class="built_in">$finish</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h2><p>我们把常见操作编写到脚本里，这样可以方便的进行操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">TC=OurTC</span><br><span class="line">TB=tb_0</span><br><span class="line"></span><br><span class="line">initialize:</span><br><span class="line">	module load synopsys/vcs/R-2020.12-SP</span><br><span class="line">	module load synopsys/verdi/R-2020.12-SP2</span><br><span class="line">compile:</span><br><span class="line">	@<span class="built_in">echo</span> $(TC)</span><br><span class="line">	<span class="built_in">mkdir</span> <span class="built_in">log</span></span><br><span class="line">	vcs	-f &#123;BASE_PATH_TO_PROJECT&#125;/Design/Filelist/filelist \</span><br><span class="line">		-l ./log/test.log \</span><br><span class="line">		-full64 \</span><br><span class="line">		-debug_acc+pp+dmptf \</span><br><span class="line">		-debug_region+cell+encrypt \</span><br><span class="line">		-debug_access \</span><br><span class="line">		-sverilog \</span><br><span class="line">		-top $(TB) \</span><br><span class="line">		-R \</span><br><span class="line">		-fgp \</span><br><span class="line">		-V -Mupdate -full64  -sverilog +v2k +notimingcheck +no_tchk_msg \</span><br><span class="line">		+lint=all \</span><br><span class="line">		-timescale=1ns/1ps -notice \</span><br><span class="line">		-cm line+cond+tgl+fsm+branch -cm_dir ../cov/$(TC).vdb \</span><br><span class="line"></span><br><span class="line">verdi:</span><br><span class="line">	verdi \</span><br><span class="line">		-sv \</span><br><span class="line">		-f &#123;BASE_PATH_TO_PROJECT&#125;/Demo/Design/Filelist/filelist \</span><br><span class="line">		-ssf $(TB).fsdb &amp; </span><br><span class="line"></span><br><span class="line">clear:</span><br><span class="line">	<span class="built_in">rm</span> -rf verdiLog</span><br><span class="line">	<span class="built_in">rm</span> -rf simv.daidir</span><br><span class="line">	<span class="built_in">rm</span> -rf <span class="built_in">log</span></span><br><span class="line">	<span class="built_in">rm</span> -rf csrc</span><br><span class="line">	<span class="built_in">rm</span> .fsm.sch.verilog.xml</span><br><span class="line">	<span class="built_in">rm</span> novas_dump.log</span><br><span class="line">	<span class="built_in">rm</span> cm.log</span><br><span class="line">	<span class="built_in">rm</span> simv</span><br><span class="line">	<span class="built_in">rm</span> ucli.key</span><br><span class="line"></span><br><span class="line">clear_all:</span><br><span class="line">	make clear</span><br><span class="line">	<span class="built_in">rm</span> tb_0.fsdb</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/" data-id="clylj5tep0010bc9584gg1ehn" data-title="【数字IC设计】使用 VCS 与 Verdi 的前端仿真流程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/08/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/Testbench%E7%BC%96%E5%86%99%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【数字IC设计】Testbench 编写基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【环境配置】C 与 C++ 的编译环境</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

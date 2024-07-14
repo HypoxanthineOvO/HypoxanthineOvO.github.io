@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【CS130】Midterm Review | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="0. Overview0.0. What is OS?OS is an special layer of Software.  Provides application SW access to HW resources Convenient abstraction of complex HW devices Protected access to shared resources Securit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CS130】Midterm Review">
+<meta property="og:url" content="http://example.com/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0. Overview0.0. What is OS?OS is an special layer of Software.  Provides application SW access to HW resources Convenient abstraction of complex HW devices Protected access to shared resources Securit">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%201.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%202.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%204.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%207.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%209.png">
+<meta property="article:published_time" content="2023-11-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-27T05:34:43.428Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CourseReview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-本科课程/CS130/Midterm-Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" class="article-date">
+  <time class="dt-published" datetime="2023-11-21T16:00:00.000Z" itemprop="datePublished">2023-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【CS130】Midterm Review
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="0-Overview"><a href="#0-Overview" class="headerlink" title="0. Overview"></a>0. Overview</h1><h2 id="0-0-What-is-OS"><a href="#0-0-What-is-OS" class="headerlink" title="0.0. What is OS?"></a>0.0. What is OS?</h2><p><strong>OS is an special layer of Software.</strong></p>
+<ul>
+<li>Provides application SW access to HW resources</li>
+<li>Convenient abstraction of complex HW devices</li>
+<li>Protected access to shared resources</li>
+<li>Security and authentication</li>
+<li>Communication amongst logical entities</li>
+</ul>
+<h2 id="0-1-OS’s-Basic-Behaviors"><a href="#0-1-OS’s-Basic-Behaviors" class="headerlink" title="0.1. OS’s Basic Behaviors"></a>0.1. OS’s Basic Behaviors</h2><ul>
+<li>Translate programs to processes</li>
+<li>Deals with context switch</li>
+<li>Scheduling, Protection</li>
+<li>I&#x2F;O</li>
+<li>Loading</li>
+</ul>
+<h2 id="0-2-OS-Boot"><a href="#0-2-OS-Boot" class="headerlink" title="0.2. OS Boot"></a>0.2. OS Boot</h2><ol>
+<li>Initialization at a fixed memory location</li>
+<li>Bootstrap Loader</li>
+<li>Loads Kernel</li>
+</ol>
+<h2 id="0-3-Three-Roles-Of-OS"><a href="#0-3-Three-Roles-Of-OS" class="headerlink" title="0.3. Three Roles Of OS"></a>0.3. Three Roles Of OS</h2><h3 id="OS-is-an-illusionist"><a href="#OS-is-an-illusionist" class="headerlink" title="OS is an illusionist"></a>OS is an illusionist</h3><ul>
+<li>Provide clean, easy-to-use abstractions of physical resources<ul>
+<li>Infinite memory, dedicated（专心的，一致的） machine</li>
+<li>Higher level objects: FIles, users, messages……</li>
+<li>Masking Limitations, Virtualization</li>
+</ul>
+</li>
+</ul>
+<h3 id="OS-is-a-Referee"><a href="#OS-is-a-Referee" class="headerlink" title="OS is a Referee"></a>OS is a Referee</h3><ul>
+<li>Manage protection, isolation, and sharing of resources</li>
+</ul>
+<h3 id="OS-is-a-glue"><a href="#OS-is-a-glue" class="headerlink" title="OS is a glue"></a>OS is a glue</h3><ul>
+<li>Storage, Networking</li>
+<li>Sharing, authorization</li>
+</ul>
+<h1 id="1-Four-Basic-OS-Concepts"><a href="#1-Four-Basic-OS-Concepts" class="headerlink" title="1. Four Basic OS Concepts"></a>1. Four Basic OS Concepts</h1><h2 id="1-0-Overview"><a href="#1-0-Overview" class="headerlink" title="1.0. Overview"></a>1.0. Overview</h2><h3 id="Abstractions-of-Underlying-HW"><a href="#Abstractions-of-Underlying-HW" class="headerlink" title="Abstractions of Underlying HW"></a>Abstractions of Underlying HW</h3><ul>
+<li>Processor → Thread</li>
+<li>Memory → Address Space</li>
+<li>Disks, SSDs,… → Files</li>
+<li>Networks → Sockets</li>
+<li>Machines → Processes</li>
+</ul>
+<h3 id="Basic-OS-Concepts"><a href="#Basic-OS-Concepts" class="headerlink" title="Basic OS Concepts"></a>Basic OS Concepts</h3><ol>
+<li>Thread<ul>
+<li>Execution Context</li>
+<li>Fully Describes Program State</li>
+<li>PC, Regs, Execution Flags, Stack…</li>
+</ul>
+</li>
+<li>Address Space<ul>
+<li>Set of memory address accessible to program</li>
+<li>May be distinct from memory space of physical machine ( in which case programs operate in a virtual machine )</li>
+</ul>
+</li>
+<li>Process<ul>
+<li>An instance of Running Program</li>
+<li>Protected Address Space + One &#x2F; More Threads</li>
+</ul>
+</li>
+<li>Dual-Mode Operation &#x2F; Protection<ul>
+<li>Only the “System” can access certain resources</li>
+<li>Combined with translation, isolates programs from each other, and isolates OS from programs.</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-1-Thread"><a href="#1-1-Thread" class="headerlink" title="1.1. Thread"></a>1.1. Thread</h2><p>Thread is <strong>single unique execution context.</strong></p>
+<ul>
+<li>A thread is suspended（挂起，即不执行）when its state is not loaded (resident，常驻 ) into the processor.<ul>
+<li>Resident: Register hold the root state of the thread. Include the PC Regs and currently executing instruction.</li>
+</ul>
+</li>
+<li>Illusion of Multiple Processors<ul>
+<li><strong>Threads are virtual cores!</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Thread-Control-Block（TCB）"><a href="#Thread-Control-Block（TCB）" class="headerlink" title="Thread Control Block（TCB）"></a>Thread Control Block（TCB）</h3><ul>
+<li>Holds contents of registers when thread is not running</li>
+<li>Contains:<ul>
+<li>Execution State: CPU Registers, Pprogram Counter (PC), Pointer to Stack (SP)</li>
+<li>Scheduling info: State, Priority, CPU time</li>
+<li>Various Pointers (for implementing scheduling queues)</li>
+<li>Pointer to Enclosing Process (PCB)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png"></p>
+<h3 id="Super-scalar-and-Hyper-threading"><a href="#Super-scalar-and-Hyper-threading" class="headerlink" title="Super scalar and Hyper threading"></a>Super scalar and Hyper threading</h3><ul>
+<li>Super scalar processors can execute multiple instructions that are independent.</li>
+<li>Hyper threading duplicates register state to make a second “thread”, allowing more instructions to run.（本质上是通过寄存器的复制来创建额外线程）</li>
+</ul>
+<h2 id="1-2-Address-Space"><a href="#1-2-Address-Space" class="headerlink" title="1.2. Address Space"></a>1.2. Address Space</h2><p>Address space is <strong>the set of accessible addresses</strong> + <strong>state associated with them</strong>.</p>
+<ul>
+<li><p>Space Size?</p>
+<ul>
+<li>For 32 Bit: $2^{32} &#x3D; 4\text{GB}$</li>
+<li>For 64 Bit: $2^{64}\approx 10^{18}\text{Bytes}$</li>
+</ul>
+</li>
+<li><p>Four Segment:</p>
+<ul>
+<li>Stack</li>
+<li>Heap</li>
+<li>Static Data</li>
+<li>Code.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%201.png"></p>
+<h3 id="OS-Protection"><a href="#OS-Protection" class="headerlink" title="OS Protection?"></a>OS Protection?</h3><ul>
+<li>OS must protect itself from user programs<ul>
+<li>Reliability, Security, Privacy, Fairness</li>
+</ul>
+</li>
+<li>OS must protect user programs from one another</li>
+</ul>
+<p><strong>Simple Protection: Base &amp; Bound</strong></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%202.png"></p>
+<h2 id="1-3-Process"><a href="#1-3-Process" class="headerlink" title="1.3. Process"></a>1.3. Process</h2><p><strong>Execution environment with Restricted Rights</strong>.</p>
+<blockquote>
+<p>Fundamental tradeoff between protection and efficiency</p>
+</blockquote>
+<ul>
+<li>(Protected) Address Space with One or More Threads</li>
+<li>Owns memory ( Address Space )</li>
+<li>Owns file descriptors, file system context, …</li>
+<li>Encapsulate（封装） one or more threads sharing processes resources</li>
+</ul>
+<h3 id="Why-Processes"><a href="#Why-Processes" class="headerlink" title="Why Processes ?"></a>Why Processes ?</h3><ul>
+<li><strong>Protected from each other</strong></li>
+<li><strong>OS protected from them</strong></li>
+</ul>
+<h3 id="Multi-Threaded-Processes"><a href="#Multi-Threaded-Processes" class="headerlink" title="Multi-Threaded Processes"></a>Multi-Threaded Processes</h3><ul>
+<li><strong>Threads encapsulate Concurrency</strong><ul>
+<li>“Active” component（主动的组件，推动程序向前）</li>
+</ul>
+</li>
+<li><strong>Address Spaces encapsulate Protection</strong><ul>
+<li>“Passive ” part（被动的部分，存储机制的提供者）</li>
+<li>Keeps buggy program from trashing the system</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-Dual-Mode-Operation"><a href="#1-4-Dual-Mode-Operation" class="headerlink" title="1.4. Dual Mode Operation"></a>1.4. Dual Mode Operation</h2><ul>
+<li>Only the “system” has the ability to access certain resources</li>
+<li>OS and HW protected from user programs</li>
+<li>User programs isolated from one another</li>
+<li>Hardware provides at least two modes ( Kernel Mode and User Mode )<ul>
+<li>Need: A bit of state, Certain operations only permitted in system &#x2F; kernel.</li>
+<li>User → Kernel Transition: Set System Mode, Saves User PC</li>
+<li>Kernel → User Transition: Clear System Mode, Restores Appropriate User PC.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%203.png"></p>
+<h1 id="2-Process-Management"><a href="#2-Process-Management" class="headerlink" title="2. Process Management"></a>2. Process Management</h1><p>Process: OS abstraction of what is needed to run a single program.</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%204.png"></p>
+<h2 id="2-0-Process-Control-Block-Compare-with-TCB"><a href="#2-0-Process-Control-Block-Compare-with-TCB" class="headerlink" title="2.0. Process Control Block ( Compare with TCB! )"></a>2.0. Process Control Block ( Compare with TCB! )</h2><aside>
+💡 POSIX: Portable Operation System Interfaces in UNIX.
+It’s the **Interface for application programmers**
+
+</aside>
+
+<ul>
+<li>Process Status (running, ready, blocked, …)</li>
+<li>Register state (when not ready)</li>
+<li>Process ID (PID), User, Executable, Priority, …</li>
+<li>Execution time, …</li>
+<li>Memory space, translation, …</li>
+<li>Kernel Scheduler maintains a data structure containing the PCBs</li>
+</ul>
+<p>In Context switch, we save the current process’s state to it’s PCB, and reload another process’s state. </p>
+<h2 id="2-1-System-Call"><a href="#2-1-System-Call" class="headerlink" title="2.1. System Call"></a>2.1. System Call</h2><ul>
+<li><strong>Vector through well-defined syscall entry points</strong><ul>
+<li>“定义良好的 System Call 入口“</li>
+<li>Table mapping system call number to handle</li>
+</ul>
+</li>
+<li>Locate argunments<ul>
+<li>In registers or on user stack</li>
+</ul>
+</li>
+<li>Copy arguments<ul>
+<li>From user memory into kernel memory</li>
+<li>Protect kernel from malicious code evading checked</li>
+</ul>
+</li>
+<li>Validate arguments<ul>
+<li>Protect kernel from errors in user code</li>
+</ul>
+</li>
+<li>Copy results back<ul>
+<li>Into user memory</li>
+</ul>
+</li>
+</ul>
+<p>There are also <strong>Hardware Support</strong> for Interrupt Control !</p>
+<ul>
+<li>Not be visible to the user process</li>
+</ul>
+<h2 id="2-2-Web-Server"><a href="#2-2-Web-Server" class="headerlink" title="2.2. Web Server"></a>2.2. Web Server</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%205.png"></p>
+<h2 id="2-3-Process-Creation"><a href="#2-3-Process-Creation" class="headerlink" title="2.3. Process Creation"></a>2.3. Process Creation</h2><h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3><ul>
+<li>Return &gt; 0<ul>
+<li>Running in <strong>Parent Process</strong></li>
+<li>Return value is PID of new child!</li>
+</ul>
+</li>
+<li>Return &#x3D; 0<ul>
+<li>Running in new <strong>Child Process</strong></li>
+</ul>
+</li>
+<li>Return &lt; 0<ul>
+<li>Error</li>
+</ul>
+</li>
+</ul>
+<p><strong>All state of original process</strong> is <strong>duplicated</strong> in both Parent and Child process</p>
+<blockquote>
+<p>值得注意的是，<code>fork()</code> 后面的所有代码都会被子线程执行<br>考点经常结合逻辑运算符的短路特性。<br>e.g.1. <code>if(fork() || fork()) fork();</code> 就会产生 5 个子线程。<br>e.g.2. <code>fork() &amp;&amp; fork() || fork()</code> 会产生 4 个子线程</p>
+</blockquote>
+<h3 id="Unix-Process-Management"><a href="#Unix-Process-Management" class="headerlink" title="Unix Process Management"></a>Unix Process Management</h3><ul>
+<li><p><code>fork</code></p>
+<ul>
+<li>Create a copy of current process, and start it running</li>
+</ul>
+</li>
+<li><p><code>exec</code></p>
+<ul>
+<li>Change the program being run by the current process</li>
+<li>在 Fork 之后使用，替换 Process 的 Memory Space</li>
+</ul>
+</li>
+<li><p><code>wait</code></p>
+<ul>
+<li>Wait for a process to finish</li>
+<li>Return status information and the pid of terminated process: <code>pid = wait(&amp;status);</code></li>
+</ul>
+</li>
+<li><p><code>kill</code></p>
+<ul>
+<li>Send a signal to another process</li>
+</ul>
+</li>
+<li><p><code>exit</code></p>
+<ul>
+<li>Process asks OS to delete it</li>
+<li>return status data from child to parent</li>
+</ul>
+</li>
+<li><p><code>abort</code></p>
+<ul>
+<li>Process terminate the execution of children process</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-Threads"><a href="#2-4-Threads" class="headerlink" title="2.4. Threads"></a>2.4. Threads</h2><p>Motivation: <strong>OS need to be able to handle multiple things at once.</strong></p>
+<h3 id="Thread-States"><a href="#Thread-States" class="headerlink" title="Thread States"></a>Thread States</h3><ul>
+<li>State shared by all thread in process &#x2F; address space<ul>
+<li>Content of memory ( Global Variables, Heap )</li>
+<li>I &#x2F; O State ( File Descriptors, Network connection, … )</li>
+</ul>
+</li>
+<li>State “Private” to each thread<ul>
+<li>Kept in TCB</li>
+<li>CPU Registers ( Include PC! )</li>
+<li>Execution stack<ul>
+<li>Parameters, Temporary Variables</li>
+<li>Return PCs are kept while called procedures are executing.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Actual-Thread-Operations"><a href="#Actual-Thread-Operations" class="headerlink" title="Actual Thread Operations"></a>Actual Thread Operations</h3><ul>
+<li><code>thread_fork(func, args)</code><ul>
+<li>Create a new thread to run <code>func(args)</code>.</li>
+</ul>
+</li>
+<li><code>thread_yield()</code><ul>
+<li>Relinquish processor voluntarily.（自愿放弃处理器的使用权或控制权。）</li>
+</ul>
+</li>
+<li><code>thread_join(thread)</code><ul>
+<li>In parent, wait for forked thread to exit, then return</li>
+</ul>
+</li>
+<li><code>thread_exit()</code><ul>
+<li>Quit thread and clean up, wake up joiner if any.</li>
+</ul>
+</li>
+<li>pThreads</li>
+</ul>
+<h3 id="The-core-of-Concurrency"><a href="#The-core-of-Concurrency" class="headerlink" title="The core of Concurrency"></a>The core of Concurrency</h3><p>That’s the Dispatch（调度程序、调度器） Loop!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Loop &#123;</span><br><span class="line">		RunThread();</span><br><span class="line">		ChooseNextThread();</span><br><span class="line">		SaveSyayeOfCPU(CurrentTCB);</span><br><span class="line">		LoadStateOfCPU(NextTCB);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Running the thread:</p>
+<ul>
+<li>Load it’s state (Reg, PC, Stack pt) into CPU.</li>
+<li>Load enviroment (VM,…)</li>
+<li>Jump to the PC</li>
+</ul>
+<h3 id="Events-Let-Dispatcherget-control-back"><a href="#Events-Let-Dispatcherget-control-back" class="headerlink" title="Events: Let Dispatcherget control back"></a>Events: Let Dispatcherget control back</h3><ul>
+<li>Internal event: Thread returns control voluntarily<ul>
+<li>Blocking on I&#x2F;O</li>
+<li>Waiting on a “signal” frin itger thread</li>
+<li>Thread executes a <code>yield()</code></li>
+</ul>
+</li>
+<li>External Events: Thread get preempted<ul>
+<li>Interrupts: signals from HW or SW that stop the running code and jump to kernel</li>
+<li>Timer: like an alarm clock that goes off every some may milliseconds</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-5-Comparison"><a href="#2-5-Comparison" class="headerlink" title="2.5. Comparison"></a>2.5. Comparison</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>Same Process</th>
+<th>Diff. Process</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switch Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Protection Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Sharing Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Same core</th>
+<th>Diff. Core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switch Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Protection Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Sharing Overhead</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+</tbody></table>
+<h2 id="2-6-Multi-Thread-Processes"><a href="#2-6-Multi-Thread-Processes" class="headerlink" title="2.6. Multi-Thread Processes"></a>2.6. Multi-Thread Processes</h2><ul>
+<li>PCB points to multiple TCBs</li>
+</ul>
+<h3 id="Multi-Threading-Models"><a href="#Multi-Threading-Models" class="headerlink" title="Multi-Threading Models"></a>Multi-Threading Models</h3><ul>
+<li>Many-to-One<ul>
+<li>User-level threads mapped to single kernel thread</li>
+<li>One thread blocking causes all to block</li>
+</ul>
+</li>
+<li>One-to-One<ul>
+<li>Each User-level thread maps to kernel thread</li>
+<li>Creating a user-level thread creates a kernel thread</li>
+<li>More concurrency, more overhead</li>
+</ul>
+</li>
+<li>Many-to-Many<ul>
+<li>Allows many user-level threads to be mapped to many kernel threads</li>
+<li>Allow OS to create a sufficient number of kernel threads.</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Synchronization"><a href="#3-Synchronization" class="headerlink" title="3. Synchronization"></a>3. Synchronization</h1><h2 id="3-1-Definitions"><a href="#3-1-Definitions" class="headerlink" title="3.1. Definitions"></a>3.1. Definitions</h2><h3 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h3><p>An operation that always run to completion or not at all</p>
+<ul>
+<li><strong>Indivisible</strong>: Cannot be stopped in the middle and state cannot bemodified by someone else in the middle.</li>
+<li><strong>Fundamental building block</strong>: If no atomic operations, then have no way for threads to work together.</li>
+</ul>
+<h3 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h3><p>Using atomic operations to ensure cooperation between threads</p>
+<h3 id="Mutual-Exclusion"><a href="#Mutual-Exclusion" class="headerlink" title="Mutual Exclusion"></a>Mutual Exclusion</h3><p>Ensuring that only one thread does a particular thing at a time.</p>
+<h3 id="Critical-Section"><a href="#Critical-Section" class="headerlink" title="Critical Section"></a>Critical Section</h3><p>Piece of code that only one thread can execute at once.</p>
+<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>Prevents someone from doing something.</p>
+<ul>
+<li><strong>Lock</strong> before <strong>entering critical section</strong> and before <strong>accessing shared data</strong></li>
+<li><strong>Unlock</strong> when leaving, after accessing shared data</li>
+<li>Wait if locked<ul>
+<li><strong>Important idea: all synchronization involves waiting</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-2-“Too-Much-Milk”"><a href="#3-2-“Too-Much-Milk”" class="headerlink" title="3.2. “Too Much Milk”"></a>3.2. “Too Much Milk”</h2><p>Solved with lock:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">milkLock.Acquire();</span><br><span class="line"><span class="keyword">if</span> (noMilk) buy milk;</span><br><span class="line">milkLock.Release();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Section of code between <code>Acquire()</code> and <code>Release()</code> called a “Critical Section”</p>
+</blockquote>
+<p>Use lock, the <strong>critical section is very short</strong> !</p>
+<h2 id="3-3-Lock"><a href="#3-3-Lock" class="headerlink" title="3.3. Lock"></a>3.3. Lock</h2><h3 id="Basic-Inplementation"><a href="#Basic-Inplementation" class="headerlink" title="Basic Inplementation"></a>Basic Inplementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> value = FREE;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">		disable interrupts;</span><br><span class="line">		<span class="keyword">if</span> (value == BUSY) &#123;</span><br><span class="line">				put thread on wait <span class="built_in">queue</span>;</span><br><span class="line">				Go to <span class="title function_">sleep</span><span class="params">()</span>;</span><br><span class="line">				<span class="comment">// Enable?</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = BUSY;</span><br><span class="line">		&#125;</span><br><span class="line">		enable interrupts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Release() &#123;</span><br><span class="line">		disable interrupts;</span><br><span class="line">		<span class="keyword">if</span> (anyone on wait <span class="built_in">queue</span>) &#123;</span><br><span class="line">				take thread off wait <span class="built_in">queue</span>;</span><br><span class="line">				Place on ready <span class="built_in">queue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = FREE;</span><br><span class="line">		&#125;</span><br><span class="line">		enable interrupts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Why do we need to disable interrupts?</p>
+<ul>
+<li>Avoid interruption between checking and setting lock value</li>
+<li>Otherwise two threads could think that they both have lock</li>
+</ul>
+<p>When we enable interrupt?</p>
+<ul>
+<li><p>Before <code>put thread on wait queue;</code> ?</p>
+<ul>
+<li>Release can check the queue and not wakeup thread</li>
+</ul>
+</li>
+<li><p>Between <code>put...</code> and <code>Go to sleep();</code> ?</p>
+<ul>
+<li>Release puts the thread on the ready queue, but the thread still think it needs to go to sleep</li>
+<li>Misses wakeup and still holds lock ( Calls Deadlock! )</li>
+</ul>
+</li>
+<li><p>How to solve?</p>
+</li>
+<li><p>When the sleeping thread wakes up, returns to acquire and re-enable interrupts.</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%206.png"></p>
+<h3 id="Atomic-Read-Modify-Write-Instructions"><a href="#Atomic-Read-Modify-Write-Instructions" class="headerlink" title="Atomic Read Modify Write Instructions"></a>Atomic Read Modify Write Instructions</h3><p>These instructions read a value and write a new value atomically</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test&amp;<span class="title function_">set</span><span class="params">(&amp;address)</span>&#123;</span><br><span class="line">	result = Mem[address];</span><br><span class="line">	Mem[address] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">compare&amp;<span class="title">swap</span><span class="params">(&amp;address, reg1, reg2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (reg1 == Mem[address]) &#123;</span><br><span class="line">		Mem[address] = reg2;</span><br><span class="line">		<span class="keyword">return</span> success;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> failure;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Impelment-Lock-with-test-set"><a href="#Impelment-Lock-with-test-set" class="headerlink" title="Impelment Lock with test&amp;set"></a>Impelment Lock with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> value = <span class="number">0</span>; <span class="comment">// FREE</span></span><br><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Release</span>() &#123;</span><br><span class="line">		value = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Busy-Waiting: thread consumes cycles while waiting!</strong></p>
+<ul>
+<li>For multi-processors: every test&amp;set is a write, which makes value ping-pong around in cache (using lots of network BW)</li>
+<li>It will cause Priority Inversion!</li>
+</ul>
+<h3 id="Solution-test-test-set-Multi-Processor-Spin-Locks"><a href="#Solution-test-test-set-Multi-Processor-Spin-Locks" class="headerlink" title="Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)"></a>Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mylock = <span class="number">0</span>; <span class="comment">// Free</span></span><br><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">while</span>(mylock); <span class="comment">// Wait until might be free</span></span><br><span class="line">		&#125; <span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(&amp;mylock)); <span class="comment">// exit if get lock</span></span><br><span class="line">&#125;</span><br><span class="line">Release() &#123;</span><br><span class="line">		mylock = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Solve Multi-processors Problem.</li>
+<li>Still Busy Waiting!</li>
+</ul>
+<h3 id="Better-Locks-with-test-set"><a href="#Better-Locks-with-test-set" class="headerlink" title="Better Locks with test&amp;set"></a>Better Locks with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> guard = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> value = FREE;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">		<span class="keyword">if</span> (value == BUSY) &#123;</span><br><span class="line">				Put thread on wait <span class="built_in">queue</span>;</span><br><span class="line">				Go to <span class="title function_">sleep</span><span class="params">()</span> &amp; guard = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = BUSY;</span><br><span class="line">				guard = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Release() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">		<span class="keyword">if</span> anyone on wait <span class="built_in">queue</span> &#123;</span><br><span class="line">				Take thread off wait <span class="built_in">queue</span>;</span><br><span class="line">				Place on ready <span class="built_in">queue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = FREE;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-Semaphore"><a href="#3-4-Semaphore" class="headerlink" title="3.4. Semaphore"></a>3.4. Semaphore</h2><p>Semaphore has a non-negative integer value and supports the following two atomic operations:</p>
+<ul>
+<li><p><code>P()</code> : Waits for semaphore to become positive, then decrements it by 1.</p>
+<ul>
+<li>Also called <code>wait()</code></li>
+</ul>
+</li>
+<li><p><code>V()</code> : Increments the semaphore by 1, waking up a waiting P if any.</p>
+<ul>
+<li>Also called <code>signal()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(S) &#123;</span><br><span class="line">	<span class="keyword">while</span>(S &lt;= <span class="number">0</span>);</span><br><span class="line">	S--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">signal(S) &#123;</span><br><span class="line">	S++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
+<li>Binary Semaphore (Block&#x2F;Resume Semaphore)<ul>
+<li>Int range only between 0 and 1 (with initial value &#x3D; 1)</li>
+<li>Same as a Mutex Lock.</li>
+</ul>
+</li>
+<li>Counring Semaphore, for scheduling constrainrs ( with initial value &#x3D; 0)<ul>
+<li>Allow thread 1 to wait for thread 2</li>
+</ul>
+</li>
+</ul>
+<h3 id="Lock-vs-Semaphore"><a href="#Lock-vs-Semaphore" class="headerlink" title="Lock vs Semaphore"></a>Lock vs Semaphore</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Advantage</th>
+<th>Disadvantage</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Locks</td>
+<td>A lock allows only one thread to enter the section or resource that’s locked at a time, simple to use.</td>
+<td>Locks can lead to problems like deadlocks if not used carefully.</td>
+<td>Locks are more suitable when you need to ensure that only one thread can access a resource at a time, such as writing to a shared source. (Other reasonable answers are acceptable.)</td>
+</tr>
+<tr>
+<td>Semaphores</td>
+<td>Semaphores can control access of multiple threads to one or more resources</td>
+<td>Semaphores can be more complex to use correctly compared to locks, and misuse can lead to problems such as deadlocks and starvation.</td>
+<td>Semaphores are suitable for Producer and Consumer case where there exists threads producing data and threads consuming data. (Other reasonable answers are acceptable.)</td>
+</tr>
+</tbody></table>
+<h2 id="3-5-Monitors"><a href="#3-5-Monitors" class="headerlink" title="3.5. Monitors"></a>3.5. Monitors</h2><p>A lock and zero or more condition variables for managing concurrent access to shared data.</p>
+<ul>
+<li>Lock: Provides Mutual Exclusion to shared data</li>
+<li>Condition Variable: A queue of threads waiting for something inside a critical section</li>
+</ul>
+<h3 id="Condition-Variables"><a href="#Condition-Variables" class="headerlink" title="Condition Variables"></a>Condition Variables</h3><p>Allow <code>wait(&amp;lock)</code> , <code>signal()</code> and <code>broadcast()</code> operations.</p>
+<ul>
+<li><strong>Rule: Must hold lock when doing condition variable ops</strong></li>
+</ul>
+<h2 id="3-6-Deadlock-and-Starvation"><a href="#3-6-Deadlock-and-Starvation" class="headerlink" title="3.6. Deadlock and Starvation"></a>3.6. Deadlock and Starvation</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>Resources</p>
+<ul>
+<li>Serially reusable resources (CPU cycles, memory space, I&#x2F;O devices, files); Consumable resources (message, buffer of information, interrupts)</li>
+</ul>
+</li>
+<li><p>Comparision</p>
+<ul>
+<li>Deadlock → Starvation</li>
+<li>Starvation can and, Deadlock can’t end without external intervention</li>
+</ul>
+</li>
+<li><p>Deadlock</p>
+<ul>
+<li>Two or more processes are waiting indefinitely for an event that can be caused by only of the waiting processes</li>
+</ul>
+</li>
+<li><p>Starvation</p>
+<ul>
+<li>Indefinite blocking</li>
+<li>A process may never be removed from the semaphore queue in which it’s suspended</li>
+</ul>
+</li>
+</ul>
+<h3 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h3><ul>
+<li>Definitions<ul>
+<li>A process is deadlocked if it’s waiting for an event that will never occur</li>
+</ul>
+</li>
+<li>Conditions:<ul>
+<li>Mutual exclusion</li>
+<li>Hold and wait</li>
+<li>No preemption</li>
+<li>Circular wait</li>
+</ul>
+</li>
+<li>Deadlock Management<ul>
+<li>死锁预防是在<strong>系统设计和资源分配阶段</strong>采取措施防止死锁的发生，而死锁避免是<strong>在运行时</strong>动态地检测和避免可能导致死锁的状态。</li>
+</ul>
+<ol>
+<li>Prevention（预防）<ul>
+<li>Ensure that at least one of the necessary conditions for deadlock cannot hold.</li>
+<li>Mutual Exclusion<ul>
+<li>No issue for sharable resources</li>
+<li>Can not deny this for non-sharable resources</li>
+</ul>
+</li>
+<li>Hold and wait（确保当一个进程请求资源时，它不持有其他资源。）<ul>
+<li>Guarantee that when a process requests a resource, it does not hold other resources</li>
+</ul>
+</li>
+<li>No Preemption（如果一个持有某些资源的进程请求无法立即分配的另一个资源，该进程将释放当前持有的资源，并将被抢占的资源添加到等待列表中。只有当该进程能够重新获取其原有的资源以及请求的新资源时，才会重新启动。）<ul>
+<li>If a process that is holding some resources requests another resource that cannot be immediately allocated to it, the process releases the resources currently being held.</li>
+<li>Preempted resources are added to the list of resources for which the process is waiting</li>
+<li>Process will be restarted only when it can regain its old resources as well as the new<br>  ones that is requesting.</li>
+</ul>
+</li>
+<li>Circular wait（避免无限的资源申请：对所有资源类型进行全局排序，并要求进程按照递增的枚举顺序请求资源。如果持有类型为N的资源，进程只能请求类型大于N的资源。）<ul>
+<li>Impose a total ordering of all resource types</li>
+<li>Require that processes request resources in increasing order of enumeration</li>
+<li>If a resource of type N is held, process can only request resources of types &gt; N</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Avoidance（避免）<ul>
+<li><p>Require additional Apriori information</p>
+<ul>
+<li>Simplest and Most useful Mode<ul>
+<li>Maximum number of resources</li>
+</ul>
+</li>
+<li>Deadlock-Avoidance algorithm<ul>
+<li>Resource-Allocation state to ensure that there can never be a circular-wait condition</li>
+<li>Resource-Allocation State<ul>
+<li>the number of available and allocated resources</li>
+<li>the maximum demands of the processes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Safe state</p>
+<p>  <img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%207.png"></p>
+<ul>
+<li>When a process requests an available resource, must decide if immediate allocation leaves the system in a safe state</li>
+<li>System in safe sate → there exists a safe sequence of all processes</li>
+<li>Banker’s Algorithm</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Detection<ul>
+<li>Allow deadlocks to occur but then rely on the operating system to detect the deadlock and deal with it</li>
+</ul>
+</li>
+<li>Recovery<ul>
+<li>Process Termination</li>
+<li>Resource Preemption</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="Bank-Algorithm"><a href="#Bank-Algorithm" class="headerlink" title="Bank Algorithm"></a>Bank Algorithm</h3><p>银行家算法的实质就是<strong>要设法保证系统动态分配资源后不进入不安全状态，以避免可能产生的死锁。</strong>即没当进程提出资源请求且系统的资源能够满足该请求时，系统将判断满足此次资源请求后系统状态是否安全，如果判断结果为安全，则给该进程分配资源，否则不分配资源，申请资源的进程将阻塞。</p>
+<p>银行家算法的执行有个前提条件，即要求进程预先提出自己的最大资源请求，并假设系统拥有固定的资源总量。下面介绍银行家算法所用的主要的数据结构。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%209.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" data-id="clylj5teu001rbc95a50fa5r5" data-title="【CS130】Midterm Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          我的“中国芯”：中国芯片的前世今生
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/07/20/PaperReading/Paper-3DGaussian/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【PaperReading】3D Gaussian Splattting</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

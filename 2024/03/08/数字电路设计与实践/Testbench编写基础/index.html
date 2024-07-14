@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【数字IC设计】Testbench 编写基础 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="How to write Testbench本文将讲述如何使用Verilog 编写一个基础的测试脚本（testbench）。 在考虑一些关键概念之前，先来看看 Testbench 的架构是什么样的。架构包括建模时间、initial 块（initial block）和任务（task）。此文最后将以一个完整的 Testbench 编写作为示例。 在使用verilog设计数字电路时，设计人员通常还会创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数字IC设计】Testbench 编写基础">
+<meta property="og:url" content="http://example.com/2024/03/08/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/Testbench%E7%BC%96%E5%86%99%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="How to write Testbench本文将讲述如何使用Verilog 编写一个基础的测试脚本（testbench）。 在考虑一些关键概念之前，先来看看 Testbench 的架构是什么样的。架构包括建模时间、initial 块（initial block）和任务（task）。此文最后将以一个完整的 Testbench 编写作为示例。 在使用verilog设计数字电路时，设计人员通常还会创建">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/TestbenchArch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Example_Module.png">
+<meta property="article:published_time" content="2024-03-08T13:12:21.000Z">
+<meta property="article:modified_time" content="2024-03-08T13:15:28.405Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数字电路, 仿真">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/TestbenchArch.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数字电路设计与实践/Testbench编写基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/08/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/Testbench%E7%BC%96%E5%86%99%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2024-03-08T13:12:21.000Z" itemprop="datePublished">2024-03-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a>►<a class="article-category-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【数字IC设计】Testbench 编写基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="How-to-write-Testbench"><a href="#How-to-write-Testbench" class="headerlink" title="How to write Testbench"></a>How to write Testbench</h1><p>本文将讲述如何使用Verilog 编写一个基础的<strong>测试脚本（testbench）</strong>。</p>
+<p>在考虑一些关键概念之前，先来看看 Testbench 的架构是什么样的。架构包括建模时间、initial 块（initial block）和任务（task）。此文最后将以一个完整的 Testbench 编写作为示例。</p>
+<p>在使用verilog设计数字电路时，设计人员通常还会创建一个testbench来仿真代码以确保其按预期设计运行。设计人员可以使用多种语言构建 Testbench，其中最流行的是 VHDL、Verilog 和 System verilog 。</p>
+<p>System Verilog 在行业中被广泛应用，可能是用于测试的最常用语言，但本文仅介绍 verilog 中Testbench 设计的基本原则。</p>
+<h1 id="1-Testbench-的架构"><a href="#1-Testbench-的架构" class="headerlink" title="1. Testbench 的架构"></a><strong>1. Testbench 的架构</strong></h1><p>Testbench由<strong>不可综合</strong>的 Verilog 代码组成，这些代码生成被测设计的输入并验证被测设计的输出是否正确（输出是否符合预期）。</p>
+<p>下图展示了一个基本testbench的典型架构。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/TestbenchArch.png"></p>
+<ul>
+<li><strong>激励（stimulus block）</strong>是为 FPGA 设计生成的输入</li>
+<li><strong>输出校验（output checker）</strong>检查被测模块的输出是否符合预期</li>
+<li><strong>被测模块（design under test，DUT）</strong>即是编写的 Verilog 模块，Testbench 的主要设计目的就是对其进行验证，以确保在特定输入下，其输出均与预期一致</li>
+</ul>
+<p>对于较大规模的设计，激励和输出校验可以位于单独的文件中，也可以将所有这些不同的模块都包含在同一个文件中。</p>
+<h1 id="2-例化被测模块"><a href="#2-例化被测模块" class="headerlink" title="2. 例化被测模块"></a><strong>2. 例化被测模块</strong></h1><p>编写 Testbench 的第一步是<strong>创建一个 Verilog 模块作为测试的顶层</strong>。</p>
+<p>与的 Verilog module 不同，在这种情况下，设计人员要创建的是一个<strong>没有输入和输出的模块</strong>。这是因为设计人员希望 Testbench 模块是完全独立的（self contained）。</p>
+<p>下面的代码片段展示了一个空模块的语法，这可以被用作testbench。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> &lt;module_name&gt; ();</span><br><span class="line">    <span class="comment">// 在这里写testbench</span></span><br><span class="line"><span class="keyword">endmodule</span> : &lt;module_name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>创建了一个 Testbench 之后，必须例化被测设计，这可以将信号连接到被测设计以激励代码运行。</p>
+<p>下面的代码片段展示了如何例化一个被测模块。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;module_name&gt; # (</span><br><span class="line">  <span class="comment">// 例化参数</span></span><br><span class="line">  .&lt;parameter_name&gt; (&lt;parameter_value&gt;)</span><br><span class="line">)</span><br><span class="line">&lt;instance_name&gt; (</span><br><span class="line">  <span class="comment">// 连接端口信号</span></span><br><span class="line">  .&lt;port_name&gt; (&lt;signal_name&gt;),</span><br><span class="line">  .&lt;port_name&gt; (signal_name&gt;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>完成此操作后，就可以开始将激励写入testbench。激励包括时钟信号和复位信号，以及创建发送到testbench的测试数据。</p>
+<p>为此，需要使用一些尚未学过的 verilog 结构：<strong>initial块</strong>（initial block）、<strong>foever循环</strong>（foever loop）和<strong>时间控制</strong>（time consuming）语句。</p>
+<h1 id="3-Verilog-中的建模时间（Modelling-Time）"><a href="#3-Verilog-中的建模时间（Modelling-Time）" class="headerlink" title="3. Verilog 中的建模时间（Modelling Time）"></a><strong>3. Verilog 中的建模时间（Modelling Time）</strong></h1><p>Testbench 代码和设计代码之间的主要区别是 Testbench 并不需要被综合成实际电路，为此可以使用时间控制语句这种特殊结构。事实上，这对于创建测试激励至关重要。</p>
+<p>在 Verilog 中有一个可用的结构——它能够对仿真进行延时。在 verilog 中使用 <strong>#</strong> 字符后跟多个时间单位来模拟延时。</p>
+<p>例如，下面的 Verilog 代码展示使用延时运算符等待 10 个时间单位。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是代码末尾并<strong>没有分号</strong>。</p>
+<p>将延时语句写在与赋值相同的代码行中也很常见，这可以有效地行使调度功能，将信号的变化安排在延迟时间之后。下面的代码片段是此种情况的一个示例。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#<span class="number">10</span> a = <span class="number">1&#x27;b1</span>;    <span class="comment">// 在10个时间单位后，a 将被赋值为1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1-时间单位（Timescale-）编译指令"><a href="#3-1-时间单位（Timescale-）编译指令" class="headerlink" title="3.1. 时间单位（Timescale ）编译指令"></a><strong>3.1. 时间单位（Timescale ）编译指令</strong></h2><p>在上一节已经讨论了十个时间单位的延时用法，但在设计人员真正定义所使用的时间单位之前，这样的讨论是毫无意义的。</p>
+<p>为了指定在仿真期间所使用的时间单位，需要使用指定<strong>时间单位</strong>和<strong>时间精度</strong>（分辨率）的 Verilog 编译器指令。这只需要在 Testbench 中运行该指令一次，而且应在模块外完成。</p>
+<p>下面的代码片段展示用来在 Verilog 中指定时间单位和精度的编译指令。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> &lt;unit_time&gt; / &lt;resolution&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>&lt;unit_time&gt;</code></strong> 指定时间的单位，**<code>&lt;resolution&gt;</code>** 则指定时间精度。</p>
+<p><code>&lt;resolution&gt;</code> 很重要，因为设计人员可以使用小数来指定 verilog 代码中的延时。例如，如果设计人员想要 10.5ns 的延迟，就可以简单地写为 <strong>#10.5</strong>。因此，编译指令中的 <code>&lt;resolution&gt;</code> 决定了可以实现最小时间的步长（即精度）。</p>
+<p>此编译指令中的两个参数都采用时间类型，例如 1ps 或 1ns。</p>
+<h1 id="4-Verilog-initial-block（初始块）"><a href="#4-Verilog-initial-block（初始块）" class="headerlink" title="4. Verilog initial block（初始块）"></a><strong>4. Verilog initial block（初始块）</strong></h1><p>在<strong>initial 块</strong>中编写的任何代码都会在仿真开始时<strong>执行一次且仅执行一次</strong>。</p>
+<p>下面的 Verilog 代码展示了initial 块的一般语法。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// 这里写代码</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>与 always 块不同，在 initial 块中编写的 verilog 代码几乎是<strong>不可综合的</strong>，因此其几乎只被用于仿真。但是，在verilog RTL 中<strong>也可以使用 initial 块来初始化信号（几乎很少用）</strong>。</p>
+<p>为了更好地理解如何使用 initial 块在 Verilog 中编写激励，请来看一个基本示例：</p>
+<p>假设现在想要测试一个基本的两输入与门，为此需要编写代码来生成所有可能的四种输入。此外还需要使用延时运算符以在生成不同的输入之间延迟一段时间。这很重要，因为这可以允许信号有时间来传播。</p>
+<p>下面的 Verilog 代码展示了在 initial 块中编写此测试的方法。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// 每隔10个时间单位就生成一个输入</span></span><br><span class="line">  and_in = <span class="number">2</span>b&#x27;<span class="number">00</span>;</span><br><span class="line">  #<span class="number">10</span> and_in = <span class="number">2</span>b&#x27;<span class="number">01</span>;</span><br><span class="line">  #<span class="number">10</span> and_in = <span class="number">2</span>b&#x27;<span class="number">10</span>;</span><br><span class="line">  #<span class="number">10</span> and_in = <span class="number">2</span>b&#x27;<span class="number">11</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，这种写法的时延是相对时延，如果想使用相对 0 时刻的绝对时延，可以使用非阻塞性赋值：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// 每隔 10 个时间单位就生成一个输入</span></span><br><span class="line">  and_in &lt;= <span class="number">2</span>b&#x27;<span class="number">00</span>;</span><br><span class="line">  and_in &lt;= #<span class="number">10</span> <span class="number">2</span>b&#x27;<span class="number">01</span>;</span><br><span class="line">  and_in &lt;= #<span class="number">30</span> <span class="number">2</span>b&#x27;<span class="number">10</span>;</span><br><span class="line">  and_in &lt;= #<span class="number">50</span> <span class="number">2</span>b&#x27;<span class="number">11</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="5-Verilog-Foever-循环（Loop）"><a href="#5-Verilog-Foever-循环（Loop）" class="headerlink" title="5. Verilog Foever 循环（Loop）"></a><strong>5. Verilog Foever 循环（Loop）</strong></h1><p>在 Verilog Testbench中可以使用一种重要的循环类型——<strong>forever</strong>循环。</p>
+<p>使用这个构造时，实际上是创建了一个无限的循环——这意味着创建了一段在仿真过程中将永远运行的代码。</p>
+<p>下面的 verilog 代码展示了用来编写foever循环的一般语法。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="comment">// our code goes here</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>当用其他编程语言编写代码时，无限循环一般被视为应极力避免的严重错误。但是，verilog 与其他编程语言不同，编写 verilog 代码是在描述硬件而不是在编写软件。</p>
+<p>因此，<strong>至少有一种情况是可以使用无限循环的——时钟信号</strong>。为此需要一种定期连续反转信号的方法，foever 循环与此相当契合。</p>
+<p>下面的 verilog 代码展示了如何使用 foever 循环在 testbench 中生成一个时钟。需要注意的是，所编写的任何循环都必须包含在过程块（procedural block）中或生成块（generate块）中。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">   clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">   <span class="keyword">forever</span> <span class="keyword">begin</span></span><br><span class="line">     #<span class="number">1</span> clk = ~clk;</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，重复序列也可以使用 always 语句产生。</p>
+<h1 id="6-Verilog-系统任务（System-Tasks）"><a href="#6-Verilog-系统任务（System-Tasks）" class="headerlink" title="6. Verilog 系统任务（System Tasks）"></a><strong>6. Verilog 系统任务（System Tasks）</strong></h1><p>在 verilog 中编写testbench时，有一些内置的任务和函数可以提供帮助。这些被统称为<strong>系统任务或系统函数</strong>，它们很容易被识别—-总是以<strong>美元符号（$）</strong>开头。</p>
+<p>虽然有很多这样的系统任务可用，但是这三个是最常用的 ：**<code>$display</code>、<code>$monitor</code> 和 <code>$time</code>**。</p>
+<h2 id="6-1-display"><a href="#6-1-display" class="headerlink" title="6.1. $display"></a><strong>6.1. <code>$display</code></strong></h2><p><code>$display</code> 是 verilog 中最常用的系统任务之一。设计人员可以使用它来输出一条消息，该消息在仿真时将会显示在控制台上。</p>
+<p><code>$display</code> 的使用方式与C语言中的 <code>printf</code> 函数非常类似，这意味着设计人员可以轻松地在 Testbench 中创建文本语句，并使用它们来显示有关仿真状态的信息。</p>
+<p>设计人员还可以在字符串中使用特殊字符 (%) 来显示设计中的信号。这样做时，还必须使用一个格式字母来决定以何种格式显示变量。最常用的格式是 <strong>b（二进制）、d（十进制）和 h（十六进制）</strong>。设计人员还可以在这个格式代码前面加上一个数字来确定要显示的位数。</p>
+<p>下面的 verilog 代码展示了 $display 系统任务的一般语法。此代码片段还包括一个示例用例。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般语法</span></span><br><span class="line"><span class="built_in">$display</span>(&lt;string_to_display&gt;, &lt;variables_to_display);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子：分别用2进制、16进制和10进制来打印x的值</span></span><br><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;x (bin) = %b, x (hex) = %h, x (decimal) = %d&quot;</span>, x, x, x);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设计人员可以在 <code>$display</code> 系统任务中使用的不同格式的完整列表如下所示。</p>
+<table>
+<thead>
+<tr>
+<th>格式代码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%b 或 %B</td>
+<td>显示为二进制</td>
+</tr>
+<tr>
+<td>%d 或 %D</td>
+<td>显示为十进制</td>
+</tr>
+<tr>
+<td>%h 或 %H</td>
+<td>显示为十六进制</td>
+</tr>
+<tr>
+<td>%o 或 %O</td>
+<td>显示为八进制格式</td>
+</tr>
+<tr>
+<td>%c 或 %C</td>
+<td>显示为 ASCII 字符</td>
+</tr>
+<tr>
+<td>%m 或 %M</td>
+<td>显示模块的层级名称</td>
+</tr>
+<tr>
+<td>%s 或 %S</td>
+<td>显示为字符串</td>
+</tr>
+<tr>
+<td>%t 或 %T</td>
+<td>显示为时间</td>
+</tr>
+</tbody></table>
+<h2 id="6-2-monitor"><a href="#6-2-monitor" class="headerlink" title="6.2. $monitor"></a><strong>6.2. <code>$monitor</code></strong></h2><p><code>$monitor</code> 函数与 <code>$display</code> 函数非常相似，但它一般被用来监视 Testbench 的信号值，这些信号中的任何一个改变状态，都会在终端打印一条消息。</p>
+<p>所有的系统任务在使用时都会被综合工具忽略，因此甚至可以在 Verilog RTL 代码中使用 <code>$monitor</code> 语句，尽管这并不常见。</p>
+<p>此系统任务的一般语法显示在下面的代码片段中。此代码片段还包括一个示例用例。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一般语法</span></span><br><span class="line">$ monitor(&lt;message_to_display&gt;, &lt;variables_to_display&gt;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//例子：监控信号in_a和in_b的值。其中任何一个发生变化都会立即在终端打印出两个信号的值</span></span><br><span class="line">$ monitor(<span class="string">&quot;in_a=%b, in_b=%b\n&quot;</span>, in_a, in_b);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-time"><a href="#6-3-time" class="headerlink" title="6.3. $time"></a><strong>6.3. <code>$time</code></strong></h2><p>在 Testbench 中常用的最后一个系统任务是 <code>$time</code> 。这个系统任务可以用来获取当前的仿真时间。</p>
+<p>在 Testbench 中通常将 <code>$time</code> 与 <code>$display</code> 或 <code>$monitor</code> 一起使用，以便在打印的消息中显示具体仿真时间。</p>
+<p>下面的 verilog 代码展示了如何一起使用 <code>$time</code> 和 <code>$display</code> 来打印信息。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">$display</span>(<span class="string">&quot;Current simulation time = %t&quot;</span>, <span class="built_in">$time</span>);    <span class="comment">//打印当前仿真时间</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-4-readmemb"><a href="#6-4-readmemb" class="headerlink" title="6.4. $readmemb"></a>6.4. <code>$readmemb</code></h2><p>系统任务 <code>$readmemb</code> 从文件中将向量读入到存储器 VMem 中。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">1</span>:BITS] VMem[<span class="number">1</span>:WORDS];</span><br><span class="line"></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">	<span class="built_in">$readmemb</span> (<span class="string">&quot;Test.vec&quot;</span>, VMem);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-5-向文本中写入向量-fdisplay-fmonitor-fstrobe"><a href="#6-5-向文本中写入向量-fdisplay-fmonitor-fstrobe" class="headerlink" title="6.5. 向文本中写入向量: $fdisplay , $fmonitor , $fstrobe"></a>6.5. 向文本中写入向量: <code>$fdisplay</code> , <code>$fmonitor</code> , <code>$fstrobe</code></h2><p>信号值可以通过这些系统任务输出到文件中，这样可以避免通过复杂的重定向操作输出结果。</p>
+<h1 id="7-Verilog-testbench示例"><a href="#7-Verilog-testbench示例" class="headerlink" title="7. Verilog testbench示例"></a><strong>7. Verilog testbench示例</strong></h1><p>接下来将为一个非常简单的电路构建一个 Testbench 以检查其功能的正确性。</p>
+<p>下面显示的电路是将用于此示例的电路，由一个简单的两输入与门以及一个寄存器组成。</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Example_Module.png"></p>
+<h2 id="7-1-创建一个-Testbench-模块"><a href="#7-1-创建一个-Testbench-模块" class="headerlink" title="7.1. 创建一个 Testbench 模块"></a><strong>7.1. 创建一个 Testbench 模块</strong></h2><p>在 <strong>Testbench</strong> 中做的第一件事就是声明一个空模块来写入代码。</p>
+<p>下面的代码片段展示了此 <strong>Testbench</strong> 的模块声明。请注意，最好让被测试设计的名称与 Testbench 的名称<strong>保持相似</strong>。一般可以简单地将 <strong><code>_tb</code> 或 <code>_test</code></strong> 附加到被测设计名称的末尾。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> example_tb ();</span><br><span class="line">  <span class="comment">//在这里写测试代码</span></span><br><span class="line"><span class="keyword">endmodule</span> : example_tb</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-2-例化被测模块"><a href="#7-2-例化被测模块" class="headerlink" title="7.2. 例化被测模块"></a><strong>7.2. 例化被测模块</strong></h2><p>现在只有一个空白的 Testbench 模块，接下来需要例化要测试的设计模块。</p>
+<p>下面的代码片段展示了如何例化被测模块，假设信号 <code>clk</code>、<code>in_a</code>、<code>in_b</code> 和 <code>out_q</code> 之前就已声明。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">example_design dut (</span><br><span class="line">    <span class="variable">.clock</span> (clk),</span><br><span class="line">    <span class="variable">.reset</span> (reset),</span><br><span class="line">    <span class="variable">.a</span>     (in_a),</span><br><span class="line">    <span class="variable">.b</span>     (in_b),</span><br><span class="line">    <span class="variable">.q</span>     (out_q)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-3-生成时钟和复位信号"><a href="#7-3-生成时钟和复位信号" class="headerlink" title="7.3. 生成时钟和复位信号"></a><strong>7.3. 生成时钟和复位信号</strong></h2><p>接下来要做的是在 Testbench 中生成一个时钟和复位信号。可以在 initial 块中为时钟和复位信号编写代码，然后使用延时运算符来实现信号状态的变化。</p>
+<p>对于时钟信号，可以使用 <code>forever</code> 关键字在仿真期间持续运行时钟信号。使用此语法将每 1 ns 进行一次反转，从而实现 500MHz 的时钟频率——选择此频率纯粹是为了实现快速仿真，实际上FPGA 中的 500MHz 时钟速率很难实现，所以 Testbench 的时钟频率应尽量与硬件时钟频率匹配。</p>
+<p>下面的 verilog 代码展示了如何在 Testbench 中生成时钟和复位信号。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成时钟信号</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    <span class="keyword">forever</span> #<span class="number">1</span> clk = ~clk;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成复位信号</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">   reset = <span class="number">1&#x27;b1</span>;</span><br><span class="line">    #<span class="number">10</span></span><br><span class="line">   reset = <span class="number">1&#x27;b0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-4、编写测试激励信号"><a href="#7-4、编写测试激励信号" class="headerlink" title="7.4、编写测试激励信号"></a><strong>7.4、编写测试激励信号</strong></h3><p>最后一部分是编写测试激励。为了测试被测电路，需要依次生成四种可能输入中的每一种，然后需要等待一小段时间，让信号通过代码块传播。</p>
+<p>为此，将为输入赋值，然后使用延时语句来通过 FPGA 进行传播。如果还想监控输入和输出的值，可以使用 <code>$monitor</code> 这个系统任务来完成。</p>
+<p>下面的代码片段展示了相关代码。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">    <span class="built_in">$monitor</span>(<span class="string">&quot;time=%3d, in_a=%b, in_b=%b, q=%2b \n&quot;</span>,</span><br><span class="line">              <span class="built_in">$time</span>, in_a, in_b, q);</span><br><span class="line"></span><br><span class="line">    in_a = <span class="number">1&#x27;b0</span>;in_b = <span class="number">1&#x27;b0</span>;</span><br><span class="line">    #<span class="number">20</span> in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line">    #<span class="number">20</span> in_a = <span class="number">1&#x27;b0</span>;in_b = <span class="number">1&#x27;b1</span>;</span><br><span class="line">    #<span class="number">20</span> in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-5-完整示例代码"><a href="#7-5-完整示例代码" class="headerlink" title="7.5. 完整示例代码"></a><strong>7.5. 完整示例代码</strong></h2><p>下面的 verilog 代码展示了完整的 Testbench 示例。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="keyword">timescale</span> 1ns / 1ps    </span><span class="comment">//时间单位1ns，精度1ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> example_tb ();</span><br><span class="line"></span><br><span class="line"><span class="comment">//声明时钟和复位信号</span></span><br><span class="line"><span class="keyword">reg</span> clk;</span><br><span class="line"><span class="keyword">reg</span> reset;</span><br><span class="line"></span><br><span class="line"><span class="comment">//输入和输出信号</span></span><br><span class="line"><span class="keyword">reg</span> in_a;</span><br><span class="line"><span class="keyword">reg</span> in_b;</span><br><span class="line"><span class="keyword">wire</span> out_q;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化被测模块</span></span><br><span class="line">example_design dut (</span><br><span class="line">  <span class="variable">.clock</span> (clk),</span><br><span class="line">  <span class="variable">.reset</span> (reset),</span><br><span class="line">  <span class="variable">.a</span>     (in_a),</span><br><span class="line">  <span class="variable">.b</span>     (in_b),</span><br><span class="line">  <span class="variable">.q</span>     (out_q)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//生成时钟信号</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  clk = <span class="number">1&#x27;b0</span>;</span><br><span class="line">  <span class="keyword">forever</span> #<span class="number">1</span> clk = ~clk;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//生成复位信号</span></span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line"> reset = <span class="number">1&#x27;b1</span>;</span><br><span class="line"> #<span class="number">10</span> reset = <span class="number">1&#x27;b0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//生成测试激励信号</span></span><br><span class="line">  <span class="keyword">initial</span> <span class="keyword">begin</span></span><br><span class="line">  <span class="built_in">$monitor</span>(<span class="string">&quot;time=%3d, in_a=%b, in_b=%b, q=%2b \n&quot;</span>,</span><br><span class="line">            <span class="built_in">$time</span>, in_a, in_b, q);</span><br><span class="line"></span><br><span class="line">  in_a = <span class="number">1&#x27;b0</span>;</span><br><span class="line">  in_b = <span class="number">1&#x27;b0</span>;</span><br><span class="line">  #<span class="number">20</span></span><br><span class="line">  in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line">  #<span class="number">20</span></span><br><span class="line">  in_a = <span class="number">1&#x27;b0</span>;</span><br><span class="line">  in_b = <span class="number">1&#x27;b1</span>;</span><br><span class="line">  #<span class="number">20</span></span><br><span class="line">  in_a = <span class="number">1&#x27;b1</span>;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/08/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/Testbench%E7%BC%96%E5%86%99%E5%9F%BA%E7%A1%80/" data-id="clylj5teo000sbc95h93r0auc" data-title="【数字IC设计】Testbench 编写基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/10/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E8%BE%90%E5%B0%84%E5%9C%BA%E4%B8%AD%E7%9A%84%E6%98%BE%E5%BC%8F%E8%A1%A8%E8%BE%BE%E5%92%8C%E9%9A%90%E5%BC%8F%E8%A1%A8%E8%BE%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【科研思考】辐射场中的显式表达和隐式表达
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/02/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%89%8D%E7%AB%AF%E4%BB%BF%E7%9C%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【数字IC设计】使用 VCS 与 Verdi 的前端仿真流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

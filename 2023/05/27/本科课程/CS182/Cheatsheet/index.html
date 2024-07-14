@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【CS182】Final Review | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CS182】Final Review">
+<meta property="og:url" content="http://example.com/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet10.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet11.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet12.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet13.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet14.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png">
+<meta property="article:published_time" content="2023-05-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-28T13:47:22.113Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CourseReview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-本科课程/CS182/Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" class="article-date">
+  <time class="dt-published" datetime="2023-05-26T16:00:00.000Z" itemprop="datePublished">2023-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【CS182】Final Review
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="CS182-Final-Review"><a href="#CS182-Final-Review" class="headerlink" title="CS182 Final Review"></a>CS182 Final Review</h1><h1 id="Overview-to-Superviced-Learninng"><a href="#Overview-to-Superviced-Learninng" class="headerlink" title="Overview to Superviced Learninng"></a><strong>Overview to Superviced Learninng</strong></h1><h2 id="Statistical-Decision-Theory"><a href="#Statistical-Decision-Theory" class="headerlink" title="Statistical Decision Theory"></a><strong>Statistical Decision Theory</strong></h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png" alt="Untitled"></p>
+<ul>
+<li>Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$</li>
+<li>Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \int(Y-f(x))^2Pr(dx, dy)$<ul>
+<li>Noticed that $Pr(dx, dy) &#x3D; Pr(Y|X)Pr(X)$ , we have $EPE(f) &#x3D; E_XE_Y([Y-f(x)]^2 | X)$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Local-Methods-in-High-Dimensions"><a href="#Local-Methods-in-High-Dimensions" class="headerlink" title="Local Methods in High Dimensions"></a><strong>Local Methods in High Dimensions</strong></h2><h3 id="Curse-of-Dimensionality-维度的诅咒"><a href="#Curse-of-Dimensionality-维度的诅咒" class="headerlink" title="Curse of Dimensionality (维度的诅咒)"></a><strong>Curse of Dimensionality</strong> (维度的诅咒)</h3><ol>
+<li>Local neighborhoods become <strong>increasingly global,</strong> as the number of dimension increases</li>
+<li>In high dimensions, all samples are <strong>close to the edge</strong> of the sample </li>
+<li>Samples <strong>sparsely populate</strong> the input space</li>
+</ol>
+<h3 id="The-Bias-Variance-Decomposition"><a href="#The-Bias-Variance-Decomposition" class="headerlink" title="The Bias-Variance Decomposition:"></a>The Bias-Variance Decomposition:</h3><ol>
+<li><p>Deterministic Case: $\text{MSE}(x_0) &#x3D; \text{Var}(\hat{y_0})+\text{Bias}^2(\hat{y_0})$</p>
+<p>$\begin{aligned}\text{MSE}(x_0) &amp;&#x3D; E[f(x_0)-\hat{y}_0]^2\<br>&amp;&#x3D; E[\hat{y}_0 - E(\hat{y}_0)+E(\hat{y}_0)-f(x_0)]^2\<br>&amp;&#x3D; E\big[(\hat{y}_0-E(\hat{y}_0))^2 + 2(\hat{y}_0-E(\hat{y}_0))(E(\hat{y}_0)-f(x_0))+(E(\hat{y}_0)-f(x_0))^2\big]\<br>&amp;&#x3D;E\big[(\hat{y}_0-E(\hat{y}_0))^2\big]+(E(\hat{y}_0)-f(x_0))^2\<br>&amp;&#x3D;\text{Var}(\hat{y}_0)+\text{Bias}^2(\hat{y}_0)<br>\end{aligned}$</p>
+</li>
+<li><p>Non-deterministic Case</p>
+<p>$$<br>\begin{aligned}\text{EPE}(x_0) &amp;&#x3D; \text{MSE}(x_0)+\sigma^2\<br>&amp;&#x3D; \text{Var}(\hat{y}_0)+\text{Bias}^2(\hat y_0)+\sigma^2\end{aligned}<br>$$</p>
+</li>
+</ol>
+<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><h2 id="Simple-Multiple-Linear-Regression"><a href="#Simple-Multiple-Linear-Regression" class="headerlink" title="Simple-Multiple Linear Regression"></a>Simple-Multiple Linear Regression</h2><p>For $\hat{\mathbf{y}} &#x3D; \mathbf{X}\beta$, Minimize $\text{RSS}(\beta) &#x3D; (\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)$</p>
+<ul>
+<li>$\displaystyle\frac{\partial\text{RSS}}{\partial\beta} &#x3D; -2\mathbf{X}^T(\mathbf{y}-\mathbf{X}\beta) &#x3D; 0 \Rightarrow \mathbf{X}^T(\mathbf{y}-\mathbf{X}\beta) &#x3D; 0$</li>
+</ul>
+<p>So we have $\hat\beta &#x3D; (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$</p>
+<h2 id="Gauss-Markov-Theorem"><a href="#Gauss-Markov-Theorem" class="headerlink" title="Gauss-Markov Theorem"></a>Gauss-Markov Theorem</h2><p>The least squares estimator has the lowest sampling variance within the class of linear unbiased estimators.</p>
+<blockquote>
+<p>最小二乘估计器在线性无偏估计器类中具有最低的抽样方差。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png" alt="Untitled"></p>
+<h2 id="Ridge-Regression"><a href="#Ridge-Regression" class="headerlink" title="Ridge Regression"></a>Ridge Regression</h2><p>对 Regression Coefficients 进行收缩（Shrink）：</p>
+<p>$$<br>\hat{\beta}^{\text{ridge}} &#x3D; \text{argmin}<em>\beta<br>\left\lbrace\sum</em>{i&#x3D;1}^N(y_i-\beta_0-\sum_{j&#x3D;1}^p x_{ij}\beta_j)^2 + \lambda\sum_{j&#x3D;1}^p\beta_j^2\right\rbrace<br>$$</p>
+<p>另一个等价的表述是：</p>
+<p>$$<br>\argmin_\beta\sum_{i&#x3D;1}^N\left(y_i-\beta_0-\sum_{i&#x3D;1}^px_{ij}\beta_j\right)^2\quad\text{subject to }\sum_{j&#x3D;1}^p\beta_j\leq t<br>$$</p>
+<p>其中的损失项变为：</p>
+<p>$$<br> ⁍<br>$$</p>
+<p>求导令之为 0，得到： $\beta^{\text{ridge}} &#x3D; (\mathbf X^T\mathbf X + \lambda\mathbf{I}_p)^{-1}\mathbf X^T\mathbf y$</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png" alt="Untitled"></p>
+<h2 id="The-Lasso"><a href="#The-Lasso" class="headerlink" title="The Lasso"></a>The Lasso</h2><p>岭回归的 L2-Loss $\displaystyle ||\beta||<em>2 &#x3D; \sum</em>{j&#x3D;1}^p|\beta_j|^2$ 变为 L1-Loss $\displaystyle||\beta||<em>1 &#x3D; \sum</em>{j&#x3D;1}^p |\beta_j|$</p>
+<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><h2 id="Linear-regression-of-an-indicator-matrix"><a href="#Linear-regression-of-an-indicator-matrix" class="headerlink" title="Linear regression of an indicator matrix"></a><strong>Linear regression of an indicator matrix</strong></h2><p><strong>Categorical output variable</strong> $𝐺$ <strong>with values from</strong> $\mathcal G &#x3D; \lbrace1, … ,𝐾\rbrace$ <strong>.</strong></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet3.png" alt="Untitled"></p>
+<ul>
+<li><p>The zero-one loss $L(k, l) &#x3D; \begin{cases}1,&amp;k\neq l\0,&amp;k&#x3D;l\end{cases}$</p>
+</li>
+<li><p>EPE with $Pr(G, X)$: $\text{EPE} &#x3D; E[L(G,\hat G(X))]$</p>
+</li>
+<li><p>Pointwise minimize leads to:</p>
+<p>$$<br>\hat G(x) &#x3D; \argmin_{k\in\mathcal G}\sum_{l&#x3D;1}^KL(K,l)Pr(G&#x3D;l|X&#x3D;x) &#x3D; \argmax_{k\in\mathcal G}Pr(G&#x3D;k|X&#x3D;x)<br>$$</p>
+</li>
+</ul>
+<h2 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h2><p>Model the posterior $Pr(G&#x3D;k|X&#x3D;x)$ based on Bayes Theorem</p>
+<p>The Posterior:</p>
+<p>$$<br>Pr(G&#x3D;k|X&#x3D;x) &#x3D; \frac{Pr(X&#x3D;x|G&#x3D;k)Pr(G&#x3D;k)}{Pr(X&#x3D;x)}&#x3D;\frac{Pr(X&#x3D;x|G&#x3D;k)Pr(G&#x3D;k)}{\sum_{l&#x3D;1}^K Pr(X&#x3D;x|G&#x3D;l)Pr(G&#x3D;l)}<br>$$</p>
+<p>其中， $G&#x3D;k$ 时候 $X$ 的密度为 $f_k(x) &#x3D; Pr(X&#x3D;x|G&#x3D;k)$，而先验有 $\pi_k &#x3D; Pr(G&#x3D;k)$</p>
+<p>$$<br>Pr(G&#x3D;k|X&#x3D;x)&#x3D;\frac{f_k(x)\pi_k}{\sum_{l&#x3D;1}^K f_l(x)\pi_l}<br>$$</p>
+<p>****It produces LDA, QDA (quadratic DA), MDA (mixture DA), kernel DA and naive Bayes, under various assumptions on $f_k(x)$</p>
+<h2 id="LDA-Linear-Discriminant-Analysis"><a href="#LDA-Linear-Discriminant-Analysis" class="headerlink" title="LDA: Linear Discriminant Analysis"></a>LDA: Linear Discriminant Analysis</h2><h3 id="Assumptions-in-LDA"><a href="#Assumptions-in-LDA" class="headerlink" title="Assumptions in LDA"></a>Assumptions in LDA</h3><ul>
+<li><p>Model each class density as <strong>Multivariate Gaussian</strong></p>
+<p>$$<br>f_k(x)&#x3D;\frac{1}{(2\pi)^{p&#x2F;2}|\Sigma_k|^{1&#x2F;2}}\exp\left(-\frac{1}{2}(x-\mu_k)^T\Sigma_l^{-1}(x-\mu_k)\right)<br>$$</p>
+</li>
+<li><p>Assume the classes share a common covariance $\Sigma_k &#x3D; \Sigma, \forall k$</p>
+</li>
+</ul>
+<h3 id="Compare-two-classes-k-and-l"><a href="#Compare-two-classes-k-and-l" class="headerlink" title="Compare two classes $k$ and $l$"></a>Compare two classes $k$ and $l$</h3><p>$$<br>\begin{aligned}\log\frac{Pr(G&#x3D;k|X&#x3D;x)}{Pr(G&#x3D;l|X&#x3D;x)} &amp;&#x3D; \log\frac{f_k(x)}{f_l(x)}+\log\frac{\pi_k}{\pi_l}\<br>&amp;&#x3D;\log\frac{\pi_k}{\pi_l}-\frac{1}{2}(\mu_k+\mu_l)^T\Sigma^{-1}(\mu_k-\mu_l)+x^T\Sigma^{-1}(\mu_k-\mu_l)\end{aligned}<br>$$</p>
+<blockquote>
+<p>二次项由于共同的协方差而消失</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet4.png" alt="Untitled"></p>
+<h2 id="QDA-Quadratic-Discriminant-Analysis"><a href="#QDA-Quadratic-Discriminant-Analysis" class="headerlink" title="QDA: Quadratic Discriminant Analysis"></a>QDA: Quadratic Discriminant Analysis</h2><p>Assume that each class has a specific covariance $\Sigma_k$</p>
+<p>Discriminant Functions:</p>
+<p>$$<br>\delta_k(x)&#x3D;-\frac{1}{2}\log|\Sigma_k|-\frac{1}{2}(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k)+\log\pi_k<br>$$</p>
+<h1 id="Probability-and-Estimator"><a href="#Probability-and-Estimator" class="headerlink" title="Probability and Estimator"></a>Probability and Estimator</h1><h2 id="MLE-Maximum-Likelihood-Estimate"><a href="#MLE-Maximum-Likelihood-Estimate" class="headerlink" title="MLE: Maximum Likelihood Estimate"></a>MLE: Maximum Likelihood Estimate</h2><p>Choose $\theta$ that maximizes probability of observed data $\mathcal D$</p>
+<p>$$<br>\hat{\theta} &#x3D; \argmax_\theta P(\mathcal D|\theta)<br>$$</p>
+<h2 id="MAP-Maximum-a-Posterior"><a href="#MAP-Maximum-a-Posterior" class="headerlink" title="MAP: Maximum a Posterior"></a>MAP: Maximum a Posterior</h2><p>Choose $\theta$ that is most probable given prior probability and the data </p>
+<p>$$<br>\begin{align}<br>\hat{\theta} &amp;&#x3D; \argmax_\theta P(\theta|\mathcal D)\<br>&amp;&#x3D; \argmax_\theta \frac{P(\mathcal D|\theta)P(\theta)}{P(\mathcal D)}<br>\end{align}<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet5.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet6.png" alt="Untitled"></p>
+<h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naive Bayes"></a>Naive Bayes</h2><ul>
+<li>Train Naive Bayes:<ul>
+<li>for each value $y_k$<ul>
+<li>estimate $\pi_k \equiv P(Y&#x3D;y_k)$</li>
+<li>for each value $x_{ij}$ of each attribute $X_i$<ul>
+<li>estimate $\theta_{ijk}\equiv P(X_i &#x3D; x_{ij}|Y&#x3D;y_k)$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Classify<ul>
+<li>$Y^{\text{new}} \leftarrow \argmax_{y_k}P(Y&#x3D;y_k)\prod_iP(X_i^{\text{new}}|Y&#x3D;y_k)$</li>
+<li>$Y^{\text{new}}\leftarrow \argmax_{y_k} \pi_k\prod_i\theta_{ijk}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Estimate-Parameters"><a href="#Estimate-Parameters" class="headerlink" title="Estimate Parameters"></a>Estimate Parameters</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet7.png" alt="Untitled"></p>
+<h2 id="Continuous-X-i-Gaussian-Naive-Bayes"><a href="#Continuous-X-i-Gaussian-Naive-Bayes" class="headerlink" title="Continuous $X_i$ (Gaussian Naive Bayes)"></a>Continuous $X_i$ (Gaussian Naive Bayes)</h2><p>Assume:</p>
+<p>$$<br>P(X_i&#x3D;x|Y&#x3D;y_k)&#x3D;\frac{1}{\sigma_{ik}\sqrt{2\pi}}\exp\left(\frac{-(x-\mu_{ik})^2}{2\sigma_{ik}^2}\right)<br>$$</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet8.png" alt="Untitled"></p>
+<h1 id="Kernel-Method-SVM"><a href="#Kernel-Method-SVM" class="headerlink" title="Kernel Method &amp; SVM"></a>Kernel Method &amp; SVM</h1><h2 id="The-online-Learning-Model-Perceptron"><a href="#The-online-Learning-Model-Perceptron" class="headerlink" title="The online Learning Model: Perceptron"></a>The online Learning Model: Perceptron</h2><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><ul>
+<li>Set $t&#x3D;1$, start with all zero vector $w_1$</li>
+<li>Given example 𝑥, predict positive iff $w_t\cdot x\geq 0$</li>
+<li>On a mistake, update:<ul>
+<li>Mistake on positive, then update $w_{t+1}\leftarrow w_t+x$</li>
+<li>Mistake on negative, then update $w_{t+1}\leftarrow w_t-x$</li>
+</ul>
+</li>
+<li>Note: $w_t &#x3D; a_{i1}x_{i1}+\cdots + a_{ik}x_{ik}$</li>
+</ul>
+<h2 id="Geometric-Margin"><a href="#Geometric-Margin" class="headerlink" title="Geometric Margin"></a>Geometric Margin</h2><ul>
+<li>Definition: The <strong>margin</strong> of example $𝑥$ w.r.t. a linear sep. $𝑤$ is the distance from $𝑥$ to the plane $w\cdot x&#x3D;0$</li>
+<li>The <strong>margin $\gamma_w$</strong> of a set of examples $𝑆$ w.r.t. a linear separator $𝑤$ is the smallest margin over points $𝑥∈𝑆$.</li>
+<li>The margin $\gamma$ of a examples $S$ is the <strong>maximum</strong> $\gamma_w$ over all linear seps $w$</li>
+</ul>
+<h2 id="Mistake-Bound"><a href="#Mistake-Bound" class="headerlink" title="Mistake Bound"></a>Mistake Bound</h2><p>Theorem: If data linearly separable by margin $\gamma$ and points inside a ball of radius $𝑅$, then Perceptron makes $≤ 𝑅&#x2F;\gamma^2$ mistakes.</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet9.png" alt="Untitled"></p>
+<h2 id="SVMs"><a href="#SVMs" class="headerlink" title="SVMs"></a>SVMs</h2><p>Directly optimize for the maximum margin separator:</p>
+<ul>
+<li>Input: $S&#x3D;\lbrace(x_1,y_1),\dots,(x_m,y_m)\rbrace$</li>
+<li>Maximize $\gamma$ under:<ul>
+<li>$||w||^2 &#x3D; 1$</li>
+<li>$\forall i, y_iw\cdot x_i\geq \gamma$</li>
+</ul>
+</li>
+</ul>
+<p>让 $w’ &#x3D; \frac{w}{\gamma}$，把优化问题转化成凸问题：</p>
+<ul>
+<li>Maximize $||w’||^2$ under $\forall i, y_iw’\cdot x_i\geq 1$</li>
+<li>If data isn’t perfectly linearly separable?<ul>
+<li>Replace “# mistakes” with upper bound called “hinge loss”</li>
+<li>Minimize $||w||^2+C\sum_i\xi_i$ s.t. $\forall i, y_iw\cdot x_i\geq 1-\xi_i, \xi_i \geq 0$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Lagrangian-Dual-of-SVMs"><a href="#Lagrangian-Dual-of-SVMs" class="headerlink" title="Lagrangian Dual of SVMs"></a>Lagrangian Dual of SVMs</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet10.png" alt="Untitled"></p>
+<h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>$K(⋅,⋅)$ is a kernel if it can be viewed as a legal definition of inner product:</p>
+<p>$$<br>\exists \phi:X\rightarrow \mathbb R^N,\text{ s.t. }K(x,z)&#x3D;\phi(x)\cdot\phi(z)<br>$$</p>
+<h3 id="Theorem-Mercer"><a href="#Theorem-Mercer" class="headerlink" title="Theorem (Mercer)"></a><strong>Theorem (Mercer)</strong></h3><p>K is a kernel if and only if:</p>
+<ul>
+<li>K is symmetric</li>
+<li>For any set of training points $𝑥_1, 𝑥_2, … , 𝑥_𝑚$ and for any $𝑎_1, 𝑎_2, … , 𝑎_𝑚 ∈ \mathbb R$, we have:</li>
+</ul>
+<p>$$<br>\sum_{i,j}a_ia_jK(x_i,x_j)\geq 0\<br>a^TKa\geq 0<br>$$</p>
+<p>I.e., $K&#x3D;(K(x_i,x_j))_{i,j &#x3D; 1,…,n}$ is positive semi-definite</p>
+<h3 id="Kernels-1"><a href="#Kernels-1" class="headerlink" title="Kernels"></a>Kernels</h3><ul>
+<li>Linear: $K(x,z)&#x3D;x\cdot z$</li>
+<li>Polynomial: $K(x,z)&#x3D;(x\cdot z)^2$ or $K(x,z)&#x3D;(1+x\cdot z)^d$</li>
+<li>Gaussian: $K(x,z)&#x3D;\exp\left[-\frac{||x-z||^2}{2\sigma^2}\right]$</li>
+<li>Laplace: $K(x,z)&#x3D;\exp\left[-\frac{||x-z||}{2\sigma^2}\right]$</li>
+</ul>
+<h1 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h1><h2 id="反向传播四公式"><a href="#反向传播四公式" class="headerlink" title="反向传播四公式"></a>反向传播四公式</h2><h3 id="BP1"><a href="#BP1" class="headerlink" title="BP1"></a>BP1</h3><p>If $Y&#x3D;\sigma(X)$, then:</p>
+<p>$$<br>\frac{\partial L}{\partial X}&#x3D;\frac{\partial L}{\partial Y}\odot \sigma’(x)<br>$$</p>
+<p>Where $\odot$ means element-wise product</p>
+<h3 id="BP2-3-4"><a href="#BP2-3-4" class="headerlink" title="BP2 &amp; 3 &amp; 4"></a>BP2 &amp; 3 &amp; 4</h3><p>If $Y&#x3D;W\cdot X+B$</p>
+<p>$$<br>\frac{\partial L}{\partial X}&#x3D;W^T\cdot \frac{\partial L}{\partial Y}<br>$$</p>
+<p>$$<br>\frac{\partial L}{\partial B}&#x3D;\frac{\partial L}{\partial Y}<br>$$</p>
+<p>$$<br>\frac{\partial L}{\partial W}&#x3D;\frac{\partial L}{\partial Y}\cdot X^T<br>$$</p>
+<h3 id="推导的核心"><a href="#推导的核心" class="headerlink" title="推导的核心"></a>推导的核心</h3><p>考虑： $y_i &#x3D; w_{i1}x_1+w_{i2}x_2+\cdots+w_{in}x_n + b_i$</p>
+<p>$$<br>\frac{\partial y_i}{\partial w_{ij}}&#x3D;x_j,\quad \frac{\partial y_i}{\partial x_j}&#x3D;w_{ij},\quad \frac{\partial y_i}{\partial b_i} &#x3D; 1<br>$$</p>
+<h2 id="常用损失函数的导数"><a href="#常用损失函数的导数" class="headerlink" title="常用损失函数的导数"></a>常用损失函数的导数</h2><h3 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h3><p>If $X&#x3D;[x_1,\cdots, x_n], Y&#x3D;\text{SoftMax}(X)&#x3D;[y_1,\cdots, y_n]$</p>
+<p>Thus $\displaystyle y_i &#x3D; \frac{e^{x_i}}{\sum_{j&#x3D;1}^ne^{x_i}}$ and obviously $\displaystyle \sum_{i&#x3D;1}^n y_i &#x3D; 1$</p>
+<p>Thus we have:</p>
+<p>$$<br>\frac{\partial y_i}{\partial x_j}&#x3D;\begin{cases}y_i(1-y_i),&amp;i&#x3D;j\-y_iy_j,&amp;u\neq j\end{cases}<br>$$</p>
+<p>It’s equal to:</p>
+<p>$$<br>\frac{\partial Y}{\partial X}&#x3D;\text{diag}(Y)-Y^TY<br>$$</p>
+<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>We have $\sigma(x)&#x3D;\text{sigmoid}(x)&#x3D;\frac{1}{1+e^{-x}}$</p>
+<p>$$<br>\sigma’(x)&#x3D;\sigma(x)(1-\sigma(x))<br>$$</p>
+<h3 id="Softmax-with-交叉熵："><a href="#Softmax-with-交叉熵：" class="headerlink" title="Softmax with 交叉熵："></a>Softmax with 交叉熵：</h3><p>$$<br>L&#x3D;-\sum_k \hat y_k\log y_k<br>$$</p>
+<p>We have:</p>
+<p>$$<br>\frac{\partial L}{\partial X} &#x3D; Y-\hat Y<br>$$</p>
+<h3 id="Tanh"><a href="#Tanh" class="headerlink" title="Tanh"></a>Tanh</h3><p>We have $\displaystyle\tau(x)&#x3D;\tanh(x)&#x3D;\frac{e^x-e^{-x}}{e^x+e^{-x}}$</p>
+<p>$$<br>\tau’(x)&#x3D;1-\tau^2(x)<br>$$</p>
+<h1 id="Dimension-Reduction-PCA"><a href="#Dimension-Reduction-PCA" class="headerlink" title="Dimension Reduction: PCA"></a>Dimension Reduction: PCA</h1><p>Denoted that $v_1,\dots, v_d$ are the d principal components, $v_i\cdot v_j &#x3D; \begin{cases}1,&amp;i&#x3D;j\0,&amp;i\neq j\end{cases}$</p>
+<p>Let $X&#x3D;[x_1,\dots,x_n]$ (Columns are the datapoints)</p>
+<p>Maximizes sample variance of projected data</p>
+<p>$$<br>\frac{1}{n}\sum_{i&#x3D;1}^n(\mathbf v^Tx_i)^2&#x3D;\mathbf v^T\mathbf X\mathbf X^T\mathbf v\text{ s.t. }\mathbf v^T\mathbf v &#x3D; 1<br>$$</p>
+<p>Lagrangian: $\argmax_{\mathbf v}\mathbf v^T \mathbf X\mathbf X^T\mathbf v-\lambda \mathbf v^T\mathbf v$</p>
+<p>We finally have $(\mathbf X\mathbf X^T -\lambda\mathbf I)\mathbf v&#x3D;0$, $(\mathbf X \mathbf X^T)\mathbf v &#x3D; \lambda \mathbf v$</p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet11.png" alt="Untitled"></p>
+<aside>
+💡 这里的 $\mathbf v^T\mathbf X$ 是投影，再乘上 $\mathbf v$ 就是 在投影上的向量。
+
+
+</aside>
+
+<ul>
+<li>The eigenvalue $\lambda$ denotes the amount of variability captured along that dimension (aka amount of energy along that dimension).</li>
+<li>Zero eigenvalues indicate no variability along those directions $\Rightarrow$ data lies exactly on a linear subspace</li>
+<li>Only keep data projections onto principal components with non-zero eigenvalues, say $v_1, … , v_k$, where $k&#x3D;\text{rank}(\mathbf X\mathbf X^T)$</li>
+</ul>
+<h1 id="Clustering-KMeans"><a href="#Clustering-KMeans" class="headerlink" title="Clustering: KMeans"></a>Clustering: KMeans</h1><h2 id="Denotions"><a href="#Denotions" class="headerlink" title="Denotions"></a>Denotions</h2><ul>
+<li>Given a sample $\mathcal X&#x3D;\lbrace\mathbf x^t\rbrace_{t&#x3D;1}^N$</li>
+<li>Find $k$ reference vectors $\mathbf m_j$ which best represent the data</li>
+</ul>
+<h2 id="Encoding-Decoding"><a href="#Encoding-Decoding" class="headerlink" title="Encoding&#x2F;Decoding"></a>Encoding&#x2F;Decoding</h2><p>Each data point $\mathbf x^t$ is represented by the index $i$ **of the nearest reference vector $i&#x3D;\argmin_j||\mathbf x^t-\mathbf m_j||$</p>
+<p>We can use labels $\mathbf b^t$ for $\mathbf x^t$ as:</p>
+<p>$$<br>b_i^t&#x3D;\begin{cases}1&amp;\text{if }i&#x3D;\argmin_j||\mathbf x^t-\mathbf m_j||\<br>0&amp;\text{otherwise}\end{cases}<br>$$</p>
+<p>The Total Reconstruction Error:</p>
+<p>$$<br>E(\lbrace\mathbf n_i\rbrace_{i&#x3D;1}^k|\mathcal X)&#x3D;\sum_t\sum_ib_i^t||\mathbf x^t-\mathbf m_i||^t<br>$$</p>
+<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>$$\argmin_{\lbrace\mathbf{m}<em>i\rbrace</em>{i&#x3D;1}^k,\lbrace\mathbf{b}^t\rbrace_{t&#x3D;1}^N}\sum_t\sum_i b_{i}^{t}||\mathbf{x}^t-\mathbf{m}_i||^2\quad$$</p>
+<p>However, since $b_i$ also depends on $\mathbf m_i$ , the optimization problem cannot be solved analytically, but <strong>iteratively</strong></p>
+<h3 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet12.png" alt="Untitled"></p>
+<h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><h2 id="Basic-Problem"><a href="#Basic-Problem" class="headerlink" title="Basic Problem"></a>Basic Problem</h2><p>$$<br>\argmin_{x\in\mathbb R^n}f(x)<br>$$</p>
+<p>Iteration: $x^{r+1}&#x3D;x^r-\gamma_r\cdot\nabla f(x^r)$</p>
+<h2 id="Convexity"><a href="#Convexity" class="headerlink" title="Convexity"></a>Convexity</h2><p>$$<br>f(\lambda(x)+(1-\lambda)y)\leq \lambda f(x)+(1-\lambda)f(y)\<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)\<br>\nabla^2f(x)\geq 0<br>$$</p>
+<h2 id="L-smooth"><a href="#L-smooth" class="headerlink" title="L-smooth"></a>L-smooth</h2><p>$$<br>||\nabla f(x)-\nabla f(y)||\leq  L||x-y||<br>$$</p>
+<h2 id="Descemdent-Lemma"><a href="#Descemdent-Lemma" class="headerlink" title="Descemdent Lemma"></a>Descemdent Lemma</h2><p>$$<br>|f(x)-f(y)-\nabla f(y)^T(x-y)|\leq \frac{L}{2}||x-y||^2<br>$$</p>
+<p>If $f$ twice-differentiable, L-smooth $\Leftrightarrow$ $\nabla^2f(x)\leq LI, \quad\mathbf d^T\nabla^2 f(x)\mathbf d\preceq L||\mathbf d||^2,\forall \mathbf d$</p>
+<h2 id="Convergence-Analysis"><a href="#Convergence-Analysis" class="headerlink" title="Convergence Analysis"></a>Convergence Analysis</h2><p>Optimality measure $M(x^r)$</p>
+<ul>
+<li>Convex: $||x^r-x^*||$ or $f(x^r)-f^*$</li>
+<li>Non-convex: $||\nabla f(x^r)||$</li>
+</ul>
+<p>Order of convergence $q$ s.t. </p>
+<p>$$<br>\sup\bigg\lbraceq\big| \lim_{r\rightarrow+\infty}\frac{M(x^{r+1})}{M(x^r)^q}&lt;\infty<br>$$</p>
+<ul>
+<li>$q&#x3D;1$ : Linear convergence, $q&#x3D;2$ : quadratic</li>
+</ul>
+<p>Rate of Convergence: Given $q$ , </p>
+<p>$$<br>\lim_{r\rightarrow\infty}\frac{M(r^{r+1})}{M(x^r)^1}&#x3D;n<br>$$</p>
+<ul>
+<li>Sublinear: $\text{Rate} &#x3D; 1$, Superlinear: $\text{Rate} &#x3D; 0$</li>
+</ul>
+<h2 id="Convergence-under-Convexity"><a href="#Convergence-under-Convexity" class="headerlink" title="Convergence under Convexity"></a>Convergence under Convexity</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet13.png" alt="Untitled"></p>
+<h2 id="Convergence-under-Smoothness"><a href="#Convergence-under-Smoothness" class="headerlink" title="Convergence under Smoothness"></a>Convergence under Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet14.png" alt="Untitled"></p>
+<h2 id="Convexity-Smoothness"><a href="#Convexity-Smoothness" class="headerlink" title="Convexity &amp; Smoothness"></a>Convexity &amp; Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png" alt="Untitled"></p>
+<h2 id="Upper-Lower-Bound"><a href="#Upper-Lower-Bound" class="headerlink" title="Upper &amp; Lower Bound"></a>Upper &amp; Lower Bound</h2><h3 id="mu-Strong-Convexity"><a href="#mu-Strong-Convexity" class="headerlink" title="$\mu$-Strong Convexity"></a>$\mu$-Strong Convexity</h3><p>$$<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)+\frac{\mu}{2}||x-y||_2^2<br>$$</p>
+<h3 id="L-Smoothness"><a href="#L-Smoothness" class="headerlink" title="L-Smoothness"></a>L-Smoothness</h3><p>$$<br>f(x)\leq f(y)+\nabla f(y)^T(x-y)+\frac{L}{2}||x-y||^2<br>$$</p>
+<h2 id="Implication"><a href="#Implication" class="headerlink" title="Implication"></a>Implication</h2><p>$$<br>\nabla f(x^r)^T(x^r-x^*)\geq f(x^r)-f^*_\frac{\mu}{2}||x^r-x^*||<br>$$</p>
+<p>$$<br>f(x^{r+1})\leq f(x^r)-\frac{r}{2}||\nabla f(x^r)||^2<br>$$</p>
+<h1 id="Lagrangian"><a href="#Lagrangian" class="headerlink" title="Lagrangian"></a>Lagrangian</h1><h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><h3 id="Original-Function"><a href="#Original-Function" class="headerlink" title="Original Function"></a>Original Function</h3><p>Minimize $f_0(x)$ with optimal $p^*$ subject to $f_i(x)\leq 0, i &#x3D; 1,…,m$</p>
+<p>We have $L(x,\lambda) &#x3D; f_0(x)+\lambda_1f_1(x)+\cdots+\lambda_mf_m(x)$</p>
+<h3 id="Dual-Function"><a href="#Dual-Function" class="headerlink" title="Dual Function"></a>Dual Function</h3><p>$$<br>⁍<br>$$</p>
+<p><strong>Lower Bound Property: if</strong> $\lambda\geq 0$ and $x$ are primal feasible:</p>
+<p>$$<br>g(\lambda)\leq f_0(x)<br>$$</p>
+<h3 id="Dual-Problem"><a href="#Dual-Problem" class="headerlink" title="Dual Problem"></a>Dual Problem</h3><p>Maximize $g(\lambda)$ with optimal $d^*$ subject to $\lambda\geq 0$</p>
+<p>We have: $d^<em>\leq p^</em>$ , denoted that $p^*-d^*$ the optimal dual gap.</p>
+<p>The Convec Problem have $p^*&#x3D;d^*$</p>
+<h3 id="KKT-Optimal-Condition"><a href="#KKT-Optimal-Condition" class="headerlink" title="KKT Optimal Condition"></a>KKT Optimal Condition</h3><table>
+<thead>
+<tr>
+<th>$f_i(x^*)\leq 0$</th>
+<th>Primal Feasible</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lambda_i^*\geq 0$</td>
+<td>Dual Feasible</td>
+</tr>
+<tr>
+<td>$\lambda_i^<em>f_i(x_i^</em>)&#x3D;0$</td>
+<td>Complementary</td>
+</tr>
+<tr>
+<td>$\nabla f_0(x^*)+\Sigma\lambda_i^<em>\nabla f_i(x^</em>)&#x3D;0$</td>
+<td>Stationary</td>
+</tr>
+</tbody></table>
+<h3 id="Equality-Constraints"><a href="#Equality-Constraints" class="headerlink" title="Equality Constraints"></a>Equality Constraints</h3><p>Minimize $f_0(x)$ subject to $f_i(x)\leq 0, i &#x3D; 1,…,m$ and $h_i(x)&#x3D;0,i &#x3D; 1,…,p$</p>
+<p>We have $L(x,\lambda,v)&#x3D;f_0(x)+\sum \lambda_i f_i(x)+\sum v_ih_i(x)$</p>
+<ul>
+<li>Dual Function: $g(\lambda, v)&#x3D;\inf_x(L(x,\lambda,v))$</li>
+<li>Dual Problem: Maximize $g(\lambda, v)$ subject to $\lambda\geq 0$</li>
+</ul>
+<p>KKT:</p>
+<table>
+<thead>
+<tr>
+<th>$f_i(x^*)\leq 0, h_i(x^*)&#x3D;0$</th>
+<th>Primal Feasible</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\lambda_i^*\geq 0$</td>
+<td>Dual Feasible</td>
+</tr>
+<tr>
+<td>$\lambda_i^<em>f_i(x_i^</em>)&#x3D;0$</td>
+<td>Complementary</td>
+</tr>
+<tr>
+<td>$\nabla f_0(x^*)+\sum\lambda_i^<em>\nabla f_i(x^</em>)+\sum v_i^<em>\nabla h_i(x^</em>)&#x3D;0$</td>
+<td>Stationary</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" data-id="clylj5ter001fbc9519sqckhl" data-title="【CS182】Final Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/06/21/PaperReading/Paper-NeuRex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【PaperReading】NeuRex
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【PaperReading】RTNeRF &amp; Instant3D</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          </li>
+        
+          <li>
+            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
