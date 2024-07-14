@@ -1,18 +1,28 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/imgs/Hypoxanthine.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yunxiang He">
+  <meta name="keywords" content="">
   
-  <title>【CS182】Final Review | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in">
+    <meta name="description" content="CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【CS182】Final Review">
-<meta property="og:url" content="http://example.com/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://hypoxanthineovo.github.io/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/index.html">
+<meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
 <meta property="og:description" content="CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png">
@@ -31,91 +41,298 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png">
 <meta property="article:published_time" content="2023-05-26T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-04-28T13:47:22.113Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Yunxiang He">
 <meta property="article:tag" content="CourseReview">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+  <title>【CS182】Final Review - Hypoxanthine&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hypoxanthineovo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
-<link rel="stylesheet" href="/css/style.css">
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【CS182】Final Review"></span>
+          
+        </div>
+
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Yunxiang He
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-27 00:00" pubdate>
+          2023年5月27日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          2k 字
         
-      </nav>
-      <nav id="sub-nav">
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
         
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
   </div>
-</header>
+</div>
 
-      <div class="outer">
-        <section id="main"><article id="post-本科课程/CS182/Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" class="article-date">
-  <time class="dt-published" datetime="2023-05-26T16:00:00.000Z" itemprop="datePublished">2023-05-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a>
-  </div>
+</div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      【CS182】Final Review
-    </h1>
-  
+  </header>
 
-      </header>
+  <main>
     
-    <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="CS182-Final-Review"><a href="#CS182-Final-Review" class="headerlink" title="CS182 Final Review"></a>CS182 Final Review</h1><h1 id="Overview-to-Superviced-Learninng"><a href="#Overview-to-Superviced-Learninng" class="headerlink" title="Overview to Superviced Learninng"></a><strong>Overview to Superviced Learninng</strong></h1><h2 id="Statistical-Decision-Theory"><a href="#Statistical-Decision-Theory" class="headerlink" title="Statistical Decision Theory"></a><strong>Statistical Decision Theory</strong></h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png" alt="Untitled"></p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【CS182】Final Review</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="CS182-Final-Review"><a href="#CS182-Final-Review" class="headerlink" title="CS182 Final Review"></a>CS182 Final Review</h1><h1 id="Overview-to-Superviced-Learninng"><a href="#Overview-to-Superviced-Learninng" class="headerlink" title="Overview to Superviced Learninng"></a><strong>Overview to Superviced Learninng</strong></h1><h2 id="Statistical-Decision-Theory"><a href="#Statistical-Decision-Theory" class="headerlink" title="Statistical Decision Theory"></a><strong>Statistical Decision Theory</strong></h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li>Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$</li>
 <li>Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \int(Y-f(x))^2Pr(dx, dy)$<ul>
@@ -145,7 +362,7 @@
 <blockquote>
 <p>最小二乘估计器在线性无偏估计器类中具有最低的抽样方差。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="Ridge-Regression"><a href="#Ridge-Regression" class="headerlink" title="Ridge Regression"></a>Ridge Regression</h2><p>对 Regression Coefficients 进行收缩（Shrink）：</p>
 <p>$$<br>\hat{\beta}^{\text{ridge}} &#x3D; \text{argmin}<em>\beta<br>\left\lbrace\sum</em>{i&#x3D;1}^N(y_i-\beta_0-\sum_{j&#x3D;1}^p x_{ij}\beta_j)^2 + \lambda\sum_{j&#x3D;1}^p\beta_j^2\right\rbrace<br>$$</p>
 <p>另一个等价的表述是：</p>
@@ -153,10 +370,10 @@
 <p>其中的损失项变为：</p>
 <p>$$<br> ⁍<br>$$</p>
 <p>求导令之为 0，得到： $\beta^{\text{ridge}} &#x3D; (\mathbf X^T\mathbf X + \lambda\mathbf{I}_p)^{-1}\mathbf X^T\mathbf y$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="The-Lasso"><a href="#The-Lasso" class="headerlink" title="The Lasso"></a>The Lasso</h2><p>岭回归的 L2-Loss $\displaystyle ||\beta||<em>2 &#x3D; \sum</em>{j&#x3D;1}^p|\beta_j|^2$ 变为 L1-Loss $\displaystyle||\beta||<em>1 &#x3D; \sum</em>{j&#x3D;1}^p |\beta_j|$</p>
 <h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><h2 id="Linear-regression-of-an-indicator-matrix"><a href="#Linear-regression-of-an-indicator-matrix" class="headerlink" title="Linear regression of an indicator matrix"></a><strong>Linear regression of an indicator matrix</strong></h2><p><strong>Categorical output variable</strong> $𝐺$ <strong>with values from</strong> $\mathcal G &#x3D; \lbrace1, … ,𝐾\rbrace$ <strong>.</strong></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet3.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet3.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <ul>
 <li><p>The zero-one loss $L(k, l) &#x3D; \begin{cases}1,&amp;k\neq l\0,&amp;k&#x3D;l\end{cases}$</p>
 </li>
@@ -183,7 +400,7 @@
 <blockquote>
 <p>二次项由于共同的协方差而消失</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet4.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet4.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="QDA-Quadratic-Discriminant-Analysis"><a href="#QDA-Quadratic-Discriminant-Analysis" class="headerlink" title="QDA: Quadratic Discriminant Analysis"></a>QDA: Quadratic Discriminant Analysis</h2><p>Assume that each class has a specific covariance $\Sigma_k$</p>
 <p>Discriminant Functions:</p>
 <p>$$<br>\delta_k(x)&#x3D;-\frac{1}{2}\log|\Sigma_k|-\frac{1}{2}(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k)+\log\pi_k<br>$$</p>
@@ -191,8 +408,8 @@
 <p>$$<br>\hat{\theta} &#x3D; \argmax_\theta P(\mathcal D|\theta)<br>$$</p>
 <h2 id="MAP-Maximum-a-Posterior"><a href="#MAP-Maximum-a-Posterior" class="headerlink" title="MAP: Maximum a Posterior"></a>MAP: Maximum a Posterior</h2><p>Choose $\theta$ that is most probable given prior probability and the data </p>
 <p>$$<br>\begin{align}<br>\hat{\theta} &amp;&#x3D; \argmax_\theta P(\theta|\mathcal D)\<br>&amp;&#x3D; \argmax_\theta \frac{P(\mathcal D|\theta)P(\theta)}{P(\mathcal D)}<br>\end{align}<br>$$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet5.png" alt="Untitled"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet6.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet5.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet6.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naive Bayes"></a>Naive Bayes</h2><ul>
 <li>Train Naive Bayes:<ul>
 <li>for each value $y_k$<ul>
@@ -211,10 +428,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="Estimate-Parameters"><a href="#Estimate-Parameters" class="headerlink" title="Estimate Parameters"></a>Estimate Parameters</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet7.png" alt="Untitled"></p>
+<h2 id="Estimate-Parameters"><a href="#Estimate-Parameters" class="headerlink" title="Estimate Parameters"></a>Estimate Parameters</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet7.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="Continuous-X-i-Gaussian-Naive-Bayes"><a href="#Continuous-X-i-Gaussian-Naive-Bayes" class="headerlink" title="Continuous $X_i$ (Gaussian Naive Bayes)"></a>Continuous $X_i$ (Gaussian Naive Bayes)</h2><p>Assume:</p>
 <p>$$<br>P(X_i&#x3D;x|Y&#x3D;y_k)&#x3D;\frac{1}{\sigma_{ik}\sqrt{2\pi}}\exp\left(\frac{-(x-\mu_{ik})^2}{2\sigma_{ik}^2}\right)<br>$$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet8.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet8.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h1 id="Kernel-Method-SVM"><a href="#Kernel-Method-SVM" class="headerlink" title="Kernel Method &amp; SVM"></a>Kernel Method &amp; SVM</h1><h2 id="The-online-Learning-Model-Perceptron"><a href="#The-online-Learning-Model-Perceptron" class="headerlink" title="The online Learning Model: Perceptron"></a>The online Learning Model: Perceptron</h2><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><ul>
 <li>Set $t&#x3D;1$, start with all zero vector $w_1$</li>
 <li>Given example 𝑥, predict positive iff $w_t\cdot x\geq 0$</li>
@@ -231,7 +448,7 @@
 <li>The margin $\gamma$ of a examples $S$ is the <strong>maximum</strong> $\gamma_w$ over all linear seps $w$</li>
 </ul>
 <h2 id="Mistake-Bound"><a href="#Mistake-Bound" class="headerlink" title="Mistake Bound"></a>Mistake Bound</h2><p>Theorem: If data linearly separable by margin $\gamma$ and points inside a ball of radius $𝑅$, then Perceptron makes $≤ 𝑅&#x2F;\gamma^2$ mistakes.</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet9.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet9.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="SVMs"><a href="#SVMs" class="headerlink" title="SVMs"></a>SVMs</h2><p>Directly optimize for the maximum margin separator:</p>
 <ul>
 <li>Input: $S&#x3D;\lbrace(x_1,y_1),\dots,(x_m,y_m)\rbrace$</li>
@@ -250,7 +467,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="Lagrangian-Dual-of-SVMs"><a href="#Lagrangian-Dual-of-SVMs" class="headerlink" title="Lagrangian Dual of SVMs"></a>Lagrangian Dual of SVMs</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet10.png" alt="Untitled"></p>
+<h3 id="Lagrangian-Dual-of-SVMs"><a href="#Lagrangian-Dual-of-SVMs" class="headerlink" title="Lagrangian Dual of SVMs"></a>Lagrangian Dual of SVMs</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet10.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>$K(⋅,⋅)$ is a kernel if it can be viewed as a legal definition of inner product:</p>
 <p>$$<br>\exists \phi:X\rightarrow \mathbb R^N,\text{ s.t. }K(x,z)&#x3D;\phi(x)\cdot\phi(z)<br>$$</p>
 <h3 id="Theorem-Mercer"><a href="#Theorem-Mercer" class="headerlink" title="Theorem (Mercer)"></a><strong>Theorem (Mercer)</strong></h3><p>K is a kernel if and only if:</p>
@@ -294,7 +511,7 @@
 <p>$$<br>\frac{1}{n}\sum_{i&#x3D;1}^n(\mathbf v^Tx_i)^2&#x3D;\mathbf v^T\mathbf X\mathbf X^T\mathbf v\text{ s.t. }\mathbf v^T\mathbf v &#x3D; 1<br>$$</p>
 <p>Lagrangian: $\argmax_{\mathbf v}\mathbf v^T \mathbf X\mathbf X^T\mathbf v-\lambda \mathbf v^T\mathbf v$</p>
 <p>We finally have $(\mathbf X\mathbf X^T -\lambda\mathbf I)\mathbf v&#x3D;0$, $(\mathbf X \mathbf X^T)\mathbf v &#x3D; \lambda \mathbf v$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet11.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet11.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <aside>
 💡 这里的 $\mathbf v^T\mathbf X$ 是投影，再乘上 $\mathbf v$ 就是 在投影上的向量。
 
@@ -317,7 +534,7 @@
 <p>$$<br>E(\lbrace\mathbf n_i\rbrace_{i&#x3D;1}^k|\mathcal X)&#x3D;\sum_t\sum_ib_i^t||\mathbf x^t-\mathbf m_i||^t<br>$$</p>
 <h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>$$\argmin_{\lbrace\mathbf{m}<em>i\rbrace</em>{i&#x3D;1}^k,\lbrace\mathbf{b}^t\rbrace_{t&#x3D;1}^N}\sum_t\sum_i b_{i}^{t}||\mathbf{x}^t-\mathbf{m}_i||^2\quad$$</p>
 <p>However, since $b_i$ also depends on $\mathbf m_i$ , the optimization problem cannot be solved analytically, but <strong>iteratively</strong></p>
-<h3 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet12.png" alt="Untitled"></p>
+<h3 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet12.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><h2 id="Basic-Problem"><a href="#Basic-Problem" class="headerlink" title="Basic Problem"></a>Basic Problem</h2><p>$$<br>\argmin_{x\in\mathbb R^n}f(x)<br>$$</p>
 <p>Iteration: $x^{r+1}&#x3D;x^r-\gamma_r\cdot\nabla f(x^r)$</p>
 <h2 id="Convexity"><a href="#Convexity" class="headerlink" title="Convexity"></a>Convexity</h2><p>$$<br>f(\lambda(x)+(1-\lambda)y)\leq \lambda f(x)+(1-\lambda)f(y)\<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)\<br>\nabla^2f(x)\geq 0<br>$$</p>
@@ -339,9 +556,9 @@
 <ul>
 <li>Sublinear: $\text{Rate} &#x3D; 1$, Superlinear: $\text{Rate} &#x3D; 0$</li>
 </ul>
-<h2 id="Convergence-under-Convexity"><a href="#Convergence-under-Convexity" class="headerlink" title="Convergence under Convexity"></a>Convergence under Convexity</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet13.png" alt="Untitled"></p>
-<h2 id="Convergence-under-Smoothness"><a href="#Convergence-under-Smoothness" class="headerlink" title="Convergence under Smoothness"></a>Convergence under Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet14.png" alt="Untitled"></p>
-<h2 id="Convexity-Smoothness"><a href="#Convexity-Smoothness" class="headerlink" title="Convexity &amp; Smoothness"></a>Convexity &amp; Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png" alt="Untitled"></p>
+<h2 id="Convergence-under-Convexity"><a href="#Convergence-under-Convexity" class="headerlink" title="Convergence under Convexity"></a>Convergence under Convexity</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet13.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Convergence-under-Smoothness"><a href="#Convergence-under-Smoothness" class="headerlink" title="Convergence under Smoothness"></a>Convergence under Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet14.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="Convexity-Smoothness"><a href="#Convexity-Smoothness" class="headerlink" title="Convexity &amp; Smoothness"></a>Convexity &amp; Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
 <h2 id="Upper-Lower-Bound"><a href="#Upper-Lower-Bound" class="headerlink" title="Upper &amp; Lower Bound"></a>Upper &amp; Lower Bound</h2><h3 id="mu-Strong-Convexity"><a href="#mu-Strong-Convexity" class="headerlink" title="$\mu$-Strong Convexity"></a>$\mu$-Strong Convexity</h3><p>$$<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)+\frac{\mu}{2}||x-y||_2^2<br>$$</p>
 <h3 id="L-Smoothness"><a href="#L-Smoothness" class="headerlink" title="L-Smoothness"></a>L-Smoothness</h3><p>$$<br>f(x)\leq f(y)+\nabla f(y)^T(x-y)+\frac{L}{2}||x-y||^2<br>$$</p>
 <h2 id="Implication"><a href="#Implication" class="headerlink" title="Implication"></a>Implication</h2><p>$$<br>\nabla f(x^r)^T(x^r-x^*)\geq f(x^r)-f^*_\frac{\mu}{2}||x^r-x^*||<br>$$</p>
@@ -402,157 +619,381 @@
 </tr>
 </tbody></table>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" data-id="clylj5ter001fbc9519sqckhl" data-title="【CS182】Final Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
 
-    </footer>
-  </div>
+<span class="category-chains">
+  
   
     
-<nav id="article-nav">
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
   
-    <a href="/2023/06/21/PaperReading/Paper-NeuRex/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          【PaperReading】NeuRex
-        
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/" class="category-chain-item">CS182</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CourseReview/" class="print-no-link">#CourseReview</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【CS182】Final Review</div>
+      <div>https://hypoxanthineovo.github.io/2023/05/27/本科课程/CS182/Cheatsheet/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Yunxiang He</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/21/PaperReading/Paper-NeuRex/" title="【PaperReading】NeuRex">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【PaperReading】NeuRex</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" title="【PaperReading】RTNeRF &amp; Instant3D">
+                        <span class="hidden-mobile">【PaperReading】RTNeRF &amp; Instant3D</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
       </div>
-    </a>
-  
-  
-    <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">【PaperReading】RTNeRF &amp; Instant3D</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
     </div>
-  </div>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
-          </li>
-        
-          <li>
-            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
-          </li>
-        
-          <li>
-            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
 
     </div>
-    <nav id="mobile-nav">
+  </div>
+</div>
+
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

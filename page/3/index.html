@@ -1,1759 +1,953 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/imgs/Hypoxanthine.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yunxiang He">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hypoxanthine&#39;s Blog">
+<meta property="og:url" content="https://hypoxanthineovo.github.io/page/3/index.html">
+<meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Yunxiang He">
+<meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/3/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+  <title>Hypoxanthine&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hypoxanthineovo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
-<link rel="stylesheet" href="/css/style.css">
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 30vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-PaperReading/Paper-3DGaussian" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/07/20/PaperReading/Paper-3DGaussian/" class="article-date">
-  <time class="dt-published" datetime="2023-07-19T16:00:00.000Z" itemprop="datePublished">2023-07-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Paper-Reading/">Paper Reading</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/07/20/PaperReading/Paper-3DGaussian/">【PaperReading】3D Gaussian Splattting</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering"><a href="#3D-Gaussian-Splatting-for-Real-Time-Radiance-Field-Rendering" class="headerlink" title="3D Gaussian Splatting for Real-Time Radiance Field Rendering"></a>3D Gaussian Splatting for Real-Time Radiance Field Rendering</h1><hr>
-<h2 id="Backgrounds"><a href="#Backgrounds" class="headerlink" title="Backgrounds"></a>Backgrounds</h2><ol>
-<li>Anisotropic（各向异性的） 3D Gaussians</li>
-<li>Splatting Method（抛雪球法）</li>
-<li>Tiling（数据分块）</li>
-</ol>
-<h3 id="Background-01-Anisotropic（各向异性的）-3D-Gaussians"><a href="#Background-01-Anisotropic（各向异性的）-3D-Gaussians" class="headerlink" title="Background 01: Anisotropic（各向异性的） 3D Gaussians"></a>Background 01: Anisotropic（各向异性的） 3D Gaussians</h3><p>$$G(\mathbf x)&#x3D;\exp\big(-\frac{1}{2}(\mathbf x)^T\Sigma^{-1}(\mathbf x)\big)$$</p>
-<ul>
-<li>“位置”用均值 $\mathbf \mu$ 来刻画</li>
-<li>“形状”用 3D 协方差矩阵 $\Sigma$ 来刻画</li>
-</ul>
-<h3 id="Background-02：-Splatting-Method（抛雪球法）"><a href="#Background-02：-Splatting-Method（抛雪球法）" class="headerlink" title="Background 02： Splatting Method（抛雪球法）"></a>Background 02： Splatting Method（抛雪球法）</h3><ul>
-<li>把 Fields 中每个 Voxel（Point）看作一个“能量源“</li>
-<li>每个 Voxel 向图像平面投影</li>
-<li>用以 Voxel 的投影点为中心的重建核将体素的“能量”“扩散”到图像像素上。<ul>
-<li>在这篇论文里，其“重建核”是 3D Gaussian Function</li>
-</ul>
-</li>
-</ul>
-<h3 id="Background-03：-Tiling（数据分块）"><a href="#Background-03：-Tiling（数据分块）" class="headerlink" title="Background 03： Tiling（数据分块）"></a>Background 03： Tiling（数据分块）</h3><ul>
-<li>GPU 上各种内存的访问速度为： <ul>
-<li>$\text{Global memory} &lt;&lt; \text{Shared memory} &lt; \text{Register}$</li>
-</ul>
-</li>
-<li>Global memory 大而慢， Shared memory 小而快</li>
-<li>减少内存访问延迟的一个重要方向就是要<strong>尽量减少 Global memory 的访问</strong></li>
-<li>常见的策略：Tiling —— 将数据分片，然后将每个小分片缓存到 Shared Memory 中。</li>
-</ul>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
-<li>NeRFs: Implicit scene representation<ul>
-<li>MLP + Volumetric ray-marching</li>
-<li>“is <strong>costly</strong> and can result in <strong>noise</strong>“</li>
-</ul>
-</li>
-<li>传统的 Explicit Representation<ul>
-<li>优点：适合 GPU&#x2F;CUDA-based rasterization</li>
-<li>缺点：传统重建方法（MVS）在场景的恢复上具有局限性（这是 Neural Rendering 的优势所在）</li>
-</ul>
-</li>
-</ul>
-<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/overview.png"></p>
-<ul>
-<li>Input: Images + Sparse Point Clouds（Generated by SFM）</li>
-<li>Initialize：Generate 3D Gaussian for every point</li>
-<li>Training：Optimization + Adaptive Density Control</li>
-<li>Rendering：Tile-based Rasterizer</li>
-</ul>
-<h2 id="3D-Gaussian-and-it’s-Projection"><a href="#3D-Gaussian-and-it’s-Projection" class="headerlink" title="3D Gaussian and it’s Projection"></a>3D Gaussian and it’s Projection</h2><p>3D Gaussian 使用 $\mu$ 和 $\Sigma$ 表征：<br>$$G(\mathbf x)&#x3D;\exp\big(-\frac{1}{2}(\mathbf x)^T\Sigma^{-1}(\mathbf x)\big)$$</p>
-<p>其投影变换使用一个 相机矩阵 $W$ 和其 Jacobian $J$：<br>$$\Sigma’ &#x3D; JW\Sigma W^TJ^T$$</p>
-<h2 id="3D-Gaussian’s-Optimization"><a href="#3D-Gaussian’s-Optimization" class="headerlink" title="3D Gaussian’s Optimization"></a>3D Gaussian’s Optimization</h2><ul>
-<li>直接优化协方差矩阵？<ul>
-<li>协方差矩阵只在半正定时才有物理意义</li>
-<li>梯度下降很难确保其有效性</li>
-</ul>
-</li>
-<li>将 $\Sigma$ 分解为 Scale Matrix $S$ 和 Rotation Matrix $R$：<br>$$\Sigma &#x3D; RSS^TR^T$$</li>
-</ul>
-<div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <div>
-
-
-<h3 id="优化对象"><a href="#优化对象" class="headerlink" title="优化对象"></a>优化对象</h3><ul>
-<li><p>Position $\mathbf p$</p>
-</li>
-<li><p>不透明度 $\alpha$</p>
-</li>
-<li><p>协方差 $\Sigma$</p>
-</li>
-<li><p>表征颜色的球谐函数系数 $\text{SH}$</p>
-</div>
-
-<div></li>
-</ul>
-<h3 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h3><ul>
-<li><p>随机梯度下降</p>
-</li>
-<li><p>对于 $\alpha$ 使用 Sigmoid 激活函数</p>
-</li>
-<li><p>对于 $\Sigma$ 的 Scale 部分，使用指数激活函数</p>
-</li>
-<li><p>Loss 表示为 L1 和 D-SSIM 的组合：</p>
-<ul>
-<li><p>$\mathcal{L} &#x3D; (1-\lambda)\mathcal{L} + \lambda\mathcal{L}_{\text{D-SSIM}}$</p>
-</div>
-</div></li>
-</ul>
-</li>
-</ul>
-<h2 id="Adaptive-Control-of-Gaussians"><a href="#Adaptive-Control-of-Gaussians" class="headerlink" title="Adaptive Control of Gaussians"></a>Adaptive Control of Gaussians</h2><ul>
-<li>每 100 个 iter 进行一次密集化（Densify）</li>
-<li>密集化的同时，移除 $\alpha &lt;\epsilon_\alpha$ 的 Gauss Function</li>
-</ul>
-<h2 id="Densification-Overview"><a href="#Densification-Overview" class="headerlink" title="Densification Overview"></a>Densification Overview</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Densify.png"></p>
-<h2 id="Object-of-Densification"><a href="#Object-of-Densification" class="headerlink" title="Object of Densification"></a>Object of Densification</h2><ul>
-<li>缺失几何特征的区域（”under-reconstruction”）</li>
-<li>Gaussian 覆盖场景中大面积区域的情况（通常对应于”over-reconstruction”</li>
-</ul>
-<p>这两种情况都具有较大的 View-space Positional Gradients。<br>—— 对于**梯度大于 $\tau_{\text{pos}}$ 的 Gaussian **进行密集化！</p>
-<h2 id="Process-of-Densification"><a href="#Process-of-Densification" class="headerlink" title="Process of Densification"></a>Process of Densification</h2><ul>
-<li>对于 Scale 比较小的 Gaussian：<ul>
-<li>Clone 一份，并向梯度方向移动</li>
-</ul>
-</li>
-<li>对于 Scale 比较大的 Gaussian：<ul>
-<li>分割成两个 $\text{Scale}<em>{\text{New}} &#x3D; \text{Scale}</em>{\text{Old}}&#x2F;1.6$ 的小 Gaussian </li>
-<li>小 Gaussian 的位置通过采样确定</li>
-</ul>
-</li>
-</ul>
-<h2 id="Fast-Differentiable-Rasterizer-Overview"><a href="#Fast-Differentiable-Rasterizer-Overview" class="headerlink" title="Fast Differentiable Rasterizer Overview"></a>Fast Differentiable Rasterizer Overview</h2><ul>
-<li>将屏幕分成 $16×16$ 个 tile</li>
-<li>针对 view-frustum 和每个 tile 对 3D Gaussian 进行裁剪。<ul>
-<li>只保留与 view-frustum 相交的置信区间为99%的 Gaussian </li>
-<li>拒绝在极端位置（均值接近 near plane 和远离 view-frustrum）上的 Gaussian</li>
-</ul>
-</li>
-<li>Instantiate each Gaussian<ul>
-<li>每个 Gaussian 分配一个 Key</li>
-<li>Key 由其 View space depth 和 tile ID 组成</li>
-</ul>
-</li>
-<li>Do GPU Radix sort，generate List for each tile</li>
-<li>Rasterization</li>
-</ul>
-<h2 id="GPU-Radix-sort"><a href="#GPU-Radix-sort" class="headerlink" title="GPU Radix sort"></a>GPU Radix sort</h2><ul>
-<li>一种非比较型<strong>整数排序</strong>算法，时间复杂度为 $O(n)$</li>
-<li>在 GPU 中具有成熟的实现</li>
-<li>NVIDIA&#x2F;CUB 库即有现成的实现方式</li>
-</ul>
-<h2 id="Radix-Sort-原理"><a href="#Radix-Sort-原理" class="headerlink" title="Radix Sort 原理"></a>Radix Sort 原理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">RadixSort</span>(<span class="params">arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">    length = <span class="built_in">len</span>(<span class="built_in">str</span>(<span class="built_in">max</span>(arr)))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(length):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        一共需要进行 length 轮排序</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 每一轮排序内部：用桶 Bucket 装对应第 k 位为 0~9 的数</span></span><br><span class="line">        <span class="comment">## GPU Radix Sort 应该是 二进制长度</span></span><br><span class="line">        buckets = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line">        <span class="keyword">for</span> number <span class="keyword">in</span> arr:</span><br><span class="line">            key = number // (<span class="number">10</span> ** k) % <span class="number">10</span></span><br><span class="line">            buckets[key].append(number)</span><br><span class="line">        <span class="comment"># 重排 arr</span></span><br><span class="line">        arr.clear()</span><br><span class="line">        arr = [number <span class="keyword">for</span> bucket <span class="keyword">in</span> buckets <span class="keyword">for</span> number <span class="keyword">in</span> bucket]</span><br><span class="line">    <span class="keyword">return</span> arr</span><br></pre></td></tr></table></figure>
-
-<h2 id="Detail-of-Rasterization"><a href="#Detail-of-Rasterization" class="headerlink" title="Detail of Rasterization"></a>Detail of Rasterization</h2><ul>
-<li>Input：每个 tile 拥有一个 list，包含其对应的所有 Gaussian<ul>
-<li>这里的 Gaussian 已经排序完成，可以直接进行 Rasterization</li>
-</ul>
-</li>
-<li>启动一个 thread block<ul>
-<li>首先把数据 Load 到 Shared Memory 中</li>
-<li>对每个像素，按顺序遍历 List 来对 Color 和 $\alpha$ 进行 Integration</li>
-<li>如果像素的 $\alpha &#x3D; 1$ ，终止这个线程</li>
-</ul>
-</li>
-</ul>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
-<li>质量：充分训练后超过 MipNeRF-360</li>
-<li>Inference 速度：130+FPS</li>
-<li>Memory Usage：NeRF Synthetic-Lego：81.7 MB（ Explicit Representation，和场景大小相关）</li>
-</ul>
-<hr>
-<h1 id="My-Discussion"><a href="#My-Discussion" class="headerlink" title="My Discussion"></a>My Discussion</h1><h2 id="Memory-bound-vs-Compute-bound"><a href="#Memory-bound-vs-Compute-bound" class="headerlink" title="Memory bound vs. Compute bound?"></a>Memory bound vs. Compute bound?</h2><blockquote>
-<p>The most compact representations (such as the MLP network in Mildenhall et al. [2020] or the low-rank decomposition in Chen et al. [2022b]) require many FLOPS to query, and the fastest representations (such as the sparse 3D data structures used in Yu et al. [2021] and Hedman et al. [2021]) consume large amounts of graphics memory —— MERF</p>
-</blockquote>
-<ul>
-<li>3D Gaussian 把计算量转化为内存占用，但是在这个 Trade Off 中在其他参数中表现非常优秀</li>
-<li>是一种 Based on GPU 的优化，充分利用了 GPU 的结构特性</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/07/20/PaperReading/Paper-3DGaussian/" data-id="clylj5tei0006bc95gvc0dszg" data-title="【PaperReading】3D Gaussian Splattting" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-PaperReading/Paper-NeuRex" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/06/21/PaperReading/Paper-NeuRex/" class="article-date">
-  <time class="dt-published" datetime="2023-06-20T16:00:00.000Z" itemprop="datePublished">2023-06-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Paper-Reading/">Paper Reading</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/06/21/PaperReading/Paper-NeuRex/">【PaperReading】NeuRex</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="NeuRex-A-Case-for-Neural-Rendering-Acceleration"><a href="#NeuRex-A-Case-for-Neural-Rendering-Acceleration" class="headerlink" title="NeuRex: A Case for Neural Rendering Acceleration"></a>NeuRex: A Case for Neural Rendering Acceleration</h1><blockquote>
-<p>Seoul National University 首尔大学</p>
-</blockquote>
-<hr>
-<h1 id="Modern-Neural-Rendering"><a href="#Modern-Neural-Rendering" class="headerlink" title="Modern Neural Rendering"></a>Modern Neural Rendering</h1><h2 id="目前神经渲染中的典型模型"><a href="#目前神经渲染中的典型模型" class="headerlink" title="目前神经渲染中的典型模型"></a>目前神经渲染中的典型模型</h2><ul>
-<li>NeRF: Neural Radiance Field</li>
-<li>NSDF: Neural Signed Distance Field</li>
-<li>GIA: Gigapixel Image Approximation</li>
-<li>NVR: Neural Volume Rendering</li>
-</ul>
-<h2 id="Modern-Neural-Rendering-Pipeline"><a href="#Modern-Neural-Rendering-Pipeline" class="headerlink" title="Modern Neural Rendering Pipeline"></a>Modern Neural Rendering Pipeline</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Pipeline.png"></p>
-<h2 id="Input-Encoding-Multi-Resolution-Hash-Encoding"><a href="#Input-Encoding-Multi-Resolution-Hash-Encoding" class="headerlink" title="Input Encoding: Multi-Resolution Hash Encoding"></a>Input Encoding: Multi-Resolution Hash Encoding</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NeRFWithNGP.png" alt="h:500"></p>
-<h2 id="Computations-Of-Multi-Resolution-Hash-Encoding"><a href="#Computations-Of-Multi-Resolution-Hash-Encoding" class="headerlink" title="Computations Of Multi-Resolution Hash Encoding"></a>Computations Of Multi-Resolution Hash Encoding</h2><h3 id="Default-Parameters-Of-NGP"><a href="#Default-Parameters-Of-NGP" class="headerlink" title="Default Parameters Of NGP"></a>Default Parameters Of NGP</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPPara.png" alt="h:350"></p>
-<hr>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/NGPFeaturePipeline.png"></p>
-<ul>
-<li>$N_\text{point}$ 个 Input Position</li>
-<li>通过十六个 Hash Table，每个 Table 取 $F&#x3D;2$ 个 Feature<ul>
-<li>形成 $N_\text{Point}\times 32$ 大小的 Input Feature Matrix</li>
-</ul>
-</li>
-<li>以上 Input Feature Matrix 输入 The Density MLP<ul>
-<li>得到 $N_\text{Point}\times 16$ 大小的 Position Feature</li>
-</ul>
-</li>
-<li>Direction 被 （SH）Encoding 成 $N_\text{Point}\times 16$ 大小的 Direction Feature</li>
-<li>以上两个 Feature 被拼成 $N_\text{Point}\times 32$ 大小的 Feature 输入 Color MLP中，输出最终预测的颜色。</li>
-</ul>
-<hr>
-<h1 id="Motivation-Latency-Breakdown"><a href="#Motivation-Latency-Breakdown" class="headerlink" title="Motivation: Latency Breakdown"></a>Motivation: Latency Breakdown</h1><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/LatencyBreakdown.png"></p>
-<p>瓶颈：</p>
-<ul>
-<li>ENC：Hash Encoding</li>
-<li>MLP：Feature Computation</li>
-</ul>
-<hr>
-<h1 id="Observations"><a href="#Observations" class="headerlink" title="Observations"></a>Observations</h1><h2 id="Performance-portability-of-multi-resolution-hash-encodings"><a href="#Performance-portability-of-multi-resolution-hash-encodings" class="headerlink" title="Performance portability of multi-resolution hash encodings"></a>Performance portability of multi-resolution hash encodings</h2><ul>
-<li>尽管哈希表查找的时间复杂度是 $𝑂(1)$，但<strong>这不是一种适合硬件的操作</strong>。<ul>
-<li>理想的 Hash Function 输出 随机的 Index，<strong>没有 Locality</strong><ul>
-<li>会频繁发生 <strong>Off-Chip Memory Access</strong></li>
-</ul>
-</li>
-<li>每次的 Access 仅使用 4 Byte 数据（For $F&#x3D;2$），<strong>带宽大量浪费</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="一种目前的解决方案"><a href="#一种目前的解决方案" class="headerlink" title="一种目前的解决方案"></a>一种目前的解决方案</h2><ul>
-<li>按层次加载 Hash Table</li>
-<li>每次先遍历所有的点，把这层 Hash Table 对应的 Feature 取出来</li>
-<li>再 Load 下一层 Hash Table</li>
-<li>仍然很慢</li>
-</ul>
-<h2 id="Serialized-execution-of-rendering-pipeline"><a href="#Serialized-execution-of-rendering-pipeline" class="headerlink" title="Serialized execution of rendering pipeline"></a>Serialized execution of rendering pipeline</h2><ul>
-<li>目前花费渲染时间最多的两个主要操作是哈希编码（ENC）和特征计算（MLP）</li>
-<li>这两个主要操作会串行执行<ul>
-<li>ENC对存储带宽要求较高，而MLP需要更多的计算资源</li>
-</ul>
-</li>
-<li>在完成所有 Hash Table 查找之前，MLP 无法进行</li>
-</ul>
-<h2 id="Difference-in-access-characteristics-across-different-levels-of-hash-tables"><a href="#Difference-in-access-characteristics-across-different-levels-of-hash-tables" class="headerlink" title="Difference in access characteristics across different levels of hash tables."></a>Difference in access characteristics across different levels of hash tables.</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/HashTableAccess.png" alt="h:350"></p>
-<ul>
-<li>对于没有哈希冲突的分辨率级别（例如， $𝐿&#x3D;1$ ）<ul>
-<li>哈希表条目仅被分配给体素网格的单个顶点</li>
-<li>一个体素中有大量的采样位置共享相同的顶点</li>
-<li>访问在几个条目上有一定的局部化，并且每个条目的访问次数很高</li>
-</ul>
-</li>
-<li>对于更细的分辨率级别（例如，$𝐿&#x3D;13$ ）<ul>
-<li>访问更均匀（且随机）地分布在哈希表条目之间</li>
-<li>每个条目的访问次数非常低。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h1 id="NeuRex-Neural-Graphics-Engine"><a href="#NeuRex-Neural-Graphics-Engine" class="headerlink" title="NeuRex: Neural Graphics Engine"></a>NeuRex: Neural Graphics Engine</h1><h2 id="Execution-FLow"><a href="#Execution-FLow" class="headerlink" title="Execution FLow"></a>Execution FLow</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Exeflow.png"></p>
-<h2 id="Restricted-Hashing"><a href="#Restricted-Hashing" class="headerlink" title="Restricted Hashing"></a>Restricted Hashing</h2><ul>
-<li>将 Input Coordinate Grid 划分为若干 Subgrids <ul>
-<li>每个 Subgrid 都拥有每个层级的大型哈希表的一部分</li>
-</ul>
-</li>
-<li>在处理另一个子网格之前，先完成所有分辨率下的一个子网格的处理。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/rh.png" alt="h:400"></p>
-<hr>
-<h2 id="Architecture-Overview"><a href="#Architecture-Overview" class="headerlink" title="Architecture Overview"></a>Architecture Overview</h2><div style="display: grid; grid-template-columns: 1fr 1fr;">
-  <div>
-
-
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/arc.png"></p>
-  </div>
-
-  <div>
-
-<p>两个主要模块：</p>
-<ul>
-<li><p>Encoding Engine（EE）</p>
-<ul>
-<li>主要负责 Hash Table Lookups 和 Interpola</li>
-</ul>
-</li>
-<li><p>Tensor Compute Engine（TCE）</p>
-<ul>
-<li>脉动阵列实现 MLP 计算</li>
-</ul>
-</div>
-</div></li>
-</ul>
-<hr>
-<h1 id="Experiment-Evaluation"><a href="#Experiment-Evaluation" class="headerlink" title="Experiment &amp; Evaluation"></a>Experiment &amp; Evaluation</h1><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedOnGPU.png"></p>
-<h2 id="NeuRex-Performance"><a href="#NeuRex-Performance" class="headerlink" title="NeuRex Performance"></a>NeuRex Performance</h2><ul>
-<li>NeuRex-Server: $2.88\times$</li>
-<li>NeuRex-Edge: $9.17\times$<ul>
-<li>On-Chip Cache 比较小的时候，对 Hash Table 的 Random Access 成为性能瓶颈</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SpeedUpPart.png" alt="h:450"></p>
-<ul>
-<li>与GPU相比，NeuRex的峰值计算吞吐量较低</li>
-<li>但它执行MLP计算的速度更快<ul>
-<li>全连接层层较小，GPU Tensor Core 的利用率较低，而 NeuRex 中的 TCE 实现了更高的计算利用率</li>
-</ul>
-</li>
-<li>NeuRex 的整体加速度（图13）高于对 ENC 和 MLP 的单独加速度<ul>
-<li>这两个操作在原始执行流中是串行的，而 NeuRex 通过受限制的哈希使它们可以重叠执行。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Rendering-Quality"><a href="#Rendering-Quality" class="headerlink" title="Rendering Quality"></a>Rendering Quality</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RenderQuality.png" alt="h:420"></p>
-<ul>
-<li>Restricted Hashing 限制了每个 Batch 只能访问单个 Subgrid Buffer 内的输入编码。</li>
-<li>增加哈希表大小对性能影响较小，因为每次只需加载部分 Entries 到芯片上。<ul>
-<li>配置了一个 4 倍大的哈希表（ Ours-LT ；每个级别 8MB ），以进一步提高 PSNR 而不影响性能</li>
-<li>结果显示，Ours-LT在最坏情况下仅导致PSNR轻微下降 $1.1%$ ，在其他几个场景中，甚至产生比 Org-Hash 更高的 PSNR 值。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/ResImages.png" alt="h:350"></p>
-<blockquote>
-<p>DT: Default Table Size</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/SourceOfGain.png" alt="h:400"></p>
-<ul>
-<li>GC: Grid Cache</li>
-<li>RH: Restricted Hashing</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/bachgrid.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/06/21/PaperReading/Paper-NeuRex/" data-id="clylj5tem000jbc953ymwbl92" data-title="【PaperReading】NeuRex" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-本科课程/CS182/Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" class="article-date">
-  <time class="dt-published" datetime="2023-05-26T16:00:00.000Z" itemprop="datePublished">2023-05-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/">【CS182】Final Review</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="CS182-Final-Review"><a href="#CS182-Final-Review" class="headerlink" title="CS182 Final Review"></a>CS182 Final Review</h1><h1 id="Overview-to-Superviced-Learninng"><a href="#Overview-to-Superviced-Learninng" class="headerlink" title="Overview to Superviced Learninng"></a><strong>Overview to Superviced Learninng</strong></h1><h2 id="Statistical-Decision-Theory"><a href="#Statistical-Decision-Theory" class="headerlink" title="Statistical Decision Theory"></a><strong>Statistical Decision Theory</strong></h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet0.png" alt="Untitled"></p>
-<ul>
-<li>Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$</li>
-<li>Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \int(Y-f(x))^2Pr(dx, dy)$<ul>
-<li>Noticed that $Pr(dx, dy) &#x3D; Pr(Y|X)Pr(X)$ , we have $EPE(f) &#x3D; E_XE_Y([Y-f(x)]^2 | X)$</li>
-</ul>
-</li>
-</ul>
-<h2 id="Local-Methods-in-High-Dimensions"><a href="#Local-Methods-in-High-Dimensions" class="headerlink" title="Local Methods in High Dimensions"></a><strong>Local Methods in High Dimensions</strong></h2><h3 id="Curse-of-Dimensionality-维度的诅咒"><a href="#Curse-of-Dimensionality-维度的诅咒" class="headerlink" title="Curse of Dimensionality (维度的诅咒)"></a><strong>Curse of Dimensionality</strong> (维度的诅咒)</h3><ol>
-<li>Local neighborhoods become <strong>increasingly global,</strong> as the number of dimension increases</li>
-<li>In high dimensions, all samples are <strong>close to the edge</strong> of the sample </li>
-<li>Samples <strong>sparsely populate</strong> the input space</li>
-</ol>
-<h3 id="The-Bias-Variance-Decomposition"><a href="#The-Bias-Variance-Decomposition" class="headerlink" title="The Bias-Variance Decomposition:"></a>The Bias-Variance Decomposition:</h3><ol>
-<li><p>Deterministic Case: $\text{MSE}(x_0) &#x3D; \text{Var}(\hat{y_0})+\text{Bias}^2(\hat{y_0})$</p>
-<p>$\begin{aligned}\text{MSE}(x_0) &amp;&#x3D; E[f(x_0)-\hat{y}_0]^2\<br>&amp;&#x3D; E[\hat{y}_0 - E(\hat{y}_0)+E(\hat{y}_0)-f(x_0)]^2\<br>&amp;&#x3D; E\big[(\hat{y}_0-E(\hat{y}_0))^2 + 2(\hat{y}_0-E(\hat{y}_0))(E(\hat{y}_0)-f(x_0))+(E(\hat{y}_0)-f(x_0))^2\big]\<br>&amp;&#x3D;E\big[(\hat{y}_0-E(\hat{y}_0))^2\big]+(E(\hat{y}_0)-f(x_0))^2\<br>&amp;&#x3D;\text{Var}(\hat{y}_0)+\text{Bias}^2(\hat{y}_0)<br>\end{aligned}$</p>
-</li>
-<li><p>Non-deterministic Case</p>
-<p>$$<br>\begin{aligned}\text{EPE}(x_0) &amp;&#x3D; \text{MSE}(x_0)+\sigma^2\<br>&amp;&#x3D; \text{Var}(\hat{y}_0)+\text{Bias}^2(\hat y_0)+\sigma^2\end{aligned}<br>$$</p>
-</li>
-</ol>
-<h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><h2 id="Simple-Multiple-Linear-Regression"><a href="#Simple-Multiple-Linear-Regression" class="headerlink" title="Simple-Multiple Linear Regression"></a>Simple-Multiple Linear Regression</h2><p>For $\hat{\mathbf{y}} &#x3D; \mathbf{X}\beta$, Minimize $\text{RSS}(\beta) &#x3D; (\mathbf{y}-\mathbf{X}\beta)^T(\mathbf{y}-\mathbf{X}\beta)$</p>
-<ul>
-<li>$\displaystyle\frac{\partial\text{RSS}}{\partial\beta} &#x3D; -2\mathbf{X}^T(\mathbf{y}-\mathbf{X}\beta) &#x3D; 0 \Rightarrow \mathbf{X}^T(\mathbf{y}-\mathbf{X}\beta) &#x3D; 0$</li>
-</ul>
-<p>So we have $\hat\beta &#x3D; (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$</p>
-<h2 id="Gauss-Markov-Theorem"><a href="#Gauss-Markov-Theorem" class="headerlink" title="Gauss-Markov Theorem"></a>Gauss-Markov Theorem</h2><p>The least squares estimator has the lowest sampling variance within the class of linear unbiased estimators.</p>
-<blockquote>
-<p>最小二乘估计器在线性无偏估计器类中具有最低的抽样方差。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet1.png" alt="Untitled"></p>
-<h2 id="Ridge-Regression"><a href="#Ridge-Regression" class="headerlink" title="Ridge Regression"></a>Ridge Regression</h2><p>对 Regression Coefficients 进行收缩（Shrink）：</p>
-<p>$$<br>\hat{\beta}^{\text{ridge}} &#x3D; \text{argmin}<em>\beta<br>\left\lbrace\sum</em>{i&#x3D;1}^N(y_i-\beta_0-\sum_{j&#x3D;1}^p x_{ij}\beta_j)^2 + \lambda\sum_{j&#x3D;1}^p\beta_j^2\right\rbrace<br>$$</p>
-<p>另一个等价的表述是：</p>
-<p>$$<br>\argmin_\beta\sum_{i&#x3D;1}^N\left(y_i-\beta_0-\sum_{i&#x3D;1}^px_{ij}\beta_j\right)^2\quad\text{subject to }\sum_{j&#x3D;1}^p\beta_j\leq t<br>$$</p>
-<p>其中的损失项变为：</p>
-<p>$$<br> ⁍<br>$$</p>
-<p>求导令之为 0，得到： $\beta^{\text{ridge}} &#x3D; (\mathbf X^T\mathbf X + \lambda\mathbf{I}_p)^{-1}\mathbf X^T\mathbf y$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet2.png" alt="Untitled"></p>
-<h2 id="The-Lasso"><a href="#The-Lasso" class="headerlink" title="The Lasso"></a>The Lasso</h2><p>岭回归的 L2-Loss $\displaystyle ||\beta||<em>2 &#x3D; \sum</em>{j&#x3D;1}^p|\beta_j|^2$ 变为 L1-Loss $\displaystyle||\beta||<em>1 &#x3D; \sum</em>{j&#x3D;1}^p |\beta_j|$</p>
-<h1 id="Linear-Classification"><a href="#Linear-Classification" class="headerlink" title="Linear Classification"></a>Linear Classification</h1><h2 id="Linear-regression-of-an-indicator-matrix"><a href="#Linear-regression-of-an-indicator-matrix" class="headerlink" title="Linear regression of an indicator matrix"></a><strong>Linear regression of an indicator matrix</strong></h2><p><strong>Categorical output variable</strong> $𝐺$ <strong>with values from</strong> $\mathcal G &#x3D; \lbrace1, … ,𝐾\rbrace$ <strong>.</strong></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet3.png" alt="Untitled"></p>
-<ul>
-<li><p>The zero-one loss $L(k, l) &#x3D; \begin{cases}1,&amp;k\neq l\0,&amp;k&#x3D;l\end{cases}$</p>
-</li>
-<li><p>EPE with $Pr(G, X)$: $\text{EPE} &#x3D; E[L(G,\hat G(X))]$</p>
-</li>
-<li><p>Pointwise minimize leads to:</p>
-<p>$$<br>\hat G(x) &#x3D; \argmin_{k\in\mathcal G}\sum_{l&#x3D;1}^KL(K,l)Pr(G&#x3D;l|X&#x3D;x) &#x3D; \argmax_{k\in\mathcal G}Pr(G&#x3D;k|X&#x3D;x)<br>$$</p>
-</li>
-</ul>
-<h2 id="Basic-Idea"><a href="#Basic-Idea" class="headerlink" title="Basic Idea"></a>Basic Idea</h2><p>Model the posterior $Pr(G&#x3D;k|X&#x3D;x)$ based on Bayes Theorem</p>
-<p>The Posterior:</p>
-<p>$$<br>Pr(G&#x3D;k|X&#x3D;x) &#x3D; \frac{Pr(X&#x3D;x|G&#x3D;k)Pr(G&#x3D;k)}{Pr(X&#x3D;x)}&#x3D;\frac{Pr(X&#x3D;x|G&#x3D;k)Pr(G&#x3D;k)}{\sum_{l&#x3D;1}^K Pr(X&#x3D;x|G&#x3D;l)Pr(G&#x3D;l)}<br>$$</p>
-<p>其中， $G&#x3D;k$ 时候 $X$ 的密度为 $f_k(x) &#x3D; Pr(X&#x3D;x|G&#x3D;k)$，而先验有 $\pi_k &#x3D; Pr(G&#x3D;k)$</p>
-<p>$$<br>Pr(G&#x3D;k|X&#x3D;x)&#x3D;\frac{f_k(x)\pi_k}{\sum_{l&#x3D;1}^K f_l(x)\pi_l}<br>$$</p>
-<p>****It produces LDA, QDA (quadratic DA), MDA (mixture DA), kernel DA and naive Bayes, under various assumptions on $f_k(x)$</p>
-<h2 id="LDA-Linear-Discriminant-Analysis"><a href="#LDA-Linear-Discriminant-Analysis" class="headerlink" title="LDA: Linear Discriminant Analysis"></a>LDA: Linear Discriminant Analysis</h2><h3 id="Assumptions-in-LDA"><a href="#Assumptions-in-LDA" class="headerlink" title="Assumptions in LDA"></a>Assumptions in LDA</h3><ul>
-<li><p>Model each class density as <strong>Multivariate Gaussian</strong></p>
-<p>$$<br>f_k(x)&#x3D;\frac{1}{(2\pi)^{p&#x2F;2}|\Sigma_k|^{1&#x2F;2}}\exp\left(-\frac{1}{2}(x-\mu_k)^T\Sigma_l^{-1}(x-\mu_k)\right)<br>$$</p>
-</li>
-<li><p>Assume the classes share a common covariance $\Sigma_k &#x3D; \Sigma, \forall k$</p>
-</li>
-</ul>
-<h3 id="Compare-two-classes-k-and-l"><a href="#Compare-two-classes-k-and-l" class="headerlink" title="Compare two classes $k$ and $l$"></a>Compare two classes $k$ and $l$</h3><p>$$<br>\begin{aligned}\log\frac{Pr(G&#x3D;k|X&#x3D;x)}{Pr(G&#x3D;l|X&#x3D;x)} &amp;&#x3D; \log\frac{f_k(x)}{f_l(x)}+\log\frac{\pi_k}{\pi_l}\<br>&amp;&#x3D;\log\frac{\pi_k}{\pi_l}-\frac{1}{2}(\mu_k+\mu_l)^T\Sigma^{-1}(\mu_k-\mu_l)+x^T\Sigma^{-1}(\mu_k-\mu_l)\end{aligned}<br>$$</p>
-<blockquote>
-<p>二次项由于共同的协方差而消失</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet4.png" alt="Untitled"></p>
-<h2 id="QDA-Quadratic-Discriminant-Analysis"><a href="#QDA-Quadratic-Discriminant-Analysis" class="headerlink" title="QDA: Quadratic Discriminant Analysis"></a>QDA: Quadratic Discriminant Analysis</h2><p>Assume that each class has a specific covariance $\Sigma_k$</p>
-<p>Discriminant Functions:</p>
-<p>$$<br>\delta_k(x)&#x3D;-\frac{1}{2}\log|\Sigma_k|-\frac{1}{2}(x-\mu_k)^T\Sigma_k^{-1}(x-\mu_k)+\log\pi_k<br>$$</p>
-<h1 id="Probability-and-Estimator"><a href="#Probability-and-Estimator" class="headerlink" title="Probability and Estimator"></a>Probability and Estimator</h1><h2 id="MLE-Maximum-Likelihood-Estimate"><a href="#MLE-Maximum-Likelihood-Estimate" class="headerlink" title="MLE: Maximum Likelihood Estimate"></a>MLE: Maximum Likelihood Estimate</h2><p>Choose $\theta$ that maximizes probability of observed data $\mathcal D$</p>
-<p>$$<br>\hat{\theta} &#x3D; \argmax_\theta P(\mathcal D|\theta)<br>$$</p>
-<h2 id="MAP-Maximum-a-Posterior"><a href="#MAP-Maximum-a-Posterior" class="headerlink" title="MAP: Maximum a Posterior"></a>MAP: Maximum a Posterior</h2><p>Choose $\theta$ that is most probable given prior probability and the data </p>
-<p>$$<br>\begin{align}<br>\hat{\theta} &amp;&#x3D; \argmax_\theta P(\theta|\mathcal D)\<br>&amp;&#x3D; \argmax_\theta \frac{P(\mathcal D|\theta)P(\theta)}{P(\mathcal D)}<br>\end{align}<br>$$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet5.png" alt="Untitled"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet6.png" alt="Untitled"></p>
-<h2 id="Naive-Bayes"><a href="#Naive-Bayes" class="headerlink" title="Naive Bayes"></a>Naive Bayes</h2><ul>
-<li>Train Naive Bayes:<ul>
-<li>for each value $y_k$<ul>
-<li>estimate $\pi_k \equiv P(Y&#x3D;y_k)$</li>
-<li>for each value $x_{ij}$ of each attribute $X_i$<ul>
-<li>estimate $\theta_{ijk}\equiv P(X_i &#x3D; x_{ij}|Y&#x3D;y_k)$</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Classify<ul>
-<li>$Y^{\text{new}} \leftarrow \argmax_{y_k}P(Y&#x3D;y_k)\prod_iP(X_i^{\text{new}}|Y&#x3D;y_k)$</li>
-<li>$Y^{\text{new}}\leftarrow \argmax_{y_k} \pi_k\prod_i\theta_{ijk}$</li>
-</ul>
-</li>
-</ul>
-<h2 id="Estimate-Parameters"><a href="#Estimate-Parameters" class="headerlink" title="Estimate Parameters"></a>Estimate Parameters</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet7.png" alt="Untitled"></p>
-<h2 id="Continuous-X-i-Gaussian-Naive-Bayes"><a href="#Continuous-X-i-Gaussian-Naive-Bayes" class="headerlink" title="Continuous $X_i$ (Gaussian Naive Bayes)"></a>Continuous $X_i$ (Gaussian Naive Bayes)</h2><p>Assume:</p>
-<p>$$<br>P(X_i&#x3D;x|Y&#x3D;y_k)&#x3D;\frac{1}{\sigma_{ik}\sqrt{2\pi}}\exp\left(\frac{-(x-\mu_{ik})^2}{2\sigma_{ik}^2}\right)<br>$$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet8.png" alt="Untitled"></p>
-<h1 id="Kernel-Method-SVM"><a href="#Kernel-Method-SVM" class="headerlink" title="Kernel Method &amp; SVM"></a>Kernel Method &amp; SVM</h1><h2 id="The-online-Learning-Model-Perceptron"><a href="#The-online-Learning-Model-Perceptron" class="headerlink" title="The online Learning Model: Perceptron"></a>The online Learning Model: Perceptron</h2><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><ul>
-<li>Set $t&#x3D;1$, start with all zero vector $w_1$</li>
-<li>Given example 𝑥, predict positive iff $w_t\cdot x\geq 0$</li>
-<li>On a mistake, update:<ul>
-<li>Mistake on positive, then update $w_{t+1}\leftarrow w_t+x$</li>
-<li>Mistake on negative, then update $w_{t+1}\leftarrow w_t-x$</li>
-</ul>
-</li>
-<li>Note: $w_t &#x3D; a_{i1}x_{i1}+\cdots + a_{ik}x_{ik}$</li>
-</ul>
-<h2 id="Geometric-Margin"><a href="#Geometric-Margin" class="headerlink" title="Geometric Margin"></a>Geometric Margin</h2><ul>
-<li>Definition: The <strong>margin</strong> of example $𝑥$ w.r.t. a linear sep. $𝑤$ is the distance from $𝑥$ to the plane $w\cdot x&#x3D;0$</li>
-<li>The <strong>margin $\gamma_w$</strong> of a set of examples $𝑆$ w.r.t. a linear separator $𝑤$ is the smallest margin over points $𝑥∈𝑆$.</li>
-<li>The margin $\gamma$ of a examples $S$ is the <strong>maximum</strong> $\gamma_w$ over all linear seps $w$</li>
-</ul>
-<h2 id="Mistake-Bound"><a href="#Mistake-Bound" class="headerlink" title="Mistake Bound"></a>Mistake Bound</h2><p>Theorem: If data linearly separable by margin $\gamma$ and points inside a ball of radius $𝑅$, then Perceptron makes $≤ 𝑅&#x2F;\gamma^2$ mistakes.</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet9.png" alt="Untitled"></p>
-<h2 id="SVMs"><a href="#SVMs" class="headerlink" title="SVMs"></a>SVMs</h2><p>Directly optimize for the maximum margin separator:</p>
-<ul>
-<li>Input: $S&#x3D;\lbrace(x_1,y_1),\dots,(x_m,y_m)\rbrace$</li>
-<li>Maximize $\gamma$ under:<ul>
-<li>$||w||^2 &#x3D; 1$</li>
-<li>$\forall i, y_iw\cdot x_i\geq \gamma$</li>
-</ul>
-</li>
-</ul>
-<p>让 $w’ &#x3D; \frac{w}{\gamma}$，把优化问题转化成凸问题：</p>
-<ul>
-<li>Maximize $||w’||^2$ under $\forall i, y_iw’\cdot x_i\geq 1$</li>
-<li>If data isn’t perfectly linearly separable?<ul>
-<li>Replace “# mistakes” with upper bound called “hinge loss”</li>
-<li>Minimize $||w||^2+C\sum_i\xi_i$ s.t. $\forall i, y_iw\cdot x_i\geq 1-\xi_i, \xi_i \geq 0$</li>
-</ul>
-</li>
-</ul>
-<h3 id="Lagrangian-Dual-of-SVMs"><a href="#Lagrangian-Dual-of-SVMs" class="headerlink" title="Lagrangian Dual of SVMs"></a>Lagrangian Dual of SVMs</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet10.png" alt="Untitled"></p>
-<h2 id="Kernels"><a href="#Kernels" class="headerlink" title="Kernels"></a>Kernels</h2><p>$K(⋅,⋅)$ is a kernel if it can be viewed as a legal definition of inner product:</p>
-<p>$$<br>\exists \phi:X\rightarrow \mathbb R^N,\text{ s.t. }K(x,z)&#x3D;\phi(x)\cdot\phi(z)<br>$$</p>
-<h3 id="Theorem-Mercer"><a href="#Theorem-Mercer" class="headerlink" title="Theorem (Mercer)"></a><strong>Theorem (Mercer)</strong></h3><p>K is a kernel if and only if:</p>
-<ul>
-<li>K is symmetric</li>
-<li>For any set of training points $𝑥_1, 𝑥_2, … , 𝑥_𝑚$ and for any $𝑎_1, 𝑎_2, … , 𝑎_𝑚 ∈ \mathbb R$, we have:</li>
-</ul>
-<p>$$<br>\sum_{i,j}a_ia_jK(x_i,x_j)\geq 0\<br>a^TKa\geq 0<br>$$</p>
-<p>I.e., $K&#x3D;(K(x_i,x_j))_{i,j &#x3D; 1,…,n}$ is positive semi-definite</p>
-<h3 id="Kernels-1"><a href="#Kernels-1" class="headerlink" title="Kernels"></a>Kernels</h3><ul>
-<li>Linear: $K(x,z)&#x3D;x\cdot z$</li>
-<li>Polynomial: $K(x,z)&#x3D;(x\cdot z)^2$ or $K(x,z)&#x3D;(1+x\cdot z)^d$</li>
-<li>Gaussian: $K(x,z)&#x3D;\exp\left[-\frac{||x-z||^2}{2\sigma^2}\right]$</li>
-<li>Laplace: $K(x,z)&#x3D;\exp\left[-\frac{||x-z||}{2\sigma^2}\right]$</li>
-</ul>
-<h1 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h1><h2 id="反向传播四公式"><a href="#反向传播四公式" class="headerlink" title="反向传播四公式"></a>反向传播四公式</h2><h3 id="BP1"><a href="#BP1" class="headerlink" title="BP1"></a>BP1</h3><p>If $Y&#x3D;\sigma(X)$, then:</p>
-<p>$$<br>\frac{\partial L}{\partial X}&#x3D;\frac{\partial L}{\partial Y}\odot \sigma’(x)<br>$$</p>
-<p>Where $\odot$ means element-wise product</p>
-<h3 id="BP2-3-4"><a href="#BP2-3-4" class="headerlink" title="BP2 &amp; 3 &amp; 4"></a>BP2 &amp; 3 &amp; 4</h3><p>If $Y&#x3D;W\cdot X+B$</p>
-<p>$$<br>\frac{\partial L}{\partial X}&#x3D;W^T\cdot \frac{\partial L}{\partial Y}<br>$$</p>
-<p>$$<br>\frac{\partial L}{\partial B}&#x3D;\frac{\partial L}{\partial Y}<br>$$</p>
-<p>$$<br>\frac{\partial L}{\partial W}&#x3D;\frac{\partial L}{\partial Y}\cdot X^T<br>$$</p>
-<h3 id="推导的核心"><a href="#推导的核心" class="headerlink" title="推导的核心"></a>推导的核心</h3><p>考虑： $y_i &#x3D; w_{i1}x_1+w_{i2}x_2+\cdots+w_{in}x_n + b_i$</p>
-<p>$$<br>\frac{\partial y_i}{\partial w_{ij}}&#x3D;x_j,\quad \frac{\partial y_i}{\partial x_j}&#x3D;w_{ij},\quad \frac{\partial y_i}{\partial b_i} &#x3D; 1<br>$$</p>
-<h2 id="常用损失函数的导数"><a href="#常用损失函数的导数" class="headerlink" title="常用损失函数的导数"></a>常用损失函数的导数</h2><h3 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h3><p>If $X&#x3D;[x_1,\cdots, x_n], Y&#x3D;\text{SoftMax}(X)&#x3D;[y_1,\cdots, y_n]$</p>
-<p>Thus $\displaystyle y_i &#x3D; \frac{e^{x_i}}{\sum_{j&#x3D;1}^ne^{x_i}}$ and obviously $\displaystyle \sum_{i&#x3D;1}^n y_i &#x3D; 1$</p>
-<p>Thus we have:</p>
-<p>$$<br>\frac{\partial y_i}{\partial x_j}&#x3D;\begin{cases}y_i(1-y_i),&amp;i&#x3D;j\-y_iy_j,&amp;u\neq j\end{cases}<br>$$</p>
-<p>It’s equal to:</p>
-<p>$$<br>\frac{\partial Y}{\partial X}&#x3D;\text{diag}(Y)-Y^TY<br>$$</p>
-<h3 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h3><p>We have $\sigma(x)&#x3D;\text{sigmoid}(x)&#x3D;\frac{1}{1+e^{-x}}$</p>
-<p>$$<br>\sigma’(x)&#x3D;\sigma(x)(1-\sigma(x))<br>$$</p>
-<h3 id="Softmax-with-交叉熵："><a href="#Softmax-with-交叉熵：" class="headerlink" title="Softmax with 交叉熵："></a>Softmax with 交叉熵：</h3><p>$$<br>L&#x3D;-\sum_k \hat y_k\log y_k<br>$$</p>
-<p>We have:</p>
-<p>$$<br>\frac{\partial L}{\partial X} &#x3D; Y-\hat Y<br>$$</p>
-<h3 id="Tanh"><a href="#Tanh" class="headerlink" title="Tanh"></a>Tanh</h3><p>We have $\displaystyle\tau(x)&#x3D;\tanh(x)&#x3D;\frac{e^x-e^{-x}}{e^x+e^{-x}}$</p>
-<p>$$<br>\tau’(x)&#x3D;1-\tau^2(x)<br>$$</p>
-<h1 id="Dimension-Reduction-PCA"><a href="#Dimension-Reduction-PCA" class="headerlink" title="Dimension Reduction: PCA"></a>Dimension Reduction: PCA</h1><p>Denoted that $v_1,\dots, v_d$ are the d principal components, $v_i\cdot v_j &#x3D; \begin{cases}1,&amp;i&#x3D;j\0,&amp;i\neq j\end{cases}$</p>
-<p>Let $X&#x3D;[x_1,\dots,x_n]$ (Columns are the datapoints)</p>
-<p>Maximizes sample variance of projected data</p>
-<p>$$<br>\frac{1}{n}\sum_{i&#x3D;1}^n(\mathbf v^Tx_i)^2&#x3D;\mathbf v^T\mathbf X\mathbf X^T\mathbf v\text{ s.t. }\mathbf v^T\mathbf v &#x3D; 1<br>$$</p>
-<p>Lagrangian: $\argmax_{\mathbf v}\mathbf v^T \mathbf X\mathbf X^T\mathbf v-\lambda \mathbf v^T\mathbf v$</p>
-<p>We finally have $(\mathbf X\mathbf X^T -\lambda\mathbf I)\mathbf v&#x3D;0$, $(\mathbf X \mathbf X^T)\mathbf v &#x3D; \lambda \mathbf v$</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet11.png" alt="Untitled"></p>
-<aside>
-💡 这里的 $\mathbf v^T\mathbf X$ 是投影，再乘上 $\mathbf v$ 就是 在投影上的向量。
-
-
-</aside>
-
-<ul>
-<li>The eigenvalue $\lambda$ denotes the amount of variability captured along that dimension (aka amount of energy along that dimension).</li>
-<li>Zero eigenvalues indicate no variability along those directions $\Rightarrow$ data lies exactly on a linear subspace</li>
-<li>Only keep data projections onto principal components with non-zero eigenvalues, say $v_1, … , v_k$, where $k&#x3D;\text{rank}(\mathbf X\mathbf X^T)$</li>
-</ul>
-<h1 id="Clustering-KMeans"><a href="#Clustering-KMeans" class="headerlink" title="Clustering: KMeans"></a>Clustering: KMeans</h1><h2 id="Denotions"><a href="#Denotions" class="headerlink" title="Denotions"></a>Denotions</h2><ul>
-<li>Given a sample $\mathcal X&#x3D;\lbrace\mathbf x^t\rbrace_{t&#x3D;1}^N$</li>
-<li>Find $k$ reference vectors $\mathbf m_j$ which best represent the data</li>
-</ul>
-<h2 id="Encoding-Decoding"><a href="#Encoding-Decoding" class="headerlink" title="Encoding&#x2F;Decoding"></a>Encoding&#x2F;Decoding</h2><p>Each data point $\mathbf x^t$ is represented by the index $i$ **of the nearest reference vector $i&#x3D;\argmin_j||\mathbf x^t-\mathbf m_j||$</p>
-<p>We can use labels $\mathbf b^t$ for $\mathbf x^t$ as:</p>
-<p>$$<br>b_i^t&#x3D;\begin{cases}1&amp;\text{if }i&#x3D;\argmin_j||\mathbf x^t-\mathbf m_j||\<br>0&amp;\text{otherwise}\end{cases}<br>$$</p>
-<p>The Total Reconstruction Error:</p>
-<p>$$<br>E(\lbrace\mathbf n_i\rbrace_{i&#x3D;1}^k|\mathcal X)&#x3D;\sum_t\sum_ib_i^t||\mathbf x^t-\mathbf m_i||^t<br>$$</p>
-<h2 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h2><p>$$\argmin_{\lbrace\mathbf{m}<em>i\rbrace</em>{i&#x3D;1}^k,\lbrace\mathbf{b}^t\rbrace_{t&#x3D;1}^N}\sum_t\sum_i b_{i}^{t}||\mathbf{x}^t-\mathbf{m}_i||^2\quad$$</p>
-<p>However, since $b_i$ also depends on $\mathbf m_i$ , the optimization problem cannot be solved analytically, but <strong>iteratively</strong></p>
-<h3 id="Algorithm-1"><a href="#Algorithm-1" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet12.png" alt="Untitled"></p>
-<h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><h2 id="Basic-Problem"><a href="#Basic-Problem" class="headerlink" title="Basic Problem"></a>Basic Problem</h2><p>$$<br>\argmin_{x\in\mathbb R^n}f(x)<br>$$</p>
-<p>Iteration: $x^{r+1}&#x3D;x^r-\gamma_r\cdot\nabla f(x^r)$</p>
-<h2 id="Convexity"><a href="#Convexity" class="headerlink" title="Convexity"></a>Convexity</h2><p>$$<br>f(\lambda(x)+(1-\lambda)y)\leq \lambda f(x)+(1-\lambda)f(y)\<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)\<br>\nabla^2f(x)\geq 0<br>$$</p>
-<h2 id="L-smooth"><a href="#L-smooth" class="headerlink" title="L-smooth"></a>L-smooth</h2><p>$$<br>||\nabla f(x)-\nabla f(y)||\leq  L||x-y||<br>$$</p>
-<h2 id="Descemdent-Lemma"><a href="#Descemdent-Lemma" class="headerlink" title="Descemdent Lemma"></a>Descemdent Lemma</h2><p>$$<br>|f(x)-f(y)-\nabla f(y)^T(x-y)|\leq \frac{L}{2}||x-y||^2<br>$$</p>
-<p>If $f$ twice-differentiable, L-smooth $\Leftrightarrow$ $\nabla^2f(x)\leq LI, \quad\mathbf d^T\nabla^2 f(x)\mathbf d\preceq L||\mathbf d||^2,\forall \mathbf d$</p>
-<h2 id="Convergence-Analysis"><a href="#Convergence-Analysis" class="headerlink" title="Convergence Analysis"></a>Convergence Analysis</h2><p>Optimality measure $M(x^r)$</p>
-<ul>
-<li>Convex: $||x^r-x^*||$ or $f(x^r)-f^*$</li>
-<li>Non-convex: $||\nabla f(x^r)||$</li>
-</ul>
-<p>Order of convergence $q$ s.t. </p>
-<p>$$<br>\sup\bigg\lbraceq\big| \lim_{r\rightarrow+\infty}\frac{M(x^{r+1})}{M(x^r)^q}&lt;\infty<br>$$</p>
-<ul>
-<li>$q&#x3D;1$ : Linear convergence, $q&#x3D;2$ : quadratic</li>
-</ul>
-<p>Rate of Convergence: Given $q$ , </p>
-<p>$$<br>\lim_{r\rightarrow\infty}\frac{M(r^{r+1})}{M(x^r)^1}&#x3D;n<br>$$</p>
-<ul>
-<li>Sublinear: $\text{Rate} &#x3D; 1$, Superlinear: $\text{Rate} &#x3D; 0$</li>
-</ul>
-<h2 id="Convergence-under-Convexity"><a href="#Convergence-under-Convexity" class="headerlink" title="Convergence under Convexity"></a>Convergence under Convexity</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet13.png" alt="Untitled"></p>
-<h2 id="Convergence-under-Smoothness"><a href="#Convergence-under-Smoothness" class="headerlink" title="Convergence under Smoothness"></a>Convergence under Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet14.png" alt="Untitled"></p>
-<h2 id="Convexity-Smoothness"><a href="#Convexity-Smoothness" class="headerlink" title="Convexity &amp; Smoothness"></a>Convexity &amp; Smoothness</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/IML_Final_Cheatsheet15.png" alt="Untitled"></p>
-<h2 id="Upper-Lower-Bound"><a href="#Upper-Lower-Bound" class="headerlink" title="Upper &amp; Lower Bound"></a>Upper &amp; Lower Bound</h2><h3 id="mu-Strong-Convexity"><a href="#mu-Strong-Convexity" class="headerlink" title="$\mu$-Strong Convexity"></a>$\mu$-Strong Convexity</h3><p>$$<br>f(x)\geq f(y)+\nabla f(y)^T(x-y)+\frac{\mu}{2}||x-y||_2^2<br>$$</p>
-<h3 id="L-Smoothness"><a href="#L-Smoothness" class="headerlink" title="L-Smoothness"></a>L-Smoothness</h3><p>$$<br>f(x)\leq f(y)+\nabla f(y)^T(x-y)+\frac{L}{2}||x-y||^2<br>$$</p>
-<h2 id="Implication"><a href="#Implication" class="headerlink" title="Implication"></a>Implication</h2><p>$$<br>\nabla f(x^r)^T(x^r-x^*)\geq f(x^r)-f^*_\frac{\mu}{2}||x^r-x^*||<br>$$</p>
-<p>$$<br>f(x^{r+1})\leq f(x^r)-\frac{r}{2}||\nabla f(x^r)||^2<br>$$</p>
-<h1 id="Lagrangian"><a href="#Lagrangian" class="headerlink" title="Lagrangian"></a>Lagrangian</h1><h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><h3 id="Original-Function"><a href="#Original-Function" class="headerlink" title="Original Function"></a>Original Function</h3><p>Minimize $f_0(x)$ with optimal $p^*$ subject to $f_i(x)\leq 0, i &#x3D; 1,…,m$</p>
-<p>We have $L(x,\lambda) &#x3D; f_0(x)+\lambda_1f_1(x)+\cdots+\lambda_mf_m(x)$</p>
-<h3 id="Dual-Function"><a href="#Dual-Function" class="headerlink" title="Dual Function"></a>Dual Function</h3><p>$$<br>⁍<br>$$</p>
-<p><strong>Lower Bound Property: if</strong> $\lambda\geq 0$ and $x$ are primal feasible:</p>
-<p>$$<br>g(\lambda)\leq f_0(x)<br>$$</p>
-<h3 id="Dual-Problem"><a href="#Dual-Problem" class="headerlink" title="Dual Problem"></a>Dual Problem</h3><p>Maximize $g(\lambda)$ with optimal $d^*$ subject to $\lambda\geq 0$</p>
-<p>We have: $d^<em>\leq p^</em>$ , denoted that $p^*-d^*$ the optimal dual gap.</p>
-<p>The Convec Problem have $p^*&#x3D;d^*$</p>
-<h3 id="KKT-Optimal-Condition"><a href="#KKT-Optimal-Condition" class="headerlink" title="KKT Optimal Condition"></a>KKT Optimal Condition</h3><table>
-<thead>
-<tr>
-<th>$f_i(x^*)\leq 0$</th>
-<th>Primal Feasible</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$\lambda_i^*\geq 0$</td>
-<td>Dual Feasible</td>
-</tr>
-<tr>
-<td>$\lambda_i^<em>f_i(x_i^</em>)&#x3D;0$</td>
-<td>Complementary</td>
-</tr>
-<tr>
-<td>$\nabla f_0(x^*)+\Sigma\lambda_i^<em>\nabla f_i(x^</em>)&#x3D;0$</td>
-<td>Stationary</td>
-</tr>
-</tbody></table>
-<h3 id="Equality-Constraints"><a href="#Equality-Constraints" class="headerlink" title="Equality Constraints"></a>Equality Constraints</h3><p>Minimize $f_0(x)$ subject to $f_i(x)\leq 0, i &#x3D; 1,…,m$ and $h_i(x)&#x3D;0,i &#x3D; 1,…,p$</p>
-<p>We have $L(x,\lambda,v)&#x3D;f_0(x)+\sum \lambda_i f_i(x)+\sum v_ih_i(x)$</p>
-<ul>
-<li>Dual Function: $g(\lambda, v)&#x3D;\inf_x(L(x,\lambda,v))$</li>
-<li>Dual Problem: Maximize $g(\lambda, v)$ subject to $\lambda\geq 0$</li>
-</ul>
-<p>KKT:</p>
-<table>
-<thead>
-<tr>
-<th>$f_i(x^*)\leq 0, h_i(x^*)&#x3D;0$</th>
-<th>Primal Feasible</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$\lambda_i^*\geq 0$</td>
-<td>Dual Feasible</td>
-</tr>
-<tr>
-<td>$\lambda_i^<em>f_i(x_i^</em>)&#x3D;0$</td>
-<td>Complementary</td>
-</tr>
-<tr>
-<td>$\nabla f_0(x^*)+\sum\lambda_i^<em>\nabla f_i(x^</em>)+\sum v_i^<em>\nabla h_i(x^</em>)&#x3D;0$</td>
-<td>Stationary</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" data-id="clylj5ter001fbc9519sqckhl" data-title="【CS182】Final Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-PaperReading/Paper-RTNeRFAndInstant3D" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" class="article-date">
-  <time class="dt-published" datetime="2023-05-04T16:00:00.000Z" itemprop="datePublished">2023-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Paper-Reading/">Paper Reading</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/">【PaperReading】RTNeRF &amp; Instant3D</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h1><p>Gatech 组的主要算法优化策略：</p>
-<ul>
-<li>首先，选择当前的 SOTA 算法</li>
-<li>对 SOTA 算法进行 Profiling，找到性能瓶颈</li>
-<li>以增量式优化为主</li>
-</ul>
-<hr>
-<h1 id="RT-NeRF"><a href="#RT-NeRF" class="headerlink" title="RT-NeRF"></a>RT-NeRF</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>认为：目前 NeRF 效率低有两个主要原因：</p>
-<ol>
-<li>The commonly used <strong>uniform point sampling</strong> method<ul>
-<li>朴素的采样方法）</li>
-</ul>
-</li>
-<li>The required dense <strong>accesses and computations</strong> for <strong>embeddings</strong><ul>
-<li>密集的 Embedding 访问和计算</li>
-</ul>
-</li>
-</ol>
-<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/nerfmodel.png" title="NeRF Model">
-
-<h3 id="先验信息：-Sparsities-of-pre-existing-points"><a href="#先验信息：-Sparsities-of-pre-existing-points" class="headerlink" title="先验信息： Sparsities of pre-existing points"></a>先验信息： Sparsities of pre-existing points</h3><p>最终有效的采样点应该具有稀疏性</p>
-<h2 id="优化方法"><a href="#优化方法" class="headerlink" title="优化方法"></a>优化方法</h2><ol>
-<li>Directly computing the geometry of pre-existing points based on the corresponding non-zero cubes of the occupancy grid<ul>
-<li>通过预计算已经存在于 Occupancy Grid 的几何元素，减少采样点数量</li>
-</ul>
-</li>
-<li>Leverages a coarse-grained view-dependent rendering ordering scheme to avoid processing invisible points<ul>
-<li>通过一个粗粒度的排序，减少对某些不可见点的运算</li>
-<li>Object Ordered 思想</li>
-</ul>
-</li>
-</ol>
-<h2 id="Profiling"><a href="#Profiling" class="headerlink" title="Profiling"></a>Profiling</h2><p>对 TensoRF 的 Rendering Pipeline 进行 Profiling。</p>
-<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorfprof.png">
-
-<hr>
-<h2 id="Profiling-1"><a href="#Profiling-1" class="headerlink" title="Profiling"></a>Profiling</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tsnsorfprof-2080ti.png">
-<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/tensorf-prof-legend.png">
-
-<hr>
-<h2 id="Locate-the-pre-existing-points"><a href="#Locate-the-pre-existing-points" class="headerlink" title="Locate the pre-existing points"></a>Locate the pre-existing points</h2><p>All the candidate points <strong>are uniformly sampled along rays</strong> and then the existence of pre-existing points are identified via a <strong>query process</strong> based on the occupancy grid.</p>
-<p>首先在光线上进行一次预采样，通过 Occupancy Grid 来查询点的存在与否</p>
-<h3 id="两个-Inefficiency"><a href="#两个-Inefficiency" class="headerlink" title="两个 Inefficiency:"></a>两个 Inefficiency:</h3><ol>
-<li>The sparsity of the occupancy grid is not leveraged<ul>
-<li>没有利用 Occupancy Grid 的稀疏性先验</li>
-</ul>
-</li>
-<li>The DRAM accesses to the occupancy grid are irregular because the emitted rays can come from any direction, and thus the order of their accesses to the occupancy grid can not be predicted in advance.<ul>
-<li>由于 Ray 的方向并不能预知，Occupancy 的 DRAM-Access 很随机，Locality 差</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="Proposed-Solution？"><a href="#Proposed-Solution？" class="headerlink" title="Proposed Solution？"></a>Proposed Solution？</h2><p>Directly computes the coordinates of pre-existing points by looping over the non-zero cubes of the occupancy grid.</p>
-<ul>
-<li>按照 <strong>固定的顺序</strong> 访问 Occupancy Grid（也即所谓的“Cube”）</li>
-</ul>
-<h2 id="Efficient-Rendering-Pipeline"><a href="#Efficient-Rendering-Pipeline" class="headerlink" title="Efficient Rendering Pipeline"></a>Efficient Rendering Pipeline</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/effrendpipel.png" width="800">
-
-
-<ol>
-<li>将 Occupancy Grid 中的每个 Non-zero cube 近似为一个球，以方便后续步骤的计算；</li>
-<li>将上述的球投射到要渲染的图像上，成为一个椭圆（Oval）；</li>
-<li>根据待渲染的图像中的 <strong>regular arrangement of points</strong> ，即一个点对应一个像素，确定椭圆内的点；</li>
-<li>使用 Line-Sphere intersections 的解析解来计算出沿着光线射线并且在球内的点的 Geometries。</li>
-</ol>
-<p>只有 Pre-exist points 会被包含在循环中。解决了：</p>
-<ol>
-<li>Occupancy Grid 的 Sparsity 没有被充分利用</li>
-<li>在 SOTA Rendering Pipeline 中， DRAM Access 的不规则性</li>
-</ol>
-<h2 id="Early-Termination-Volume-Rendering"><a href="#Early-Termination-Volume-Rendering" class="headerlink" title="Early Termination: Volume Rendering"></a>Early Termination: Volume Rendering</h2><p>在图形学中，Volume Rendering Integral 的离散化计算主要有两种：</p>
-<ul>
-<li>Front-to-back composition: 从前向后积分<ul>
-<li>$\begin{cases}\hat{C_i}&#x3D;\hat{C}<em>{i+1} + \hat{T</em>{i+1}}C_i\\hat{T_i}&#x3D;\hat{T}_{i+1}(1-\alpha_i)\end{cases}$</li>
-</ul>
-</li>
-<li>Back-to-front composition： 从后向前积分<ul>
-<li>$\begin{cases}\hat{C_i}&#x3D;\hat{C_{i-1}}(1-\alpha_i)\\hat{T}<em>i&#x3D;\hat{T}</em>{i-1}(1-\alpha_i)\end{cases}$</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="View-Dependent-Rendering-Ordering"><a href="#View-Dependent-Rendering-Ordering" class="headerlink" title="View-Dependent Rendering Ordering"></a>View-Dependent Rendering Ordering</h2><p>主要 Motivation 来自于：</p>
-<ul>
-<li>Early Termination 要求我们在进行点采样的时候按照 Ray Marching 的顺序进行（从前向后）</li>
-<li>如果先访问了暂时还没有 Marching 到的点，那这个数值显然不能拿来计算，相当于是一次无效访问</li>
-<li>如果能让渲染的计算本身变得有序，就能获得更好的 Locality！</li>
-</ul>
-<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/vdro.png">
-
-<ol>
-<li>将 Occupancy Grid 分割成八个 Subspace</li>
-<li>先计算最接近 View Origin（光线的原点）的子空间将会先进入计算</li>
-<li>接下来，途中标注 <code>2</code> 的部分再进入计算，再接下来是剩下的</li>
-</ol>
-<hr>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/RTRes.png">
-
-<hr>
-<h1 id="Instant-3D"><a href="#Instant-3D" class="headerlink" title="Instant 3D"></a>Instant 3D</h1><p>回顾一下Gatech 组的主要算法优化策略：</p>
-<ul>
-<li>首先，选择当前的 SOTA 算法</li>
-<li>对 SOTA 算法进行 Profiling，找到性能瓶颈</li>
-<li>以增量式优化为主</li>
-</ul>
-<h2 id="选择当前的-SOTA-算法"><a href="#选择当前的-SOTA-算法" class="headerlink" title="选择当前的 SOTA 算法"></a>选择当前的 SOTA 算法</h2><p>—— Instant NGP</p>
-<h2 id="对-SOTA-算法进行-Profiling"><a href="#对-SOTA-算法进行-Profiling" class="headerlink" title="对 SOTA 算法进行 Profiling"></a>对 SOTA 算法进行 Profiling</h2><p>认为 NGP 的主要瓶颈是对 3D Feature 进行三线性插值</p>
-<h2 id="Different-paces-of-Color-and-Density-During-Training"><a href="#Different-paces-of-Color-and-Density-During-Training" class="headerlink" title="Different paces of Color and Density During Training"></a>Different paces of Color and Density During Training</h2><p>重建质量对于 Color 和 Density特征 具有不同的敏感性</p>
-<ul>
-<li>因为 NeRF 本身重建的 Loss 是 RGB-Based，并没有引入几何形状的约束，几何形状的重建本身是“赠品”</li>
-<li>因此，Color 部分并不需要和 Density 部分相同的精度（Color 部分粗糙一些也不影响重建效果）</li>
-</ul>
-<h2 id="两个优化："><a href="#两个优化：" class="headerlink" title="两个优化："></a>两个优化：</h2><ol>
-<li>两个网格的尺寸不需要一样</li>
-<li>两个网格的更新频率不需要一样</li>
-</ol>
-<h3 id="网格尺寸"><a href="#网格尺寸" class="headerlink" title="网格尺寸"></a>网格尺寸</h3><p>遍历了一下两个网格尺寸的比例，找了一些有代表性的结果：</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-10-07.png" alt="w:500"></p>
-<p>Color Grid 可以使用更小的大小</p>
-<h3 id="更新频率"><a href="#更新频率" class="headerlink" title="更新频率"></a>更新频率</h3><p>遍历了一下两个网格更新频率的比例，找了一些有代表性的结果：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/2023-05-05-22-11-58.png" alt="w:500"></p>
-<p>Density Grid 可以使用更小的更新频率</p>
-<h2 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h2><p>We can trim down the runtime by $83.0%$ as compared to the most efficient NeRF training algorithm [24] on the same edge GPU Xavier NX.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" data-id="clylj5tek000abc95bmod0phd" data-title="【PaperReading】RTNeRF &amp; Instant3D" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/行见录/行见录-遗憾篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/04/16/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/" class="article-date">
-  <time class="dt-published" datetime="2023-04-15T16:00:00.000Z" itemprop="datePublished">2023-04-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/04/16/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/">【行见录】遗憾篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。</p>
-</blockquote>
-<hr>
-<p>遗憾是一种风吹不散，时间也无法侵蚀的东西。</p>
-<p>再完满的爱意若没有维系也会随着时间自然淡化，再真挚的情义也难免被名利纠缠在俗世里，退化为现实的枷锁；那些深沉的恨意在复仇以后，随着敌人的消散也一同在漫天风沙里一点点弥散，教人迷茫无所措。</p>
-<p>但遗憾不一样。那是经年岁月中，无可挽回的无可奈何，时空流逝下，深黄的定格。它会褪色却不会淡化，天地不移，江流石不转。它是如此沉重，我们无知觉的拿起，却得用一生的时间去学着放下。</p>
-<p>或者说，所谓放下，说对自身刻意的欺骗，用那些美好光明的虚幻涂鸦去遮掩那些无法被更改的刻痕。</p>
-<p>遗憾是在知道一切无可更改之后的浇不开的块垒。《诡秘之主》里克莱恩被命运胁迫着一路向神位前行，最终却发现梦想回到的家乡已经成为了几万年前的历史；《盘龙》中林雷一路挣扎历经生死，才知道为了救自己燃烧完灵魂的那个德林爷爷再也不能出现在自己面前。那些故事里的遗憾是如此重，让那些能背负命运的主角们——以及作为读者的我们无法放下。</p>
-<p>而现实中的遗憾或许未必一样如山岳般沉重，但你一样放不下它们，只能被选择与它们和解。</p>
-<p>正如高考结束的很多年里，我仍然会做起那些梦。</p>
-<p>那些梦可能是某次考试前的紧张，某次挫败后的懊恼，某些难以言喻的悸动，又或者某些美好灿烂的幻想。那是一段非常沉重而纯粹的回忆。它是如此的沉重，就像是要背着巍峨高山一步一步踏出深深的脚印；它又是如此纯粹，目标是那样的明确，所有人都以不同的方式向着它前进。</p>
-<p>但存在并不代表实现。事实上对于大多数像我这样的人来说，一步一步走下去留下的注定是遗憾，一次一次的努力所证明的是自己的平庸。</p>
-<p>遗憾就是这样，你做着莫欺少年穷的美梦咬牙前行之后，蓦然回首，发现除了与生活与平庸和解以外，失去了别的选择。你终于可以笑着说“原来我也是一个普普通通的人啊”。那些曾经最玄奇最伟大飘渺的幻想被红尘掩埋，埋在那个名叫年少的坟墓里。然后你就再也不需要证明什么了。随着时间的流逝你慢慢老去，然后被人们淡忘，消失在漫长时光的冲刷下，成为历史记录里某个数字的组成部分。</p>
-<p>而此时再看来，在流淌的岁月里沉淀的记忆，已经零零碎碎。剩下的是一片金色的阳光，某个恬静的面庞，还有那个真的相信自己可以倾尽山海的热忱和赤诚。在等若干年后，等自己已经被打磨得圆滑，等着头发变得灰白，等面颊上不可逆转的长出皱纹，我会不会仍然为当年那些年少轻狂——或者未曾年少轻狂——而感到遗憾和后悔？我不知道，也没有人知道。命运的伏线太多，在千百次的推演间我也未曾找到我想要的最优解。那些美好的幻想，永远与我隔着天堑，因为我的平凡和笨拙。</p>
-<p>在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/04/16/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/" data-id="clylj5tes001kbc95eiqh3q6y" data-title="【行见录】遗憾篇" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/人文课论文/婉约词中的风骨" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" class="article-date">
-  <time class="dt-published" datetime="2023-03-09T16:00:00.000Z" itemprop="datePublished">2023-03-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/">【唐宋文学精华 期末论文】婉约词中的风骨</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="婉约词中的风骨"><a href="#婉约词中的风骨" class="headerlink" title="婉约词中的风骨"></a>婉约词中的风骨</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>起初的风骨只是一把中性的标尺。但随着时间的推移，我们逐渐把那种豪迈的、悲壮的诗歌当成了风骨的代表。或许是因为有那样多的好汉站在仁义之上，引吭高歌、奋笔疾书，写下充满凛然正气的篇章，让人仿佛以为，谈到有风骨的诗文，就一定要看到有风骨的诗人——于是原本作为中性标尺的风骨，就渐渐被绑缚在豪迈上，言风骨则必称悲壮豪放，似乎诗词之作者没有经历过万般磨难，诗词内容里没有登高一呼或是怆然涕下，就不能和风骨沾边一般。但事实上，风骨绝非是只在经历磨难痛苦的时候所能体现出来的东西。在对镜梳妆的时候，在登楼相思的时候，在追忆往事的时候，在生活的每个片面里，都应该存在风骨的影子。那我们为什么不试着在婉约词中找到风骨的存在呢？<br>风骨何谓？</p>
-<p>风骨，是一个极具中国浪漫特色的词汇。这个词的意蕴颇为复杂，既指向人的品格，描绘出某种顽强不屈、无惧生死的气度，好像让人看到屈原在江边悲叹、陶渊明在南山下微笑；又指向文艺作品——如嵇康疾书广陵散、李白高歌蜀道难，让人感觉到刚健遒劲的、源于内心深处的力量。<br>最开始被携入文学领域的时候，风骨是对于作品的“情”与“辞”的最高要求：“情与气偕，辞共体并”[ （南朝）刘勰撰《文心雕龙》第二十八篇《风骨》]，也就是既有情致，由有内涵。刘勰在《文心雕龙》中说：“是以怡怅述情，必始乎风；沉吟铺辞，莫先於骨。故辞之待骨，如体之树骸；情之含风，犹形之包气。结言端直，则文骨成焉；意气骏爽，则文风清焉。”。在抒发情感的时候，要有气质，要能够有一种感发乃至于教化的作用；而文章的架构内涵又不能浅薄庸俗，要用显豁却动人的表达来让人有所思索，有所感悟。这就是最早的风骨之说。<br>所谓风骨，风为情致，体为架构。我们在这里谈到有风骨的诗词歌赋，是说它既有风一样的情致，又有骨一般的思想内涵。而这里所指的内涵，绝非片面的，被局限的忧国忧民等类的言志之作，而是更加深远的，对于生活和自然，还有更长远的——时间、刹那与永恒、虚幻与真实——的某些思考和揣摩，又或者是在不同境遇下，在日常生活的点滴里不经意间流露出来的情思和风度。 </p>
-<p>中华文化应该是有风骨的文化，中华文化的风骨是由温柔细腻的情思和英勇豪迈的高歌一同铸就的。我们有时过分的强调豪迈的诗词，认为这才是中华文化之所以壮阔伟大的原因，认为中华文化的伟大只有在国破家亡颠沛流离的时候才能体现出来。但谁说在盛世太平间，我们看不到中华文化的堂皇气象？谁说在儿女情长里，你读不出中华文化的细腻温柔？如果说，那些豪迈壮阔的高歌聚集成中华文化的“骨”，那每一首温柔婉转细腻幽深的词句，就萦绕成中华文化的“风”。骨滋养了千年来中华文化不断的血脉，风则绘制出中华文化的万般气象，赋予其更加丰满的情思和内涵。</p>
-<h2 id="冯、李君臣：南唐词的莽苍之气"><a href="#冯、李君臣：南唐词的莽苍之气" class="headerlink" title="冯、李君臣：南唐词的莽苍之气"></a>冯、李君臣：南唐词的莽苍之气</h2><blockquote>
-<p>谁道闲情抛掷久，每到春来，惆怅还依旧。日日花前常病酒，不辞镜里朱颜瘦。 </p>
-<p>河畔青芜堤上柳，为问新愁，此事年年有。独立小桥风满袖，平林新月人归后。 </p>
-<p>——冯延己《鹊踏枝》 [ （南唐）冯延巳撰《阳春集》]</p>
-</blockquote>
-<blockquote>
-<p>菡萏香销翠叶残，西风愁起绿波间。还与韶光共憔悴，不堪看。 </p>
-<p>细雨梦回鸡塞远，小楼吹彻玉笙寒。多少泪珠何限恨，倚栏干。 </p>
-<p>——李璟《山花子》[ （南唐）李璟、李煜撰，（现代）王仲闻修订，《南唐二主词校订》] </p>
-</blockquote>
-<p>官至南唐宰相的冯延巳和南唐中主李璟私交极好，两人在冯延巳二十多岁、李璟十多岁的时候就开始交游。《南唐书》记载说，某日李璟与冯延巳谈话，李璟问：“风乍起，吹皱一池春水，干卿何事？”冯延巳回答：“未若陛下‘小楼吹彻玉笙寒’也。”所提的词句皆是两人的名句。<br>只从字面就能读出，这对君臣的词极其富有兴发之作用。所谓兴发，就是由于周围景色风景环境的微小变化，而引起的内心的波澜壮阔的活动。这种感发性正是“风骨”中“风”的体现。而他们的词不再如温、韦那般流连于房前屋后的花前月下，而是仿佛走到原野中，在迷茫壮阔的天地中歌颂着一种更加深刻的情感——一言以蔽之，有一种“莽苍之气”。</p>
-<p>冯延巳的风骨体现在他的执着里。同是写春愁，是写“惆怅还依旧”，正因为这种冯延巳却能把惆怅写出浓郁的悲剧韵味来。“日日花前常病酒，不辞镜里朱颜瘦”，这句话颇有杜甫“且看欲尽花经眼，莫厌伤多酒入唇[ （唐）杜甫《曲江二首》]”的神韵。花前病酒为何故？是因为这花很快就要零落了，很快就看不见了。这样美好的事物即将消逝，他何故不饮？他何忍不饮？于是就只能将对于花的珍重和惋惜融进酒里，这种珍重和惋惜，到了要为此“朱颜瘦”，要为此身形消瘦、心灵憔悴的深重。冯延巳的风骨就体现在这种对于美的执着里。“不辞镜里朱颜瘦”，“不辞”和“镜里”正是体现了诗人的执着。 </p>
-<p>从体式上看，这是婉约词的风格无疑；从思想情致上看，这首词却具有深刻的执着和悲剧的内涵——正是这种内涵，和唯美深致的描写一起，构成了词的风骨：我们都说，在清醒的状态下经历的苦难才是最可怕的；而如果能在清醒的状态下，在苦难的深重压挫下，仍然执着的坚持自身的追求，就更加难得可贵了。为了“花经眼”，他明知道自己会“朱颜瘦”，仍然愿意在日日饮酒，哪怕看着自己在镜中的模样消瘦枯槁下去。这倒颇有一种在几千年后，刘慈欣在《三体》中写到的，罗辑为自己挖好坟墓然后站在阔大的郊外说“我对三体世界说话”的感受。这种独立荒原的莽苍之气，将本轻柔平淡的惆怅推向了更高的境界。</p>
-<p>李璟的词则富有一种生命衰老凋零的感动。“南唐中主词‘菡萏香销翠叶残，西风愁起绿波间’，大有众荒芜秽、美人迟暮之感”。[ （清）王国维《人间词话》]所谓“众荒芜秽、美人迟暮”，最早见于宋词之中。屈原说：“惟草木之零落兮，恐美人之迟暮。[ （战国）屈原《离骚》]”宋玉说：“悲哉！秋之为气也，萧瑟兮草木摇落而变衰。[ （战国）宋玉《九辩》]”。这种摇落秋天草木的悲哀是一种颇具中国传统特色的审美。而生命的衰老和凋零是极具兴发感动的。“菡萏香销翠叶残，西风愁起绿波间”：荷花凋残，碧色萎靡，风吹过而池水皱，和那凋零憔悴的美丽相映衬，和美人迟暮时的悲哀是同质的。</p>
-<p>这正是婉约词，南唐的婉约词。虽然是用婉约的笔调书写，但谁能说这种锐感的诗心所体悟的情感是没有深度的，谁敢说这样的诗篇是没有风骨的？与豪放词宛如滔滔江河或者银河落瀑的磅礴情感不同，这种感发就像是往平静的池塘里投下一块石头，激起一圈一圈的波纹。在水波的振动摇荡间，也就振动摇荡了性情，扩散出深沉悠远的情致和思索，在莽莽苍苍的荒原上，搭建出深而有致的风骨。 </p>
-<h2 id="晏、欧：北宋词的境界与格局"><a href="#晏、欧：北宋词的境界与格局" class="headerlink" title="晏、欧：北宋词的境界与格局"></a>晏、欧：北宋词的境界与格局</h2><p>晏殊和欧阳修的词风都继承自南唐。王国维评价冯延巳：“晏同叔得其俊，欧阳永叔得其深[ （清）刘熙载《艺概·词曲概》]”，却也正是对两人风格的写照。<br>此三位词人都是有风骨之词人。如果说冯延巳的风骨是“执着的热情”，那晏殊的风骨就是一种“圆融的关照”，欧阳修的风骨就是一种“遣玩的意兴”[ （现代）叶嘉莹《唐宋词十七讲》，北京大学出版社，第一百九十五页]。 </p>
-<p>冯延巳的风骨，“执着的热情”，是“梅落繁枝千万片，犹自多情，学雪随风转[ （南唐）冯延巳《鹊踏枝》]”这样的多情的执着；也是“日日花前常病酒，不辞镜里朱颜瘦”这般对容易逝去的美好的执着。这种执着是深具悲剧韵味的、是富有“莽苍之气”的，但晏殊和欧阳修却不然。 </p>
-<blockquote>
-<p>一曲新词酒一杯，去年天气旧亭台。夕阳西下几时回？ </p>
-<p>无可奈何花落去，似曾相识燕归来。小园香径独徘徊。 </p>
-<p>——晏殊《浣溪沙》 [ （宋）晏殊《浣溪沙》]</p>
-</blockquote>
-<blockquote>
-<p>离歌且莫翻新阕，一曲能教肠寸结。 </p>
-<p>直须看尽洛城花，始共春风容易别。 </p>
-<p>——欧阳修《玉楼春》 [ （宋）欧阳修《玉楼春》]</p>
-</blockquote>
-<p>晏殊的风骨是内敛的，是“圆融”的，读者很难直接从他的词句里读出那种独立荒野的壮阔，而只能从他闲静淡雅的词句里体会出对时间、对人生的观照和思索，从中品味出他高远潇洒的境界，然后感悟到一种近乎于道的风骨。这是一种理性：并非是计较一亩三分地的得失厉害的衡量，而是一种对自身的状态和感情充满反省的理性。这种理性就体现在，他的文字是有节制的，他的感情是有节制的，他的抒情决不是那种放纵的宣泄，而是一种轻柔的感发。“夕阳西下几时回。”明天的太阳还会升起，可是今天的太阳落下去，就不会再回来了。“夕阳西下几时回”并没有多么椎心泣血的呼喊，而是如此闲静淡漠、如此不着痕迹的传达了他的感发，传达了他对于万物流逝无可挽回的无奈。 </p>
-<p>更加绝妙的是，他在后面如是说：“无可奈何花落去，似曾相识燕归来”，虽然无可奈何，但它仍然会以其他的形式回到我们的身边——这是另一种层面上的永恒，是宇宙的循环。他的圆融就来源于此。在“小园香径独徘徊”的时候，你就好像看到他一个人的身影慢慢踱步，看到他的思索，看到他的困惑和释然。这是晏殊的境界，一种潇洒高妙的境界，而在境界中又不经意体现出一种思索的情致。这种面对无可抗力的潇洒风度和深切思致，正是晏殊的风骨所在。<br>欧阳修的风骨则与之不同。同样是面对困境，欧阳修用一种对于美的欣赏来排遣内心的哀伤和忧愁——正所谓“遣玩”。在这种欣赏里，读者能体会到的是“付出最大的精神、情感和力量去做、去欣赏”的意兴和格局，从而一窥他的风骨。</p>
-<p>就只看这《玉楼春》的最后四句：“离歌且莫翻新阕，一曲能教肠寸结。直须看尽洛城花，始共春风容易别。”——不用再做新的离歌了，只是听一听都让人感到肝肠寸断。只有看尽了这洛阳美好的花，我才能轻易和春天告别。 </p>
-<p>《圣经》中有言：“那美好的仗我已经打完了，应行的路我已行尽了，当守的道我守住了。[ 《圣经·新约·提摩太后书》第四章第七节]”这与欧阳修这种“直须看尽洛城花，始共春风容易别”，有相似的境界和格调。或许他写的仅仅是一次离别，但其中所暗含的，诗人对眼前的光阴、所做的事业的一种“付出最大的精神、情感和力量去做、去欣赏”的风度，却真实到仿佛可以触摸。这种风度令词从仅仅刻画离愁别情的“妇人语”里拔升而出，就好像要向着天空去、向着太阳去，于是局限的格局被打开了，俗套的境界被洗刷了，遣玩的潇洒意兴跃然纸上。谁能说这不是一种风骨呢？ </p>
-<p>北宋的词就是这样。你能从词句中无意的抒发里，窥见词人自身的襟袍、格局和境界，这种境界用寥寥几笔就勾画出令人神往的气度，勾画出婉约词派中，真实而不朽的风骨。 </p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>若是说冯、李二人在婉约词中写出了悲剧美的韵味，他们的风骨是投入水中的石所激荡摇动的性情，那晏、欧二人就是在经历过繁华之后，轻轻落进“万紫千红总是空”的意境，余韵袅袅，带着一些觉悟和感慨，带着一些思索和哲理，在空中轻轻的荡漾着。这种思索正是王国维所最为推崇的“境界”。在这种境界里，你能看到词人经历过的无数沧桑风云和苦难，但那都被悄然隐去在婉转幽深的词句里。看似只是写着相思的词句，隐藏的却是词人在跌宕起伏间孤独和寂寞的思索，在上上下下中所完成的人格。这种隐约的境界正是婉约词的风骨之所在。它不直接，也不爽朗，实实在在地存在着，就像浩瀚海洋上些微露出的冰山，看似并不宏伟，却深藏自己的内涵。 </p>
-<p>这样婉转的内涵所体现出的作者的修养和襟袍，与那些高亢的豪言壮语一起，共同构成了词文学中的风骨，无分高下，各有千秋，各自屹立在词文化的渺渺平原上，供无数来人欣赏、揣摩，又生长兴发出更多的文化来。 </p>
-<h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>诗、词：</p>
-<ol>
-<li>（唐）杜甫《曲江二首》</li>
-<li>（南唐）李璟《山花子》</li>
-<li>（李璟）冯延巳《鹊踏枝》</li>
-<li>（宋）晏殊《浣溪沙》</li>
-<li>（宋）欧阳修《玉楼春》</li>
-<li>（战国）屈原《离骚》</li>
-<li>（战国）宋玉《九辩》</li>
-<li>《圣经·新约·提摩太后书》第四章第七节</li>
-</ol>
-<p>古书：<br>9. （南朝）刘勰撰《文心雕龙》第二十八篇《风骨》<br>10. （清）王国维《人间词话》<br>11. （清）刘熙载《艺概·词曲概》</p>
-<p>现代作品：<br>12. （现代）叶嘉莹《唐宋词十七讲》，北京大学出版社，第一百九十五页</p>
-<h1 id="文件下载链接"><a href="#文件下载链接" class="headerlink" title="文件下载链接"></a>文件下载链接</h1><ul>
-<li><a href="/files/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8.pdf">PDF</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" data-id="clylj5tf0003mbc9505qng8jy" data-title="【唐宋文学精华 期末论文】婉约词中的风骨" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2021下半年-2022年诗词创作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/31/2021%E4%B8%8B%E5%8D%8A%E5%B9%B4-2022%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" class="article-date">
-  <time class="dt-published" datetime="2022-12-30T16:00:00.000Z" itemprop="datePublished">2022-12-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/31/2021%E4%B8%8B%E5%8D%8A%E5%B9%B4-2022%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2021下半年-2022年诗词创作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="诗词创作"><a href="#诗词创作" class="headerlink" title="诗词创作"></a>诗词创作</h1><h2 id="离家"><a href="#离家" class="headerlink" title="离家"></a>离家</h2><p>时至今日前事休，天南海北少年游。<br>漫漫长路从此始，不到云霄不回头。</p>
-<h2 id="西江月"><a href="#西江月" class="headerlink" title="西江月"></a>西江月</h2><p>来路云月渺渺，前路风雨茫茫。<br>独自可以对天酌，可怜无人相望。</p>
-<p>相逢不过萍水，寓所更在他乡。<br>谁能相识更相知，便从此无惆怅。</p>
-<h2 id="水调歌头"><a href="#水调歌头" class="headerlink" title="水调歌头"></a>水调歌头</h2><p>沉沉初颜色，雾涌楼第间。<br>正是归来时候，慨叹有天寒。<br>澎湃暴雨如幕，落叶飞花无数，何时见青天。<br>只他忽转瞬，丽日露云前。</p>
-<p>是青春。岁月稠，度流年。<br>花开蝶往，相看舞蹁跹。<br>云游相逢甚好，缘分古来玄奥，谁人可断言。<br>留尔词一阙，天乞与成全。</p>
-<h2 id="打油诗-初秋"><a href="#打油诗-初秋" class="headerlink" title="打油诗 初秋"></a>打油诗 初秋</h2><p>灯影楼相闻，层层复加深。<br>日落思往事，风起忆故人。</p>
-<h2 id="打油诗"><a href="#打油诗" class="headerlink" title="打油诗"></a>打油诗</h2><p>天寒旷野静，灯火已未明。<br>正此夜深时，仰首见繁星。</p>
-<h2 id="踏莎行"><a href="#踏莎行" class="headerlink" title="踏莎行"></a>踏莎行</h2><p>低云如山，霞光似柱。煌煌应是琼霄路。<br>雨疏风骤亦有时，凭栏独好斜阳暮。</p>
-<p>伏案疾书，深情谁诉？拟把归期从今数。<br>东南西北何归途，满身相思向荆楚。</p>
-<h2 id="临江仙"><a href="#临江仙" class="headerlink" title="临江仙"></a>临江仙</h2><p>高树盈盈夏意，碧空淡淡轻烟。<br>翠微无声自绵延。<br>远峰如云浅，缥缈忆从前。</p>
-<p>白云横空如练，莫为风月流连。<br>平生唯爱日高眠。<br>望见青山老，春色属华年。</p>
-<h2 id="鹊踏枝"><a href="#鹊踏枝" class="headerlink" title="鹊踏枝"></a>鹊踏枝</h2><p>炎夏却为秋色敛。慢慢云天，数道光深浅。<br>街上画店绘眉间，河中客舟从篙转。</p>
-<p>稚子嬉游时时见。一曲《童年》，岁月随波远。<br>茶尽日重已入夕，此刻竟为浮生满。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/31/2021%E4%B8%8B%E5%8D%8A%E5%B9%B4-2022%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" data-id="clylj5ted0001bc95gj43ggrr" data-title="2021下半年-2022年诗词创作" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/行见录/行见录-相逢篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/" class="article-date">
-  <time class="dt-published" datetime="2022-12-17T16:00:00.000Z" itemprop="datePublished">2022-12-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/">【行见录】相逢篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>“青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，只剩下一抹浅浅的泡影。”</p>
-<p>——行见录·相逢篇</p>
-</blockquote>
-<blockquote>
-<p>从别后，忆相逢，几回魂梦与君同。今宵剩把银釭照，犹恐相逢是梦中。</p>
-<p>——晏几道《鹧鸪天》</p>
-</blockquote>
-<hr>
-<p>什么是相逢？</p>
-<p>小的时候，每天回家看到迎接自己的父母，称得上相逢吗？</p>
-<p>每天早上从宿舍起来看到正在学习的舍友，称得上相逢吗？</p>
-<p>每天在去考勤的路上与某位教授擦肩而过，称得上相逢吗？</p>
-<p>我觉得不算。</p>
-<p>西方语言学中有一个叫做“语码”的概念。在一个有着相同文化传统的群体里，一个语言符号，可以引发人们共同（“普遍”）的联想。这时候，这个语言符号（语码），就像一个按钮，按下它，就会引起这个有着相同文化传统的群体里的人比较接近的联想。</p>
-<p>相逢就是这样一个语码。听到相逢这两个字，就好像看到明媚的春天里的狂奔，在春风中飞扬的花瓣擦过自己的脸庞，而恍然未觉的你只是看着眼前与你相见的人，她的眼睛是如此的明亮而深邃，就像是每个深夜入梦时头顶的星空。</p>
-<p>青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，剩下一道泡影。</p>
-<p>曾几何时，我也经历过这样的相逢：</p>
-<blockquote>
-<p>今年天气去年新，昨夜凭窗望月明。</p>
-<p>红笺急草封心意，字字句句重千金。</p>
-<p>春天树，夏天云，风景难寄此时情。</p>
-<p>乘我小舟轻渡浪，江流回转始逢君。</p>
-</blockquote>
-<p>那时的相逢这样的。你会紧张到无法入眠，看着窗外逐渐温暖却爽朗清新的天气，看着窗外的明月在干净的夜空下莹莹烁烁，在淡淡的层云间洒下薄薄的辉光。你沉思良久，有好多好多想说的话，又害怕自己说不出口，只好提笔，用信的格式写下那些无从抒发的心绪。你是如此郑重、真诚和热忱，每一句话都从最深的心底发出，你相信你永远也不会违背自己现在所说的一切。</p>
-<p>春夏之交，你望着那些绿树层云，它们都是相逢路上的注解，这些淡漠的风景怎能抒发那种迫切又梦幻的心情？在渡过浩渺的长江的时候，你想到苏轼曾经在这里写下“渺沧海之一粟”，但这样的宽广浩瀚在相逢的迫切下也显得如此微茫。在几个小时的奔波之后，你终于满头大汗的见到了你想见的人，阳光斜斜地穿过树荫，落在她微侧的脸庞上，你看着她清澈的眼睛，感到如此兴奋和幸福，就好像整个世界都被你收入眼里。</p>
-<p>哪怕你知道这次相见之后，就是……永别。</p>
-<p>但这一瞬间也已经足够。</p>
-<p>我们说相逢的欢喜是永恒的，而它又会以极快的速度逝去。永恒是什么？永恒刻画的是深度，从不是持续的时间。消失的喜悦留下的梦幻一般的回忆被各种各样的思绪填满，越是长久，越是深沉，最后酿成夹杂喜怒哀乐的一句感慨，藏着当年的小心翼翼和满心期盼，藏着未说出口的话，藏到你自己都忘却，藏到岁月的尘埃把它们掩埋。</p>
-<p>是啊，每个生命都在时间的洪流里疾行，本来也没有多少时间给我们留下来蹉跎和温存。</p>
-<p>相逢这种东西太易碎了，“江南无所有，聊赠一枝春”，又或者“正是江南好风景，落花时节又逢君”，都是不敢言说的相思和喜悦。大都好物不坚牢，彩云易散琉璃脆。相逢是如此的美妙，以致于我们不敢直言，怕一说出口它就变成了梦幻和泡影。</p>
-<p>刘慈欣在《球状闪电》的结尾也曾经写过一种“相逢”：</p>
-<blockquote>
-<p>我猛地睁开双眼，就在书桌上的紫水晶花瓶上，出现了一朵蓝色的玫瑰，但玫瑰在我看到它的瞬间就消失了，只剩空花瓶静静地立在那里。但那朵玫瑰的每一个细节都印在我的脑海中，它充满了生机，透出一种冰雪的灵气。</p>
-</blockquote>
-<blockquote>
-<p>我以后再也没有看到蓝色玫瑰，但知道它在那里就够了。有时夜深人静，我就将水晶花瓶移到窗前，然后背对着它站着，这时我往往能闻到缥缈的花香，就知道它肯定已经在那里了，心灵的眼睛能看清它的每一个细节。我用心来抚摸着它的每一个花瓣，看它在来自窗外的夜风中微微摇曳……它是一朵我只能用心来看的花。</p>
-</blockquote>
-<blockquote>
-<p>不过，我还是希望在此生再用自己的眼睛看到一次蓝色玫瑰，据丁仪说，从量子力学的角度来讲，人的死亡过程就是由一个强观察者变为弱观察者再变为非观察者的过程，当我变成弱观察者时，玫瑰的概率云向毁灭态的坍缩速度就会慢一些，我就有希望看到它。</p>
-</blockquote>
-<blockquote>
-<p>当我走到人生的尽头，当我在弥留之际最后一次睁开眼睛，那时我所有的知性和记忆都消失在过去的深渊中，又回到童年纯真的感觉和梦幻之中，那就是量子玫瑰向我微笑的时候。</p>
-</blockquote>
-<p>这就是相逢。蓝色的玫瑰引着我们从时间的长河里腾空，跨越一生的时光，回到那个你不曾回去的年岁。那是你从别后就一直在回忆的东西。我想，当玫瑰在我离去的那一刻开放的时候，再现的玫瑰正如同晏几道的相逢一样，那一瞬间，往昔的杨柳明月桃花清风都再一次浮现在眼前，栩栩如生一如当年；那一刻再短暂得像是春天的清晨树梢滑落的露水，却又被一帧帧拉长，慢放到足以回忆起一生的欢喜和忧伤。我想晏几道在人生的终点闭上双眼的时候，或许是含着期待去的。在离去的那一个，一生的岁月如走马灯一般略过眼前的时候，他终于可以再一次回味那时候的欢喜，回味那个彩袖飞舞的相逢。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/" data-id="clylj5tet001obc953zm8anr6" data-title="【行见录】相逢篇" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/人文课论文/元代之后陆上丝绸之路凋敝的必然性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/" class="article-date">
-  <time class="dt-published" datetime="2022-05-27T16:00:00.000Z" itemprop="datePublished">2022-05-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/">【中华文明通论 期末论文】元代之后陆上丝绸之路凋敝的必然性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><p>近年来，丝绸之路研究中，存在重汉唐、轻明清，重海路、轻陆路的倾向。对于丝绸之路的发展和繁盛，有相当多的论文从经济、政治、文化、宗教等各个角度对丝绸之路进行解构和分析。但在元朝之后，明清时代的陆上丝路，由于其衰败，反而少有人提及。本文系统整理元代及以后与陆上丝绸之路相关的军事、政治、经济、文化、科技和自然环境因素的综合变化，论证在元代以后、新中国成立之前，陆上丝绸之路走向凋敝的必然性。</p>
-<blockquote>
-<p>关键词：陆上丝路 凋敝 必然性 元代之后 综合作用</p>
-</blockquote>
-<hr>
-<p>古代陆上丝绸之路的兴衰历程可谓是一波三折：从汉武帝时期的初步形成，到南北朝时期受到中国内地战乱的冲击；从盛唐时期的繁华鼎盛，到宋时期的衰落，又到元代的“回光返照”，最终一蹶不振，为海上丝绸之路所最终取代。为什么在元朝之前，陆上丝绸之路尽管兴衰起伏，但总有复兴之机；而在元之后的五百年里，却彻底凋敝，“已为陈迹”？这是否是必然的？如果是，又有哪些必然的原因呢？本文便试图通过剖析丝绸之路兴盛的原因和元代之后诸多条件的变化，来论证元代以后陆上丝绸之路彻底凋敝的必然性。</p>
-<h1 id="一、背景：陆上丝绸之路的兴衰历程"><a href="#一、背景：陆上丝绸之路的兴衰历程" class="headerlink" title="一、背景：陆上丝绸之路的兴衰历程"></a>一、背景：陆上丝绸之路的兴衰历程</h1><p>古代陆上丝绸之路形成于汉武帝时期：一方面，张骞受汉武帝委托，出于军事目的，前往西域寻找大月氏，欲与之联手，夹击匈奴，但也间接促使汉朝与西域各国形成贸易关系；另一方面，汉武帝南征北战，收河套、逐匈奴于漠北，令细君公主和亲乌孙；正是在汉武帝军事、外交双重手段下，陆上丝绸之路得以初步形成。</p>
-<p>魏晋南北朝时期，中国内部战乱，对丝绸之路形成了一定冲击，但丝绸之路并没有断绝，商业和文化的贸易往来一直在进行着。<br>隋唐时期，中国归于一统，国力堪称鼎盛，对外的经济贸易、政治交流、文化交流都是通过丝绸之路完成的。这段时间可以说是丝绸之路发展历程中的最兴盛时期。</p>
-<p>但是好景不长。围绕安西四镇，大唐和吐蕃殊死争夺。安西四镇几度易手。为了让远离中央的军镇形成合力，唐政府给予节度使极大的权力——这也就为后面安史之乱埋下伏笔。玄宗时期，玄宗用人不当，节度使安禄山做大引发安史之乱，安西都护府大量精兵内援致丝路力量薄弱，最终安西四镇相继失陷。安史之乱后，唐代虽然也出现过明君，主导了三次中兴，但始终也没能把影响力重新覆盖到西域。反而深陷节度使废立泥沼不可自拔。</p>
-<p>宋因为河东节度使石敬瑭割让燕云十六州于契丹，宋朝立国初期面临北面巨大军事压力，一时无暇西顾，定难军节度使世袭至李元昊时终于称帝建立西夏。宋神宗一朝和西夏屡战屡败，永乐城一役更是三十万大军全军覆没。至此中原政权再无力西进。</p>
-<p>蒙古帝国时期，<em>“经过四位汗王半个多世纪的努力，蒙古帝国的版图已经横跨欧亚两大洲，这客观上促使古代欧亚诸民族、族群走出了孤立封闭的地域，逐步摆脱了复杂的陆上丝绸之路的通商关卡，开启了对外交流门户的通道”</em>。[ 孙秀君：《论蒙古帝国时期蒙古人对陆上丝绸之路的贡献》，《西部蒙古论坛》2016年第1期。]</p>
-<p>蒙古帝国作为游牧民族所形成的政权，其游牧性经济势必需求他们与外界进行物资的交换。而蒙古周围存在诸多少数民族政权，诸如金、辽、西夏等。当时仍然处于游牧经济阶段的蒙古，其经济形式仍然处于物物交换的形式，甚至存在“可能还不知道使用货币”[ 《蒙古族简史》编写组、《蒙古族简史》修订本编写组：《蒙古族简史》，民族出版社2009年版，第14页。]的情况。在此背景下，其贸易必然经历其他政权的经济剥削，致使蒙古人必须向西发展贸易。</p>
-<p>成吉思汗在位期间，多次西征南征，攻占乃蛮、征伐西夏，周边少数民族政权都为蒙古所政府或主动归附了蒙古，实现了领土上的大一统。</p>
-<p>在这种背景下，再加之，蒙古政权游牧民族的本质所带来的重商主义让蒙古政权的政策非常重视商业贸易。<em>成吉思汗曾经派遣了450名商人带上几乎等于蒙古帝国初期所有的财产和国书去花剌子模经商，可见其对商业和商人的重视以及对能与邻国长期友好通商往来的期盼。</em>[ 孙秀君：《论蒙古帝国时期蒙古人对陆上丝绸之路的贡献》，《西部蒙古论坛》2016年第1期。]</p>
-<p>不仅如此，蒙古政权还采取了一系列措施来保障丝绸之路的交通和贸易，如修路设驿、驻军遣官等。元朝统治期间，陆上丝绸之路再度繁荣起来。<br>元朝之后，陆上西部丝绸之路从未中断，但是它在明清以来东西文化交流中日渐边缘化。清代的陆上丝绸之路衰落起始，学界有所争议。有学人认为持续到18世纪，“历时两千五百多年、横亘欧亚大陆的丝绸之路是人类文明的运河，东西方文化交流的桥梁。在公元后，以中国、印度、罗马帝国、安息（波斯）和阿拉伯世界为枢纽，汇聚欧亚主要文明和沿途各民族文化的丝绸之路的功能和格局，一直延续到18世纪末，直到19世纪西方列强掀起瓜分世界的狂潮，丝绸之路平等文明的经济文化交流被打破为止”[ 吴四伍：《明清时期陆上西部丝绸之路再审视》，《历史档案》2019年第2期<br>]。但总体而言，元代以后，陆上丝绸之路失去其原有的经济地位，只剩下少量官府主导的、含有政治性的贸易，并且绝大多数作用由海上丝路贸易取而代之，是不争的事实。</p>
-<h1 id="二、陆上丝绸之路兴盛的必要条件"><a href="#二、陆上丝绸之路兴盛的必要条件" class="headerlink" title="二、陆上丝绸之路兴盛的必要条件"></a>二、陆上丝绸之路兴盛的必要条件</h1><p>观察陆上丝绸之路的兴衰历程，我们不难发现，陆上丝绸之路最为兴盛的三个时期：汉、唐、元，都具有某些相似的特征：军事上实力强大、政策上放开商业、文化宗教上外向包容……进一步归纳，我们可以从六个角度分析丝绸之路兴盛的必要条件：</p>
-<ul>
-<li>军事因素。陆上丝绸之路途经一连串不同的地域。以西汉时期长安为起点（东汉时为洛阳），经河西走廊到敦煌。从敦煌起分为南北两路：南路从敦煌经楼兰、于阗、莎车，穿越葱岭今帕米尔到大月氏、安息，往西到达条支、大秦；北路从敦煌到交河、龟兹、疏勒，穿越葱岭到大宛，往西经安息到达大秦。当地国家政权与民族地区的控制，势必影响丝绸之路的全线畅通。因此，丝绸之路的稳定需要<strong>一个军事实力强大的中原政府</strong>，至少需要能够实际控制河西走廊地区，并对周围的政权形成强而有力的威慑。</li>
-<li>政治因素。陆上丝绸之路的本质是商业贸易和宗教传播。作为丝绸之路的一极，<strong>中原政府是否对各种文化宗教充满包容、是否重视商业</strong>，直接决定了丝绸之路的兴盛与否。</li>
-<li>经济因素。陆上丝绸之路“贸易”的性质决定了西域诸国必须有各自的特色，才能在贸易中有攫取利益的能力。倘若西域国家都经济凋零，那“贸易”就会无所进行——<strong>西域的蓬勃发展无疑是陆上丝绸之路的重要支撑。</strong></li>
-<li>文化因素。汉、唐时期，中原丰富而多彩的文化对西域人民的冲击和震撼是难以言喻的。在中原文化的辐射下，中原政权与西域诸国的关系建立更为顺畅，与中国进行贸易的商人在路途中的隐性成本无疑被大大降低。因此，<strong>中原文化的强大向心力，是丝绸之路兴盛的重要条件。</strong></li>
-<li>科技因素。海上丝绸之路开辟于汉代，可那个时候人类的造船技术和航海技术的落后，使得海上丝绸之路并不兴盛。自唐代开始普及效率更高的磁针开始，加之中国的造船技术的持续发展，天文知识的不断积累，中国的航海技术越来越发达，跨洋航行越来越成熟。在技术成熟的条件下，航海贸易下的海上丝绸之路比陆地丝绸之路更有效率，也相对更安全。因此，<strong>陆上丝绸之路的兴盛是建立在海上丝绸之路难以维系的前提下的。</strong></li>
-<li>自然因素。丝绸之路经过的沙漠地区，其自然环境——如绿洲的密度、沙尘暴的频率等等，对商人的影响是巨大的。因此，<strong>丝绸之路的兴盛无疑需要良好的沿线自然环境。</strong></li>
-</ul>
-<p>以上可以看出，丝绸之路的兴衰是多种因素复合作用的结果，军事、政治、经济、文化、科技和自然因素缺一不可。不难推断，元代之后，陆上丝绸之路的彻底凋敝也与这些因素的不可逆变化有着密不可分的联系。</p>
-<h1 id="三、陆上丝绸之路的衰败"><a href="#三、陆上丝绸之路的衰败" class="headerlink" title="三、陆上丝绸之路的衰败"></a>三、陆上丝绸之路的衰败</h1><h2 id="1-军事-政治角度：元之后中原对西域的失控"><a href="#1-军事-政治角度：元之后中原对西域的失控" class="headerlink" title="1. 军事&amp;政治角度：元之后中原对西域的失控"></a>1. 军事&amp;政治角度：元之后中原对西域的失控</h2><p>通过比对汉（武帝）、唐（玄宗，前期）、宋、元、明五个时代的地图，我们可以很清楚地看到中原政府所能控制的实际领土的大小：</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222151749.png"></p>
-<p>图 1: 汉武帝时期中原政府领土</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222151844.png"></p>
-<p>图 2: 唐前期中原政府领土</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222151855.png"></p>
-<p>图 3: 北宋时期中原政府领土</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222151900.png"></p>
-<p>图 4: 元时期中原政府领土</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222152030.png"></p>
-<p>图 5: 明朝时期中原政府的领土</p>
-<p>纵观五朝地图，我们可以发现：丝绸之路贸易往来繁荣的三个朝代——汉、唐和元，中原政府的军事控制力均能够有效地蔓延到西域。或者说，古代丝绸之路这样的贸易线路的本质，是 <strong>“依附于某个中央强权的松散小邦合集”</strong> ——中原政府无疑扮演着这样一个“中央强权”的角色：其与周边国家之间，看似具有明确的臣属关系，但实际上完全是以利益为纽带的。如果出现某些变故，导致中央“强权”军事控制力的削弱，周围的小政权就会立刻反噬，为各自的利益进行一系列行动。</p>
-<p>而值得注意的是，明朝以后，中国再无向外扩张的行动。一方面，宋朝的理学鼓吹“华夷之防”，让儒生主导的中原政权整体策略转入以防守为主，失去了向外的动力——自然也不会去经略西域；另一方面，目前的历史经验已经可以说明，唐朝的节度使制度是古代生产条件下唯一能够在远离中原的边陲建立长效统治的制度，但宋朝以后，出于政权稳定性的考虑，中央对武将可能的拥兵自重加以高度提防，彻底断绝了节度使的产生。没有军政一体的节度使在边境进行组织，中原政权自然也失去了维持丝路稳定的能力。</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222152123.png"></p>
-<p>图 6: 十五世纪奥斯曼帝国的领土</p>
-<p>值得一提的是明朝初年，中亚地区，奥斯曼土耳其政权的崛起。奥斯曼帝国作为15到19世纪唯一能与欧洲国家抗衡的伊斯兰势力，坐落于东西文明的交汇处，掌握东西文明的陆上交通线达六个世纪之久，直至大英帝国在18世纪通过直布罗舵打通地中海航线为止。奥斯曼帝国天然掌握了丝绸之路沿线的大部分地域。奥斯曼帝国出于自身利益，隔绝陆上丝绸之路的贸易，进一步导致了陆上丝绸之路的衰落。</p>
-<p>两方面因素的综合作用下，元朝以后，中原政权的军事影响力彻底退出河西走廊等地带，对丝绸之路沿线失去了控制力，原本依赖于中原政权军事保障的陆上丝绸之路也随之逐渐衰落下去。</p>
-<p>当然，这并不意味着中国与欧洲经济、文化交流的结束。欧洲大航海时代的开启、中国海上丝路的开辟，都是在这种情况下作出的应对之策。这些应对之策所产生的新交流方式和贸易路线，最终逐渐取代了原本陆上丝路的地位。这部分内容将会在“科技因素：航海技术的发展与海上丝绸之路的兴起”中进行更加详细的分析和叙述。</p>
-<h2 id="2-经济角度－中原：明清社会经济倾向的改变"><a href="#2-经济角度－中原：明清社会经济倾向的改变" class="headerlink" title="2. 经济角度－中原：明清社会经济倾向的改变"></a>2. 经济角度－中原：明清社会经济倾向的改变</h2><p>元代之后的明清时期，政府采取重农抑商的经济政策，实行对商品经济的垄断。其中，除了对食盐和茶叶的垄断之外，明清时期对于民营手工业也实行了严格制裁，具体表现为：</p>
-<h3 id="2-1-实行严格的等级进贡制"><a href="#2-1-实行严格的等级进贡制" class="headerlink" title="2.1. 实行严格的等级进贡制"></a>2.1. 实行严格的等级进贡制</h3><p><em>“明清时期的统治者为了实行更好地统治，倡导节俭制度，尤其是明太祖朱元璋，颁布的《大明律》中，严禁官吏贪污。并且身体力行，带头倡导节俭。《大清律》同样有类似的内容。”</em>[ 《重农抑商政策与明清社会经济》，《史志研究》总第396期]但是，到了明清两代的中后期，统治阶级的生活仍然不可避免地奢侈起来。为了维护其作为统治阶级的利益，其需求不可能全部通过商品买卖的方式获得。</p>
-<p>为此，明清政府采用“任土作贡”的制度：所需物品由相应的产区直接供应，以便实现统治阶级的直接使用；各地按照相应的等级，对于各种需要的物品由民间直接进贡。——比如，隆庆六年，令 <em>“广东采珠八百两</em>”[ 张廷玉《明史》，北京：中华书局，1974]，由官府以极低的价格出钱购买，加之官员中饱私囊，一般平民和小商人不堪重负，“相率避匿”。</p>
-<h3 id="2-2-实行官营手工业以缓解供需矛盾"><a href="#2-2-实行官营手工业以缓解供需矛盾" class="headerlink" title="2.2. 实行官营手工业以缓解供需矛盾"></a>2.2. 实行官营手工业以缓解供需矛盾</h3><p>明清政府开办政府控制下的手工工场以解决供需矛盾。例如，工部在北京城内外设置了诸如崇文门外的神木厂等五大厂成为为官府服务的官窑以及官场，商业发展具有浓厚的官府控制色彩[ 肖溱《重农抑商政策与明清社会经济》，《史志研究》总第396期]。</p>
-<p>由此可以看出，相比于汉、唐时期相对发达的民营手工业来说，明清时期大量的官营手工业主要只是负责供给统治阶级的需求。</p>
-<p>历朝历代的工业结构都是以官工业为主的。但是，在中国商品经济较为繁荣的时代——例如唐代，即使官工业占据工业结构的统治地位，仍然不能阻止私营手工业的发展。<em>“唐代的手工业除官工业外，基本上都是商品生产”</em>[   傅筑夫《唐宋时代商品经济的发展与资本主义因素的萌芽》]。另一方面，唐代也有规模极大的私营工业。如 <em>“唐定州何明远，大富，主官中三驿，每于驿边起店停商，专以袭胡为业，资财巨万，家有绫机五百张”</em> [ 《太平广记》，卷二百四十三，何明远条]，他生产的商品，有很大一部分都流入市场进行交易——丝路上的很多手工业品都来源于此。</p>
-<p>而明清与之相比，对于商品经济的打压则更加彻底：政府实行严格的户籍管理制度，将农业经济作为社会发展的主产业；向农民征收沉重的赋税，让农民的生活水平低下，没有多余的资本去市场购买商品。在这种背景下，人们从事商业经济几乎都是无奈而为之——也导致从事商业经济的商人素质偏低，难以突破自身的眼界和经历限制。</p>
-<p>在这种背景下，丝路经济的重要支柱：中国对外的手工业品输出，被充分地遏制了。对于在元朝之后，已经逐渐衰落停摆的陆上丝路而言，这一事实更是雪上加霜。因此，陆上丝路在元代之后不可逆地衰落下去，从中原的社会经济结构的角度来分析，无疑是一种必然。</p>
-<h3 id="2-3-经济角度－西域：蒙古西征之后西北地区人口、经济的凋零"><a href="#2-3-经济角度－西域：蒙古西征之后西北地区人口、经济的凋零" class="headerlink" title="2.3. 经济角度－西域：蒙古西征之后西北地区人口、经济的凋零"></a>2.3. 经济角度－西域：蒙古西征之后西北地区人口、经济的凋零</h3><p>蒙古帝国历史上有三次较为大规模的西征。</p>
-<table>
-<thead>
-<tr>
-<th>蒙古历史上的三次西征</th>
-<th>时间&#x2F;公元</th>
-<th>执政者</th>
-<th>进攻目标</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第一次西征</td>
-<td>1219年</td>
-<td>成吉思汗</td>
-<td>花剌子模、中亚、伊朗、阿富汗</td>
-</tr>
-<tr>
-<td>第二次西征</td>
-<td>1235年至1241年</td>
-<td>窝阔台</td>
-<td>保加利亚、俄罗斯、波兰、匈牙利等</td>
-</tr>
-<tr>
-<td>第三次西征</td>
-<td>1251年至1259年</td>
-<td>蒙哥</td>
-<td>伊朗、阿拉伯、叙利亚</td>
-</tr>
-</tbody></table>
-<p>表 1: 蒙古帝国的三次西征</p>
-<p>由上表，我们可以感受到蒙古帝国扩张期间对欧洲的军事行动之频繁。</p>
-<p>虽然蒙古对于欧洲地区有多次军事行动，但是事实上，蒙古对于西欧的“土地”并不感兴趣——至少在当时是如此。蒙古攻打匈牙利的主要原因是政治性的：警告贝拉对库曼人提供保护甚至拒绝将库曼人交出来的行为。残酷的屠杀昭告了这样一个事实：抵抗必然遭到惩罚，不惜一切代价。</p>
-<p>正因为蒙古帝国的军事行动并不以统治，而以惩戒为目的——其给被征服地区带来的灾难也格外深重。大量的文献资料生动地描绘了1219年蒙古人进攻花剌子模时的凄惨场景：</p>
-<p>入侵者 <em>“来了，打了仗，放了火，杀了人，抢了东西，然后离开了”，一位历史学家这样写道。我宁愿没生在这世上，那样就不必亲历如此残酷的场景了，另一位作者说。穆斯林只求消灭他们的基督教敌人，但蒙古人不一样，他们“谁都不放过，他们杀女人、杀男人、杀孩子，甚至将孕妇开膛破肚，杀死还未出生的胚胎”。</em>[ 彼得·弗兰科潘《丝绸之路：一部全新的世界史》，第九章：地狱之路]</p>
-<p>概而言之，蒙古帝国西征所到之处的城市和地区都遭到严重的倒退和破坏，其人口、生产力和文化都经历了残酷的摧残和蹂躏。他们所采用的“焚城”和“屠城”的手段，对于途径国家都造成了毁灭性的打击。</p>
-<p>西北诸国深受其害，以西藏地区为例：西藏人口在 <em>“七世纪强盛时期，约有五百万至九百万”</em> [ 《西北人口》1982年第2期]，而在 <em>“十三世纪，蒙古人一统西藏地区时，藏族人口不可能超过三十万”</em> [ H·E·Richardson:《Tibet and its history》, ]。可见，蒙古帝国的征伐给西藏地区带来的毁灭性打击。</p>
-<table>
-<thead>
-<tr>
-<th>时期</th>
-<th>西藏地区人口</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>七世纪（唐朝，西藏为吐蕃统治）</td>
-<td>一千万人左右</td>
-</tr>
-<tr>
-<td>十三世纪（元朝统治期间）</td>
-<td>数十万人</td>
-</tr>
-<tr>
-<td>十七世纪（清代雍正时期）</td>
-<td>一百二十万人左右[ 见《西藏历史新篇章》 ]</td>
-</tr>
-</tbody></table>
-<p>表 2: 西藏地区在不同时期的人口变化</p>
-<p>正是这种摧残，让西域地区的各个国家在蒙古帝国的远征结束之后，仍然没有足够的自我恢复、繁衍和发展的能力。相比于中原而言，西域本来就脆弱的自然环境和薄弱的农业生产基础，让西域的人民遭遇了更大的苦难：人口的减少带来土地的荒芜，于是百姓更加流离失所，形成的大量流民在叛军组织下烧杀抢掠，如此往复、恶性循环。纵使忽必烈在西域采取屯田策略，仍然无法挽回长期战争所带来的破坏。</p>
-<p>元代之后，西北地区再无重新繁盛的能力。明朝中叶，东察合台汗国演变为叶尔羌汗国（1514－1678年），直到清朝初年才被由瓦剌演变而来的漠西蒙古所灭。清代，漠西蒙古成为新疆重要势力，准格尔部在康雍乾三朝与清军进行了长期的军事冲突，最终在乾隆朝彻底平定，中央王朝重新在新疆建立统治。乾隆朝间相继平定大小和卓叛乱，并迎回东归的漠西蒙古土尔扈特部，此后直至清末，一直对新疆进行着稳定的——但也仅仅是稳定的统治。但随着清朝势力的衰落与西方列强的兴起，最终丢失了巴尔喀什湖以东以南的50万平方公里领土，一度全疆陷落于中亚的浩罕王国。直到左宗棠率领湘军收复新疆，并于1884年设立新疆省。</p>
-<p>总而言之，蒙古西征之前，西北地区的人口总体在随时代的进步而缓慢发展。但在经历数十年战火的摧残之后，西北地区元气大伤，与中原地区的贸易也随之凋零衰败下来。蒙古帝国出于“惩罚”而非“统治”的征伐，直接导致在西征结束之后，丝绸之路在西北地区沿线诸国再无力如汉、唐时期那般积极主动地谋求参与陆上丝路的贸易，这也是元代以后，陆上丝绸之路彻底凋敝的重要原因。</p>
-<h2 id="4-文化角度－以河湟地区为例，元明时期西域伊斯兰教的传播发展"><a href="#4-文化角度－以河湟地区为例，元明时期西域伊斯兰教的传播发展" class="headerlink" title="4. 文化角度－以河湟地区为例，元明时期西域伊斯兰教的传播发展"></a>4. 文化角度－以河湟地区为例，元明时期西域伊斯兰教的传播发展</h2><p>河湟地区，指黄河上游、湟水流域、大通河流域，古称“三河间”，主要包括今天青海东部地区和甘肃西部与青海接壤地带。这一地区是陆上丝绸之路和唐蕃古道两条大动脉的交汇处。这里是伊斯兰教传播较早的地区。</p>
-<p>伊斯兰教很早就在河湟地区传播了。其传入的时间可以上溯到一千多年以前。河湟正值丝绸之路的要津，特别是唐宋以来，丝绸之路的河湟支线空前繁荣，有的来甘青经商的大食人和波斯人就在河湟一带安家落户，这些外来民族就是河湟地区最早的穆斯林和伊斯兰教的传播者。</p>
-<p>元代，河湟地区的穆斯林数量达到了前所未有的高峰。新入居河湟的穆斯林大大人数超过了以往各个时期，主要包含以下几类：[ 余超，《浅探元明时期河湟地区新民族的形成与伊斯兰教的传播发展》，《学海纵横》]</p>
-<table>
-<thead>
-<tr>
-<th>新入居的穆斯林</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>亚洲西部各族</td>
-<td>西突厥乌古思部的撒鲁尔人，中亚突厥中的撒尔塔人，“回回军”中的其他部落</td>
-</tr>
-<tr>
-<td>国内河湟地区以外迁居于此的穆斯林</td>
-<td>信仰伊斯兰教的流亡西夏人</td>
-</tr>
-<tr>
-<td>皈依伊斯兰教的国内其他民族</td>
-<td>元西宁王速来蛮及其所属部众</td>
-</tr>
-</tbody></table>
-<p> 总的来说，在“1.军事&amp;政治角度：元之后中原对西域的失控”中，我们论述过，古代丝绸之路这样的贸易线路的本质，是 <strong>“依附于某个中央强权的松散小邦合集”</strong> 。这种“强权”，不仅是军事上的，也是文化上的。</p>
-<p>在汉、唐时期，周边的小政权在派出使团参观过中原地区以后，都确确实实以中国为“天朝上国”，抱着憧憬和学习的心态对待中原地区与其所推崇的儒家文化。正是这种无形的文化崇拜，让中原政府在对周边区域进行行政控制变得更加简单：他们自带了一种“先进”的标签，这种标签，让当地民众对于中原地区的管理和统治方式天然地亲近和向往。这极大地减少了中原政府传播自身影响力的隐藏成本，对于陆上丝绸之路的维系和稳定具有极大的帮助。</p>
-<p>而随着伊斯兰教的传播，儒家文化在以河湟地区为代表的西域地区影响力逐渐减弱。这个时期，河湟地区有诸多新民族形成，诸如回族、保安族、撒拉族、东乡族等等，这直接与伊斯兰教的传播相关：<em>“一方面，河湟地区信仰伊斯兰教的新民族的形成得益于伊斯兰教的传播；另一方面，这些民族形成之后又进一步促进了伊斯兰教的传播。”</em>[ 余超，《浅探元明时期河湟地区新民族的形成与伊斯兰教的传播发展》，《学海纵横》]这些原本由元朝安置在丝路沿线的民族随着时代发展，形成了自己独有的文化，而不再以汉文化或佛教文化为主。这无形中是中原“中央强权”文化霸权的衰退。随着中原政府军事霸权的衰落，西域诸小邦在文化上也不再对中原抱有依赖性。</p>
-<p>文化霸权的衰退是隐形和持久的。在双方都没有意识到的时候，随着信仰的变迁和民族的迁徙，“泱泱华夏”的文化影响力在不断衰弱着。这是陆上丝路衰败不可忽视的重要推手。</p>
-<h2 id="5-科技角度－航海技术的发展与海上丝绸之路的兴起"><a href="#5-科技角度－航海技术的发展与海上丝绸之路的兴起" class="headerlink" title="5. 科技角度－航海技术的发展与海上丝绸之路的兴起"></a>5. 科技角度－航海技术的发展与海上丝绸之路的兴起</h2><p>尽管明代在明太祖朱元璋立国之初就规定“片板不许下海”，但并不意味着明代航海技术无所发展。相反，明代是我国造船技术取得重大突破的时代：明代造船技术取得重大突破，如船舶体积增大和配套设施齐全，郑和下西洋所用的船，在当时世界上是最先进的。同时，航海技术也日趋成熟，尤其是天文和地文航海技术的运用，将我国古代航海技术又向前推进了一大步。</p>
-<p>《两种海道针经》是由《顺风相送》和《指南正法》两本航海科技专著所组成的。此书反映了明代航海科技的明显进步，比如[   孙光圻《明清航海》，世界海运2011年第11期]：</p>
-<ol>
-<li>观测方法更为精细，如定潮水消长，除了时刻之外，配以水色、流向和海生物等等资料。</li>
-<li>出现了新的定位与导航技术，如定三方针法和定四方针法。</li>
-<li>航路指南更加具体。</li>
-</ol>
-<p>在这种背景下，即使明清时代均有较严格的海禁政策，海上丝绸之路依然发展了起来。</p>
-<p><em>“海上丝路”的南北航线在元明时期达到最大程度的交融。元明时期的中国，经济中心在南方而政治中心在北方，相对先进的航海技术使得南北方之间的海运成为保证南方粮食、丝绸、瓷器等北上的重要运输方式。在对外贸易上，明朝中期的郑和率船队七下西洋，开创了中国远洋航海的新时代。</em>[ 《“丝绸之路”是谁发明的》，人民网]</p>
-<p>在这一时期，明代海上丝绸之路的航线已经扩展到全球：向西航行，有郑和七下西洋；向东航行，也有“广州－拉丁美洲航线”。<em>这样，开始于汉代的海上丝绸之路，经唐、宋、元日趋发达，迄于明代，达到高峰。郑和远航的成功，标志着海上丝路发展到了极盛时期。</em>[ 《海上丝绸之路千年兴衰史》，人民网]</p>
-<p>在技术成熟的条件下，海上贸易是比陆上贸易更加有效率和安全的选择。陆上丝路的贸易，需要货源、市场需求、专门从业人员（商人）、便利的交通设施、保证贸易畅通的环境等一系列环境。而海上丝路，在有成熟的导航技术和大船的情况下，不光运力远高于依赖驼夫和骆驼的陆上运输，海运的速度也比陆运快上一筹：<br>古代马的时速大概在35km&#x2F;h左右，和明清时代的船只相当。考虑到丝路的路况艰难，并且骆驼的时速比马更低一些，加上旅人需要休息，可以计算出陆上丝路的实际时速在海上丝路的一半左右。</p>
-<p>考虑到海上丝路需要绕路，两者在时效上并没有很明显的差距，因此运输效率的差距就成了海上丝路优异的主要因素。明代时期，船只的排水量就已经达到了数万吨（郑和的旗舰“宝船”排水量足有2.5万吨）。这是海上丝路的最大优势。</p>
-<p>因此，在陆上丝路逐渐衰败的同时，这部分贸易需求被很好地转移到了海上丝路——换言之，海上丝绸之路是更优的替代选择。这是一个不可逆的过程。因此，在海上丝绸之路兴起的同时，陆上丝绸之路的衰落就成了无可逆转的过程。</p>
-<h2 id="6-自然角度－以罗布泊地区为例分析西部地区的自然气候变迁"><a href="#6-自然角度－以罗布泊地区为例分析西部地区的自然气候变迁" class="headerlink" title="6. 自然角度－以罗布泊地区为例分析西部地区的自然气候变迁"></a>6. 自然角度－以罗布泊地区为例分析西部地区的自然气候变迁</h2><h3 id="6-1-罗布泊地区的重要意义"><a href="#6-1-罗布泊地区的重要意义" class="headerlink" title="6.1. 罗布泊地区的重要意义"></a>6.1. 罗布泊地区的重要意义</h3><p>罗布泊地区对于古代丝绸之路的中外交通繁荣具有重要意义：</p>
-<p>首先从地理位置看，这里连接着河西走廊与地域的广大地区，自东向西分别形成以敦煌和楼兰为中转枢纽的丝绸之路交通网络。而就文化交往而言，罗布泊地区是中外文明传播交流的前沿阵地，荟萃着华夏文明、印度文明、伊朗文明和希腊文明等亚欧大陆诸多文明。</p>
-<p>汉唐时期所谓“汉唐盛世”，除了国家稳定、军事强大、文化昌盛等原因之外，积极展开对外交流也是呈现于传播中国盛世形象的主要推动力。因此，作为当时沟通中国与外部世界的主要通道之一，其盛衰变迁不仅体现了中原社会变革的兴衰起伏，也影响着古代陆上丝绸之路东西文明交往的沉浮历程。[ 唐尚书《汉唐间罗布泊地区的环境演变研究》]</p>
-<h3 id="6-2-罗布泊地区的自然气候变迁"><a href="#6-2-罗布泊地区的自然气候变迁" class="headerlink" title="6.2.罗布泊地区的自然气候变迁"></a>6.2.罗布泊地区的自然气候变迁</h3><p>两汉至西晋时罗布泊地区气候大体经历着逐渐由暖湿转向冷干类型变化的过程。从西汉时罗布泊沿岸植被“多葭苇、柽柳、胡桐、白草”之情况以及两汉时期楼兰等地兴盛的屯田活动也可以印证罗布泊地区水源较充足与当时气候暖湿背景有关。</p>
-<p>魏晋时期冷干气候使得罗布泊地区面临着水资源日趋减少与沙漠化日益扩大等生态失衡的情况，深刻影响着当地人们的生产生活。楼兰简牍文书内容曾反映出魏晋时期楼兰地区士兵日用口粮大幅减少，由两汉楼兰全盛时期口粮人均一斗二升的标准降低到了而西晋泰始年间人均日食五升、六升。楼兰尼雅240号文书记载：<em>“出黑粟三斛六斗禀战车成辅，一人日食一斗二升起二月一尽卅日，咸熙三年二月一日监。”文书中的曹魏咸熙三年（266）表明当时还保持着人均每天供应口粮一斗二升。然而此后的时期已经有了明显的减少。</em>[ 唐尚书《汉唐间罗布泊地区的环境演变研究》]</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222153008.png"><br>图 7: 魏晋以后罗布泊水系推测图</p>
-<p>南北朝时期气候长期干旱背景下，社会政权交替混乱以及绿洲生态脆弱地区 的水土开发等人类活动行为的耦合叠加进一步改变了区域景观形态，同时也加剧 了罗布泊地区自然环境变迁的进程。</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240222153034.png"></p>
-<p>图 8: 唐代寒暖气候事件累计曲线图</p>
-<p>隋唐时的自然气候处于竺可桢学说中的温暖期。学界又将该时期称之为隋唐温暖期或普兰店温暖期，其温暖程度“如与现代气候相比较，则当时年平均温度高1℃左右，气候带的纬度北移1°左右”。</p>
-<p>满志敏先生的结论认为唐代并不是一个稳定的温暖期，以8世纪中叶为界分为两个阶段：8世纪50年代以前是温暖期，而8世纪60年代以后气候变寒冷。[  满志敏《关于唐代气候冷暖问题的讨论》，《第四纪研宂》1998年第1期，第20-30页。]</p>
-<p>众所周知分布在罗布泊地区的河流水系主要依靠南北两边的高山冰川融水，其河水径流量受季节变化影响明显。湿润时期降水量增多，高山冰川的雪线降低，冰川面积增加，因此河流水源补给充足，有利于绿洲的稳固发展。反之在气候干旱时期区域而蒸发量大，高山雪线升高、冰川后退，致使河流水源补给不足，进而造成终端湖罗布泊面积衰减收缩，同时也造成绿洲土地涵养水分能力进一步减退甚至消失，加剧地区土地干旱化与沙漠化程度。可见对于干旱和半干旱地区而言，气候干湿情况的影响相比冷暖类型的影响更为重要与深刻。</p>
-<p>从《隋书》《旧唐书》等正史文献中的干旱、水涝等自然灾害的记录：</p>
-<table>
-<thead>
-<tr>
-<th>年份</th>
-<th>干旱次数</th>
-<th>洪涝次数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>581-600</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr>
-<td>601-620</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr>
-<td>621-640</td>
-<td>8</td>
-<td>3</td>
-</tr>
-<tr>
-<td>641-660</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>661-680</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>681-700</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>701-720</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>721-740</td>
-<td>4</td>
-<td>3</td>
-</tr>
-<tr>
-<td>741-760</td>
-<td>0</td>
-<td>3</td>
-</tr>
-<tr>
-<td>761-780</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr>
-<td>781-800</td>
-<td>2</td>
-<td>4</td>
-</tr>
-<tr>
-<td>801-820</td>
-<td>4</td>
-<td>4</td>
-</tr>
-<tr>
-<td>821-840</td>
-<td>3</td>
-<td>6</td>
-</tr>
-<tr>
-<td>841-860</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>861-880</td>
-<td>4</td>
-<td>1</td>
-</tr>
-<tr>
-<td>881-900</td>
-<td>2</td>
-<td>0</td>
-</tr>
-</tbody></table>
-<p>表格注释：</p>
-<ol>
-<li>施雅风《中国西北气候存暖干向暖湿转型的特征和趋势探讨》，《第四纪研究》，2003年第2期，第 161 页。</li>
-<li>张敏《自然环境变迁与十六闺政权割据局面的出现》，《史学门刊》2003年第5期，第24页。</li>
-<li>注：正史文献的灾害记录中有的可能只是反映的某个特定州县等显然不具有地域代表性。例如：麟德二年（665） <em>“六月，州大水，坏居人庐舍。”</em>；光化三年(900) <em>“冬，京师旱，至于四年春。”</em>因此在进行数据统计时只针对当时自然灾害地理范围相对比较大的年份视为有效数据。本研究所采用的以同时期自然灾害影响州县数馈超过十个为参考标准。</li>
-</ol>
-<p>表 2: 隋唐时期（581-900）自然灾害数量统计表（以二十年为尺度）</p>
-<p>吴敬禄等学者对新疆艾比湖地区近1500年来气候演变的研究结论中认为“公元500-660年，温度较高且较干。大约公元620年发生有一次明显的暖干气候事件：公元660-760年，温度较前期有所降低但气候干湿波动大：公元760-1050 年，温度降低湿度增加。尤其是公元900-1050年间时段体现了气候偏冷湿。”[  吴敬禄、刘建军、王苏民《近1500年来新观艾比湖同位素记录的气候环境演化特征》，《第四纪研宂》， 2004年第5期，第587页。]另外《中国历朝气候变化》中论述：“对天山东段巴里坤湖泊沉积物地化特征的 综合分析表明，隋唐时期当地气候以为界，表现出前湿后干的特征。”[  葛全胜等著《中国历朝气候变化》，第321页。]上述结论与计量分析结果所反映出的隋唐时期我国西部气候干湿变化情况基本一致。由此也推断出隋唐罗布泊地区的气候以大体以公元8世纪中期为界经历了由暖湿到冷干的转变。其中隋唐换代之际还带有魏晋寒冷期向中世纪暖期过渡阶段部分冷干气候的残余。以当时西北地区突厥内部发生的气候灾害为例，一个是隋朝初年突厥境内发生有干旱和蝗灾事件。《隋书·突厥传》记载：“去岁四时，竟无雨雪，川枯蝗暴，卉木烧尽，饥疫死亡，人畜相半。”[    [唐]魏征等撰《隋书》卷84《突厥》，第1867页。]表明当时气候的冷干性质。另外唐贞观三年（629）突厥境内出现“其国大雪，平地数尺，羊马皆死，人大饥”[  [后晋]刘岣等撰《旧唐书》卷194《突厥上》，第5158页。]以及“塞北霜旱，糇粮乏绝”[  [北宋]司马光编著《资治通鉴》卷193《唐纪九》，北京：中华书局，1976年，第6065页。]等寒冷十旱灾难严重的情况。</p>
-<p>唐代安史之乱后罗布泊地区便游离于中原治理体系之外，先后辗转依附于张氏归义军、仲云、沙州回鹘等政权。正如马端临《文献通考》中评论隋唐时期河西地区社会变迁时云：“盖河西之地，自唐中叶以后，一论异域，顿化为龙荒沙漠之区，无复昔之殷富繁华矣。唐自安史之乱，西北土地皆不能如旧。然北方如卢龙、沧景虽世为强藩所据，自擅其兵赋而奉正朔、请旌节，犹唐之臣也。风声气习文物礼乐犹承平之旧也。独西陲沦于吐蕃，遂有夷夏之分，致使数百年中华衣冠之地，复变为左衽，不能自拔。”[  [元]马端临撰《文献通考》卷322《舆地考八北京：中华书局，1986年，第2537页。]该评论从文化变迁的角度指出唐中期吐蕃占领之后的河西地区也包括罗布泊地区已经弃绝中原的“风声气习，文武礼乐”而成为“龙荒沙漠”之地，同时也可以推断出安史之乱后罗布泊地区生态环境此前一度改善良好的情况再度陷入停滞与倒退之中。</p>
-<p>这一系列气候变化直接提高了陆上丝绸之路上商人运输的成本。从唐之后，丝路的重心逐渐从陆地转移到海上，沿线自然环境逐渐恶化产生了很大的影响。</p>
-<h1 id="四、结论：陆上丝绸之路的衰落是综合因素导致的必然"><a href="#四、结论：陆上丝绸之路的衰落是综合因素导致的必然" class="headerlink" title="四、结论：陆上丝绸之路的衰落是综合因素导致的必然"></a>四、结论：陆上丝绸之路的衰落是综合因素导致的必然</h1><p>综合全文来看，从这几个角度，我们都能推出丝绸之路在元代之后行将凋敝的结论：</p>
-<ul>
-<li>从军事角度来说：元代之后中原政府基本失去了对河西走廊等西北地域的控制，难以支持对丝绸之路的维系；</li>
-<li>从经济角度来说：元代之后中原的经济政策趋向内向和保守，严格控制民间的对外贸易；陆上丝路沿线的各个小政权被蒙古帝国的屠杀摧残的元气大伤，大量经济产出用于自身的恢复而非对外交易上；</li>
-<li>从文化角度来说：中原儒家文化和佛文化在西域的影响力随着伊斯兰教的传播而逐渐消退，直接导致了中原文化影响力的减弱，加速了丝绸之路的凋敝；</li>
-<li>从科技角度来说：成熟的航海技术催熟了海上丝绸之路，逐渐取代了原本陆上丝路的地位，政府不再有维护陆上丝路的理由和动力；</li>
-<li>从自然角度来说：丝绸之路沿线同时经历了过度开发和自然气候变迁两个因素的作用，自然环境逐渐恶化，商队的成本大幅增加，遏制了陆上丝路的复兴。</li>
-</ul>
-<p>由此可见，古代陆上丝绸之路在元代之后的凋敝并非是单一因素造成的偶然，而是多重因素同时作用所造成的必然。原先繁荣昌盛的丝绸之路，在时光长河里逐渐沉寂、凋敝，无疑令人惋惜；但是，在它凋零衰落的同时，我们也应从中试图发掘出历史发展和变迁的规律，“以史为鉴、以明当世”，让现世我们的经济发展更加稳定、更加向好。这或许是我们研究历史的重大意义之一。</p>
-<p>〔作者贺云翔，上海科技大学信息学院本科生〕</p>
-<h1 id="文件下载链接："><a href="#文件下载链接：" class="headerlink" title="文件下载链接："></a>文件下载链接：</h1><ul>
-<li><a href="/files/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7.docx">Docx</a></li>
-<li><a href="/files/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7.pdf">PDF</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/" data-id="clylj5teu001xbc95h5mo60ma" data-title="【中华文明通论 期末论文】元代之后陆上丝绸之路凋敝的必然性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/高中作品小记/灯河" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/" class="article-date">
-  <time class="dt-published" datetime="2021-02-19T16:00:00.000Z" itemprop="datePublished">2021-02-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/">【高中作品小记】江城忆（二） 灯河</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>“这是沉没在灯河中的我们最后的幻想，企盼我们也有鱼跃龙门，水击三千里的那一天。”<br>——《灯河》</p>
-</blockquote>
-<p>如果你在晚上登上一座有窗的楼来俯瞰街道，你会看到川流不息的灯光，像很多很多坠落于地的银河。</p>
-<p>很巧合的是学校的有一扇大窗户正对着大街，于是每次晚自习我都不自觉欣赏城市的灯光或急或徐的流淌，透过丛丛树叶在稀薄的雾气中抛撒下斑驳的影。刚开始或许未注意到这美妙的变化，但不久后我便沉浸其中，于是每天晚上我都要抽出几分钟溜出教室，潜心欣赏一番灯火城市，欣赏它的春夏秋冬，欣赏它的热闹繁华、车来车往，也欣赏历史的船在时光长河上漂游时，缘舟而落的宝剑深深插入河底的泥土，最终成为各处老房子上凝固的时光，以及人们进出时不经意瞥见的历史侧影。</p>
-<p>作为城里的孩子，我很享受在灯河里漫游，在那“河底”的柏油路上散步。</p>
-<p>你一步步走在斑驳的影中，刺目与柔和的形色灯光在你眼前交替，呼啸而过的车声是流逝着时光的注脚。有行人匆忙安静走过，有三两成群的学生嬉笑着或高谈阔论；穿布衣的大妈们在炉中烧菜，光着膀子的老大爷们聚在马扎上下棋谈天。油腻的柏油路在灯光下五光十色，充满了俗气却又像是另一种形式的仙境，那是所有神明最终的归所，名叫人间。</p>
-<p>——是啊，灯河之底是大地，大地上的是人生百态，是世俗，是红尘。</p>
-<p>红尘万象无不让人留恋。我们渴望着衣锦还乡，渴望着光宗耀祖，所追求的一切不过都是属于红尘的认可。有人沉沦在眼前风尘间，于是他们成为市井，生活都是父母孩子柴米油盐车子房子，想在灯河之底筑一座巢，老婆孩子热炕头，从此了却余生；也有人想游向河面去一览河中全貌，在某个下班或出差的夜晚站在大楼顶上俯瞰着通明的城夜；更有甚者，决意冲出河面，去到那些灯光照不到的地方，那里是云层之上，是太阳和月亮管辖的地方。</p>
-<p>但即使是最最市井的人也梦到过爬上云霄，即使是井底之蛙也会用自己狭窄的眼界去幻想井外的天空。这也是为什么人到了某些时候会爆发出难以想象的力量，因为阳光照过来了——看到篝火的飞蛾怎能不拼命扑火？那时人们的心底焕发出最原始的向往，那时每个人都向上爬。</p>
-<p>因此我们不甘平凡，因此我们勇往直前，我们向往河流入海，那里是鱼的天空。</p>
-<p>突然想到很多精英都喜欢在高楼上买大房子，房子的落地窗直面城市最繁华的街区，在某个夜晚开着雕花吊灯，看一帘城市灯火在你眼前展开。那时候这河流并不只蜿蜒在空间上，更盘桓在时间里。太阳升起的时候灯光退潮而去，留下光裸的大地，打底衫的人们顶着刺目的阳光匆匆忙忙来来去去，虎牙人与人出没在河面的浮游动植物们，退潮的河水将他们留在浅滩上挣扎，相濡以沫或者相忘于江湖。但是任何一个城市都不会缺少我们这样的底层，正如生产者从阳光中攫取能量支撑起宏伟的生态金字塔。来来去去的我们朝九晚五，从事手头乏味或者有趣的工作，像是点燃一颗颗微小的星火，最终星火联结铸成熔炉，熔炉中烧制出一个个精美的工艺品，刻上中国之名展示于世界——这时每个平凡的我们又与伟大连接，不分彼此，这时共同的我们人生间突然又有了交界。</p>
-<p>但我又不太喜欢如那些精英一样离城市太远，年轻的灵魂会觉得这样未免缺乏几分世俗的热闹感。或许我更喜欢在某个五六楼的房间里对着窗户注视着人们的来来往往，哭笑嗔怒，就好像那些情感发生在我自己的身上。</p>
-<p>我是灯河中潜水的鱼儿，在形形色色中棋罢斧烂，想借着世俗的热闹和别人的人生延长自己的人生。</p>
-<p>很多人喜欢看电视剧而我喜欢看小说，喜欢看林雷和迪莉娅在乌山的吻别，看秦羽和姜立在神界的相拥；看林动寻找清竹，看萧炎燃烧异火；看蓝牧的坚持白歌的向往，看墨穷不负上善若水的黑帝之名，看黄极说“我是一个医生，你的文明病了而我要治好他”时的无限自信和肩负。这就像是小时候去看水族馆，你在那种长长的水底隧道里穿过，步行而过的你看见鱼儿游过你身边，你突然宛如鱼儿一样要在这封锁的水底度过一生。于是你惊惶又好奇，把自己当做鱼儿转身游去，游出水族馆游入我们的灯河。电视剧与小说就是我们的隧道，带你捕捉或幻想灯河中转瞬即逝的另一种生活，那种生活的目的是那样高远，即使过程痛苦万分你仍然激动不已，像回到儿时的水族馆里，蓦然发现自己与鱼儿们生出翅膀，化鹏振翅，奔向难以企及又触手可及天空与远方。</p>
-<p>是啊，电视剧与小说，这些文学艺术是在灯河中沉没的我们最后的幻想，企盼自己也有鱼跃龙门、水击三千里的那一天。</p>
-<p>所以我们要挣扎，使出浑身解数，只为一览灯河之外的风景，然后衣锦还乡在灯河中长眠而去，带着全新的梦沉睡而去，美梦永不醒来。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/" data-id="clylj5tes001gbc95anzth2g2" data-title="【高中作品小记】江城忆（二） 灯河" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
-          </li>
         
-          <li>
-            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
-          </li>
-        
-          <li>
-            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/imgs/IC_Cover.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="欢迎来到 Hypoxanthine 的 Blog！"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/07/20/PaperReading/Paper-3DGaussian/" target="_self">
+          【PaperReading】3D Gaussian Splattting
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/20/PaperReading/Paper-3DGaussian/" target="_self">
+        <div>
+          3D Gaussian Splatting for Real-Time Radiance Field Rendering Backgrounds Anisotropic（各向异性的） 3D Gaussians Splatting Method（抛雪球法） Tiling（数据分块）  Background 01: Anisotropic（各向异性的） 3D Gaussians$$G(\mathbf
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-20 00:00" pubdate>
+              2023-07-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Paper-Reading/" class="category-chain-item">Paper Reading</a>
   
-</nav>
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/06/21/PaperReading/Paper-NeuRex/" target="_self">
+          【PaperReading】NeuRex
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/21/PaperReading/Paper-NeuRex/" target="_self">
+        <div>
+          NeuRex: A Case for Neural Rendering Acceleration Seoul National University 首尔大学   Modern Neural Rendering目前神经渲染中的典型模型 NeRF: Neural Radiance Field NSDF: Neural Signed Distance Field GIA: Gigapixel Imag
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-21 00:00" pubdate>
+              2023-06-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Paper-Reading/" class="category-chain-item">Paper Reading</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" target="_self">
+          【CS182】Final Review
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/27/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/Cheatsheet/" target="_self">
+        <div>
+          CS182 Final ReviewOverview to Superviced LearninngStatistical Decision Theory  Squared error loss: $L(Y, f(X)) &#x3D; (Y-f(X))^2$ Expected Prediction Error (EPE): $EPE(f) &#x3D; E(Y-f(X))^2 &#x3D; \in
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-27 00:00" pubdate>
+              2023-05-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/" class="category-chain-item">CS182</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CourseReview/">#CourseReview</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" target="_self">
+          【PaperReading】RTNeRF &amp; Instant3D
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/05/PaperReading/Paper-RTNeRFAndInstant3D/" target="_self">
+        <div>
+          BeforeGatech 组的主要算法优化策略：  首先，选择当前的 SOTA 算法 对 SOTA 算法进行 Profiling，找到性能瓶颈 以增量式优化为主   RT-NeRFMotivation认为：目前 NeRF 效率低有两个主要原因：  The commonly used uniform point sampling method 朴素的采样方法）   The required dens
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-05 00:00" pubdate>
+              2023-05-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Paper-Reading/" class="category-chain-item">Paper Reading</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/">#Neural Rendering, Architiecture, Hardware-Software Co-Design</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/16/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/" target="_self">
+          【行见录】遗憾篇
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/16/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E9%81%97%E6%86%BE%E7%AF%87/" target="_self">
+        <div>
+          在盛夏的某个中午，人海浮沉，如泡沫的心思在阳光下消融，融入时间的尘埃里，没有人记得，也就没有人忘记。   遗憾是一种风吹不散，时间也无法侵蚀的东西。 再完满的爱意若没有维系也会随着时间自然淡化，再真挚的情义也难免被名利纠缠在俗世里，退化为现实的枷锁；那些深沉的恨意在复仇以后，随着敌人的消散也一同在漫天风沙里一点点弥散，教人迷茫无所措。 但遗憾不一样。那是经年岁月中，无可挽回的无可奈何，时空流逝下
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-16 00:00" pubdate>
+              2023-04-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%A3%E6%96%87/" class="category-chain-item">散文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" target="_self">
+          【唐宋文学精华 期末论文】婉约词中的风骨
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/10/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%A9%89%E7%BA%A6%E8%AF%8D%E4%B8%AD%E7%9A%84%E9%A3%8E%E9%AA%A8/" target="_self">
+        <div>
+          婉约词中的风骨引言起初的风骨只是一把中性的标尺。但随着时间的推移，我们逐渐把那种豪迈的、悲壮的诗歌当成了风骨的代表。或许是因为有那样多的好汉站在仁义之上，引吭高歌、奋笔疾书，写下充满凛然正气的篇章，让人仿佛以为，谈到有风骨的诗文，就一定要看到有风骨的诗人——于是原本作为中性标尺的风骨，就渐渐被绑缚在豪迈上，言风骨则必称悲壮豪放，似乎诗词之作者没有经历过万般磨难，诗词内容里没有登高一呼或是怆然涕下，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-10 00:00" pubdate>
+              2023-03-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/" class="category-chain-item">文学论文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2022/12/31/2021%E4%B8%8B%E5%8D%8A%E5%B9%B4-2022%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" target="_self">
+          2021下半年-2022年诗词创作
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/31/2021%E4%B8%8B%E5%8D%8A%E5%B9%B4-2022%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" target="_self">
+        <div>
+          诗词创作离家时至今日前事休，天南海北少年游。漫漫长路从此始，不到云霄不回头。 西江月来路云月渺渺，前路风雨茫茫。独自可以对天酌，可怜无人相望。 相逢不过萍水，寓所更在他乡。谁能相识更相知，便从此无惆怅。 水调歌头沉沉初颜色，雾涌楼第间。正是归来时候，慨叹有天寒。澎湃暴雨如幕，落叶飞花无数，何时见青天。只他忽转瞬，丽日露云前。 是青春。岁月稠，度流年。花开蝶往，相看舞蹁跹。云游相逢甚好，缘分古来玄奥
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-12-31 00:00" pubdate>
+              2022-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/" class="category-chain-item">诗与词</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/" target="_self">
+          【行见录】相逢篇
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/18/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E8%A1%8C%E8%A7%81%E5%BD%95/%E8%A1%8C%E8%A7%81%E5%BD%95-%E7%9B%B8%E9%80%A2%E7%AF%87/" target="_self">
+        <div>
+          “青春时节的相逢就是这样一个美好的事情，它足够热烈，是一瞬间绽放的烟火；又足够短暂，短暂到沉重的现实来不及侵入和玷污它就灰飞烟灭，消散在流逝的时光里，只剩下一抹浅浅的泡影。” ——行见录·相逢篇   从别后，忆相逢，几回魂梦与君同。今宵剩把银釭照，犹恐相逢是梦中。 ——晏几道《鹧鸪天》   什么是相逢？ 小的时候，每天回家看到迎接自己的父母，称得上相逢吗？ 每天早上从宿舍起来看到正在学习的舍友，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-12-18 00:00" pubdate>
+              2022-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%A3%E6%96%87/" class="category-chain-item">散文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/" target="_self">
+          【中华文明通论 期末论文】元代之后陆上丝绸之路凋敝的必然性
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/28/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%85%83%E4%BB%A3%E4%B9%8B%E5%90%8E%E9%99%86%E4%B8%8A%E4%B8%9D%E7%BB%B8%E4%B9%8B%E8%B7%AF%E5%87%8B%E6%95%9D%E7%9A%84%E5%BF%85%E7%84%B6%E6%80%A7/" target="_self">
+        <div>
+          Abstract近年来，丝绸之路研究中，存在重汉唐、轻明清，重海路、轻陆路的倾向。对于丝绸之路的发展和繁盛，有相当多的论文从经济、政治、文化、宗教等各个角度对丝绸之路进行解构和分析。但在元朝之后，明清时代的陆上丝路，由于其衰败，反而少有人提及。本文系统整理元代及以后与陆上丝绸之路相关的军事、政治、经济、文化、科技和自然环境因素的综合变化，论证在元代以后、新中国成立之前，陆上丝绸之路走向凋敝的必然性
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-05-28 00:00" pubdate>
+              2022-05-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/" class="category-chain-item">文学论文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/" target="_self">
+          <img src="/imgs/%E7%81%AF%E6%B2%B3.png" srcset="/img/loading.gif" lazyload alt="【高中作品小记】江城忆（二） 灯河">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/" target="_self">
+          【高中作品小记】江城忆（二） 灯河
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2021/02/20/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E9%AB%98%E4%B8%AD%E4%BD%9C%E5%93%81%E5%B0%8F%E8%AE%B0/%E7%81%AF%E6%B2%B3/" target="_self">
+        <div>
+          “这是沉没在灯河中的我们最后的幻想，企盼我们也有鱼跃龙门，水击三千里的那一天。”——《灯河》  如果你在晚上登上一座有窗的楼来俯瞰街道，你会看到川流不息的灯光，像很多很多坠落于地的银河。 很巧合的是学校的有一扇大窗户正对着大街，于是每次晚自习我都不自觉欣赏城市的灯光或急或徐的流淌，透过丛丛树叶在稀薄的雾气中抛撒下斑驳的影。刚开始或许未注意到这美妙的变化，但不久后我便沉浸其中，于是每天晚上我都要抽
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-20 00:00" pubdate>
+              2021-02-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%A3%E6%96%87/" class="category-chain-item">散文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>

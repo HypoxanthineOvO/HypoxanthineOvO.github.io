@@ -1,2714 +1,1003 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/imgs/Hypoxanthine.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yunxiang He">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hypoxanthine&#39;s Blog">
+<meta property="og:url" content="https://hypoxanthineovo.github.io/page/2/index.html">
+<meta property="og:site_name" content="Hypoxanthine&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Yunxiang He">
+<meta name="twitter:card" content="summary_large_image">
   
   
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
+  <title>Hypoxanthine&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hypoxanthineovo.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
   
-<link rel="stylesheet" href="/css/style.css">
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 30vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
         
-      </nav>
-      <nav id="sub-nav">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-常用技术笔记/C_And_CPP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/" class="article-date">
-  <time class="dt-published" datetime="2024-02-25T16:00:00.000Z" itemprop="datePublished">2024-02-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a>►<a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/">【环境配置】C 与 C++ 的编译环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。</p>
-<p>关于比较完整的，适合上课使用的 C&amp;C++ 环境配置，可以参考视频 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1id4y1n7Kw/?spm_id_from=333.337.search-card.all.click&vd_source=3bbc7395fdcea11b679cb15cd7812635">GKxx: C&#x2F;C++环境配置</a>。这里对其内容做一个梳理和总结，方便懒得看视频的同学。</p>
-<h1 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h1><ul>
-<li>编辑器：用于编辑代码文本的工具。<ul>
-<li>On Windows：记事本，VS Code……</li>
-<li>On Linux：Vim，Emacs……</li>
-</ul>
-</li>
-<li>编译器：用于<strong>将源代码转换为可执行文件（“计算机能看懂的代码”）</strong>的工具。<ul>
-<li>On Windows：MSVC</li>
-<li>On Linux：GCC, Clang</li>
-</ul>
-</li>
-<li>IDE（Integrated Development Environment）：集成开发环境，包含编辑器、编译器、调试器等工具。<ul>
-<li>On Windows：Visual Studio……</li>
-<li>On Linux：CLion, Eclipse……</li>
-</ul>
-</li>
-</ul>
-<h1 id="Compiler-On-Linux（以-Ubuntu-为例）"><a href="#Compiler-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Compiler On Linux（以 Ubuntu 为例）"></a>Compiler On Linux（以 Ubuntu 为例）</h1><p>Linux 上我们一般使用 gcc 编译器，它是 GNU Compiler Collection 的缩写，是一个由 GNU 开发的编程语言编译器。</p>
-<h2 id="默认版本的安装"><a href="#默认版本的安装" class="headerlink" title="默认版本的安装"></a>默认版本的安装</h2><p>以 Ubuntu 为例，我们通常直接使用系统自带的 <code>apt</code> 工具来安装软件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update <span class="comment"># 更新软件源。</span></span><br><span class="line"><span class="built_in">sudo</span> apt install build-essential <span class="comment"># Build-essential 是一个包，包含了编译器、链接器等工具。</span></span><br></pre></td></tr></table></figure>
-
-<p>然后我们可以查看安装是否成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
-
-<p>如果安装成功，会显示类似如下的信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0</span><br><span class="line">Copyright (C) 2021 Free Software Foundation, Inc.</span><br><span class="line">This is free software; see the <span class="built_in">source</span> <span class="keyword">for</span> copying conditions.  There is NO</span><br><span class="line">warranty; not even <span class="keyword">for</span> MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span><br></pre></td></tr></table></figure>
-<h2 id="gcc-11-的安装"><a href="#gcc-11-的安装" class="headerlink" title="gcc-11 的安装"></a>gcc-11 的安装</h2><p>我们可以通过添加软件源的方式来安装 gcc-11：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-add-repository ppa:ubuntu-toolchain-r/test</span><br><span class="line"><span class="built_in">sudo</span> apt install gcc-11 g++-11</span><br></pre></td></tr></table></figure>
-
-<h1 id="Compiler-On-Windows（MingW）"><a href="#Compiler-On-Windows（MingW）" class="headerlink" title="Compiler On Windows（MingW）"></a>Compiler On Windows（MingW）</h1><p>Windows 不能直接使用 gcc，但我们可以安装 MinGW（<strong>Min</strong>imalist <strong>G</strong>NU for <strong>W</strong>indows）来使用 gcc。</p>
-<p>事实上，由于 MinGW 已经很久没有更新了，所以我们一般使用 MinGW-w64，它是 MinGW 的一个分支，支持 64 位系统。</p>
-<h2 id="下载与解压"><a href="#下载与解压" class="headerlink" title="下载与解压"></a>下载与解压</h2><p>我们在 <a target="_blank" rel="noopener" href="https://winlibs.com/">Winlibs</a> 中进行下载：</p>
-<ul>
-<li>在 <strong>Download</strong> 下选择 <strong>UCRT runtime</strong> 中标有 <strong>(LATEST)</strong> 的那个 release 里的 Win64 Zip archive（建议选带有 LLVM&#x2F;Clang 的）</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/brechtsanders/winlibs_mingw/releases/download/12.2.0-15.0.7-10.0.0-ucrt-r4/winlibs-x86_64-posix-seh-gcc-12.2.0-llvm-15.0.7-mingw-w64ucrt-10.0.0-r4.zip">GCC 12.2.0 + Clang 15.0.7 + MinGW-w64 10.0.0 (UCRT) release 64, Win64 Zip</a></li>
-<li>解压后将 <code>mingw64</code> 这个文件夹放在 C 盘或 D 盘，<strong>路径最好简单一点，不要给自己找麻烦</strong>，例如 <code>C:\mingw64</code> 或者 <code>D:\mingw64</code>。</li>
-</ul>
-<h2 id="环境变量的配置"><a href="#环境变量的配置" class="headerlink" title="环境变量的配置"></a>环境变量的配置</h2><ul>
-<li><p>按 <code>Win</code> 键，输入 <code>env</code>（或者在 <code>此电脑</code> 上右键，选择 <code>属性</code>，然后选择 <code>高级系统设置</code>，再选择 <code>环境变量</code>），即可看到<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env.png"></p>
-<p>点击它，进入编辑界面</p>
-</li>
-<li><p>通过编辑 <code>Path</code>：</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env2.png"></p>
-</li>
-<li><p>新建一个环境变量，输入 <code>mingw64\bin</code> 的绝对路径（在文件管理器中复制路径，然后粘贴到这里），类似于：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/env3.png"></p>
-</li>
-</ul>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在命令行中输入 <code>gcc --version</code>，如果出现类似的信息：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcc.exe (MinGW<span class="literal">-W64</span> x86_64<span class="literal">-ucrt-posix-seh</span>，built by Brecht Sanders) <span class="number">12.2</span>.<span class="number">0</span></span><br><span class="line">Copyright (C) <span class="number">2022</span> Free Software Foundation， Inc.</span><br><span class="line">This is free software; see the source <span class="keyword">for</span> copying</span><br><span class="line">conditions.There is NO</span><br><span class="line">warranty; not even <span class="keyword">for</span> MERCHANTABILITY OP FITNESS <span class="keyword">FOR</span> A PARTICULAR PURPOSE</span><br></pre></td></tr></table></figure>
-
-<h1 id="Compiler-On-Windows（Visual-Studio）"><a href="#Compiler-On-Windows（Visual-Studio）" class="headerlink" title="Compiler On Windows（Visual Studio）"></a>Compiler On Windows（Visual Studio）</h1><p>个人不推荐使用 Visual Studio：</p>
-<ol>
-<li>VS 在只需要写一些小程序的初学阶段并不好用，会掩盖程序编译执行的一些非常基础的细节</li>
-<li>VS 的安装包非常大，而且安装过程非常繁琐</li>
-</ol>
-<p>如果你一定要使用 VS，这里贴个教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71110525">VS On Windows的安装</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/" data-id="clylj5tej0009bc95difdc7ot" data-title="【环境配置】C 与 C++ 的编译环境" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-常用技术笔记/SSH" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/" class="article-date">
-  <time class="dt-published" datetime="2024-02-25T16:00:00.000Z" itemprop="datePublished">2024-02-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/">【环境配置】SSH 远程连接</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Why-SSH？"><a href="#Why-SSH？" class="headerlink" title="Why SSH？"></a>Why SSH？</h1><p>刚开始学习编程的时候，我们都是在自己的电脑（对于大部分人来说，是一台小笔记本）上进行代码的编写、编译、运行等工作。这是非常自然的一种想法。但是，只在本机上运行会遇到这样一些问题：</p>
-<ol>
-<li>通常我们自己的笔记本是 Windows 系统，它在日常使用便利的同时，也带来很多问题。例如，没有原生 GCC 编译器，和 Bash 截然不同的 Terminal（终端）体验等。</li>
-<li>笔记本性能有限，无法满足一些大型项目的编译、运行需求。<ul>
-<li>例如，笔记本上编译大型项目需要很长时间</li>
-<li>例如，笔记本上的显卡通常显存小，无法满足深度学习的需求</li>
-<li>例如，笔记本上的内存有限，无法满足大型数据库的需求</li>
-<li>例如，笔记本上的 CPU 核心数有限，无法满足大型并行计算的需求</li>
-</ul>
-</li>
-</ol>
-<p>总之，在这时候，我们需要考虑使用远程连接服务器的方式来满足我们的需求。SSH（Secure Shell）是一种非常常用的远程连接协议，它可以让我们在本地电脑上通过命令行的方式连接到远程服务器，进行文件传输、命令执行等操作。</p>
-<h1 id="SSH-的基本使用"><a href="#SSH-的基本使用" class="headerlink" title="SSH 的基本使用"></a>SSH 的基本使用</h1><h2 id="Windows-系统的-SSH-使用"><a href="#Windows-系统的-SSH-使用" class="headerlink" title="Windows 系统的 SSH 使用"></a>Windows 系统的 SSH 使用</h2><h3 id="SSH-服务的开启"><a href="#SSH-服务的开启" class="headerlink" title="SSH 服务的开启"></a>SSH 服务的开启</h3><p>Windows 10 之后的系统自带了 OpenSSH 服务。我们可以通过 <code>Win</code> + <code>R</code>，输入 <code>powershell</code> 进入命令行，然后键入 <code>ssh</code>。如果出现：</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240224154203.png"></p>
-<p>则说明 SSH 服务已经开启。</p>
-<h3 id="SSH-的使用"><a href="#SSH-的使用" class="headerlink" title="SSH 的使用"></a>SSH 的使用</h3><p>可以直接在上述命令行 Powershell 中通过：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh &#123;USER_NAME&#125;<span class="selector-tag">@</span>&#123;IP_ADDRESS&#125;</span><br></pre></td></tr></table></figure>
-
-<p>来连接到远程服务器。</p>
-<h2 id="Mobaxterm"><a href="#Mobaxterm" class="headerlink" title="Mobaxterm"></a>Mobaxterm</h2><p>如果你不喜欢使用命令行，可以使用 Mobaxterm。它是一个功能强大的终端模拟器，支持 SSH、SFTP、X11、RDP、VNC、FTP、Mosh 等多种协议。</p>
-<p>我们可以通过<a target="_blank" rel="noopener" href="https://mobaxterm.mobatek.net/">Mobaxterm</a>下载官方版本，然后进行安装。</p>
-<p>Mobaxterm 使用起来非常方便：</p>
-<ol>
-<li>点击 Session<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240224154611.png"></li>
-<li>点击 SSH<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240224154618.png"></li>
-<li>输入 IP 地址、用户名、密码<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240224154809.png"></li>
-<li>点击 OK</li>
-<li>输入服务器密码，可以点击 YES 保存密码。</li>
-<li>连接成功</li>
-</ol>
-<h2 id="Linux-系统的-SSH-使用"><a href="#Linux-系统的-SSH-使用" class="headerlink" title="Linux 系统的 SSH 使用"></a>Linux 系统的 SSH 使用</h2><p>都使用 Linux 了，相信你已经可以自己配置 SSH 了。加油！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/" data-id="clylj5ten000lbc953n51gqzv" data-title="【环境配置】SSH 远程连接" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-常用技术笔记/CUDA" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" class="article-date">
-  <time class="dt-published" datetime="2024-02-25T16:00:00.000Z" itemprop="datePublished">2024-02-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a>►<a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/">【环境配置】CUDA环境配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h1><h2 id="什么是-CUDA？"><a href="#什么是-CUDA？" class="headerlink" title="什么是 CUDA？"></a>什么是 CUDA？</h2><p>CUDA 的全称是<strong>统一计算设备架构</strong>（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。</p>
-<p>在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。</p>
-<h2 id="CUDA-Driver-和-CUDA-Runtime"><a href="#CUDA-Driver-和-CUDA-Runtime" class="headerlink" title="CUDA Driver 和 CUDA Runtime"></a>CUDA Driver 和 CUDA Runtime</h2><h3 id="CUDA-Driver"><a href="#CUDA-Driver" class="headerlink" title="CUDA Driver"></a>CUDA Driver</h3><p>CUDA Driver 是 CUDA 的<strong>驱动</strong>，有点类似 GPU 的“操作系统”，一个硬件设备上只会有一个版本。</p>
-<p>我们可以通过 <code>nvidia-smi</code> 命令查看当前系统中的 CUDA Driver 版本。</p>
-<h3 id="CUDA-Runtime"><a href="#CUDA-Runtime" class="headerlink" title="CUDA Runtime"></a>CUDA Runtime</h3><p>CUDA Runtime 是 CUDA 的<strong>运行时库</strong>，是一个软件库，用于在程序中调用 GPU 的计算资源。一个系统中可以有很多个 CUDA Runtime，不同的程序可能会使用不同的 CUDA Runtime。</p>
-<p>我们可以通过 <code>nvcc --version</code> 命令查看当前系统中的 CUDA Runtime 版本。通常，CUDA Runtime 的路径是 <code>/usr/local/cuda-xxx</code>。</p>
-<h1 id="CUDA-On-Linux（以-Ubuntu-为例）"><a href="#CUDA-On-Linux（以-Ubuntu-为例）" class="headerlink" title="CUDA On Linux（以 Ubuntu 为例）"></a>CUDA On Linux（以 Ubuntu 为例）</h1><p>首先，进入 NVIDIA 的官网，进入对应的下载页面：<br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/20240226122713.png"></p>
-<p>你需要依次选择这些项目，以便获得合适的安装包。</p>
-<p>通常，最后一项推荐选择 <code>runfile</code>，这是一个自解压文件，你可以通过命令行来安装。</p>
-<h1 id="CUDA-On-Windows"><a href="#CUDA-On-Windows" class="headerlink" title="CUDA On Windows"></a>CUDA On Windows</h1><p>Windows 下的 CUDA 安装相对来说更加简单，只需要下载对应的安装包，然后一路下一步即可。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" data-id="clylj5ten000pbc958z7b8nrg" data-title="【环境配置】CUDA环境配置" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-常用技术笔记/Python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" class="article-date">
-  <time class="dt-published" datetime="2024-02-25T16:00:00.000Z" itemprop="datePublished">2024-02-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a>►<a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">【环境配置】Python 环境与 Conda</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Python-On-Windows"><a href="#Python-On-Windows" class="headerlink" title="Python On Windows"></a>Python On Windows</h1><h2 id="原生-Python-安装"><a href="#原生-Python-安装" class="headerlink" title="原生 Python 安装"></a>原生 Python 安装</h2><p>Windows 的 Python 安装可以直接使用微软应用商店：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://apps.microsoft.com/detail/9nj46sx7x90p?activetab=pivot:overviewtab&rtc=1&hl=zh-cn&gl=CN">Python 的安装</a></li>
-<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/python/beginners">Python 的使用</a></li>
-</ul>
-<p>如果无法访问微软应用商店，你可能需要使用一些科学上网的工具。</p>
-<h2 id="Conda-的安装"><a href="#Conda-的安装" class="headerlink" title="Conda 的安装"></a>Conda 的安装</h2><p>在 <a target="_blank" rel="noopener" href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe">官网</a> 下载对应的安装包，然后执行安装包即可。</p>
-<h1 id="Python-On-Linux（以-Ubuntu-为例）"><a href="#Python-On-Linux（以-Ubuntu-为例）" class="headerlink" title="Python On Linux（以 Ubuntu 为例）"></a>Python On Linux（以 Ubuntu 为例）</h1><h2 id="原生-Python-安装-1"><a href="#原生-Python-安装-1" class="headerlink" title="原生 Python 安装"></a>原生 Python 安装</h2><p>Ubuntu 22.04 应该已经安装了 Python 3，可以通过以下命令查看版本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 --version</span><br></pre></td></tr></table></figure>
-<p>即可看到。</p>
-<p>值得注意的是，直接输入 <code>python</code> 可能会找不到 Python 3，这是因为没有设置软链接的原因，这时候你需要输入 <code>python3</code>。</p>
-<p>当然，我们经常会使用到虚拟环境，这时候使用 Conda 会更合适。</p>
-<h2 id="Conda-的安装-1"><a href="#Conda-的安装-1" class="headerlink" title="Conda 的安装"></a>Conda 的安装</h2><p>我们不推荐使用 Anaconda，而是推荐使用 Miniconda，因为 Miniconda 更加轻量级，而且可以自定义安装。</p>
-<p>在 <a target="_blank" rel="noopener" href="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh">官网</a> 下载对应的安装包，然后执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-<p>然后一路回车，只有两点可能需要注意：</p>
-<ol>
-<li>选择安装路径。默认安装在 <code>~/miniconda3</code>，你可以选择其他路径。</li>
-<li>是否将 Conda 加入 PATH。如果你选择了不加入，那么你需要手动将 Conda 加入 PATH。建议选择加入。</li>
-</ol>
-<p>安装完成后，你需要重启终端，或者使用 <code>source ~/.bashrc</code> ，然后执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda --version</span><br></pre></td></tr></table></figure>
-<p>如果看到版本号，那么说明安装成功。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" data-id="clylj5teo000wbc95cabf5dyg" data-title="【环境配置】Python 环境与 Conda" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/人文课论文/宋词中的感性和理性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" class="article-date">
-  <time class="dt-published" datetime="2024-01-14T16:00:00.000Z" itemprop="datePublished">2024-01-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/">【宋词导读 读书报告】宋词中的感性和理性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="宋词中的感性与理性"><a href="#宋词中的感性与理性" class="headerlink" title="宋词中的感性与理性"></a>宋词中的感性与理性</h1><p>在中国韵文的文学体式中，有一个传统：“文以载道”。这个传统也蔓延到诗上：我们说“温柔敦厚乃诗之教也”，诗天生就被赋予了一种教化的力量。或许正是因此，随着时代的发展和变迁，诗变得越来越理性，越来越深刻，也越来越沉重。相比而言，词的组成里，就有了更多感性的成分。这样一种“要眇宜修”的文学体裁里，“感性”和“理性”是如何相互作用，如何碰撞出美妙的语言的？</p>
-<p>在讨论任何概念的关系之前，我们都应该首先明确我们说的是什么——也就是概念的定义。</p>
-<p>何谓感性？感性是对事物的敏锐体现，是一种“真情锐感”。具体到词的写作中，感性就体现在文字的安排上。感性的词作者，其词句的安排源于直觉，源于对周围事物的体会。而理性则与之不同：在写作中的理性，表现为一种反思，一种节制，乃至于在安排词句的时候，其核心脉络就变感受为“思力”，是根据自己的思索来写作的。</p>
-<p>叶嘉莹先生的《唐宋词十七讲》中，曾经在讨论李后主和晏殊两位词人时着重提及了“感性词人”和“理性词人”的概念。她认为，李后主是一位“完全以感性为主的作者，连他掌握文字的能力，都不是理性的选择，是他自己感性的感受”。而谈论晏殊的时候，她说晏殊这样的理性词人是“对自己的感情有一种节制，有一种掌握”的，而这种词人的词，就能表现出思想性和理性。</p>
-<p>但南宋词从写作技巧而言，其实是更加体现“理性”的。自周邦彦开始，长调慢词的写作逐渐盛行起来。写作长调、慢词的时候，如周邦彦这样的词人，事实上是“以赋笔为词”。赋笔，是铺张之笔，需要思索，也需要安排。原本我们谈论的理性词人，是在感情抒发时的节制，是对自身感受、经历的反省。而这里我们谈论的理性，是将理性深入到了写作技巧的层次，连文字的安排也由理性来决定了。这样的理性，体现在艺术技巧上，既包括曲调的创作，也包括词句的斟酌。</p>
-<p>情感抒发的感性、情感抒发的理性；创作过程的直接感发和理性安排，这些不同的特质体现在不同的词人上，就形成了各自独特的艺术风格。接下来，我们试着通过不同词人书写“春天”的不同笔法，来体悟和探寻其中的区别和联系。</p>
-<h1 id="李煜：纯粹感性的词人"><a href="#李煜：纯粹感性的词人" class="headerlink" title="李煜：纯粹感性的词人"></a>李煜：纯粹感性的词人</h1><p>王国维在《人间词话》曾评价李煜：尼采谓一切文学余爱以血书者。后主之词，真所谓以血书者也。</p>
-<blockquote>
-<p>帘外雨潺潺，春意阑珊。罗衾不耐五更寒。梦里不知身是客，一晌贪欢。</p>
-<p>独自莫凭栏，无限江山，别时容易见时难。流水落花春去也，天上人间。</p>
-</blockquote>
-<p>“帘外雨潺潺，春意阑珊。”这里的潺潺是形容雨声，而且是不太大的小雨的声音。什么时候人能很清晰的听到雨声呢？是安静的时候，乃至于寂静的时候。开头五个字，就勾勒出一个帘内床上人枯坐，帘外小雨连绵的景象。随后“春意阑珊”，一句已经体现出来作者的感受：阑珊的不只是春意，还有自己的意兴。下一句仍是感受：“罗衾不耐五更寒”，真的只有罗衾不耐寒吗？看似写的是身体，实则又让人感受到心灰意冷的境味。那心灰意冷是为了什么呢？“梦里不知身是客，一晌贪欢”，是美梦里又忆及曾经，又仿佛忘却了眼前的惆怅。</p>
-<p>接下来整个下阕都是感叹。“独自莫凭栏，无限江山，别时容易见时难”，仿佛能听到作者心中碎裂的声音。辽阔的江山里，自身便被衬托的格外渺小，想追寻的故人更是无从说起。这一切的悲哀，春雨、春寒、春意阑珊，最终都融于一句更深层的慨叹：“落花流水春去也，天上人间！”</p>
-<p>李煜写的春愁是如此的明确和清晰，在他的笔下，仿佛要把自己的心脏挖出来，融入天下所有的事物里，让所有事物都沾染上他的感受。他能从一帘小雨中体会到“天上人间”的人生无常，这正是感性的敏锐之处。这种纯粹感性派的词，便显得有力度，力透纸背，真所谓“以血书者”。</p>
-<h1 id="晏殊：用理性的反省，让感性的体悟拥有深度"><a href="#晏殊：用理性的反省，让感性的体悟拥有深度" class="headerlink" title="晏殊：用理性的反省，让感性的体悟拥有深度"></a>晏殊：用理性的反省，让感性的体悟拥有深度</h1><blockquote>
-<p>一向年光有限身，等闲别离最销魂。酒筵歌席莫辞频。</p>
-<p>满目山河空念远，落花风雨更伤春，不如怜取眼前人。</p>
-</blockquote>
-<p>这首《浣溪沙》并非是晏殊最为有名或最为出色的作品。但这首伤春之词，却能很好的体现晏殊的节制和反省。“满目山河空念远，落花风雨更伤春”，这句话所描摹的意境，和“独自莫凭栏，无限江山”“落花流水春去也”是何其相似！同样是登高凭栏，面对着辽阔的江山和郁郁绵绵的春雨，如果是某位花间词人，可能会补一句诸如“滴漏声中夜已深”；如果是李煜，想必会有更加惊人的泣血之句。但晏殊不一样，他对自己的伤情是有节制的，他说：“不如怜取眼前人”，他要通过眼前的欢好，来冲和春天的伤情。这就是他理性的体现，同样是抒发自己的感受，他的“感受”本身就是节制的，是有哲理有思索的。“无可奈何花落去，似曾相识燕归来”，这种淡淡的感情，仿佛早晨的轻烟飘荡在湖泊上，读来给人以悠长的回味。</p>
-<h1 id="苏轼、辛弃疾：激昂感情和理性思索的结合"><a href="#苏轼、辛弃疾：激昂感情和理性思索的结合" class="headerlink" title="苏轼、辛弃疾：激昂感情和理性思索的结合"></a>苏轼、辛弃疾：激昂感情和理性思索的结合</h1><blockquote>
-<p>花褪残红青杏小，燕子飞时，绿水人家绕。枝上柳绵吹又少。天涯何处无芳草。</p>
-<p>墙里秋千墙外道，墙外行人，墙里佳人笑。笑渐不闻声渐悄。多情却被无情恼。</p>
-</blockquote>
-<blockquote>
-<p>更能消、几番风雨，匆匆春又归去。惜春长怕花开早，何况落红无数。春且住，见说道、天涯芳草无归路。怨春不语。算只有殷勤，画檐蛛网，尽日惹飞絮。</p>
-<p>长门事，准拟佳期又误。蛾眉曾有人妒。千金纵买相如赋，脉脉此情谁诉？君莫舞，君不见、玉环飞燕皆尘土！闲愁最苦！休去倚危栏，斜阳正在，烟柳断肠处。</p>
-</blockquote>
-<p>苏轼和辛弃疾是宋词创作的两座高峰。作为所谓“豪放派”的两位代表性词人，他们的词同样具备极其深刻的感染力，并且体现了理性和感性的深度结合。</p>
-<p>苏轼的理性体现在他的旷达上。同样是伤春，苏轼的“画风”和晏殊那种淡淡的思索和哀愁又有所不同。他说：“枝上柳绵吹又少，天涯何处无芳草”，前面“花褪残红青杏小”的一点哀愁就消散于无形了。下阕更是以奇妙的视角来写春愁：“笑声不闻声渐消，多情却被无情恼”，明明是一点淡淡的愁绪，却平添了几分趣味。苏轼的理性是一种智慧，一种通透，他要用他这样的智慧去对抗人生的无常，命运的波折。</p>
-<p>辛弃疾的理性则体现在，他的词句中传达出来的那种坚定而激烈的意志。这种意志并非是一时兴起的冲动，那种冲动是轻浮的；而是经过沉重的思索之后，仍然不后悔、不迟疑的一往无前的坚定。他这样的人，前路注定是孤独的，他的感性就在体会这种孤独：“几番风雨”“怨春不语”，这是他的惆怅和悲伤。但在这种悲伤和孤独里，他却没有迟疑过，仍然在激烈的坚定的寻找着出路。“君莫舞！君不见，玉环飞燕皆尘土！”这在辛弃疾以前的人的词作中绝对是少有的激言烈语。同样是抒发被排挤贬谪边缘化的慨叹，晏殊不过说“若有知音见采，不辞唱遍阳春”，两者在气势和决心上就已经分出了明显的区别。</p>
-<p>这是苏轼和辛弃疾，在词之境界的扩大上，做出了最伟大贡献的两位词人。他们在敏锐的体悟之下，用理性的思索将感受变得深刻，是理性和感性的结合。他们用理性来应对感性，排遣也好，对抗也罢，这种内生的，对抗性的力量体现在他们的词里，让他们的词格外有深度和力量。可以说，这是理性和感性共同结合的最好表现形式之一。</p>
-<h1 id="周邦彦：音乐匠人之词"><a href="#周邦彦：音乐匠人之词" class="headerlink" title="周邦彦：音乐匠人之词"></a>周邦彦：音乐匠人之词</h1><blockquote>
-<p>柳阴直，烟里丝丝弄碧。隋堤上、曾见几番，拂水飘绵送行色。登临望故国，谁识京华倦客？长亭路，年去岁来，应折柔条过千尺。</p>
-<p>闲寻旧踪迹，又酒趁哀弦，灯照离席。梨花榆火催寒食。愁一箭风快，半篙波暖，回头迢递便数驿，望人在天北。</p>
-<p>凄恻，恨堆积！渐别浦萦回，津堠岑寂，斜阳冉冉春无极。念月榭携手，露桥闻笛。沉思前事，似梦里，泪暗滴。</p>
-</blockquote>
-<p>周邦彦的词，用王国维的话说，总有一点“隔”的感觉。事实上，虽然周邦彦也写一些小令词，但他艺术成就的高峰，却集中在这种所谓“隔”的长调中。<br>这首词的第一段几乎都是铺垫。“柳阴直，烟里丝丝弄碧。隋堤上、曾见几番，拂水飘绵送行色。”先刻画堤上景象，为下句“登临望故国”起兴。然后写到“长亭路”的时候，这句“应折柔条过千尺”写如一句总结，仿佛要将年年岁岁的折柳为别做一个总结，这是一个审视的、评论的角度。<br>而后写到“闲寻旧踪迹”的时候，词人又交代了很多场景和情感，给人以场景变换、目不暇接的感觉。但概括而言。此段不过写“催别离”之悲和“愁回望”之叹。直到第三段，作者的情感才明白的展现出来：“凄恻，恨堆积”。而后几句去用景色书写自己的情怀，别浦萦回，津堠岑寂，斜阳冉冉。最后“沉思前事，似梦里，泪暗滴”，颇有几分“收”的感受，用这样一个安静的，沉静的环境来收束前文里拗折的感情。<br>这样基于理性安排的词作同样是美的，但它的美需要理解和赏析才能被人所体会到。从正统的“词”文学来说，这样的匠人之词无疑是一种正道，对后来南宋格律词派的发展和相当一部分清代词人的写作产生了重大影响。可惜，从个人体会而言，这种理性多少是余了几分匠气，少了点真切和灵气。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>所以我们为什么要读词？因为我们也需要应对自己的感性。高中的时候我在考试中写过一篇作文，大谈“苦难给我们带来了什么”，被语文老师一顿乱批：伟大的从来都不是什么苦难，而是人在面对苦难的时候所展现出来的品质。其实在这里也是一样：感性从来未必是正确的，它是一种体悟、一种感发，我们也需要用我们的理性去排遣、对抗或者调度它。这种内生的，感性和理性的矛盾，存在于每个人心里。在词或清丽或拗折的语句里，我们一遍又一遍的体悟昔人曾经抒发的情感，不自觉的去思考，他们是以什么态度来面对这样一份情感的。是用血书般的文字吟诵，还是用圆融的观照去排遣？是直呼“杀贼数声”，还是慨叹“江海寄余生”？又或者，在谱曲填词后的某个深夜里，“沉思前事，似梦里，泪暗滴”？至少在某个孤独的瞬间，我们还能想起，还能吟诵，还能穿越千年的时光，和早已化为尘土的他们相逢，体会他们的悲欢。这时候，我们的感性和理性达成了某种和谐的共存，让我们变得强大，让我们有勇气去面对那些未知的明天。</p>
-<h1 id="文件下载链接"><a href="#文件下载链接" class="headerlink" title="文件下载链接"></a>文件下载链接</h1><ul>
-<li><a href="/files/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7.pdf">PDF</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" data-id="clylj5teu001ubc95g1e5dm29" data-title="【宋词导读 读书报告】宋词中的感性和理性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-本科课程/CS130/Final-Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/08/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Final-Cheatsheet/" class="article-date">
-  <time class="dt-published" datetime="2024-01-07T16:00:00.000Z" itemprop="datePublished">2024-01-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/08/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Final-Cheatsheet/">【CS130】Final Review</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Cheatsheet-Final"><a href="#Cheatsheet-Final" class="headerlink" title="Cheatsheet-Final"></a>Cheatsheet-Final</h1><h1 id="4-Scheduling"><a href="#4-Scheduling" class="headerlink" title="4. Scheduling"></a>4. Scheduling</h1><h2 id="4-0-Overview"><a href="#4-0-Overview" class="headerlink" title="4.0. Overview"></a>4.0. Overview</h2><h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><p>Scheduling：Deciding which threads are given access to resources from moment to moment.</p>
-<ul>
-<li>Often, we think in terms of CPU time, but could also think about access to resources like network BW or disk access.</li>
-</ul>
-<h3 id="Scheduling-Assumptions"><a href="#Scheduling-Assumptions" class="headerlink" title="Scheduling Assumptions"></a>Scheduling Assumptions</h3><ul>
-<li>One program per user</li>
-<li>One thread per program</li>
-<li>Programs are independent</li>
-</ul>
-<h3 id="Scheduling-Policy-Goals-Criteria（调度的主要目的）"><a href="#Scheduling-Policy-Goals-Criteria（调度的主要目的）" class="headerlink" title="Scheduling Policy Goals &#x2F; Criteria（调度的主要目的）"></a>Scheduling Policy Goals &#x2F; Criteria（调度的主要目的）</h3><ul>
-<li>Minimize Response Time（最小化响应时间）<ul>
-<li>Minimize elapsed time to do an operation &#x2F; job</li>
-</ul>
-</li>
-<li>Maximize Throughput（最大化吞吐量）<ul>
-<li>Throughput related to response time, but not identical:<ul>
-<li>Minimizing response time will lead to more context switching than if you only maximized throughput</li>
-</ul>
-</li>
-<li>Two parts to maximizing throughput<ul>
-<li>Minimize overhead（最小化调度的开销）</li>
-<li>Efficient use of resources（最大化利用资源）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Fairness<ul>
-<li>Share CPU among users in some equitable way</li>
-</ul>
-</li>
-<li>程序既使用CPU，也使用I&#x2F;O设备。操作系统通过调度算法决定下一个要在CPU上执行的作业。时间片轮转调度算法确保每个线程都能获得一定的CPU时间。某些I&#x2F;O活动可能会被视为计算，因为CPU仍在使用中。I&#x2F;O指的是进程进入阻塞状态，等待外部设备完成工作。</li>
-</ul>
-<h3 id="Scheduling-Algorithms"><a href="#Scheduling-Algorithms" class="headerlink" title="Scheduling Algorithms"></a>Scheduling Algorithms</h3><ul>
-<li>First Come, First Served</li>
-<li>Round Robin</li>
-<li>Priority</li>
-<li>Multi Level Queue</li>
-<li>Real-Time Scheduling</li>
-</ul>
-<h2 id="4-1-FCFS-Scheduling"><a href="#4-1-FCFS-Scheduling" class="headerlink" title="4.1. FCFS Scheduling"></a>4.1. FCFS Scheduling</h2><h3 id="Ideas"><a href="#Ideas" class="headerlink" title="Ideas"></a>Ideas</h3><ul>
-<li><strong>First-Come, First Served</strong></li>
-<li><strong>Convoy Effort</strong>: short process behind long process</li>
-</ul>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet0.png"><br><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet1.png"></p>
-<h2 id="4-2-Round-Robin-Scheduling"><a href="#4-2-Round-Robin-Scheduling" class="headerlink" title="4.2. Round Robin Scheduling"></a>4.2. Round Robin Scheduling</h2><h3 id="Ideas-1"><a href="#Ideas-1" class="headerlink" title="Ideas"></a>Ideas</h3><ul>
-<li>Idea：Preemption<ul>
-<li>Each process gets a small unit of CPU time quantum, usually 10-100ms</li>
-<li>After quantum expires, the process is preempted and added to the end of the ready queue</li>
-</ul>
-</li>
-<li>$n$ process in ready queue and time quantum is $q$<ul>
-<li>Each process get $\frac{1}{n}$ of the CPU time</li>
-<li>In chunks of at most $q$ time units</li>
-<li><strong>No process waits more than $(n-1)\cdot q$ time units</strong></li>
-</ul>
-</li>
-<li>Performance<ul>
-<li>$q$ large → FCFS</li>
-<li>$q$ small → Interleaved（交错调度）（Really small → HT，超线程）</li>
-<li>$q$ must be large with respect to context switch, otherwise overhead is too high.</li>
-</ul>
-</li>
-<li>How to choose time slices<ul>
-<li>What if too big?<ul>
-<li>Response time suffers</li>
-</ul>
-</li>
-<li>What if infinite?<ul>
-<li>Get back to FCFS</li>
-</ul>
-</li>
-<li>What if too small?<ul>
-<li>Through suffers</li>
-</ul>
-</li>
-<li>Actually choices:<ul>
-<li>In practice, need to balance short job performance and long job throughput</li>
-<li>Typical time slice today is between 10 - 100 ms</li>
-<li>Typical context-switching overhead is 0.1 - 1 ms</li>
-<li>Roughly 1% overhead due to context-switching</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet2.png"></p>
-<h2 id="4-3-Priority-Scheduling"><a href="#4-3-Priority-Scheduling" class="headerlink" title="4.3. Priority Scheduling"></a>4.3. Priority Scheduling</h2><ul>
-<li>A priority value (int.) is associated with eachprocess.</li>
-<li>Based on:<ul>
-<li>Cost to user</li>
-<li>Importance to user</li>
-<li>Aging</li>
-<li>%CPU time used in last XX hours</li>
-</ul>
-</li>
-<li>Execution Plan<ul>
-<li>Always execute highest-priority runnable jobs to completion</li>
-<li>Each queue can be processed in RR with some time quantum</li>
-</ul>
-</li>
-<li>Problem<ul>
-<li>Starvation</li>
-<li>Deadlock</li>
-</ul>
-</li>
-<li>How to fix problems<ul>
-<li>Dynamic Properties<ul>
-<li>Adjust base-level priority up or down based on heuristicsabout interactivity, locking, burst behavior, etc…</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>How to implement fairness?<ul>
-<li>Give each queue some fraction of the CPU</li>
-<li>Increase priority of jobs that don’t get service</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-4-Lottery-Scheduling"><a href="#4-4-Lottery-Scheduling" class="headerlink" title="4.4. Lottery Scheduling"></a>4.4. Lottery Scheduling</h2><h3 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h3><ul>
-<li>Give each job some number of lottery tickets</li>
-<li>On each time slice, randomly pick a winning ticket</li>
-<li>On average, CPU time is proportional to number of tickets given to each job</li>
-</ul>
-<h3 id="Tickets-Assignment"><a href="#Tickets-Assignment" class="headerlink" title="Tickets Assignment"></a>Tickets Assignment</h3><ul>
-<li>SRTF: Short Running Jobs get more, long running jobs get fewer</li>
-<li>to avoid starvation, every job gets at least one ticket</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet3.png"></p>
-<h3 id="How-to-evaluate-a-scheduling-algorithm"><a href="#How-to-evaluate-a-scheduling-algorithm" class="headerlink" title="How to evaluate a scheduling algorithm?"></a>How to evaluate a scheduling algorithm?</h3><ul>
-<li>Deterministic modeling</li>
-<li>Queueing models</li>
-<li>Implementation &#x2F; Simulation</li>
-</ul>
-<h2 id="4-6-What-if-We-Knew-the-Future"><a href="#4-6-What-if-We-Knew-the-Future" class="headerlink" title="4.6. What if We Knew the Future?"></a>4.6. What if We Knew the Future?</h2><h3 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h3><ul>
-<li>Shortest Job First (SJF)</li>
-<li>Shortest Remaining Time First (SRTF)<ul>
-<li>Sometimes called “Shortest Remaining Time to Completion First” (SRTCF)</li>
-</ul>
-</li>
-</ul>
-<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><p>SJF &#x2F; SRTF are the best you can do at minimizing average response time</p>
-<ul>
-<li><p><strong>Provably optimal</strong> !</p>
-</li>
-<li><p>SRTF is always at least as good as SJF, we focus on it.</p>
-</li>
-<li><p>Comparison of SRTF with FCFS</p>
-<ul>
-<li>What if all jobs the same length?<ul>
-<li>SRTF becomes the same as FCFS (i.e. FCFS is best can do if all jobs the same length)</li>
-</ul>
-</li>
-<li>What if jobs have varying length?<ul>
-<li>SRTF: short jobs not stuck behind long ones</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Benefits of SRTF</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet4.png"></p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet5.png"></p>
-<ul>
-<li>Starvation<ul>
-<li><strong>SRTF can lead to starvation if many small jobs!</strong></li>
-<li>Large jobs never run</li>
-</ul>
-</li>
-<li>Somehow need to predict future<ul>
-<li>Some systems ask the user</li>
-</ul>
-</li>
-<li>SRTF Pros &amp; Cons<ul>
-<li>Pros: Optimal (average response time)</li>
-<li>Cons: Hard to predict future; unfair</li>
-</ul>
-</li>
-</ul>
-<h3 id="Predicting-the-length-of-the-next-CPU-burst"><a href="#Predicting-the-length-of-the-next-CPU-burst" class="headerlink" title="Predicting the length of the next CPU burst"></a>Predicting the length of the next CPU burst</h3><ul>
-<li>Adaptive: Changing policy based on past behavior<ul>
-<li>CPU scheduling, in virtual memory, in file systems, etc</li>
-<li>Works because programs have predictable behavior<ul>
-<li>If program was I&#x2F;O bound in past, likely in future</li>
-<li>If computer behavior were random, wouldn’t help</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-7-Multi-level-Queue"><a href="#4-7-Multi-level-Queue" class="headerlink" title="4.7. Multi-level Queue"></a>4.7. Multi-level Queue</h2><ul>
-<li>Ready queue partitioned into separate queues<ul>
-<li>e.g. system processes. foreground(interactive), background(batch), student processes…</li>
-</ul>
-</li>
-<li>Each queue has its own scheduling algorithm<ul>
-<li>e.g. foreground(RR), background(FCFS)</li>
-</ul>
-</li>
-<li>Processes assigned to one queue permanently</li>
-<li>Scheduling must be done between the queues<ul>
-<li>Fixed priority</li>
-<li>Time slice: Each queue get some CPU time that it schedules</li>
-</ul>
-</li>
-</ul>
-<h3 id="Multilevel-Feedback-Queue"><a href="#Multilevel-Feedback-Queue" class="headerlink" title="Multilevel Feedback Queue"></a>Multilevel Feedback Queue</h3><ul>
-<li><strong>Multilevel queue, each with different priorities</strong><ul>
-<li>Higher priority queue ofter considered “foreground” tasks</li>
-</ul>
-</li>
-<li><strong>Each queue has its own scheduling algorithm</strong><ul>
-<li>e.g., Foreground - RR, background - FCFS</li>
-</ul>
-</li>
-<li><strong>A process can move between the queues</strong><ul>
-<li>Aging can be implemented this way</li>
-</ul>
-</li>
-<li>Parameters for a multilevel feedback queue scheduler<ul>
-<li>Number of queues</li>
-<li>Scheduling algorithm for each queue</li>
-<li>Method used to determine<ul>
-<li>When to upgrade a process</li>
-<li>When to demote a process</li>
-<li>Which queue a process will enter when that process needs services</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Scheduling must be done between the queues</strong><ul>
-<li>Fixed priority scheduling</li>
-<li>Time slice</li>
-<li>Countermeasure: user action that can ruin intent for the OS designers</li>
-</ul>
-</li>
-</ul>
-<h3 id="Linux-O-1-Scheduler"><a href="#Linux-O-1-Scheduler" class="headerlink" title="Linux O(1) Scheduler"></a>Linux O(1) Scheduler</h3><p>Priority-based scheduler: 140 priorities</p>
-<ul>
-<li>40 for User Tasks</li>
-<li>100 for Real-time&#x2F;Kernel</li>
-<li>Lower priority value → Higher priority</li>
-<li>All algorithms $O(1)$: schedule n processes in constant time<ul>
-<li>compute time-slices&#x2F;priorities&#x2F;interactivity credits when job finishes time slice</li>
-<li>140-bit bit mask indicates presence or absence of job(s) at given priority level</li>
-</ul>
-</li>
-</ul>
-<p>Two separate priority queues (arrays)</p>
-<ul>
-<li>Active</li>
-<li>Expired</li>
-<li>All tasks in the active queue use up their time slices and get placed on the expired queue, after which queue swapped</li>
-</ul>
-<p>Time slice depends on priority - linearly mapped onto time slice range</p>
-<ul>
-<li>Like multi-level queue (one queue per priority) with different time slice at each level</li>
-<li>Execution split into “Time slice Granularity” chunks — RR through priority</li>
-</ul>
-<p>Heuristics</p>
-<ul>
-<li>User-task priority adjusted ±5 based on heuristics<ul>
-<li><code>p -&gt; sleep_avg = sleep_time - run_time</code></li>
-<li>Higher <code>sleep_avg</code> → more I&#x2F;O bound the task, more reward</li>
-</ul>
-</li>
-<li>Interactive Credit<ul>
-<li>Earned when task sleeps for “long” time, Spend when task runs for “long” time</li>
-<li>IC is used to provide hysteresis to avoid changing interactivity for temporary changes in behavior</li>
-</ul>
-</li>
-<li>BUT, interactive tasks get special dispensation<ul>
-<li>To try to maintain interactivity</li>
-<li>Placed back into active queue, unless another track has starved for too long..</li>
-</ul>
-</li>
-</ul>
-<p>Real-Time tasks</p>
-<ul>
-<li>Always preempt non-RT tasks and no dynamic adjustment of priorities</li>
-<li>Scheduling schemes<ul>
-<li><code>SCHED_FIFO</code>: preempts other tasks, no timeslice limit</li>
-<li><code>SCHED_RR</code>: preempts normal tasks, RR scheduling amongst tasks of same priority</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-8-Real-Time-Scheduling"><a href="#4-8-Real-Time-Scheduling" class="headerlink" title="4.8. Real-Time Scheduling"></a>4.8. Real-Time Scheduling</h2><p>Efficiency is important but <strong>predictability</strong> is essential</p>
-<ul>
-<li>Hard real-time computing<ul>
-<li>Attempt to meet all deadlines</li>
-<li>EDF (earliest deadline first), LLF (least laxity first)</li>
-<li>RMS (Rate-Monotonic Scheduling), DM (Deadline Monotonic Scheduling)</li>
-</ul>
-</li>
-<li>Soft real-time computing<ul>
-<li>Attempt to meed deadlines with high probability</li>
-<li>Minimize miss ratio &#x2F; Maximize completion ratio</li>
-<li>CBS (Constant Bandwidth Server)</li>
-</ul>
-</li>
-</ul>
-<h3 id="Issues-in-Real-Time-Scheduling"><a href="#Issues-in-Real-Time-Scheduling" class="headerlink" title="Issues in Real-Time Scheduling"></a>Issues in Real-Time Scheduling</h3><ul>
-<li>Dispatch Latency</li>
-<li>Priority Inversion and Inheritance<ul>
-<li>priority inversion: Higher priority process needs kernel resource currently being used by another lower priority process, thus Higher priority process must wait</li>
-<li>Priority inheritance (Solution of Priority inversion): Low priority process now inherits high priority until it has completed use of the resource in question.</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-9-EDF-Earliest-Deadline-FIrst"><a href="#4-9-EDF-Earliest-Deadline-FIrst" class="headerlink" title="4.9. EDF (Earliest Deadline FIrst)"></a>4.9. EDF (Earliest Deadline FIrst)</h2><ul>
-<li><p>Tasks <strong>periodic</strong> with period $P$ and computation $C$ in each period: $(P_i, C_i)$ for each task $i$</p>
-</li>
-<li><p>Preemptive priority-based dynamic scheduling:</p>
-<ul>
-<li>Each task is assigned a (current) priority based on how close the absolute deadline is (i.e. $D^{t+1} &#x3D; D_i^t + P_i$ for each task!)</li>
-<li><strong>The scheduler always schedules the active task with the closest absolute deadline</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet6.png"></p>
-<ul>
-<li>Schedulable when $\sum_{i&#x3D;1}^n(\frac{C_i}{P_i})\leq 1$</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet7.png"></p>
-<h1 id="5-Address-Translation"><a href="#5-Address-Translation" class="headerlink" title="5. Address Translation"></a>5. Address Translation</h1><h2 id="5-1-Address-Address-Space"><a href="#5-1-Address-Address-Space" class="headerlink" title="5.1. Address &amp; Address Space"></a>5.1. Address &amp; Address Space</h2><p>Definition: Set of accessible addresses and the state associated with them.</p>
-<p>What happens when processor reads or writes to an address?</p>
-<ul>
-<li>Perhaps acts like regular memory</li>
-<li>Perhaps causes I&#x2F;O operation (Memory-mapped I&#x2F;O)</li>
-<li>Causes program to abort (segfault)?</li>
-<li>Communicate with another program</li>
-</ul>
-<p>Virtualizing Resources：Why worry about Resources？</p>
-<p>为什么要担心内存共享？</p>
-<ul>
-<li>进程和&#x2F;或内核的完整工作状态由其在内存（和寄存器）中的数据定义。</li>
-<li>因此，不能让不同的控制线程使用相同的内存。<ul>
-<li>物理上：两个不同的数据不能占用内存中的同一个位置。</li>
-</ul>
-</li>
-<li>保护机制。<ul>
-<li>不希望不同的线程访问彼此的内存。</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-2-Important-Aspects-of-Memory-Multiplexing"><a href="#5-2-Important-Aspects-of-Memory-Multiplexing" class="headerlink" title="5.2. Important Aspects of Memory Multiplexing"></a>5.2. Important Aspects of Memory Multiplexing</h2><h3 id="Protection"><a href="#Protection" class="headerlink" title="Protection"></a>Protection</h3><ul>
-<li>Prevent access to private memory of other processes<ul>
-<li>Different pages of memory can be given special behavior (e.g., Read Only, Invisible to user programs, etc.)</li>
-<li>Kernel data protected from user programs</li>
-<li>Programs protected from themselves</li>
-</ul>
-</li>
-</ul>
-<h3 id="Controlled-Overlap"><a href="#Controlled-Overlap" class="headerlink" title="Controlled Overlap"></a>Controlled Overlap</h3><ul>
-<li>Separate state of threads should not collide in physical memory. Obviously, unexpected overlap<br>causes chaos!</li>
-<li>Conversely, would like the ability to overlap when desired (for communication)</li>
-</ul>
-<h3 id="Translation"><a href="#Translation" class="headerlink" title="Translation"></a>Translation</h3><ul>
-<li>Ability to translate accesses from one address space (virtual) to a different one (physical)</li>
-<li>When translation exists, processor uses virtual addresses, physical memory uses physical<br>addresses</li>
-<li>Side effects:<ul>
-<li>Can be used to avoid overlap</li>
-<li>Can be used to give uniform view of memory to programs</li>
-</ul>
-</li>
-</ul>
-<p>Addresses is bounded to final valuesanywhere in this path</p>
-<ul>
-<li>Depends on HW support</li>
-<li>Also depends on OS</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet8.png"></p>
-<h2 id="5-3-Simple-B-B-Method"><a href="#5-3-Simple-B-B-Method" class="headerlink" title="5.3. Simple B&amp;B Method"></a>5.3. Simple B&amp;B Method</h2><h3 id="Multi-programming-Version-w-Protection-——Base-Bound"><a href="#Multi-programming-Version-w-Protection-——Base-Bound" class="headerlink" title="Multi-programming (Version w&#x2F; Protection)——Base &amp; Bound"></a>Multi-programming (Version w&#x2F; Protection)——Base &amp; Bound</h3><p>Can we protect programs from each other without translation?</p>
-<ul>
-<li>Yes: use two special registers BaseAddr and LimitAddr to prevent user from straying outside designated area<ul>
-<li>Cause error if user tries to access an illegal address</li>
-</ul>
-</li>
-<li>During switch, kernel loads new base&#x2F;limit from PCB (Process Control Block)</li>
-<li>User not allowed to change base&#x2F;limit registers</li>
-</ul>
-<h3 id="Issue-with-simble-B-B-Method"><a href="#Issue-with-simble-B-B-Method" class="headerlink" title="Issue with simble B&amp;B Method"></a>Issue with simble B&amp;B Method</h3><ul>
-<li>Fragmentation problem over time<ul>
-<li>Not every process is same size → memory becomes fragmented over time</li>
-</ul>
-</li>
-<li>Missing support for sparse address space<ul>
-<li>Would like to have multiple chunks&#x2F;program (Code, Data, Stack, Heap, etc)</li>
-</ul>
-</li>
-<li>Hard to do inter-process sharing<ul>
-<li>Want to share code segments when possible</li>
-<li>Want to share memory between processes</li>
-<li>Helped by providing multiple segments per process</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-4-Multi-Segment-Model"><a href="#5-4-Multi-Segment-Model" class="headerlink" title="5.4. Multi Segment Model"></a>5.4. Multi Segment Model</h2><ul>
-<li>Segment map resides in processor<ul>
-<li><strong>Segment number</strong> mapped into <strong>base&#x2F;limit pair</strong></li>
-<li>Base added to offset to generate physical address</li>
-<li>Error check catches offset out of range</li>
-</ul>
-</li>
-<li>As many chunks of physical memory as entries<ul>
-<li>Segment addressed by portion of virtual address</li>
-<li>However, could be included in instruction instead:<ul>
-<li>x86 Example: mov [es:bx],ax</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet9.png"></p>
-<h3 id="Observations-about-Segmentation"><a href="#Observations-about-Segmentation" class="headerlink" title="Observations about Segmentation"></a>Observations about Segmentation</h3><ul>
-<li>Virtual address space has holes<ul>
-<li>Segmentation efficient for <strong>sparse address spaces</strong></li>
-<li>A correct program should never address gaps (except as mentioned in moment)<ul>
-<li>If it does, trap to kernel and dump core</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>When it is OK to address outside valid range?<ul>
-<li>This is how the stack and heap are allowed to grow</li>
-<li>For instance, stack takes fault, system automatically increases size of stack</li>
-</ul>
-</li>
-<li>Need protection mode in segment table<ul>
-<li>For example, code segment would be read-only</li>
-<li><strong>Data and stack</strong> would be <strong>read-write</strong> (stores allowed)</li>
-<li>Shared segment could be read-only or read-write</li>
-</ul>
-</li>
-<li>What must be saved&#x2F;restored on context switch?<ul>
-<li>Segment table stored in CPU, not in memory (small)</li>
-<li>Might store all of process’ memory onto disk when switched (called “<strong>swapping</strong>”)</li>
-</ul>
-</li>
-</ul>
-<h3 id="Problems-with-Segmantation"><a href="#Problems-with-Segmantation" class="headerlink" title="Problems with Segmantation"></a>Problems with Segmantation</h3><ul>
-<li>Must fit variable-sized chunks into physical memory</li>
-<li>May move processes multiple times to fit everything</li>
-<li>Limited options for swapping to disk</li>
-<li><strong>Fragmentation</strong>: wasted space<ul>
-<li>External: free gaps between allocated chunks</li>
-<li>Internal: don’t need all memory within allocated chunks</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-5-Paging"><a href="#5-5-Paging" class="headerlink" title="5.5. Paging"></a>5.5. Paging</h2><ul>
-<li>Physical Memory in <strong>Fixed Size Chunks</strong></li>
-<li>Can use simple vector of bits to handle allocation: 00110001110001101 … 110010（BitMap）<ul>
-<li>Each bit represents page of physical memory：1 → allocated, 0 → free</li>
-</ul>
-</li>
-<li>Typically have <strong>small pages</strong> (1K-16K)<ul>
-<li>Consequently: need multiple pages&#x2F;segment</li>
-</ul>
-</li>
-</ul>
-<h3 id="How-to-implement-Simple-Paging"><a href="#How-to-implement-Simple-Paging" class="headerlink" title="How to implement Simple Paging"></a>How to implement Simple Paging</h3><ul>
-<li>Page Table (One per process)<ul>
-<li>Resides in physical memory</li>
-<li>Contains physical page and permission for each virtual page<ul>
-<li>Permissions include: Valid bits, Read, Write, etc</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Virtual address mapping<ul>
-<li>Offset from Virtual address copied to Physical Address<ul>
-<li>Example: 10 bit offset fi 1024-byte pages</li>
-</ul>
-</li>
-<li>Virtual page # is all remaining bits<ul>
-<li>Example for 32-bits: 32-10 &#x3D; 22 bits, i.e. 4 million entries</li>
-<li>Physical page # copied from table into physical address</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Check Page Table bounds and permissions</li>
-</ul>
-<h3 id="Where-is-page-sharing-used"><a href="#Where-is-page-sharing-used" class="headerlink" title="Where is page sharing used ?"></a>Where is page sharing used ?</h3><ul>
-<li>The “kernel region” of every process has the same page table entries</li>
-<li>Different processes running same binary!</li>
-<li>User-level system libraries (execute only)</li>
-<li>Shared-memory segments between different processes</li>
-</ul>
-<h3 id="Some-Simple-Security-Measures"><a href="#Some-Simple-Security-Measures" class="headerlink" title="Some Simple Security Measures"></a>Some Simple Security Measures</h3><ul>
-<li>Address Space Randomization</li>
-<li>Kernel address space isolation</li>
-</ul>
-<h2 id="5-6-Multi-Level-Translation"><a href="#5-6-Multi-Level-Translation" class="headerlink" title="5.6. Multi-Level Translation"></a>5.6. Multi-Level Translation</h2><p>Motivation：单层 Page Table 太大了，全部放在memory里很不方便。</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet10.png"></p>
-<h1 id="6-Caching-TLB"><a href="#6-Caching-TLB" class="headerlink" title="6. Caching, TLB"></a>6. Caching, TLB</h1><h2 id="6-1-Page-Table-Page-Table-Entry"><a href="#6-1-Page-Table-Page-Table-Entry" class="headerlink" title="6.1. Page Table &amp; Page Table Entry"></a>6.1. Page Table &amp; Page Table Entry</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet11.png"></p>
-<h3 id="Two-level-page-table"><a href="#Two-level-page-table" class="headerlink" title="Two-level page table"></a>Two-level page table</h3><ul>
-<li>Tree Of Page Tables: 10b-10b-12b pattern</li>
-<li>Table Fixed Size（1024 Entries）<ul>
-<li>On Context-Switch: Save single PageTablePtr Register</li>
-</ul>
-</li>
-<li>Valid bits on Page Table Entries<ul>
-<li>Don’t need every 2nd-level table</li>
-<li>Even when exist, 2nd-level tables <strong>can reside on disk</strong> if not in use</li>
-</ul>
-</li>
-</ul>
-<h3 id="Page-Table-Entry（PTE）"><a href="#Page-Table-Entry（PTE）" class="headerlink" title="Page Table Entry（PTE）"></a>Page Table Entry（PTE）</h3><p>Example：x86 PTE</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet12.png"></p>
-<ul>
-<li>P: Present (same as “valid” bit in other architectures)</li>
-<li>W: Writeable</li>
-<li>U: User accessible</li>
-<li>PWT: Page write transparent: external cache write-through</li>
-<li>PCD: Page cache disabled (page cannot be cached)</li>
-<li>A: Accessed: page has been accessed recently</li>
-<li>D: Dirty (PTE only): page has been modified recently</li>
-<li>PS: Page Size: PS&#x3D;1 → 4MB page (directory only).</li>
-<li>Bottom 22 bits of virtual address serve as offset</li>
-</ul>
-<h3 id="How-to-use-PTE"><a href="#How-to-use-PTE" class="headerlink" title="How to use PTE?"></a>How to use PTE?</h3><ol>
-<li>Demand Paging<ul>
-<li>Keep only active pages in memory</li>
-<li>Place others on disk and mark their PTEs invalid</li>
-</ul>
-</li>
-<li>Copy on Write<ul>
-<li>UNIX fork gives copy of parent address space to child<ul>
-<li>Address spaces disconnected after child created</li>
-</ul>
-</li>
-<li>How to do this cheaply?<ul>
-<li>Make copy of parent’s page tables (point at same memory)</li>
-<li><strong>Mark entries in both sets of page tables as read-only</strong></li>
-<li><strong>Page fault on write creates two copies（只在需要 Write 的时候，再创建新的页面）</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Zero Fill On Demand<ul>
-<li>New data pages must carry no information (say be zeroed)</li>
-<li>Mark PTEs as invalid; page fault on use gets zeroed page</li>
-<li>Often, OS creates zeroed pages in background</li>
-</ul>
-</li>
-</ol>
-<h3 id="Multi-level-Translation-Segments-Pages"><a href="#Multi-level-Translation-Segments-Pages" class="headerlink" title="Multi-level Translation: Segments + Pages"></a>Multi-level Translation: Segments + Pages</h3><p>What about a tree of tables?</p>
-<ul>
-<li>Lowest level page table fi memory still allocated with bitmap</li>
-<li>Higher levels often segmented</li>
-</ul>
-<h2 id="6-2-Inverted-Page-Table"><a href="#6-2-Inverted-Page-Table" class="headerlink" title="6.2. Inverted Page Table"></a>6.2. Inverted Page Table</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet13.png"></p>
-<p>IA64: 64bit addresses: Six-level page table?</p>
-<ul>
-<li>No! Too slow! Too Many Almost-Empty Tables</li>
-<li>核心问题：Physical memory may be much less than Virtual Memory allocated</li>
-</ul>
-<h3 id="Inverted-Page-Table"><a href="#Inverted-Page-Table" class="headerlink" title="Inverted Page Table"></a>Inverted Page Table</h3><p>Using a hash table</p>
-<ul>
-<li>Called an “<strong>Inverted Page Table</strong>”</li>
-<li>Size is <strong>independent of virtual address space</strong></li>
-<li>Directly related to amount of physical memory</li>
-<li>Very attractive option for 64-bit address spaces<ul>
-<li>PowerPC, UltraSPARC, IA64</li>
-</ul>
-</li>
-</ul>
-<h2 id="6-3-Address-Translation-Comparison"><a href="#6-3-Address-Translation-Comparison" class="headerlink" title="6.3. Address Translation Comparison"></a>6.3. Address Translation Comparison</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet14.png"></p>
-<p>MMU（内存管理单元）的位置和功能。</p>
-<p>MMU是位于处理器和内存系统之间的一个组件。当处理器发出读取虚拟地址的请求时，请求会通过MMU转发到缓存（再传递到内存）。一段时间后，内存系统会以物理地址的形式回复存储在该物理地址上的数据（这是通过虚拟地址到物理地址的转换得到的结果）。这个过程在缓存命中时非常快速，但在缓存未命中时会比较慢。</p>
-<p>那么MMU具体在做什么呢？在每次引用（指令获取、加载、存储）时，MMU会读取（多层级的）页表项，以获取物理帧或发生错误（FAULT）。这个过程会经过缓存再传递到内存，并且最终会读取或写入到物理位置上。</p>
-<p>简而言之，MMU的主要功能是实现虚拟地址到物理地址的转换。它通过查找页表来确定虚拟地址对应的物理地址，并将数据从物理地址读取或写入。这个过程中会使用缓存来提高访问速度，但如果在缓存中未找到对应的数据，则需要从内存中读取，这会比较慢。</p>
-<p>总结一下，MMU的作用是管理虚拟地址和物理地址之间的转换，并通过读取和写入物理位置来实现对内存的访问。它是处理器和内存系统之间的重要桥梁，对于实现高效的内存管理至关重要。</p>
-<h2 id="6-4-TLB-Translation-Look-Aside-Buffer"><a href="#6-4-TLB-Translation-Look-Aside-Buffer" class="headerlink" title="6.4. TLB: Translation Look-Aside Buffer"></a>6.4. TLB: Translation Look-Aside Buffer</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet15.png"></p>
-<h3 id="What-TLB-Organization-Makes-Sense"><a href="#What-TLB-Organization-Makes-Sense" class="headerlink" title="What TLB Organization Makes Sense?"></a>What TLB Organization Makes Sense?</h3><ul>
-<li>Needs to be really fast<ul>
-<li><strong>Critical path of memory access</strong><ul>
-<li>In simplest view: before the cache</li>
-<li>Thus, this adds to access time (reducing cache speed)</li>
-</ul>
-</li>
-<li>Seems to argue for Direct Mapped or Low Associativity</li>
-</ul>
-</li>
-<li>However, needs to have very few conflicts!<ul>
-<li>With TLB, the Miss Time extremely high! (PT traversal)</li>
-<li>Cost of Conflict (Miss Time) is high</li>
-<li>Hit Time – dictated by clock cycle</li>
-</ul>
-</li>
-<li>Thrashing: continuous conflicts between accesses</li>
-</ul>
-<h3 id="Current-Example-Memory-Hierarchy"><a href="#Current-Example-Memory-Hierarchy" class="headerlink" title="Current Example: Memory Hierarchy"></a>Current Example: Memory Hierarchy</h3><p>Caches (all 64 B line size)</p>
-<ul>
-<li>L1 I-Cache: 32 KiB&#x2F;core, 8-way set assoc.</li>
-<li>L1 D Cache: 32 KiB&#x2F;core, 8-way set assoc., 4-5 cycles load-to-use, Writeback policy</li>
-<li>L2 Cache: 1 MiB&#x2F;core, 16-way set assoc., Inclusive, Write-back policy, 14 cycles latency</li>
-<li>L3 Cache: 1.375 MiB&#x2F;core, 11-way set assoc., shared across cores, Noninclusive victim cache, Write-back policy, 50-70 cycles latency</li>
-</ul>
-<p>TLB</p>
-<ul>
-<li>L1 ITLB, 128 entries; 8-way set assoc. for 4 KB pages<ul>
-<li>8 entries per thread; fully associative, for 2 MiB &#x2F; 4 MiB page</li>
-</ul>
-</li>
-<li>L1 DTLB 64 entries; 4-way set associative for 4 KB pages<ul>
-<li>32 entries; 4-way set associative, 2 MiB &#x2F; 4 MiB page translations:</li>
-<li>4 entries; 4-way associative, 1G page translations:</li>
-</ul>
-</li>
-<li>L2 STLB: 1536 entries; 12-way set assoc. 4 KiB + 2 MiB pages<ul>
-<li>16 entries; 4-way set associative, 1 GiB page translations:</li>
-</ul>
-</li>
-</ul>
-<h3 id="What-Happens-on-a-Context-Switch"><a href="#What-Happens-on-a-Context-Switch" class="headerlink" title="What Happens on a Context Switch?"></a>What Happens on a Context Switch?</h3><ul>
-<li>Invalidate TLB: simple but might be expensive<ul>
-<li>What if switching frequently between processes</li>
-</ul>
-</li>
-<li>Include ProcessID in TLB<ul>
-<li>This is an architectural solution: needs <strong>hardware</strong></li>
-</ul>
-</li>
-</ul>
-<p>What if translation tables change?</p>
-<ul>
-<li>For example, to move page from memory to disk or vice versa…<ul>
-<li>Must invalidate TLB entry!</li>
-<li>Otherwise, might think that page is still in memory!</li>
-</ul>
-</li>
-<li>Called “<strong>TLB Consistency</strong>”</li>
-</ul>
-<h1 id="7-Demand-Paging"><a href="#7-Demand-Paging" class="headerlink" title="7. Demand Paging"></a>7. Demand Paging</h1><h2 id="7-1-Page-Fault"><a href="#7-1-Page-Fault" class="headerlink" title="7.1. Page Fault"></a>7.1. Page Fault</h2><h3 id="Definition-2"><a href="#Definition-2" class="headerlink" title="Definition"></a>Definition</h3><p>The Virtual-to-Physical Translation fails</p>
-<ul>
-<li>PTE marked invalid, Priv. Level Violation, Access violation, or does not exist<ul>
-<li>Causes an Fault &#x2F; Trap</li>
-</ul>
-</li>
-<li><strong>Not an interrupt</strong> because synchronous to instruction execution<ul>
-<li>May occur on instruction fetch or data access</li>
-<li>Protection violations typically terminate the instruction</li>
-</ul>
-</li>
-</ul>
-<h3 id="Page-Fault-→-Demand-Paging"><a href="#Page-Fault-→-Demand-Paging" class="headerlink" title="Page Fault → Demand Paging"></a>Page Fault → Demand Paging</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet16.png"></p>
-<h3 id="Inversion-of-HW-SW-Boundary"><a href="#Inversion-of-HW-SW-Boundary" class="headerlink" title="Inversion of HW&#x2F;SW Boundary"></a>Inversion of HW&#x2F;SW Boundary</h3><p>硬件和软件边界的反转现象：在执行指令时，如果发生页面错误（Page Fault），操作系统的软件会介入并采取相应的措施来解决问题。这可能包括加载页面、创建页面、写时复制等操作，并更新页表项以确保后续的地址转换成功。然后，操作系统会重新启动或恢复指令的执行。这种反转现象在RISC（精简指令集计算机）指令集中是一个巨大的简化，但在x86指令集等复杂指令集中可能会更加复杂，因为指令可能会修改状态。</p>
-<h2 id="7-2-Demand-Paging"><a href="#7-2-Demand-Paging" class="headerlink" title="7.2. Demand Paging"></a>7.2. Demand Paging</h2><ul>
-<li>What “block size”? - 1 page (e.g, 4 KB)</li>
-<li>What “organization” ie. direct-mapped, set-assoc., fullyassociative?<ul>
-<li>Any page in any frame of memory,</li>
-<li>i.e., fully associative: arbitrary virtual → physical mapping</li>
-</ul>
-</li>
-<li>How do we locate a page?<ul>
-<li>First check TLB, then page-table traversal</li>
-</ul>
-</li>
-<li>What is page replacement policy? (i.e. LRU, Random…)<ul>
-<li>This requires more explanation… (kinda LRU)</li>
-</ul>
-</li>
-<li>What happens on a miss?<ul>
-<li>Go to lower level to fill miss (i.e. disk)</li>
-</ul>
-</li>
-<li>What happens on a write? (write-through, write back)<ul>
-<li>Definitely write-back – need dirty bit!</li>
-</ul>
-</li>
-</ul>
-<p><img src="/Cheatsheet-Final%20a3ede0b2d25945df9dd63986f8a9b2fb/Untitled%2017.png" alt="Use main memory as “cache” for disk"></p>
-<p>Use main memory as “cache” for disk</p>
-<h2 id="7-3-Illusion-of-Infinite-Memory"><a href="#7-3-Illusion-of-Infinite-Memory" class="headerlink" title="7.3. Illusion of Infinite Memory"></a>7.3. Illusion of Infinite Memory</h2><p>Transparent Level of Indirection (page table)</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet18.png"></p>
-<h2 id="7-4-Demand-Paging-Mechanisms"><a href="#7-4-Demand-Paging-Mechanisms" class="headerlink" title="7.4. Demand Paging Mechanisms"></a>7.4. Demand Paging Mechanisms</h2><p>PTE makes demand paging implementatable</p>
-<ul>
-<li>Valid → Page in memory, PTE points at physical page</li>
-<li>Not Valid → Page not in memory; use info in PTE to find it on disk when necessary</li>
-</ul>
-<h3 id="What-does-OS-do-on-a-Page-Fault"><a href="#What-does-OS-do-on-a-Page-Fault" class="headerlink" title="What does OS do on a Page Fault"></a>What does OS do on a Page Fault</h3><p>Choose an old page to replace</p>
-<ul>
-<li>If old page modified (“D&#x3D;1”), write contents back to disk</li>
-<li>Change its PTE and any cached TLB to be invalid</li>
-<li>Load new page into memory from disk</li>
-<li>Update page table entry, invalidate TLB for new entry</li>
-<li>Continue thread from original faulting location</li>
-</ul>
-<p>TLB for new page will be loaded when thread continued!</p>
-<h3 id="Some-Questions"><a href="#Some-Questions" class="headerlink" title="Some Questions"></a>Some Questions</h3><p>During a page fault, where does the OS get a free frame?</p>
-<ul>
-<li>Keeps a free list<ul>
-<li>Unix runs a “reaper” if memory gets too full<ul>
-<li>Schedule dirty pages to be written back on disk</li>
-<li>Zero (clean) pages which haven’t been accessed in a while</li>
-</ul>
-</li>
-<li>As a last resort, evict a dirty page first</li>
-</ul>
-</li>
-<li>How can we organize these mechanisms?<ul>
-<li>Work on the replacement policy</li>
-</ul>
-</li>
-<li>How many page frames&#x2F;process?<ul>
-<li>Like thread scheduling, need to “schedule” memory resources:<ul>
-<li>Utilization? fairness? priority?</li>
-</ul>
-</li>
-<li>Allocation of disk paging bandwidth</li>
-</ul>
-</li>
-</ul>
-<p>操作系统通过维护一个空闲列表来管理可用的物理页帧。当内存空间不足时，Unix系统会运行一个“回收器”，将脏页面写回磁盘，并清除一段时间内未被访问的干净页面。作为最后的手段，如果没有空闲的干净页面，操作系统将优先驱逐一个脏页面。为了组织和管理这些机制，需要制定合适的替换策略。</p>
-<p>另外，还讨论了每个进程应分配多少个页帧的问题。类似于线程调度，需要对内存资源进行“调度”，考虑利用率、公平性和优先级等因素。此外，还需要合理分配磁盘分页带宽，以满足不同进程的需求。</p>
-<h2 id="7-5-Cost-Model"><a href="#7-5-Cost-Model" class="headerlink" title="7.5. Cost Model"></a>7.5. Cost Model</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet19.png"></p>
-<h1 id="8-General-I-O"><a href="#8-General-I-O" class="headerlink" title="8. General I&#x2F;O"></a>8. General I&#x2F;O</h1><h2 id="8-1-What-about-I-O"><a href="#8-1-What-about-I-O" class="headerlink" title="8.1. What about I&#x2F;O?"></a>8.1. What about I&#x2F;O?</h2><ul>
-<li>Without I&#x2F;O, computers are useless (disembodied brains?)</li>
-<li>But… thousands of devices, each slightly different<ul>
-<li>How can we <strong>standardize the interfaces to these devices</strong>?</li>
-</ul>
-</li>
-<li>Devices unreliable: media failures and transmission errors<ul>
-<li>How can we <strong>make them reliable</strong>?</li>
-</ul>
-</li>
-<li>Devices unpredictable and&#x2F;or slow<ul>
-<li>How can we manage them if we don’t know what they will do or how they will perform?</li>
-</ul>
-</li>
-</ul>
-<h2 id="8-2-Visualize-IO"><a href="#8-2-Visualize-IO" class="headerlink" title="8.2. Visualize IO"></a>8.2. Visualize IO</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet20.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet21.png"></p>
-<h2 id="8-3-I-O-Design"><a href="#8-3-I-O-Design" class="headerlink" title="8.3. I&#x2F;O Design"></a>8.3. I&#x2F;O Design</h2><h3 id="Operational-Parameters-for-I-O"><a href="#Operational-Parameters-for-I-O" class="headerlink" title="Operational Parameters for I&#x2F;O"></a>Operational Parameters for I&#x2F;O</h3><ul>
-<li>Data granularity: Byte vs. Block<ul>
-<li>Some devices provide single byte at a time (e.g., keyboard)</li>
-<li>Others provide whole blocks (e.g., disks, networks, etc.)</li>
-</ul>
-</li>
-<li>Access pattern: Sequential vs. Random<ul>
-<li>Some devices must be accessed sequentially (e.g., tape)</li>
-<li>Others can be accessed “randomly” (e.g., disk, cd, etc.)<ul>
-<li>Fixed overhead to start transfers</li>
-</ul>
-</li>
-<li>Some devices require continual monitoring</li>
-<li>Others generate interrupts when they need service</li>
-</ul>
-</li>
-<li>Transfer Mechanism: Programmed IO and DMA</li>
-</ul>
-<h3 id="The-goal-of-the-I-O-Subsystem"><a href="#The-goal-of-the-I-O-Subsystem" class="headerlink" title="The goal of the I&#x2F;O Subsystem"></a>The goal of the I&#x2F;O Subsystem</h3><p>Provide Uniform Interfaces, Despite Wide Range of Different Devices</p>
-<h3 id="Standard-Interfaces-to-Devices"><a href="#Standard-Interfaces-to-Devices" class="headerlink" title="Standard Interfaces to Devices"></a>Standard Interfaces to Devices</h3><ul>
-<li><strong>Block Devices</strong>: e.g. disk drives, tape drives, DVD-ROM<ul>
-<li>Access <strong>blocks of data</strong></li>
-<li>Commands include <code>open()</code>, <code>read()</code>, <code>write()</code>, <code>seek()</code></li>
-<li>Raw I&#x2F;O or file-system access</li>
-<li>Memory-mapped file access possible</li>
-</ul>
-</li>
-<li><strong>Character Devices</strong>: e.g. keyboards, mice, serial ports, some USB devices<ul>
-<li><strong>Single characters at a time</strong></li>
-<li>Commands include <code>get()</code>, <code>put()</code></li>
-<li>Libraries layered on top allow line editing</li>
-</ul>
-</li>
-<li><strong>Network Devices</strong>: e.g. Ethernet, Wireless, Bluetooth<ul>
-<li>Different enough from block&#x2F;character to have own interface</li>
-<li>Unix and Windows include socket interface<ul>
-<li>Separates network protocol from network operation</li>
-<li>Includes select() functionality</li>
-</ul>
-</li>
-<li>Usage: pipes, FIFOs, streams, queues, mailboxes</li>
-</ul>
-</li>
-</ul>
-<h3 id="How-does-User-Deal-with-Timing"><a href="#How-does-User-Deal-with-Timing" class="headerlink" title="How does User Deal with Timing"></a>How does User Deal with Timing</h3><ul>
-<li><strong>Blocking Interface</strong>: “Wait”<ul>
-<li>When request data (e.g. <code>read()</code> system call), put process to sleep until data is ready</li>
-<li>When write data (e.g. <code>write()</code> system call), put process to sleep until device is ready for data</li>
-</ul>
-</li>
-<li><strong>Non-blocking Interface</strong>: “Don’t Wait”<ul>
-<li>Returns quickly from read or write request with count of bytes successfully transferred</li>
-<li>Read may return nothing, write may write nothing</li>
-</ul>
-</li>
-<li><strong>Asynchronous Interface</strong>: “Tell Me Later”<ul>
-<li>When request data, take pointer to user’s buffer, return immediately; later kernel fills buffer and notifies user</li>
-<li>When send data, take pointer to user’s buffer, return immediately; later kernel takes data and notifies user</li>
-</ul>
-</li>
-</ul>
-<h3 id="Transferring-Data-to-from-Controller"><a href="#Transferring-Data-to-from-Controller" class="headerlink" title="Transferring Data to&#x2F;from Controller"></a>Transferring Data to&#x2F;from Controller</h3><ul>
-<li>Programmed I&#x2F;O:<ul>
-<li>Each byte transferred via processor in&#x2F;out or load&#x2F;store</li>
-<li>Pro: Simple hardware, easy to program</li>
-<li>Con: Consumes processor cycles proportional to data size</li>
-</ul>
-</li>
-<li><strong>Direct Memory Access</strong>:<ul>
-<li>Give controller access to memory bus</li>
-<li>Ask it to transfer data blocks to&#x2F;from memory directly</li>
-</ul>
-</li>
-<li>Sample interaction with DMA controller (from OSC book):</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet22.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet23.png"></p>
-<h3 id="I-O-Device-Notifying-the-OS"><a href="#I-O-Device-Notifying-the-OS" class="headerlink" title="I&#x2F;O Device Notifying the OS"></a>I&#x2F;O Device Notifying the OS</h3><ul>
-<li>The OS needs to know when:<ul>
-<li>The I&#x2F;O device has completed an operation</li>
-<li>The I&#x2F;O operation has encountered an error</li>
-</ul>
-</li>
-<li><strong>I&#x2F;O Interrupt</strong>:<ul>
-<li>Device generates an interrupt whenever it needs service</li>
-<li>Pro: handles unpredictable events well</li>
-<li>Con: interrupts relatively high overhead</li>
-</ul>
-</li>
-<li><strong>Polling</strong>:<ul>
-<li>OS periodically checks a device-specific status register<ul>
-<li>I&#x2F;O device puts completion information in status register</li>
-</ul>
-</li>
-<li>Pro: low overhead</li>
-<li>Con: may waste many cycles on polling if infrequent or unpredictable I&#x2F;O operations</li>
-</ul>
-</li>
-<li>Actual devices combine both polling and interrupts<ul>
-<li>For instance – High-bandwidth network adapter:<ul>
-<li>Interrupt for first incoming packet</li>
-<li>Poll for following packets until hardware queues are empty</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Device-Drivers"><a href="#Device-Drivers" class="headerlink" title="Device Drivers"></a>Device Drivers</h3><ul>
-<li><strong>Device Driver</strong>: Device-specific code in the kernel that interacts directly with the device hardware<ul>
-<li>Supports a standard, internal interface</li>
-<li>Same kernel I&#x2F;O system can interact easily with different device drivers</li>
-<li>Special device-specific configuration supported with the ioctl() system call</li>
-</ul>
-</li>
-<li>Device Drivers typically divided into two pieces:<ul>
-<li><strong>Top half</strong>: accessed in call path from system calls<ul>
-<li>implements a set of <strong>standard, cross-device calls</strong> like open(), close(), read(), write(), ioctl(), strategy()</li>
-<li>This is the kernel’s interface to the device driver</li>
-<li>Top half will start I&#x2F;O to device, may put thread to sleep until finished</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Bottom half</strong>: run as interrupt routine<ul>
-<li>Gets input or transfers next block of output</li>
-<li>May wake sleeping threads if I&#x2F;O now complete</li>
-</ul>
-</li>
-</ul>
-<h1 id="9-File-System"><a href="#9-File-System" class="headerlink" title="9. File System"></a>9. File System</h1><h2 id="9-1-File"><a href="#9-1-File" class="headerlink" title="9.1. File"></a>9.1. File</h2><h3 id="File-Concept"><a href="#File-Concept" class="headerlink" title="File Concept"></a>File Concept</h3><p>Contiguous logical address space</p>
-<ul>
-<li>OS abstracts from the physical properties of its storage device to define a logical storage unit called file</li>
-<li>Persistent</li>
-<li>OS maps files to physical devices</li>
-</ul>
-<p>Types: Data, Program, Documents</p>
-<h3 id="File-Structure"><a href="#File-Structure" class="headerlink" title="File Structure"></a>File Structure</h3><ul>
-<li>None - sequence of words&#x2F;bytes</li>
-<li>Simple record structure</li>
-<li>Complex structures</li>
-<li>Can simulate last two with first method by inserting appropriate control<br>characters</li>
-<li>Who decides? OS &#x2F; Programs</li>
-</ul>
-<h3 id="File-Attibutes"><a href="#File-Attibutes" class="headerlink" title="File Attibutes"></a>File Attibutes</h3><ul>
-<li>Name</li>
-<li>Identifier</li>
-<li>Type</li>
-<li>Location</li>
-<li>Size</li>
-<li>Protection</li>
-<li>Time, Date, User Identification</li>
-<li>Information about files are kept in the directory structure, maintained on disk</li>
-</ul>
-<h3 id="File-Operations"><a href="#File-Operations" class="headerlink" title="File Operations"></a>File Operations</h3><ul>
-<li>Create</li>
-<li>Write</li>
-<li>Read</li>
-<li>Reposition within file - file seek</li>
-<li>Delete</li>
-<li>Truncate</li>
-<li>Open&#x2F;Close</li>
-</ul>
-<h2 id="9-2-Directory"><a href="#9-2-Directory" class="headerlink" title="9.2. Directory"></a>9.2. Directory</h2><h3 id="Information-in-a-Device-Directory"><a href="#Information-in-a-Device-Directory" class="headerlink" title="Information in a Device Directory"></a>Information in a Device Directory</h3><ul>
-<li>File name</li>
-<li>File type</li>
-<li>Address or location</li>
-<li>Current length</li>
-<li>Maximum length</li>
-<li>Date created, last accessed, last updated</li>
-<li>Owner ID, Protection Information</li>
-</ul>
-<h3 id="Operations-Performed-on-Directory"><a href="#Operations-Performed-on-Directory" class="headerlink" title="Operations Performed on Directory"></a>Operations Performed on Directory</h3><ul>
-<li>Search for a file</li>
-<li>Create a file</li>
-<li>Delete a file</li>
-<li>List a directory</li>
-<li>Rename a file</li>
-<li>Traverse the file system</li>
-</ul>
-<h3 id="Directory-Organization"><a href="#Directory-Organization" class="headerlink" title="Directory Organization"></a>Directory Organization</h3><p>Goals: <strong>Efficiency</strong>, <strong>Naming</strong>, <strong>Grouping</strong></p>
-<h2 id="9-3-File-System"><a href="#9-3-File-System" class="headerlink" title="9.3. File System"></a>9.3. File System</h2><h3 id="Components-of-a-File-System"><a href="#Components-of-a-File-System" class="headerlink" title="Components of a File System"></a>Components of a File System</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet24.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">  File_Name_Offset --Directory--&gt; File_Number_Offset --Index_Structure--&gt; Storage_Block</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Open performs <strong>Name Resolution</strong><ul>
-<li><strong>Translates pathname into a “file number”</strong></li>
-<li>Used as an “index” to locate the blocks<ul>
-<li>Creates a file descriptor in PCB within kernel</li>
-<li>Returns a “handle” (another integer) to user process</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h3><ul>
-<li>Basically a hierarchical structure</li>
-<li>Each directory entry is a collection of Files &#x2F; Directories(A link to another entries)</li>
-<li>Each has a name and attributes<ul>
-<li>Files have data</li>
-</ul>
-</li>
-<li>Links (hard links) make it a <strong>DAG</strong>, not just a tree<ul>
-<li>Softlinks (aliases) are another name for an entry</li>
-</ul>
-</li>
-</ul>
-<aside>
-💡 **Example**: How many disk accesses to resolve “/my/book/count”?
-
-
-<ul>
-<li><p>Read in file header for root (fixed spot on disk)</p>
-</li>
-<li><p>Read in first data block for root</p>
-<ul>
-<li>Table of file name&#x2F;index pairs. Search linearly – ok since directories typically very small</li>
-</ul>
-</li>
-<li><p>Read in file header for “my”</p>
-</li>
-<li><p>Read in first data block for “my”; search for “book”</p>
-</li>
-<li><p>Read in file header for “book”</p>
-</li>
-<li><p>Read in first data block for “book”; search for “count”</p>
-</li>
-<li><p>Read in file header for “count”</p>
-</aside>
-</li>
-<li><p><strong>Current working directory</strong>: Per-address-space pointer to a directory (inode) used for resolving file names</p>
-</li>
-</ul>
-<h3 id="File"><a href="#File" class="headerlink" title="File"></a>File</h3><ul>
-<li>Named permanent storage</li>
-<li>Contains:<ul>
-<li>Data<ul>
-<li>Blocks on disk somewhere</li>
-</ul>
-</li>
-<li>Metadata (Attributes)<ul>
-<li>Owner, size, last opened, …</li>
-<li>Access rights<ul>
-<li>R, W, X</li>
-<li>Owner, Group, Other (in Unix systems)</li>
-<li>Access control list in Windows system</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="In-Memory-File-System-Structures"><a href="#In-Memory-File-System-Structures" class="headerlink" title="In-Memory File System Structures"></a>In-Memory File System Structures</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet25.png"></p>
-<ul>
-<li>Open system call:<ul>
-<li>Resolves file name, finds <strong>file control block (inode)</strong></li>
-<li>Makes entries in per-process and system-wide tables</li>
-<li>Returns index (called “file handle”) in open-file table</li>
-</ul>
-</li>
-<li>Read&#x2F;write system calls:<ul>
-<li>Use file handle to locate <strong>inode</strong></li>
-<li>Perform appropriate reads or writes</li>
-</ul>
-</li>
-</ul>
-<h2 id="9-4-Our-First-FileSystem-FAT"><a href="#9-4-Our-First-FileSystem-FAT" class="headerlink" title="9.4. Our First FileSystem: FAT"></a>9.4. Our First FileSystem: FAT</h2><h3 id="FAT-File-Allication-Table"><a href="#FAT-File-Allication-Table" class="headerlink" title="FAT: File Allication Table"></a>FAT: File Allication Table</h3><ul>
-<li>Assume (for now) we have a way to translate a path to a “file number”<ul>
-<li>i.e., a directory structure</li>
-</ul>
-</li>
-<li>Disk Storage is a collection of Blocks<ul>
-<li>Just hold file data:</li>
-<li>offset <code>o = &lt; B, x &gt;</code></li>
-</ul>
-</li>
-<li>E.g.,: <code>file_read 31, &lt; 2, x &gt;</code><ul>
-<li>Index into FAT with file number</li>
-<li>Follow linked list to block</li>
-<li>Read the block from disk into memory</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet26.png"></p>
-<h3 id="FAT-Properties"><a href="#FAT-Properties" class="headerlink" title="FAT Properties"></a>FAT Properties</h3><ul>
-<li>File is collection of disk blocks</li>
-<li>FAT is linked list 1-1 with blocks</li>
-<li>File Number is index of root of block list for the file</li>
-<li>File offset (<code>o = &lt; B, x &gt;</code>)</li>
-<li>Follow list to get block #</li>
-<li>Unused blocks → Marked free (no ordering, must scan to find)</li>
-<li>E.g. <code>file_write(31, &lt; 3, y &gt;)</code><ul>
-<li>Grab free block</li>
-<li>Linking them into file</li>
-</ul>
-</li>
-<li>Grow file by allocating free blocks and linking them in</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet27.png"></p>
-<h3 id="FAT-Assessment"><a href="#FAT-Assessment" class="headerlink" title="FAT Assessment"></a>FAT Assessment</h3><p>FAT32 (32 instead of 12 bits) used in Windows, USB drives, SD…</p>
-<ul>
-<li>Where is FAT stored?<ul>
-<li>On Disk, on boot cache in memory, second (backup) copy on disk</li>
-</ul>
-</li>
-<li>What happens when you format a disk?<ul>
-<li>Zero the blocks, Mark FAT entries “free”</li>
-</ul>
-</li>
-<li>What happens when you quick format a disk?<ul>
-<li>Mark all entries in FAT as free</li>
-</ul>
-</li>
-<li>Simple<ul>
-<li>Can implement in device firmware</li>
-</ul>
-</li>
-</ul>
-<h3 id="FAT-Directories"><a href="#FAT-Directories" class="headerlink" title="FAT Directories"></a>FAT Directories</h3><p>Directory is a file containing <code>&lt;file_name: file_number&gt;</code> mappings</p>
-<ul>
-<li>Free space for new&#x2F;deleted entries</li>
-<li>In FAT: file attributes are kept in directory (!!!)</li>
-<li>Each directory is a linked list of entries</li>
-</ul>
-<p>Where do you find root directory ( “&#x2F;” )?</p>
-<ul>
-<li><strong>At well-defined place on disk</strong></li>
-<li>For FAT, this is at block 2 (there are no blocks 0 or 1)</li>
-<li>Remaining directories are accessed via their file_number</li>
-</ul>
-<h3 id="FAT-Security-Holes"><a href="#FAT-Security-Holes" class="headerlink" title="FAT Security Holes"></a>FAT Security Holes</h3><ul>
-<li>FAT has no access rights</li>
-<li>FAT has no header in the file blocks</li>
-<li>Just gives an index into the FAT to read data</li>
-</ul>
-<h2 id="9-5-Unix-File-System"><a href="#9-5-Unix-File-System" class="headerlink" title="9.5. Unix File System"></a>9.5. Unix File System</h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><ul>
-<li>Original inode format appeared in BSD 4.1<ul>
-<li>Berkeley Standard Distribution Unix</li>
-<li>Similar structure for Linux Ext2&#x2F;3</li>
-</ul>
-</li>
-<li>File Number is index into inode arrays</li>
-<li>Multi-level index structure<ul>
-<li>Great for little and large files</li>
-<li>Asymmetric tree with fixed sized blocks</li>
-</ul>
-</li>
-<li>Metadata associated with the file<ul>
-<li>Rather than in the directory that points to it</li>
-</ul>
-</li>
-<li>UNIX Fast File System (FFS) BSD 4.2 Locality Heuristics:<ul>
-<li>Block group placement</li>
-<li>Reserve space</li>
-</ul>
-</li>
-<li>Scalable directory structure</li>
-</ul>
-<h3 id="Inode-Structure"><a href="#Inode-Structure" class="headerlink" title="Inode Structure"></a>Inode Structure</h3><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet28.png"></p>
-<h3 id="UNIX-BSD-4-2-Problem-1"><a href="#UNIX-BSD-4-2-Problem-1" class="headerlink" title="UNIX BSD 4.2 Problem 1"></a>UNIX BSD 4.2 Problem 1</h3><p>When create a file, don’t know how big it will become (in UNIX, most writes are by appending)</p>
-<ul>
-<li>How much contiguous space do you allocate for a file?</li>
-<li>In BSD 4.2, just find some range of free blocks</li>
-<li>Put each new file at the front of different range</li>
-<li>To expand a file, you first try successive blocks in bitmap, then choose new range of blocks<ul>
-<li>Also in BSD 4.2: store files from same directory near each other</li>
-</ul>
-</li>
-</ul>
-<h3 id="UNIX-BSD-4-2-Problem-2"><a href="#UNIX-BSD-4-2-Problem-2" class="headerlink" title="UNIX BSD 4.2 Problem 2"></a>UNIX BSD 4.2 Problem 2</h3><p>Missing blocks due to rotational delay</p>
-<blockquote>
-<p>Issue: Read one block, do processing, and read next block. In meantime, disk has continued turning: missed next block! Need 1 revolution&#x2F;block!</p>
-</blockquote>
-<ul>
-<li>Solution1: Skip sector positioning (“interleaving”)<ul>
-<li>Place the blocks from one file on every other block of a track: give time for processing to overlap rotation</li>
-<li>Can be done by OS or in modern drives by the disk controller</li>
-</ul>
-</li>
-<li>Solution 2: Read ahead: read next block right after first, even if application hasn’t asked for it yet<ul>
-<li>This can be done either by OS (read ahead)</li>
-<li>By disk itself (track buffers) - many disk controllers have internal RAM that allows them to read a complete track</li>
-</ul>
-</li>
-</ul>
-<h2 id="9-6-Links"><a href="#9-6-Links" class="headerlink" title="9.6. Links"></a>9.6. Links</h2><h3 id="Hard-link"><a href="#Hard-link" class="headerlink" title="Hard link"></a>Hard link</h3><ul>
-<li>Sets another directory entry to contain the file number for the file</li>
-<li>Creates another name (path) for the file</li>
-<li>Each is “first class”</li>
-</ul>
-<h3 id="Soft-link-or-Symbolic-Link-or-Shortcut"><a href="#Soft-link-or-Symbolic-Link-or-Shortcut" class="headerlink" title="Soft link (or Symbolic Link or Shortcut)"></a>Soft link (or Symbolic Link or Shortcut)</h3><ul>
-<li>Directory entry contains the path and name of the file</li>
-<li>Map one name to another name</li>
-</ul>
-<h2 id="9-7-NTFS"><a href="#9-7-NTFS" class="headerlink" title="9.7. NTFS"></a>9.7. NTFS</h2><ul>
-<li>New Technology File System (NTFS)<ul>
-<li>Default on Microsoft Windows systems</li>
-</ul>
-</li>
-<li><strong>Variable length extents</strong><ul>
-<li>Rather than fixed blocks</li>
-</ul>
-</li>
-<li>Everything (almost) is a sequence of <code>attribute:value</code> pairs<ul>
-<li>Meta-data and data</li>
-</ul>
-</li>
-<li>Mix direct and indirect freely</li>
-<li>Directories organized in <strong>B-tree structure</strong> by default</li>
-<li>Master File Table<ul>
-<li>Database with Flexible 1KB entries for metadata&#x2F;data</li>
-<li>Variable-sized attribute records (data or metadata)</li>
-<li>Extend with variable depth tree (non-resident)</li>
-</ul>
-</li>
-<li>Extents – variable length contiguous regions<ul>
-<li>Block pointers cover runs of blocks</li>
-<li>Similar approach in Linux (ext4)</li>
-<li>File create can provide hint as to size of file</li>
-</ul>
-</li>
-<li>journaling for reliability</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet29.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet30.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet31.png"></p>
-<h2 id="9-8-Memory-Mapped-Files"><a href="#9-8-Memory-Mapped-Files" class="headerlink" title="9.8. Memory Mapped Files"></a>9.8. Memory Mapped Files</h2><ul>
-<li>Traditional I&#x2F;O involves explicit transfers between buffers in process address space to&#x2F; from regions of a file<ul>
-<li>This involves multiple copies into caches in memory, plus system calls</li>
-</ul>
-</li>
-<li>What if we could “map” the file directly into an empty region of our address space<ul>
-<li>Implicitly “page it in” when we read it</li>
-<li>Write it and “eventually” page it out</li>
-</ul>
-</li>
-<li>Executable files are treated this way when we exec the process!!</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/OS_Final_Cheatsheet32.png"></p>
-<h2 id="9-9-File-System-Caching"><a href="#9-9-File-System-Caching" class="headerlink" title="9.9. File System Caching"></a>9.9. File System Caching</h2><ul>
-<li>Key Idea: Exploit locality by caching data in memory<ul>
-<li>Name translations: Mapping from paths → inodes</li>
-<li>Disk blocks: Mapping from block address → disk content</li>
-</ul>
-</li>
-<li><strong>Buffer Cache</strong>: Memory used to cache kernel resources, including disk blocks and name translations<ul>
-<li>Can contain “dirty” blocks (blocks yet on disk)</li>
-</ul>
-</li>
-<li>Replacement policy? LRU<ul>
-<li>Can afford overhead of timestamps for each disk block</li>
-<li>Advantages:<ul>
-<li>Works very well for name translation</li>
-<li>Works well in general as long as memory is big enough to accommodate a host’s working set of files.</li>
-</ul>
-</li>
-<li>Disadvantages:<ul>
-<li>Fails when some application scans through file system, thereby flushing the cache with data used only once</li>
-<li>E.g., : <code>find . –exec grep foo &#123;&#125; \;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Other Replacement Policies?<ul>
-<li>Some systems allow applications to request other policies</li>
-<li>E.g., ‘Use Once’:<ul>
-<li>File system can discard blocks as soon as they are used</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Cache Size: How much memory should the OS allocate to the buffer cache vs virtual memory?<ul>
-<li>Too much memory to the file system cache → won’t be able to run many applications at once</li>
-<li>Too little memory to file system cache → many applications may run slowly (disk caching not effective)</li>
-<li>Solution: <strong>adjust boundary dynamically</strong> so that the disk access rates for paging and file access are balanced</li>
-</ul>
-</li>
-<li>Read Ahead Prefetching: <strong>fetch sequential blocks early</strong><ul>
-<li>Key Idea: exploit fact that most common file access is sequential by prefetching subsequent disk blocks ahead of current read request (if they are not already in memory)</li>
-<li>Elevator algorithm can efficiently interleave groups of prefetches from<br>concurrent applications</li>
-<li>How much to prefetch?<ul>
-<li>Too many imposes delays on requests by other applications</li>
-<li>Too few causes many seeks (and rotational delays) among concurrent file requests</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Delayed Writes: <strong>Writes to files not immediately</strong> sent out to disk<ul>
-<li>Instead, <code>write()</code> copies data from user space buffer to kernel buffer (in<br>cache)<ul>
-<li>Enabled by presence of buffer cache: can leave written file blocks in cache<br>for a while</li>
-<li>If some other application tries to read data before written to disk, file system<br>will read from cache</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Flushed to disk periodically (e.g. in UNIX, every 30 sec)</li>
-<li>Advantages:<ul>
-<li>Disk scheduler can efficiently order lots of requests</li>
-<li>Disk allocation algorithm can be run with correct size value for a file</li>
-<li>Some files need never get written to disk! (e..g temporary scratch files written<br><code>/tmp</code> often don’t exist for 30 sec)</li>
-</ul>
-</li>
-<li>Disadvantages<ul>
-<li>What if system crashes before file has been written out?</li>
-<li>Worse yet, what if system crashes before a directory file has been written<br>out? (lose pointer to inode!)</li>
-</ul>
-</li>
-</ul>
-<h2 id="9-10-Important-Ilities"><a href="#9-10-Important-Ilities" class="headerlink" title="9.10. Important Ilities"></a>9.10. Important Ilities</h2><ul>
-<li><strong>Availability</strong>: the probability that the system can accept and process requests<ul>
-<li>Often measured in “nines” of probability. So, a 99.9% probability is considered “3-nines of availability”</li>
-<li>Key idea here is independence of failures</li>
-</ul>
-</li>
-<li><strong>Durability</strong>: the ability of a system to recover data despite faults<ul>
-<li>This idea is fault tolerance applied to data</li>
-<li>Doesn’t necessarily imply availability: information on pyramids was very durable, but could not be accessed until discovery of Rosetta Stone</li>
-</ul>
-</li>
-<li><strong>Reliability</strong>: the ability of a system or component to perform its required functions under stated conditions for a specified period of time (IEEE definition)<ul>
-<li>Usually stronger than simply availability: means that the system is not only “up”, but also working correctly</li>
-<li>Includes availability, security, fault tolerance&#x2F;durability</li>
-<li>Must make sure data survives system crashes, disk crashes, other problems</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/08/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Final-Cheatsheet/" data-id="clylj5tf1003nbc956bplfvxw" data-title="【CS130】Final Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2023年诗词创作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" class="article-date">
-  <time class="dt-published" datetime="2023-12-30T16:00:00.000Z" itemprop="datePublished">2023-12-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2023 年诗词创作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>2023 年我并没有机会去写太多的内容。一方面是因为这一年真的很忙，另一方面是因为，在缺乏阅读的情况下，我总觉得没有文字回荡在自己的脑海里。所幸在年底上了宋词导读课，终于有时间去看一些高质量的诗词作品。</p>
-<p>总体而言，我觉得今年写的虽然不多，但质量还是相当不错的。相比于小时候的作品而言，至少做到了言之有物言之有情，也有了一些我觉得称得上有意思有味道的句子。</p>
-<p>希望 2024 年能写出更好的作品。</p>
-<h1 id="诗词创作"><a href="#诗词创作" class="headerlink" title="诗词创作"></a>诗词创作</h1><h2 id="扬州游"><a href="#扬州游" class="headerlink" title="扬州游"></a>扬州游</h2><p>垂柳寂寂水波青，烟雨秋声入邗城。<br>二十四桥人如水，谁见桥边红药生？</p>
-<h2 id="鹧鸪天-·-病中有感"><a href="#鹧鸪天-·-病中有感" class="headerlink" title="鹧鸪天 · 病中有感"></a>鹧鸪天 · 病中有感</h2><p>寒月已照老病身，谩说思绪更销魂。<br>心事故事何曾问，已非旧地旧时分。</p>
-<p>风猎猎，夜沉沉，无花无酒无故人。<br>不敢凭眺西南望，灯火楼间万点尘。</p>
-<h2 id="临江仙"><a href="#临江仙" class="headerlink" title="临江仙"></a>临江仙</h2><p>半夜杯中温水，十篇纸上新诗。<br>轻描淡写寄谁知？<br>笔停还怅望，不是少年时。</p>
-<p>多少故园心事，朝朝暮暮相思。<br>一溪风月入陈词。<br>柳垂江上影，梅谢雪中枝。</p>
-<h2 id="鹧鸪天-·-读稼轩《代人赋》有感"><a href="#鹧鸪天-·-读稼轩《代人赋》有感" class="headerlink" title="鹧鸪天 · 读稼轩《代人赋》有感"></a>鹧鸪天 · 读稼轩《代人赋》有感</h2><p>细数分明日落迟，随风寒露竟铺石。<br>若非昨夜白头梦，不信人间有相思。</p>
-<p>云摇荡，月参差，尽似催我作新诗。<br>莫问何物无尽处，须知天地有穷时。</p>
-<h2 id="踏莎行"><a href="#踏莎行" class="headerlink" title="踏莎行"></a>踏莎行</h2><p>骤雨将息，微风渐暖。日高初醒人犹懒。<br>浮生常道愁处多，朦胧又恨欢时短。</p>
-<p>旧梦香消，故人影散。凭栏不是当时晚。<br>也曾举手欲摘星，今夜清尊空又满。</p>
-<h2 id="鹧鸪天-·-海南游"><a href="#鹧鸪天-·-海南游" class="headerlink" title="鹧鸪天 · 海南游"></a>鹧鸪天 · 海南游</h2><p>茶暖楼高与笑谈，棕榈叶里望晴滩。<br>云生风起潮将退，日落沙明月已残。</p>
-<p>听旧事，更经年，青天碧海未桑田。<br>人生易老天难老，多少悲欢一梦间。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" data-id="clylj5tee0002bc958j1p0t7x" data-title="2023 年诗词创作" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-个人创作/人文课论文/宋词导读拍照配词" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/12/06/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E5%AF%BC%E8%AF%BB%E6%8B%8D%E7%85%A7%E9%85%8D%E8%AF%8D/" class="article-date">
-  <time class="dt-published" datetime="2023-12-05T16:00:00.000Z" itemprop="datePublished">2023-12-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/12/06/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E5%AF%BC%E8%AF%BB%E6%8B%8D%E7%85%A7%E9%85%8D%E8%AF%8D/">【宋词导读 拍照配词】没有人记得，就没有人忘记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>欲买桂花同载酒，终不似，少年游。</p>
-</blockquote>
-<p><img src="/imgs/PZPC01.png"></p>
-<p><img src="/imgs/PZPC02.png"></p>
-<p>2021年6月23日的晚上，我在手机的便签中写下：</p>
-<p>只有离开或消逝的事物才被冠以“故”字，因此，久别者才叫“故人”，离开后方为“故乡”。</p>
-<p>直到和好朋友们都分别，我才意识到，这是最后一次以学生的身份坐在那个教室里——这是真正意义上的最后一次。以后我们还会回来很多次，大抵是在功成名就衣锦还乡的时候，可以面带微笑侃侃而谈，可以从容不迫应对自如。那时候老师再也不会对我们的表现挑剔，好朋友们也不必再为彼此的下一次考试而担心。我当时以为，我们会走出曾经的桎梏，走入新的天地，而对“故人”“故乡”的怀念，不过是繁华锦簇中一抹淡淡的、充满深意的忧伤。</p>
-<p>但我错了。2023年8月23日，我和同样的朋友们一起，回到了同样的校园，不一样的只有时间。当并肩爬楼梯的时候，原本已经没那么熟稔的我们又如当年一样嬉笑打闹。见到老师的时候，听到的仍然是熟悉的对彼此的调侃和吹捧，以及一如既往的拘谨。最后行将分别的时候，一种莫大的哀伤萦绕在我心头。我操纵着无人机，留下我们一起微笑的模样，大家一如当年，又不似当年。</p>
-<p>没有什么东西再将我们绑在一起了，我们都有各自的人生；北京、上海、西安……大家已经是天各一方，都有各自新的经历和新的人生了。分别之后我一个人路过学校门口的文具店，习惯性的步入其中，像当年一般挑选了几本不同的笔记本。提着它们，又路过学校门口的时候，我听到了下午上课的铃声，脚步不自觉的快了几分。就在那恍惚的几秒里，我感觉上大学的两年从来没有发生过，我还留在那里，穿着校服，做一个普普通通的学生。可这一切毕竟是幻觉，即使买了一样的东西，走在一样的道路上，可我无法再次踏入同一条河流。</p>
-<p>欲买桂花同载酒——我想，很多年之后，如果我们都老了，又聚在一起，大家都忘了这些年经过了什么，于是我们打闹嬉笑，喊起当年的外号，嘲笑彼此的衰老。这时候，桂花载酒的我们，是否又似故人重游呢？在盛夏的金色阳光里，思绪在不断飘散着，飘散在风中，飘散回昔日的校园里。<strong>没有人记得，也就没有人忘记。</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/12/06/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E5%AF%BC%E8%AF%BB%E6%8B%8D%E7%85%A7%E9%85%8D%E8%AF%8D/" data-id="clylj5tf1003qbc953a20csie" data-title="【宋词导读 拍照配词】没有人记得，就没有人忘记" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-科研思考/中国芯片的前世今生" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" class="article-date">
-  <time class="dt-published" datetime="2023-11-26T16:00:00.000Z" itemprop="datePublished">2023-11-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/">我的“中国芯”：中国芯片的前世今生</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_00.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_01.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_02.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_03.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_04.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_05.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_06.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_07.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_08.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_09.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_10.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_11.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_12.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_13.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_14.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_15.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_16.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_17.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_18.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_19.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_20.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_21.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_22.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_23.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_24.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_25.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_26.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_27.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_28.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_29.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_30.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_31.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_32.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_33.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_34.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_35.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_36.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_37.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_38.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_39.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_40.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_41.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_42.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_43.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_44.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_45.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_46.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_47.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_48.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_49.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_50.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_51.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_52.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_53.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_54.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_55.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_56.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_57.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_58.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_59.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_60.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_61.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_62.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_63.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_64.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_65.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_66.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_67.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_68.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_69.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_70.png"><br><img src="/files/MG-PPT-IMG/%E6%AF%9B%E6%A6%82%EF%BC%9A%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F_71.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" data-id="clylj5tep0013bc95ft0egnzv" data-title="我的“中国芯”：中国芯片的前世今生" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-本科课程/CS130/Midterm-Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" class="article-date">
-  <time class="dt-published" datetime="2023-11-21T16:00:00.000Z" itemprop="datePublished">2023-11-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a>►<a class="article-category-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/">【CS130】Midterm Review</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="0-Overview"><a href="#0-Overview" class="headerlink" title="0. Overview"></a>0. Overview</h1><h2 id="0-0-What-is-OS"><a href="#0-0-What-is-OS" class="headerlink" title="0.0. What is OS?"></a>0.0. What is OS?</h2><p><strong>OS is an special layer of Software.</strong></p>
-<ul>
-<li>Provides application SW access to HW resources</li>
-<li>Convenient abstraction of complex HW devices</li>
-<li>Protected access to shared resources</li>
-<li>Security and authentication</li>
-<li>Communication amongst logical entities</li>
-</ul>
-<h2 id="0-1-OS’s-Basic-Behaviors"><a href="#0-1-OS’s-Basic-Behaviors" class="headerlink" title="0.1. OS’s Basic Behaviors"></a>0.1. OS’s Basic Behaviors</h2><ul>
-<li>Translate programs to processes</li>
-<li>Deals with context switch</li>
-<li>Scheduling, Protection</li>
-<li>I&#x2F;O</li>
-<li>Loading</li>
-</ul>
-<h2 id="0-2-OS-Boot"><a href="#0-2-OS-Boot" class="headerlink" title="0.2. OS Boot"></a>0.2. OS Boot</h2><ol>
-<li>Initialization at a fixed memory location</li>
-<li>Bootstrap Loader</li>
-<li>Loads Kernel</li>
-</ol>
-<h2 id="0-3-Three-Roles-Of-OS"><a href="#0-3-Three-Roles-Of-OS" class="headerlink" title="0.3. Three Roles Of OS"></a>0.3. Three Roles Of OS</h2><h3 id="OS-is-an-illusionist"><a href="#OS-is-an-illusionist" class="headerlink" title="OS is an illusionist"></a>OS is an illusionist</h3><ul>
-<li>Provide clean, easy-to-use abstractions of physical resources<ul>
-<li>Infinite memory, dedicated（专心的，一致的） machine</li>
-<li>Higher level objects: FIles, users, messages……</li>
-<li>Masking Limitations, Virtualization</li>
-</ul>
-</li>
-</ul>
-<h3 id="OS-is-a-Referee"><a href="#OS-is-a-Referee" class="headerlink" title="OS is a Referee"></a>OS is a Referee</h3><ul>
-<li>Manage protection, isolation, and sharing of resources</li>
-</ul>
-<h3 id="OS-is-a-glue"><a href="#OS-is-a-glue" class="headerlink" title="OS is a glue"></a>OS is a glue</h3><ul>
-<li>Storage, Networking</li>
-<li>Sharing, authorization</li>
-</ul>
-<h1 id="1-Four-Basic-OS-Concepts"><a href="#1-Four-Basic-OS-Concepts" class="headerlink" title="1. Four Basic OS Concepts"></a>1. Four Basic OS Concepts</h1><h2 id="1-0-Overview"><a href="#1-0-Overview" class="headerlink" title="1.0. Overview"></a>1.0. Overview</h2><h3 id="Abstractions-of-Underlying-HW"><a href="#Abstractions-of-Underlying-HW" class="headerlink" title="Abstractions of Underlying HW"></a>Abstractions of Underlying HW</h3><ul>
-<li>Processor → Thread</li>
-<li>Memory → Address Space</li>
-<li>Disks, SSDs,… → Files</li>
-<li>Networks → Sockets</li>
-<li>Machines → Processes</li>
-</ul>
-<h3 id="Basic-OS-Concepts"><a href="#Basic-OS-Concepts" class="headerlink" title="Basic OS Concepts"></a>Basic OS Concepts</h3><ol>
-<li>Thread<ul>
-<li>Execution Context</li>
-<li>Fully Describes Program State</li>
-<li>PC, Regs, Execution Flags, Stack…</li>
-</ul>
-</li>
-<li>Address Space<ul>
-<li>Set of memory address accessible to program</li>
-<li>May be distinct from memory space of physical machine ( in which case programs operate in a virtual machine )</li>
-</ul>
-</li>
-<li>Process<ul>
-<li>An instance of Running Program</li>
-<li>Protected Address Space + One &#x2F; More Threads</li>
-</ul>
-</li>
-<li>Dual-Mode Operation &#x2F; Protection<ul>
-<li>Only the “System” can access certain resources</li>
-<li>Combined with translation, isolates programs from each other, and isolates OS from programs.</li>
-</ul>
-</li>
-</ol>
-<h2 id="1-1-Thread"><a href="#1-1-Thread" class="headerlink" title="1.1. Thread"></a>1.1. Thread</h2><p>Thread is <strong>single unique execution context.</strong></p>
-<ul>
-<li>A thread is suspended（挂起，即不执行）when its state is not loaded (resident，常驻 ) into the processor.<ul>
-<li>Resident: Register hold the root state of the thread. Include the PC Regs and currently executing instruction.</li>
-</ul>
-</li>
-<li>Illusion of Multiple Processors<ul>
-<li><strong>Threads are virtual cores!</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="Thread-Control-Block（TCB）"><a href="#Thread-Control-Block（TCB）" class="headerlink" title="Thread Control Block（TCB）"></a>Thread Control Block（TCB）</h3><ul>
-<li>Holds contents of registers when thread is not running</li>
-<li>Contains:<ul>
-<li>Execution State: CPU Registers, Pprogram Counter (PC), Pointer to Stack (SP)</li>
-<li>Scheduling info: State, Priority, CPU time</li>
-<li>Various Pointers (for implementing scheduling queues)</li>
-<li>Pointer to Enclosing Process (PCB)</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled.png"></p>
-<h3 id="Super-scalar-and-Hyper-threading"><a href="#Super-scalar-and-Hyper-threading" class="headerlink" title="Super scalar and Hyper threading"></a>Super scalar and Hyper threading</h3><ul>
-<li>Super scalar processors can execute multiple instructions that are independent.</li>
-<li>Hyper threading duplicates register state to make a second “thread”, allowing more instructions to run.（本质上是通过寄存器的复制来创建额外线程）</li>
-</ul>
-<h2 id="1-2-Address-Space"><a href="#1-2-Address-Space" class="headerlink" title="1.2. Address Space"></a>1.2. Address Space</h2><p>Address space is <strong>the set of accessible addresses</strong> + <strong>state associated with them</strong>.</p>
-<ul>
-<li><p>Space Size?</p>
-<ul>
-<li>For 32 Bit: $2^{32} &#x3D; 4\text{GB}$</li>
-<li>For 64 Bit: $2^{64}\approx 10^{18}\text{Bytes}$</li>
-</ul>
-</li>
-<li><p>Four Segment:</p>
-<ul>
-<li>Stack</li>
-<li>Heap</li>
-<li>Static Data</li>
-<li>Code.</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%201.png"></p>
-<h3 id="OS-Protection"><a href="#OS-Protection" class="headerlink" title="OS Protection?"></a>OS Protection?</h3><ul>
-<li>OS must protect itself from user programs<ul>
-<li>Reliability, Security, Privacy, Fairness</li>
-</ul>
-</li>
-<li>OS must protect user programs from one another</li>
-</ul>
-<p><strong>Simple Protection: Base &amp; Bound</strong></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%202.png"></p>
-<h2 id="1-3-Process"><a href="#1-3-Process" class="headerlink" title="1.3. Process"></a>1.3. Process</h2><p><strong>Execution environment with Restricted Rights</strong>.</p>
-<blockquote>
-<p>Fundamental tradeoff between protection and efficiency</p>
-</blockquote>
-<ul>
-<li>(Protected) Address Space with One or More Threads</li>
-<li>Owns memory ( Address Space )</li>
-<li>Owns file descriptors, file system context, …</li>
-<li>Encapsulate（封装） one or more threads sharing processes resources</li>
-</ul>
-<h3 id="Why-Processes"><a href="#Why-Processes" class="headerlink" title="Why Processes ?"></a>Why Processes ?</h3><ul>
-<li><strong>Protected from each other</strong></li>
-<li><strong>OS protected from them</strong></li>
-</ul>
-<h3 id="Multi-Threaded-Processes"><a href="#Multi-Threaded-Processes" class="headerlink" title="Multi-Threaded Processes"></a>Multi-Threaded Processes</h3><ul>
-<li><strong>Threads encapsulate Concurrency</strong><ul>
-<li>“Active” component（主动的组件，推动程序向前）</li>
-</ul>
-</li>
-<li><strong>Address Spaces encapsulate Protection</strong><ul>
-<li>“Passive ” part（被动的部分，存储机制的提供者）</li>
-<li>Keeps buggy program from trashing the system</li>
-</ul>
-</li>
-</ul>
-<h2 id="1-4-Dual-Mode-Operation"><a href="#1-4-Dual-Mode-Operation" class="headerlink" title="1.4. Dual Mode Operation"></a>1.4. Dual Mode Operation</h2><ul>
-<li>Only the “system” has the ability to access certain resources</li>
-<li>OS and HW protected from user programs</li>
-<li>User programs isolated from one another</li>
-<li>Hardware provides at least two modes ( Kernel Mode and User Mode )<ul>
-<li>Need: A bit of state, Certain operations only permitted in system &#x2F; kernel.</li>
-<li>User → Kernel Transition: Set System Mode, Saves User PC</li>
-<li>Kernel → User Transition: Clear System Mode, Restores Appropriate User PC.</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%203.png"></p>
-<h1 id="2-Process-Management"><a href="#2-Process-Management" class="headerlink" title="2. Process Management"></a>2. Process Management</h1><p>Process: OS abstraction of what is needed to run a single program.</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%204.png"></p>
-<h2 id="2-0-Process-Control-Block-Compare-with-TCB"><a href="#2-0-Process-Control-Block-Compare-with-TCB" class="headerlink" title="2.0. Process Control Block ( Compare with TCB! )"></a>2.0. Process Control Block ( Compare with TCB! )</h2><aside>
-💡 POSIX: Portable Operation System Interfaces in UNIX.
-It’s the **Interface for application programmers**
-
-</aside>
-
-<ul>
-<li>Process Status (running, ready, blocked, …)</li>
-<li>Register state (when not ready)</li>
-<li>Process ID (PID), User, Executable, Priority, …</li>
-<li>Execution time, …</li>
-<li>Memory space, translation, …</li>
-<li>Kernel Scheduler maintains a data structure containing the PCBs</li>
-</ul>
-<p>In Context switch, we save the current process’s state to it’s PCB, and reload another process’s state. </p>
-<h2 id="2-1-System-Call"><a href="#2-1-System-Call" class="headerlink" title="2.1. System Call"></a>2.1. System Call</h2><ul>
-<li><strong>Vector through well-defined syscall entry points</strong><ul>
-<li>“定义良好的 System Call 入口“</li>
-<li>Table mapping system call number to handle</li>
-</ul>
-</li>
-<li>Locate argunments<ul>
-<li>In registers or on user stack</li>
-</ul>
-</li>
-<li>Copy arguments<ul>
-<li>From user memory into kernel memory</li>
-<li>Protect kernel from malicious code evading checked</li>
-</ul>
-</li>
-<li>Validate arguments<ul>
-<li>Protect kernel from errors in user code</li>
-</ul>
-</li>
-<li>Copy results back<ul>
-<li>Into user memory</li>
-</ul>
-</li>
-</ul>
-<p>There are also <strong>Hardware Support</strong> for Interrupt Control !</p>
-<ul>
-<li>Not be visible to the user process</li>
-</ul>
-<h2 id="2-2-Web-Server"><a href="#2-2-Web-Server" class="headerlink" title="2.2. Web Server"></a>2.2. Web Server</h2><p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%205.png"></p>
-<h2 id="2-3-Process-Creation"><a href="#2-3-Process-Creation" class="headerlink" title="2.3. Process Creation"></a>2.3. Process Creation</h2><h3 id="Fork"><a href="#Fork" class="headerlink" title="Fork"></a>Fork</h3><ul>
-<li>Return &gt; 0<ul>
-<li>Running in <strong>Parent Process</strong></li>
-<li>Return value is PID of new child!</li>
-</ul>
-</li>
-<li>Return &#x3D; 0<ul>
-<li>Running in new <strong>Child Process</strong></li>
-</ul>
-</li>
-<li>Return &lt; 0<ul>
-<li>Error</li>
-</ul>
-</li>
-</ul>
-<p><strong>All state of original process</strong> is <strong>duplicated</strong> in both Parent and Child process</p>
-<blockquote>
-<p>值得注意的是，<code>fork()</code> 后面的所有代码都会被子线程执行<br>考点经常结合逻辑运算符的短路特性。<br>e.g.1. <code>if(fork() || fork()) fork();</code> 就会产生 5 个子线程。<br>e.g.2. <code>fork() &amp;&amp; fork() || fork()</code> 会产生 4 个子线程</p>
-</blockquote>
-<h3 id="Unix-Process-Management"><a href="#Unix-Process-Management" class="headerlink" title="Unix Process Management"></a>Unix Process Management</h3><ul>
-<li><p><code>fork</code></p>
-<ul>
-<li>Create a copy of current process, and start it running</li>
-</ul>
-</li>
-<li><p><code>exec</code></p>
-<ul>
-<li>Change the program being run by the current process</li>
-<li>在 Fork 之后使用，替换 Process 的 Memory Space</li>
-</ul>
-</li>
-<li><p><code>wait</code></p>
-<ul>
-<li>Wait for a process to finish</li>
-<li>Return status information and the pid of terminated process: <code>pid = wait(&amp;status);</code></li>
-</ul>
-</li>
-<li><p><code>kill</code></p>
-<ul>
-<li>Send a signal to another process</li>
-</ul>
-</li>
-<li><p><code>exit</code></p>
-<ul>
-<li>Process asks OS to delete it</li>
-<li>return status data from child to parent</li>
-</ul>
-</li>
-<li><p><code>abort</code></p>
-<ul>
-<li>Process terminate the execution of children process</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-4-Threads"><a href="#2-4-Threads" class="headerlink" title="2.4. Threads"></a>2.4. Threads</h2><p>Motivation: <strong>OS need to be able to handle multiple things at once.</strong></p>
-<h3 id="Thread-States"><a href="#Thread-States" class="headerlink" title="Thread States"></a>Thread States</h3><ul>
-<li>State shared by all thread in process &#x2F; address space<ul>
-<li>Content of memory ( Global Variables, Heap )</li>
-<li>I &#x2F; O State ( File Descriptors, Network connection, … )</li>
-</ul>
-</li>
-<li>State “Private” to each thread<ul>
-<li>Kept in TCB</li>
-<li>CPU Registers ( Include PC! )</li>
-<li>Execution stack<ul>
-<li>Parameters, Temporary Variables</li>
-<li>Return PCs are kept while called procedures are executing.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Actual-Thread-Operations"><a href="#Actual-Thread-Operations" class="headerlink" title="Actual Thread Operations"></a>Actual Thread Operations</h3><ul>
-<li><code>thread_fork(func, args)</code><ul>
-<li>Create a new thread to run <code>func(args)</code>.</li>
-</ul>
-</li>
-<li><code>thread_yield()</code><ul>
-<li>Relinquish processor voluntarily.（自愿放弃处理器的使用权或控制权。）</li>
-</ul>
-</li>
-<li><code>thread_join(thread)</code><ul>
-<li>In parent, wait for forked thread to exit, then return</li>
-</ul>
-</li>
-<li><code>thread_exit()</code><ul>
-<li>Quit thread and clean up, wake up joiner if any.</li>
-</ul>
-</li>
-<li>pThreads</li>
-</ul>
-<h3 id="The-core-of-Concurrency"><a href="#The-core-of-Concurrency" class="headerlink" title="The core of Concurrency"></a>The core of Concurrency</h3><p>That’s the Dispatch（调度程序、调度器） Loop!</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Loop &#123;</span><br><span class="line">		RunThread();</span><br><span class="line">		ChooseNextThread();</span><br><span class="line">		SaveSyayeOfCPU(CurrentTCB);</span><br><span class="line">		LoadStateOfCPU(NextTCB);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Running the thread:</p>
-<ul>
-<li>Load it’s state (Reg, PC, Stack pt) into CPU.</li>
-<li>Load enviroment (VM,…)</li>
-<li>Jump to the PC</li>
-</ul>
-<h3 id="Events-Let-Dispatcherget-control-back"><a href="#Events-Let-Dispatcherget-control-back" class="headerlink" title="Events: Let Dispatcherget control back"></a>Events: Let Dispatcherget control back</h3><ul>
-<li>Internal event: Thread returns control voluntarily<ul>
-<li>Blocking on I&#x2F;O</li>
-<li>Waiting on a “signal” frin itger thread</li>
-<li>Thread executes a <code>yield()</code></li>
-</ul>
-</li>
-<li>External Events: Thread get preempted<ul>
-<li>Interrupts: signals from HW or SW that stop the running code and jump to kernel</li>
-<li>Timer: like an alarm clock that goes off every some may milliseconds</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-5-Comparison"><a href="#2-5-Comparison" class="headerlink" title="2.5. Comparison"></a>2.5. Comparison</h2><table>
-<thead>
-<tr>
-<th></th>
-<th>Same Process</th>
-<th>Diff. Process</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Switch Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Protection Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Sharing Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Same core</th>
-<th>Diff. Core</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Switch Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Protection Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Sharing Overhead</td>
-<td>Low</td>
-<td>High</td>
-</tr>
-</tbody></table>
-<h2 id="2-6-Multi-Thread-Processes"><a href="#2-6-Multi-Thread-Processes" class="headerlink" title="2.6. Multi-Thread Processes"></a>2.6. Multi-Thread Processes</h2><ul>
-<li>PCB points to multiple TCBs</li>
-</ul>
-<h3 id="Multi-Threading-Models"><a href="#Multi-Threading-Models" class="headerlink" title="Multi-Threading Models"></a>Multi-Threading Models</h3><ul>
-<li>Many-to-One<ul>
-<li>User-level threads mapped to single kernel thread</li>
-<li>One thread blocking causes all to block</li>
-</ul>
-</li>
-<li>One-to-One<ul>
-<li>Each User-level thread maps to kernel thread</li>
-<li>Creating a user-level thread creates a kernel thread</li>
-<li>More concurrency, more overhead</li>
-</ul>
-</li>
-<li>Many-to-Many<ul>
-<li>Allows many user-level threads to be mapped to many kernel threads</li>
-<li>Allow OS to create a sufficient number of kernel threads.</li>
-</ul>
-</li>
-</ul>
-<h1 id="3-Synchronization"><a href="#3-Synchronization" class="headerlink" title="3. Synchronization"></a>3. Synchronization</h1><h2 id="3-1-Definitions"><a href="#3-1-Definitions" class="headerlink" title="3.1. Definitions"></a>3.1. Definitions</h2><h3 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h3><p>An operation that always run to completion or not at all</p>
-<ul>
-<li><strong>Indivisible</strong>: Cannot be stopped in the middle and state cannot bemodified by someone else in the middle.</li>
-<li><strong>Fundamental building block</strong>: If no atomic operations, then have no way for threads to work together.</li>
-</ul>
-<h3 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h3><p>Using atomic operations to ensure cooperation between threads</p>
-<h3 id="Mutual-Exclusion"><a href="#Mutual-Exclusion" class="headerlink" title="Mutual Exclusion"></a>Mutual Exclusion</h3><p>Ensuring that only one thread does a particular thing at a time.</p>
-<h3 id="Critical-Section"><a href="#Critical-Section" class="headerlink" title="Critical Section"></a>Critical Section</h3><p>Piece of code that only one thread can execute at once.</p>
-<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>Prevents someone from doing something.</p>
-<ul>
-<li><strong>Lock</strong> before <strong>entering critical section</strong> and before <strong>accessing shared data</strong></li>
-<li><strong>Unlock</strong> when leaving, after accessing shared data</li>
-<li>Wait if locked<ul>
-<li><strong>Important idea: all synchronization involves waiting</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="3-2-“Too-Much-Milk”"><a href="#3-2-“Too-Much-Milk”" class="headerlink" title="3.2. “Too Much Milk”"></a>3.2. “Too Much Milk”</h2><p>Solved with lock:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">milkLock.Acquire();</span><br><span class="line"><span class="keyword">if</span> (noMilk) buy milk;</span><br><span class="line">milkLock.Release();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Section of code between <code>Acquire()</code> and <code>Release()</code> called a “Critical Section”</p>
-</blockquote>
-<p>Use lock, the <strong>critical section is very short</strong> !</p>
-<h2 id="3-3-Lock"><a href="#3-3-Lock" class="headerlink" title="3.3. Lock"></a>3.3. Lock</h2><h3 id="Basic-Inplementation"><a href="#Basic-Inplementation" class="headerlink" title="Basic Inplementation"></a>Basic Inplementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> value = FREE;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">		disable interrupts;</span><br><span class="line">		<span class="keyword">if</span> (value == BUSY) &#123;</span><br><span class="line">				put thread on wait <span class="built_in">queue</span>;</span><br><span class="line">				Go to <span class="title function_">sleep</span><span class="params">()</span>;</span><br><span class="line">				<span class="comment">// Enable?</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = BUSY;</span><br><span class="line">		&#125;</span><br><span class="line">		enable interrupts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Release() &#123;</span><br><span class="line">		disable interrupts;</span><br><span class="line">		<span class="keyword">if</span> (anyone on wait <span class="built_in">queue</span>) &#123;</span><br><span class="line">				take thread off wait <span class="built_in">queue</span>;</span><br><span class="line">				Place on ready <span class="built_in">queue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = FREE;</span><br><span class="line">		&#125;</span><br><span class="line">		enable interrupts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Why do we need to disable interrupts?</p>
-<ul>
-<li>Avoid interruption between checking and setting lock value</li>
-<li>Otherwise two threads could think that they both have lock</li>
-</ul>
-<p>When we enable interrupt?</p>
-<ul>
-<li><p>Before <code>put thread on wait queue;</code> ?</p>
-<ul>
-<li>Release can check the queue and not wakeup thread</li>
-</ul>
-</li>
-<li><p>Between <code>put...</code> and <code>Go to sleep();</code> ?</p>
-<ul>
-<li>Release puts the thread on the ready queue, but the thread still think it needs to go to sleep</li>
-<li>Misses wakeup and still holds lock ( Calls Deadlock! )</li>
-</ul>
-</li>
-<li><p>How to solve?</p>
-</li>
-<li><p>When the sleeping thread wakes up, returns to acquire and re-enable interrupts.</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%206.png"></p>
-<h3 id="Atomic-Read-Modify-Write-Instructions"><a href="#Atomic-Read-Modify-Write-Instructions" class="headerlink" title="Atomic Read Modify Write Instructions"></a>Atomic Read Modify Write Instructions</h3><p>These instructions read a value and write a new value atomically</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test&amp;<span class="title function_">set</span><span class="params">(&amp;address)</span>&#123;</span><br><span class="line">	result = Mem[address];</span><br><span class="line">	Mem[address] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">compare&amp;<span class="title">swap</span><span class="params">(&amp;address, reg1, reg2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (reg1 == Mem[address]) &#123;</span><br><span class="line">		Mem[address] = reg2;</span><br><span class="line">		<span class="keyword">return</span> success;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> failure;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Impelment-Lock-with-test-set"><a href="#Impelment-Lock-with-test-set" class="headerlink" title="Impelment Lock with test&amp;set"></a>Impelment Lock with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> value = <span class="number">0</span>; <span class="comment">// FREE</span></span><br><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Release</span>() &#123;</span><br><span class="line">		value = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Busy-Waiting: thread consumes cycles while waiting!</strong></p>
-<ul>
-<li>For multi-processors: every test&amp;set is a write, which makes value ping-pong around in cache (using lots of network BW)</li>
-<li>It will cause Priority Inversion!</li>
-</ul>
-<h3 id="Solution-test-test-set-Multi-Processor-Spin-Locks"><a href="#Solution-test-test-set-Multi-Processor-Spin-Locks" class="headerlink" title="Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)"></a>Solution: test&amp;test&amp;set (Multi-Processor: Spin Locks)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> mylock = <span class="number">0</span>; <span class="comment">// Free</span></span><br><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">while</span>(mylock); <span class="comment">// Wait until might be free</span></span><br><span class="line">		&#125; <span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(&amp;mylock)); <span class="comment">// exit if get lock</span></span><br><span class="line">&#125;</span><br><span class="line">Release() &#123;</span><br><span class="line">		mylock = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Solve Multi-processors Problem.</li>
-<li>Still Busy Waiting!</li>
-</ul>
-<h3 id="Better-Locks-with-test-set"><a href="#Better-Locks-with-test-set" class="headerlink" title="Better Locks with test&amp;set"></a>Better Locks with test&amp;set</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> guard = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> value = FREE;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">		<span class="keyword">if</span> (value == BUSY) &#123;</span><br><span class="line">				Put thread on wait <span class="built_in">queue</span>;</span><br><span class="line">				Go to <span class="title function_">sleep</span><span class="params">()</span> &amp; guard = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = BUSY;</span><br><span class="line">				guard = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Release() &#123;</span><br><span class="line">		<span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">		<span class="keyword">if</span> anyone on wait <span class="built_in">queue</span> &#123;</span><br><span class="line">				Take thread off wait <span class="built_in">queue</span>;</span><br><span class="line">				Place on ready <span class="built_in">queue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">				value = FREE;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-4-Semaphore"><a href="#3-4-Semaphore" class="headerlink" title="3.4. Semaphore"></a>3.4. Semaphore</h2><p>Semaphore has a non-negative integer value and supports the following two atomic operations:</p>
-<ul>
-<li><p><code>P()</code> : Waits for semaphore to become positive, then decrements it by 1.</p>
-<ul>
-<li>Also called <code>wait()</code></li>
-</ul>
-</li>
-<li><p><code>V()</code> : Increments the semaphore by 1, waking up a waiting P if any.</p>
-<ul>
-<li>Also called <code>signal()</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(S) &#123;</span><br><span class="line">	<span class="keyword">while</span>(S &lt;= <span class="number">0</span>);</span><br><span class="line">	S--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">signal(S) &#123;</span><br><span class="line">	S++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><ul>
-<li>Binary Semaphore (Block&#x2F;Resume Semaphore)<ul>
-<li>Int range only between 0 and 1 (with initial value &#x3D; 1)</li>
-<li>Same as a Mutex Lock.</li>
-</ul>
-</li>
-<li>Counring Semaphore, for scheduling constrainrs ( with initial value &#x3D; 0)<ul>
-<li>Allow thread 1 to wait for thread 2</li>
-</ul>
-</li>
-</ul>
-<h3 id="Lock-vs-Semaphore"><a href="#Lock-vs-Semaphore" class="headerlink" title="Lock vs Semaphore"></a>Lock vs Semaphore</h3><table>
-<thead>
-<tr>
-<th></th>
-<th>Advantage</th>
-<th>Disadvantage</th>
-<th>Use Case</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Locks</td>
-<td>A lock allows only one thread to enter the section or resource that’s locked at a time, simple to use.</td>
-<td>Locks can lead to problems like deadlocks if not used carefully.</td>
-<td>Locks are more suitable when you need to ensure that only one thread can access a resource at a time, such as writing to a shared source. (Other reasonable answers are acceptable.)</td>
-</tr>
-<tr>
-<td>Semaphores</td>
-<td>Semaphores can control access of multiple threads to one or more resources</td>
-<td>Semaphores can be more complex to use correctly compared to locks, and misuse can lead to problems such as deadlocks and starvation.</td>
-<td>Semaphores are suitable for Producer and Consumer case where there exists threads producing data and threads consuming data. (Other reasonable answers are acceptable.)</td>
-</tr>
-</tbody></table>
-<h2 id="3-5-Monitors"><a href="#3-5-Monitors" class="headerlink" title="3.5. Monitors"></a>3.5. Monitors</h2><p>A lock and zero or more condition variables for managing concurrent access to shared data.</p>
-<ul>
-<li>Lock: Provides Mutual Exclusion to shared data</li>
-<li>Condition Variable: A queue of threads waiting for something inside a critical section</li>
-</ul>
-<h3 id="Condition-Variables"><a href="#Condition-Variables" class="headerlink" title="Condition Variables"></a>Condition Variables</h3><p>Allow <code>wait(&amp;lock)</code> , <code>signal()</code> and <code>broadcast()</code> operations.</p>
-<ul>
-<li><strong>Rule: Must hold lock when doing condition variable ops</strong></li>
-</ul>
-<h2 id="3-6-Deadlock-and-Starvation"><a href="#3-6-Deadlock-and-Starvation" class="headerlink" title="3.6. Deadlock and Starvation"></a>3.6. Deadlock and Starvation</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
-<li><p>Resources</p>
-<ul>
-<li>Serially reusable resources (CPU cycles, memory space, I&#x2F;O devices, files); Consumable resources (message, buffer of information, interrupts)</li>
-</ul>
-</li>
-<li><p>Comparision</p>
-<ul>
-<li>Deadlock → Starvation</li>
-<li>Starvation can and, Deadlock can’t end without external intervention</li>
-</ul>
-</li>
-<li><p>Deadlock</p>
-<ul>
-<li>Two or more processes are waiting indefinitely for an event that can be caused by only of the waiting processes</li>
-</ul>
-</li>
-<li><p>Starvation</p>
-<ul>
-<li>Indefinite blocking</li>
-<li>A process may never be removed from the semaphore queue in which it’s suspended</li>
-</ul>
-</li>
-</ul>
-<h3 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h3><ul>
-<li>Definitions<ul>
-<li>A process is deadlocked if it’s waiting for an event that will never occur</li>
-</ul>
-</li>
-<li>Conditions:<ul>
-<li>Mutual exclusion</li>
-<li>Hold and wait</li>
-<li>No preemption</li>
-<li>Circular wait</li>
-</ul>
-</li>
-<li>Deadlock Management<ul>
-<li>死锁预防是在<strong>系统设计和资源分配阶段</strong>采取措施防止死锁的发生，而死锁避免是<strong>在运行时</strong>动态地检测和避免可能导致死锁的状态。</li>
-</ul>
-<ol>
-<li>Prevention（预防）<ul>
-<li>Ensure that at least one of the necessary conditions for deadlock cannot hold.</li>
-<li>Mutual Exclusion<ul>
-<li>No issue for sharable resources</li>
-<li>Can not deny this for non-sharable resources</li>
-</ul>
-</li>
-<li>Hold and wait（确保当一个进程请求资源时，它不持有其他资源。）<ul>
-<li>Guarantee that when a process requests a resource, it does not hold other resources</li>
-</ul>
-</li>
-<li>No Preemption（如果一个持有某些资源的进程请求无法立即分配的另一个资源，该进程将释放当前持有的资源，并将被抢占的资源添加到等待列表中。只有当该进程能够重新获取其原有的资源以及请求的新资源时，才会重新启动。）<ul>
-<li>If a process that is holding some resources requests another resource that cannot be immediately allocated to it, the process releases the resources currently being held.</li>
-<li>Preempted resources are added to the list of resources for which the process is waiting</li>
-<li>Process will be restarted only when it can regain its old resources as well as the new<br>  ones that is requesting.</li>
-</ul>
-</li>
-<li>Circular wait（避免无限的资源申请：对所有资源类型进行全局排序，并要求进程按照递增的枚举顺序请求资源。如果持有类型为N的资源，进程只能请求类型大于N的资源。）<ul>
-<li>Impose a total ordering of all resource types</li>
-<li>Require that processes request resources in increasing order of enumeration</li>
-<li>If a resource of type N is held, process can only request resources of types &gt; N</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Avoidance（避免）<ul>
-<li><p>Require additional Apriori information</p>
-<ul>
-<li>Simplest and Most useful Mode<ul>
-<li>Maximum number of resources</li>
-</ul>
-</li>
-<li>Deadlock-Avoidance algorithm<ul>
-<li>Resource-Allocation state to ensure that there can never be a circular-wait condition</li>
-<li>Resource-Allocation State<ul>
-<li>the number of available and allocated resources</li>
-<li>the maximum demands of the processes</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Safe state</p>
-<p>  <img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%207.png"></p>
-<ul>
-<li>When a process requests an available resource, must decide if immediate allocation leaves the system in a safe state</li>
-<li>System in safe sate → there exists a safe sequence of all processes</li>
-<li>Banker’s Algorithm</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Detection<ul>
-<li>Allow deadlocks to occur but then rely on the operating system to detect the deadlock and deal with it</li>
-</ul>
-</li>
-<li>Recovery<ul>
-<li>Process Termination</li>
-<li>Resource Preemption</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="Bank-Algorithm"><a href="#Bank-Algorithm" class="headerlink" title="Bank Algorithm"></a>Bank Algorithm</h3><p>银行家算法的实质就是<strong>要设法保证系统动态分配资源后不进入不安全状态，以避免可能产生的死锁。</strong>即没当进程提出资源请求且系统的资源能够满足该请求时，系统将判断满足此次资源请求后系统状态是否安全，如果判断结果为安全，则给该进程分配资源，否则不分配资源，申请资源的进程将阻塞。</p>
-<p>银行家算法的执行有个前提条件，即要求进程预先提出自己的最大资源请求，并假设系统拥有固定的资源总量。下面介绍银行家算法所用的主要的数据结构。</p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%208.png"></p>
-<p><img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/Untitled%209.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" data-id="clylj5teu001rbc95a50fa5r5" data-title="【CS130】Midterm Review" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Paper-Reading/">Paper Reading</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">常用技术笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%A3%E6%96%87/">散文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/">数字电路设计与实践</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E5%B7%A5%E7%A8%8B/">工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/">文学论文</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/">本科课程</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/">CS130</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS182/">CS182</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/">毛概</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/">科研思考</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B2%E5%BA%A7%E7%AC%94%E8%AE%B0/">讲座笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/">诗与词</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CourseReview/" rel="tag">CourseReview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyPapers/" rel="tag">MyPapers</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" rel="tag">Neural Rendering, Architiecture, Hardware-Software Co-Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radiance-Fields-Neural-Rendering/" rel="tag">Radiance Fields, Neural Rendering</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" rel="tag">实用工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" rel="tag">常用技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" rel="tag">数字电路, 仿真</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" rel="tag">数字电路, 仿真, VCS, Verdi,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" rel="tag">沐曦集成电路，GPU 生态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%AF%E7%89%87/" rel="tag">芯片</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/CourseReview/" style="font-size: 20px;">CourseReview</a> <a href="/tags/MyPapers/" style="font-size: 10px;">MyPapers</a> <a href="/tags/Neural-Rendering-Architiecture-Hardware-Software-Co-Design/" style="font-size: 15px;">Neural Rendering, Architiecture, Hardware-Software Co-Design</a> <a href="/tags/Radiance-Fields-Neural-Rendering/" style="font-size: 10px;">Radiance Fields, Neural Rendering</a> <a href="/tags/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">实用工具</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">常用技术</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F/" style="font-size: 10px;">数字电路, 仿真</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F-VCS-Verdi/" style="font-size: 10px;">数字电路, 仿真, VCS, Verdi,</a> <a href="/tags/%E6%B2%90%E6%9B%A6%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%EF%BC%8CGPU-%E7%94%9F%E6%80%81/" style="font-size: 10px;">沐曦集成电路，GPU 生态</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 20px;">环境配置</a> <a href="/tags/%E8%8A%AF%E7%89%87/" style="font-size: 10px;">芯片</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">June 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">December 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/06/30/MyWorks/">Overview Of My Research：我的科研工作一览</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2025/06/30/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/Overview/">ShanghaiTech 课程笔记整理</a>
-          </li>
         
-          <li>
-            <a href="/2024/12/31/2024%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/">2024 年诗词创作</a>
-          </li>
-        
-          <li>
-            <a href="/2024/06/11/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E6%99%BA%E8%83%BD%E7%9A%84%E9%80%86%E6%B5%81%E4%B8%8E%E8%BE%B9%E7%95%8C/">【科技文明通论 期末论文】智能的逆流与边界</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/25/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Marp/">【实用工具】Marp 和 ShanghaiTech Marp 主题</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/imgs/IC_Cover.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="欢迎来到 Hypoxanthine 的 Blog！"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/" target="_self">
+          【环境配置】C 与 C++ 的编译环境
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/C_And_CPP/" target="_self">
+        <div>
+          写在前面环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。 关于比较完整的，适合上课使用的 C&amp;C++ 环境配置，可以参考视频 GKxx: C&#x2F;C++环境配置。这里对其内容做一个梳理和总结，方便懒得看视频的同学。 常用术语 编辑器：用于编辑代码文本的工具。 On Windows：记事本，VS Code…… On Linux：Vim，Emacs……   编译器：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-26 00:00" pubdate>
+              2024-02-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
   
-    <a href="/" class="mobile-nav-link">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">常用技术笔记</a>
   
-</nav>
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/" target="_self">
+          【环境配置】SSH 远程连接
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/SSH/" target="_self">
+        <div>
+          Why SSH？刚开始学习编程的时候，我们都是在自己的电脑（对于大部分人来说，是一台小笔记本）上进行代码的编写、编译、运行等工作。这是非常自然的一种想法。但是，只在本机上运行会遇到这样一些问题：  通常我们自己的笔记本是 Windows 系统，它在日常使用便利的同时，也带来很多问题。例如，没有原生 GCC 编译器，和 Bash 截然不同的 Terminal（终端）体验等。 笔记本性能有限，无法满足
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-26 00:00" pubdate>
+              2024-02-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">常用技术笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF/">#常用技术</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" target="_self">
+          【环境配置】CUDA环境配置
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/CUDA/" target="_self">
+        <div>
+          前置知识什么是 CUDA？CUDA 的全称是统一计算设备架构（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。 CUDA Driver 和 CUDA
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-26 00:00" pubdate>
+              2024-02-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">常用技术笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" target="_self">
+          【环境配置】Python 环境与 Conda
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/02/26/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" target="_self">
+        <div>
+          Python On Windows原生 Python 安装Windows 的 Python 安装可以直接使用微软应用商店：  Python 的安装 Python 的使用  如果无法访问微软应用商店，你可能需要使用一些科学上网的工具。 Conda 的安装在 官网 下载对应的安装包，然后执行安装包即可。 Python On Linux（以 Ubuntu 为例）原生 Python 安装Ubuntu 22
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-26 00:00" pubdate>
+              2024-02-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" class="category-chain-item">常用技术笔记</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" target="_self">
+          【宋词导读 读书报告】宋词中的感性和理性
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/15/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E4%B8%AD%E7%9A%84%E6%84%9F%E6%80%A7%E5%92%8C%E7%90%86%E6%80%A7/" target="_self">
+        <div>
+          宋词中的感性与理性在中国韵文的文学体式中，有一个传统：“文以载道”。这个传统也蔓延到诗上：我们说“温柔敦厚乃诗之教也”，诗天生就被赋予了一种教化的力量。或许正是因此，随着时代的发展和变迁，诗变得越来越理性，越来越深刻，也越来越沉重。相比而言，词的组成里，就有了更多感性的成分。这样一种“要眇宜修”的文学体裁里，“感性”和“理性”是如何相互作用，如何碰撞出美妙的语言的？ 在讨论任何概念的关系之前，我们
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-15 00:00" pubdate>
+              2024-01-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/" class="category-chain-item">文学论文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/08/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Final-Cheatsheet/" target="_self">
+          【CS130】Final Review
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/08/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Final-Cheatsheet/" target="_self">
+        <div>
+          Cheatsheet-Final4. Scheduling4.0. OverviewDefinitionScheduling：Deciding which threads are given access to resources from moment to moment.  Often, we think in terms of CPU time, but could also think a
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-08 00:00" pubdate>
+              2024-01-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/" class="category-chain-item">CS130</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CourseReview/">#CourseReview</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" target="_self">
+          2023 年诗词创作
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/31/2023%E5%B9%B4%E8%AF%97%E8%AF%8D%E5%88%9B%E4%BD%9C/" target="_self">
+        <div>
+          序言2023 年我并没有机会去写太多的内容。一方面是因为这一年真的很忙，另一方面是因为，在缺乏阅读的情况下，我总觉得没有文字回荡在自己的脑海里。所幸在年底上了宋词导读课，终于有时间去看一些高质量的诗词作品。 总体而言，我觉得今年写的虽然不多，但质量还是相当不错的。相比于小时候的作品而言，至少做到了言之有物言之有情，也有了一些我觉得称得上有意思有味道的句子。 希望 2024 年能写出更好的作品。 诗
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-31 00:00" pubdate>
+              2023-12-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%97%E4%B8%8E%E8%AF%8D/" class="category-chain-item">诗与词</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/12/06/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E5%AF%BC%E8%AF%BB%E6%8B%8D%E7%85%A7%E9%85%8D%E8%AF%8D/" target="_self">
+          【宋词导读 拍照配词】没有人记得，就没有人忘记
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/06/%E4%B8%AA%E4%BA%BA%E5%88%9B%E4%BD%9C/%E4%BA%BA%E6%96%87%E8%AF%BE%E8%AE%BA%E6%96%87/%E5%AE%8B%E8%AF%8D%E5%AF%BC%E8%AF%BB%E6%8B%8D%E7%85%A7%E9%85%8D%E8%AF%8D/" target="_self">
+        <div>
+          欲买桂花同载酒，终不似，少年游。    2021年6月23日的晚上，我在手机的便签中写下： 只有离开或消逝的事物才被冠以“故”字，因此，久别者才叫“故人”，离开后方为“故乡”。 直到和好朋友们都分别，我才意识到，这是最后一次以学生的身份坐在那个教室里——这是真正意义上的最后一次。以后我们还会回来很多次，大抵是在功成名就衣锦还乡的时候，可以面带微笑侃侃而谈，可以从容不迫应对自如。那时候老师再也不会
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-06 00:00" pubdate>
+              2023-12-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%96%87%E5%AD%A6%E8%AE%BA%E6%96%87/" class="category-chain-item">文学论文</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" target="_self">
+          我的“中国芯”：中国芯片的前世今生
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/27/%E7%A7%91%E7%A0%94%E6%80%9D%E8%80%83/%E4%B8%AD%E5%9B%BD%E8%8A%AF%E7%89%87%E7%9A%84%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-27 00:00" pubdate>
+              2023-11-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/%E6%AF%9B%E6%A6%82/" class="category-chain-item">毛概</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%8A%AF%E7%89%87/">#芯片</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" target="_self">
+          【CS130】Midterm Review
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/22/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/Midterm-Cheatsheet/" target="_self">
+        <div>
+          0. Overview0.0. What is OS?OS is an special layer of Software.  Provides application SW access to HW resources Convenient abstraction of complex HW devices Protected access to shared resources Securit
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-22 00:00" pubdate>
+              2023-11-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/" class="category-chain-item">本科课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%AC%E7%A7%91%E8%AF%BE%E7%A8%8B/CS130/" class="category-chain-item">CS130</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CourseReview/">#CourseReview</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
