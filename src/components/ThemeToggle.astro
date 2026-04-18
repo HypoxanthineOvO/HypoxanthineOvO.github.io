@@ -1,34 +1,43 @@
 <button
-  id="theme-toggle"
   type="button"
-  class="rounded-full border border-paper-3 px-3 py-1.5 text-sm text-ink transition hover:border-accent hover:text-accent dark:border-ink-3 dark:text-paper dark:hover:border-paper dark:hover:text-paper"
+  class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
+  aria-label="Toggle theme"
+  aria-pressed="false"
+  data-theme-toggle
 >
-  Theme
+  <svg data-theme-icon="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
+    <circle cx="12" cy="12" r="4.5" />
+    <path d="M12 2.5v2.3M12 19.2v2.3M4.8 4.8l1.6 1.6M17.6 17.6l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.8 19.2l1.6-1.6M17.6 6.4l1.6-1.6" />
+  </svg>
+  <svg data-theme-icon="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
+    <path d="M20 14.2A8 8 0 1 1 9.8 4a6.3 6.3 0 0 0 10.2 10.2Z" />
+  </svg>
 </button>
 
-<script is:inline>
-  const applyTheme = (theme) => {
-    const root = document.documentElement;
-    root.classList.toggle('dark', theme === 'dark');
-    root.dataset.theme = theme;
+<script>
+  const storageKey = 'hypo-theme';
+
+  const syncButtons = () => {
+    const dark = document.documentElement.classList.contains('dark');
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(dark));
+
+      const sun = button.querySelector('[data-theme-icon="sun"]');
+      const moon = button.querySelector('[data-theme-icon="moon"]');
+
+      sun?.classList.toggle('hidden', !dark);
+      moon?.classList.toggle('hidden', dark);
+    });
   };
 
-  const stored = localStorage.getItem('theme');
-  const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  applyTheme(stored || preferred);
+  syncButtons();
 
-  const button = document.getElementById('theme-toggle');
-  if (button) {
-    const label = () => {
-      button.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
-    };
-
-    label();
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
     button.addEventListener('click', () => {
-      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
-      localStorage.setItem('theme', next);
-      applyTheme(next);
-      label();
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem(storageKey, dark ? 'dark' : 'light');
+      syncButtons();
     });
-  }
+  });
 </script>

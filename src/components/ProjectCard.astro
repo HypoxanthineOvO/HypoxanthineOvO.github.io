@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+
+const badgeClassMap = {
+  Active: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300',
+  WIP: 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-300',
+  Archived: 'border-slate-500/30 bg-slate-500/10 text-slate-500 dark:text-slate-300',
+  Idea: 'border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-300',
+} as const;
+---
+
+<article class="surface-card p-6">
+  <div class="mb-4 flex flex-wrap items-center gap-3">
+    <h3 class="text-[1.2rem]">{project.data.name}</h3>
+    <span class:list={['rounded-full border px-2.5 py-1 text-xs font-medium font-sans', badgeClassMap[project.data.status]]}>
+      {project.data.status}
+    </span>
+  </div>
+
+  <p class="mb-4 text-muted">{project.data.description}</p>
+
+  <div class="mb-4 flex flex-wrap gap-2">
+    {project.data.tech.map((item) => (
+      <span class="tag-pill">{item}</span>
+    ))}
+  </div>
+
+  <div class="flex flex-wrap gap-3 font-sans text-sm">
+    {project.data.repo && (
+      <a class="inline-link" href={project.data.repo} target="_blank" rel="noreferrer">
+        Repository
+      </a>
+    )}
+    {project.data.link && (
+      <a class="inline-link" href={project.data.link} target="_blank" rel="noreferrer">
+        Project Link
+      </a>
+    )}
+  </div>
+</article>

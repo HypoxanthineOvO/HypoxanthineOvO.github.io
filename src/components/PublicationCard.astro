@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  publication: CollectionEntry<'publications'>;
+}
+
+const { publication } = Astro.props;
+
+const links: { href: string; label: string }[] = [];
+
+if (publication.data.pdf) {
+  links.push({ href: publication.data.pdf, label: 'PDF' });
+}
+
+if (publication.data.code) {
+  links.push({ href: publication.data.code, label: 'Code' });
+}
+
+if (publication.data.project_page) {
+  links.push({ href: publication.data.project_page, label: 'Site' });
+}
+---
+
+<article class="surface-card p-6">
+  <h3 class="mb-3 text-[1.2rem]">{publication.data.title}</h3>
+  <p class="mb-2 text-sm leading-relaxed text-muted">
+    {
+      publication.data.authors.map((author, index) => (
+        <>
+          {index > 0 && ', '}
+          {author === 'Hypoxanthine He' ? (
+            <strong class="font-semibold text-text underline decoration-accent/60 underline-offset-4">{author}</strong>
+          ) : (
+            author
+          )}
+        </>
+      ))
+    }
+  </p>
+  <p class="mb-4 font-sans text-sm text-muted">
+    {publication.data.venue} · {publication.data.year}
+  </p>
+  {links.length > 0 && (
+    <div class="flex flex-wrap gap-3 font-sans text-sm">
+      {links.map((link) => (
+        <a class="inline-link" href={link.href} target="_blank" rel="noreferrer">
+          [{link.label}]
+        </a>
+      ))}
+    </div>
+  )}
+</article>

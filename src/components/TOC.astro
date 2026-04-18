@@ -1,28 +1,48 @@
 ---
-type Heading = {
+interface Heading {
   depth: number;
   slug: string;
   text: string;
-};
+}
 
-const { headings = [] } = Astro.props as { headings?: Heading[] };
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const items = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
 ---
 
 {
-  headings.length > 0 && (
-    <nav class="rounded-3xl border border-paper-3 bg-paper-2/80 p-5 text-sm dark:border-ink-3 dark:bg-ink-2/80">
-      <p class="mb-3 font-semibold text-ink dark:text-paper">On this page</p>
-      <ol class="space-y-2 text-ink-3 dark:text-paper-3">
-        {headings
-          .filter((heading) => heading.depth <= 3)
-          .map((heading) => (
-            <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
-              <a class="transition hover:text-accent dark:hover:text-paper" href={`#${heading.slug}`}>
+  items.length > 0 && (
+    <>
+      <details class="mb-8 rounded-2xl border border-border px-4 py-3 xl:hidden">
+        <summary class="cursor-pointer font-sans text-sm font-semibold text-text">Table of Contents</summary>
+        <ul class="mt-3 space-y-2 text-sm text-muted">
+          {items.map((heading) => (
+            <li class:list={[heading.depth === 3 ? 'pl-4' : 'pl-0']}>
+              <a class="transition-colors duration-150 hover:text-accent" href={`#${heading.slug}`}>
                 {heading.text}
               </a>
             </li>
           ))}
-      </ol>
-    </nav>
+        </ul>
+      </details>
+
+      <aside class="fixed right-6 top-28 hidden w-60 xl:block 2xl:right-[max(2rem,calc(50%-700px))]">
+        <div class="rounded-2xl border border-border bg-[var(--surface)] p-4 backdrop-blur">
+          <p class="mb-3 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-muted">Contents</p>
+          <ul class="space-y-2 text-sm">
+            {items.map((heading) => (
+              <li class:list={[heading.depth === 3 ? 'pl-4' : 'pl-0']}>
+                <a class="block text-muted transition-colors duration-150 hover:text-accent" href={`#${heading.slug}`}>
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </>
   )
 }

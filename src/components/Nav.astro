@@ -1,29 +1,31 @@
 ---
 import { navLinks } from '../lib/site';
 
-const pathname = Astro.url.pathname;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
-<nav class="border-b border-paper-3 bg-paper/80 backdrop-blur dark:border-ink-3 dark:bg-ink/80">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
-    <a class="text-lg font-semibold tracking-tight text-ink dark:text-paper" href="/">HypoxanthineOvO</a>
-    <div class="flex flex-wrap items-center gap-3 text-sm text-ink-3 dark:text-paper-3">
-      {navLinks.map((link) => {
-        const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+<nav aria-label="Primary">
+  <ul class="flex flex-wrap items-center justify-end gap-3 md:gap-4">
+    {
+      navLinks.map((link) => {
+        const href = link.href.replace(/\/$/, '') || '/';
+        const active = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
+
         return (
-          <a
-            class:list={[
-              'rounded-full px-3 py-1 transition',
-              active
-                ? 'bg-accent text-paper'
-                : 'hover:bg-accent-soft hover:text-accent dark:hover:bg-ink-2 dark:hover:text-paper',
-            ]}
-            href={link.href}
-          >
-            {link.label}
-          </a>
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                'font-sans text-xs transition-colors duration-150 hover:text-accent md:text-sm',
+                active ? 'text-text' : 'text-muted',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
         );
-      })}
-    </div>
-  </div>
+      })
+    }
+  </ul>
 </nav>

@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { formatDate } from '../lib/content';
+import TagList from './TagList.astro';
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+---
+
+<article class="border-b border-border py-6 last:border-b-0" data-note-card data-note-tags={(note.data.tags ?? []).join(',')}>
+  <p class="mb-2 font-sans text-xs uppercase tracking-[0.16em] text-muted">{formatDate(note.data.date)}</p>
+  <h3 class="mb-2 text-[1.25rem]">
+    <a class="transition-colors duration-150 hover:text-accent" href={`/notes/${note.id}`}>
+      {note.data.title}
+    </a>
+  </h3>
+  {note.data.description && <p class="mb-3 text-[0.98rem] text-muted">{note.data.description}</p>}
+  <TagList tags={note.data.tags ?? []} mode="note" linkToTags={false} />
+</article>

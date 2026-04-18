@@ -1,22 +1,37 @@
 ---
-type Props = {
-  currentPage: number;
+interface Props {
   totalPages: number;
-  previousHref?: string;
-  nextHref?: string;
-};
+}
 
-const { currentPage, totalPages, previousHref, nextHref } = Astro.props as Props;
+const { totalPages } = Astro.props;
 ---
 
-<nav class="flex items-center justify-between rounded-3xl border border-paper-3 bg-paper-2 px-5 py-4 text-sm dark:border-ink-3 dark:bg-ink-2">
-  <a class:list={['transition hover:text-accent', !previousHref && 'pointer-events-none opacity-40']} href={previousHref ?? '#'}>
-    Previous
-  </a>
-  <span class="text-ink-3 dark:text-paper-3">
-    Page {currentPage} / {totalPages}
-  </span>
-  <a class:list={['transition hover:text-accent', !nextHref && 'pointer-events-none opacity-40']} href={nextHref ?? '#'}>
-    Next
-  </a>
-</nav>
+{
+  totalPages > 1 && (
+    <nav class="mt-8 flex flex-wrap items-center gap-2 font-sans text-sm" data-pagination-nav data-total-pages={totalPages} aria-label="Pagination">
+      <button
+        type="button"
+        class="rounded-full border border-border px-3 py-1.5 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
+        data-page-prev
+      >
+        Prev
+      </button>
+      {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+        <button
+          type="button"
+          class="rounded-full border border-border px-3 py-1.5 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
+          data-page-button={page}
+        >
+          {page}
+        </button>
+      ))}
+      <button
+        type="button"
+        class="rounded-full border border-border px-3 py-1.5 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
+        data-page-next
+      >
+        Next
+      </button>
+    </nav>
+  )
+}
