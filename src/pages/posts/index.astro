@@ -1,0 +1,108 @@
+---
+import Pagination from '../../components/Pagination.astro';
+import PostCard from '../../components/PostCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { chunkEntries, getPosts, groupEntriesByYear } from '../../lib/content';
+
+const posts = await getPosts();
+const postPages = chunkEntries(posts, 6).map((entries) => groupEntriesByYear(entries));
+---
+
+<BaseLayout title="Posts" description="Long-form posts, grouped by year and paginated in place.">
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Archive</p>
+        <h1>Posts</h1>
+      </div>
+    </div>
+
+    <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
+      <p class="mb-8 text-muted">
+        Longer writing lives here. The page stays on a single route and paginates client-side to keep the final route
+        table aligned with the migration spec.
+      </p>
+
+      <div data-post-pages>
+        {
+          postPages.map((pageGroups, index) => (
+            <div data-page-index={index + 1} hidden={index !== 0}>
+              {pageGroups.map((group) => (
+                <section class="mb-10">
+                  <h2 class="mb-4 text-[1.5rem]">{group.year}</h2>
+                  <div class="rounded-3xl border border-border px-6 py-2 md:px-8">
+                    {group.items.map((post) => <PostCard post={post} />)}
+                  </div>
+                </section>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+
+      <Pagination totalPages={postPages.length} />
+    </div>
+  </section>
+
+  <script is:inline>
+    const pageNav = document.querySelector('[data-pagination-nav]');
+    const pagePanels = [...document.querySelectorAll('[data-page-index]')];
+
+    if (pageNav && pagePanels.length > 0) {
+      const totalPages = Number(pageNav.getAttribute('data-total-pages')) || 1;
+      const pageButtons = [...pageNav.querySelectorAll('[data-page-button]')];
+      const prevButton = pageNav.querySelector('[data-page-prev]');
+      const nextButton = pageNav.querySelector('[data-page-next]');
+
+      const applyButtonState = (page) => {
+        pageButtons.forEach((button) => {
+          const active = Number(button.getAttribute('data-page-button')) === page;
+          button.classList.toggle('border-accent', active);
+          button.classList.toggle('bg-accent', active);
+          button.classList.toggle('text-white', active);
+          button.classList.toggle('text-muted', !active);
+        });
+
+        prevButton?.toggleAttribute('disabled', page === 1);
+        nextButton?.toggleAttribute('disabled', page === totalPages);
+        prevButton?.classList.toggle('opacity-40', page === 1);
+        nextButton?.classList.toggle('opacity-40', page === totalPages);
+      };
+
+      const setPage = (page) => {
+        const nextPage = Math.max(1, Math.min(totalPages, page));
+
+        pagePanels.forEach((panel) => {
+          panel.hidden = Number(panel.getAttribute('data-page-index')) !== nextPage;
+        });
+
+        applyButtonState(nextPage);
+        history.replaceState({}, '', nextPage === 1 ? '/posts' : `/posts#page-${nextPage}`);
+      };
+
+      const hashMatch = window.location.hash.match(/page-(\d+)/);
+      setPage(hashMatch ? Number(hashMatch[1]) : 1);
+
+      pageButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setPage(Number(button.getAttribute('data-page-button')));
+        });
+      });
+
+      prevButton?.addEventListener('click', () => {
+        const current = Number(window.location.hash.match(/page-(\d+)/)?.[1] || 1);
+        setPage(current - 1);
+      });
+
+      nextButton?.addEventListener('click', () => {
+        const current = Number(window.location.hash.match(/page-(\d+)/)?.[1] || 1);
+        setPage(current + 1);
+      });
+
+      window.addEventListener('hashchange', () => {
+        const match = window.location.hash.match(/page-(\d+)/);
+        setPage(match ? Number(match[1]) : 1);
+      });
+    }
+  </script>
+</BaseLayout>

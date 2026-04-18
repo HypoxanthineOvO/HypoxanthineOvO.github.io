@@ -1,14 +1,29 @@
 ---
-import Base from '../layouts/Base.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../lib/site';
 ---
 
-<Base title="About" description="About page placeholder for the Astro rebuild.">
-  <section class="mx-auto max-w-4xl px-6 py-10">
-    <p class="text-sm uppercase tracking-[0.2em] text-accent">About</p>
-    <h1 class="mt-4 text-4xl font-semibold tracking-tight">About this site</h1>
-    <div class="prose prose-slate mt-6 max-w-none dark:prose-invert">
-      <p>This placeholder page will eventually hold the final biography, interests, and contact details.</p>
-      <p>Prompt B can replace this copy after content migration decisions are settled.</p>
+<BaseLayout title="About" description="Placeholder about page for the Astro rebuild.">
+  <section class="shell pb-20">
+    <div class="content-shell md:mx-0 md:px-0">
+      <p class="section-kicker">Profile</p>
+      <h1 class="mb-6">About</h1>
+      <div class="space-y-4 text-muted">
+        <p>
+          Hypoxanthine He is currently represented here with placeholder copy for the Prompt B skeleton. The long-form
+          biography will be rewritten after the content migration step.
+        </p>
+        <p>
+          Current placeholder frame: graduate student at ShanghaiTech University, broadly interested in Cryo-GPU
+          systems, research tooling, and computational workflows that connect theory with usable infrastructure.
+        </p>
+        <p>
+          Contact links for the rebuilt site stay intentionally minimal:
+          <a class="inline-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
+          and
+          <a class="inline-link" href={`mailto:${siteConfig.email}`}>Email</a>.
+        </p>
+      </div>
     </div>
   </section>
-</Base>
+</BaseLayout>

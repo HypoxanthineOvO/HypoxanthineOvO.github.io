@@ -1,47 +1,35 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
-import { collectTags, getEntryHref, getEntryMeta, getEntrySummary, getEntryTags, type SiteEntry } from '../../lib/content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatTagLabel, getPosts, toTagParam } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const allEntries = [
-    ...(await getCollection('blog', ({ data }) => !data.draft)),
-    ...(await getCollection('teaching')),
-    ...(await getCollection('courses')),
-    ...(await getCollection('publications')),
-  ];
+  const posts = await getPosts();
+  const tags = [...new Set(posts.flatMap((entry) => entry.data.tags))];
 
-  return collectTags(allEntries).map((bucket) => ({
-    params: { tag: bucket.slug },
-    props: bucket,
+  return tags.map((tag) => ({
+    params: { tag: toTagParam(tag) },
+    props: {
+      tag,
+      posts: posts.filter((entry) => entry.data.tags.includes(tag)),
+    },
   }));
 }
 
-const { tag, entries } = Astro.props as {
-  tag: string;
-  entries: SiteEntry[];
-};
+const { tag, posts } = Astro.props;
 ---
 
-<Base title={`Tag: ${tag}`} description={`Entries tagged with ${tag}.`}>
-  <section class="mx-auto max-w-6xl px-6 py-10">
-    <div class="mb-8 space-y-4">
-      <p class="text-sm uppercase tracking-[0.2em] text-accent">Tags / {tag}</p>
-      <h1 class="text-4xl font-semibold tracking-tight">#{tag}</h1>
+<BaseLayout title={`Tag: ${formatTagLabel(tag)}`} description={`Posts tagged ${formatTagLabel(tag)}.`}>
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Filtered Posts</p>
+        <h1>{formatTagLabel(tag)}</h1>
+      </div>
     </div>
 
-    <div class="grid gap-6">
-      {entries.map((entry) => (
-        <PostCard
-          href={getEntryHref(entry)}
-          title={entry.data.title}
-          summary={getEntrySummary(entry)}
-          eyebrow={entry.collection}
-          meta={getEntryMeta(entry)}
-          tags={getEntryTags(entry)}
-        />
-      ))}
+    <div class="content-shell rounded-3xl border border-border px-6 py-2 md:mx-0 md:max-w-[780px] md:px-8">
+      {posts.map((post) => <PostCard post={post} />)}
     </div>
   </section>
-</Base>
+</BaseLayout>

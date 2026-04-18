@@ -1,0 +1,49 @@
+---
+import PublicationCard from '../../components/PublicationCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublications } from '../../lib/content';
+
+const publications = await getPublications();
+const years = [...new Set(publications.map((entry) => entry.data.year))].sort((a, b) => b - a);
+
+const grouped = years.map((year) => {
+  const items = publications.filter((entry) => entry.data.year === year);
+  const areas = [...new Set(items.map((entry) => entry.data.research_area))].map((area) => ({
+    area,
+    items: items.filter((entry) => entry.data.research_area === area),
+  }));
+
+  return { year, areas };
+});
+---
+
+<BaseLayout title="Publications" description="Publication list grouped by year and research area.">
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Record</p>
+        <h1>Publications</h1>
+      </div>
+    </div>
+
+    <div class="space-y-12">
+      {grouped.map((yearGroup) => (
+        <section>
+          <h2 class="mb-6">{yearGroup.year}</h2>
+          <div class="space-y-8">
+            {yearGroup.areas.map((areaGroup) => (
+              <div>
+                <p class="mb-4 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-muted">
+                  {areaGroup.area}
+                </p>
+                <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                  {areaGroup.items.map((publication) => <PublicationCard publication={publication} />)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

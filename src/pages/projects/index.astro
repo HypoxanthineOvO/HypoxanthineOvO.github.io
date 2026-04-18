@@ -1,0 +1,27 @@
+---
+import ProjectCard from '../../components/ProjectCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/content';
+
+const projects = await getProjects();
+---
+
+<BaseLayout title="Projects" description="Hypo-* ecosystem project cards.">
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Ecosystem</p>
+        <h1>Projects</h1>
+      </div>
+    </div>
+
+    <p class="mb-8 max-w-[760px] text-muted">
+      A compact map of the Hypo-* stack, mixing verified local repositories with clearly marked placeholders where the
+      public repo or final scope is still undecided.
+    </p>
+
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

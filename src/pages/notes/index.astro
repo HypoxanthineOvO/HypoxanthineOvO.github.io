@@ -1,0 +1,92 @@
+---
+import NoteCard from '../../components/NoteCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTags, formatTagLabel, getNotes } from '../../lib/content';
+
+const notes = await getNotes();
+const tags = collectTags(notes);
+---
+
+<BaseLayout title="Notes" description="Compact notes with an inline tag filter.">
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Index</p>
+        <h1>Notes</h1>
+      </div>
+    </div>
+
+    <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
+      <p class="mb-6 text-muted">
+        Notes stay lighter than posts: lecture fragments, tool records, and reading traces. The filter below is
+        client-side only and does not create extra routes.
+      </p>
+
+      <div class="mb-8 flex flex-wrap gap-2" data-note-filters>
+        <button
+          type="button"
+          class="tag-pill border-accent text-accent"
+          data-note-filter-button="all"
+        >
+          All notes
+        </button>
+        {tags.map(({ tag, count }) => (
+          <button type="button" class="tag-pill transition-colors duration-150 hover:border-accent hover:text-accent" data-note-filter-button={tag}>
+            {formatTagLabel(tag, 'note')} ({count})
+          </button>
+        ))}
+      </div>
+
+      <div class="rounded-3xl border border-border px-6 py-2 md:px-8" data-note-list>
+        {notes.map((note) => <NoteCard note={note} />)}
+      </div>
+
+      <p class="mt-4 hidden font-sans text-sm text-muted" data-note-empty>
+        No notes match the current tag.
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    const filterButtons = [...document.querySelectorAll('[data-note-filter-button]')];
+    const cards = [...document.querySelectorAll('[data-note-card]')];
+    const emptyState = document.querySelector('[data-note-empty]');
+
+    if (filterButtons.length > 0) {
+      const setFilter = (tag) => {
+        let visible = 0;
+
+        filterButtons.forEach((button) => {
+          const active = button.getAttribute('data-note-filter-button') === tag;
+          button.classList.toggle('border-accent', active);
+          button.classList.toggle('text-accent', active);
+        });
+
+        cards.forEach((card) => {
+          const tags = (card.getAttribute('data-note-tags') || '').split(',').filter(Boolean);
+          const show = tag === 'all' || tags.includes(tag);
+          card.hidden = !show;
+          if (show) visible += 1;
+        });
+
+        emptyState?.classList.toggle('hidden', visible > 0);
+        const hash = tag === 'all' ? '' : `#tag-${tag}`;
+        history.replaceState({}, '', `/notes${hash}`);
+      };
+
+      const hash = window.location.hash.match(/tag-(.+)$/)?.[1] || 'all';
+      setFilter(hash);
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFilter(button.getAttribute('data-note-filter-button') || 'all');
+        });
+      });
+
+      window.addEventListener('hashchange', () => {
+        const next = window.location.hash.match(/tag-(.+)$/)?.[1] || 'all';
+        setFilter(next);
+      });
+    }
+  </script>
+</BaseLayout>
