@@ -1,0 +1,65 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/600.css';
+import '@fontsource/source-serif-4/700.css';
+import '@fontsource/source-serif-4/400-italic.css';
+import '@fontsource/noto-serif-sc/400.css';
+import '@fontsource/noto-serif-sc/700.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/600.css';
+
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+import { siteConfig } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = siteConfig.description } = Astro.props;
+const pageTitle = title ? `${title} | ${siteConfig.title}` : siteConfig.title;
+const themeScript = `
+(() => {
+  const storageKey = 'hypo-theme';
+  const root = document.documentElement;
+  const stored = localStorage.getItem(storageKey);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if ((stored ?? (prefersDark ? 'dark' : 'light')) === 'dark') {
+    root.classList.add('dark');
+  }
+})();
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, siteConfig.site).toString()} />
+    <meta property="og:image" content={new URL(siteConfig.avatar, siteConfig.site).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#1E3A5F" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    <script is:inline set:html={themeScript} />
+    <slot name="head" />
+  </head>
+  <body>
+    <Header />
+    <main class="pt-24">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -7,7 +7,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://HypoxanthineOvO.github.io',
+  site: 'https://hypoxanthineovo.github.io',
   output: 'static',
   integrations: [
     mdx(),
@@ -17,6 +17,14 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      wrap: true,
+    },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
   },

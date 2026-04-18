@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import katexCss from 'katex/dist/katex.min.css?raw';
+
+import Prose from '../components/Prose.astro';
+import TOC from '../components/TOC.astro';
+import TagList from '../components/TagList.astro';
+import { formatDate } from '../lib/content';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'posts'>;
+  Content: any;
+  headings: { depth: number; slug: string; text: string }[];
+  newer: CollectionEntry<'posts'> | null;
+  older: CollectionEntry<'posts'> | null;
+}
+
+const { entry, Content, headings, newer, older } = Astro.props;
+const metaDescription = entry.data.description ?? 'Post detail page';
+const katexStyles = entry.data.math ? katexCss : '';
+---
+
+<BaseLayout title={entry.data.title} description={metaDescription}>
+  {entry.data.math && <style slot="head" is:inline set:html={katexStyles} />}
+
+  <TOC headings={headings} />
+
+  <article class="shell pb-20">
+    <div class="content-shell xl:mr-[18rem]">
+      <p class="section-kicker">Posts</p>
+      <h1 class="mb-4">{entry.data.title}</h1>
+      <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm text-muted">
+        <span>{formatDate(entry.data.date)}</span>
+        {entry.data.updated && <span>Updated {formatDate(entry.data.updated)}</span>}
+      </div>
+      <div class="mb-10">
+        <TagList tags={entry.data.tags} mode="post" />
+      </div>
+
+      <Prose>
+        <Content />
+      </Prose>
+
+      <nav class="mt-12 grid gap-4 border-t border-border pt-6 font-sans text-sm md:grid-cols-2">
+        <div>
+          {newer && (
+            <>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Newer</p>
+              <a class="inline-link" href={`/posts/${newer.id}`}>
+                {newer.data.title}
+              </a>
+            </>
+          )}
+        </div>
+        <div class="md:text-right">
+          {older && (
+            <>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Older</p>
+              <a class="inline-link" href={`/posts/${older.id}`}>
+                {older.data.title}
+              </a>
+            </>
+          )}
+        </div>
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
