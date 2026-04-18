@@ -1,0 +1,92 @@
+---
+import Hero from '../components/Hero.astro';
+import NoteCard from '../components/NoteCard.astro';
+import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getNotes, getPosts, getProjects, getPublications } from '../lib/content';
+
+const recentPosts = (await getPosts()).slice(0, 3);
+const recentNotes = (await getNotes()).slice(0, 3);
+const featuredPublications = (await getPublications()).filter((entry) => entry.data.featured).slice(0, 3);
+const featuredProjects = (await getProjects()).filter((entry) => entry.data.featured).slice(0, 3);
+---
+
+<BaseLayout>
+  <div class="shell pb-20">
+    <Hero />
+
+    <section class="mb-14">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Short Context</h2>
+        </div>
+        <a class="inline-link font-sans text-sm" href="/about">Read more →</a>
+      </div>
+      <div class="content-shell space-y-4 text-muted md:mx-0 md:max-w-[760px] md:px-0">
+        <p>
+          The site is being rebuilt around four content types: long-form posts, compact notes, publications, and
+          project records.
+        </p>
+        <p>
+          Prompt B focuses on the structural shell only, so several texts here are intentionally marked as placeholders
+          until the full Hexo-to-Astro migration pass lands.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Featured</p>
+          <h2>Publications</h2>
+        </div>
+        <a class="inline-link font-sans text-sm" href="/publications">View all →</a>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {featuredPublications.map((publication) => <PublicationCard publication={publication} />)}
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Recent</p>
+          <h2>Posts</h2>
+        </div>
+        <a class="inline-link font-sans text-sm" href="/posts">View all →</a>
+      </div>
+      <div class="content-shell rounded-3xl border border-border px-6 py-2 md:mx-0 md:max-w-none md:px-8">
+        {recentPosts.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+
+    <section class="mb-14">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Recent</p>
+          <h2>Notes</h2>
+        </div>
+        <a class="inline-link font-sans text-sm" href="/notes">View all →</a>
+      </div>
+      <div class="content-shell rounded-3xl border border-border px-6 py-2 md:mx-0 md:max-w-none md:px-8">
+        {recentNotes.map((note) => <NoteCard note={note} />)}
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Featured</p>
+          <h2>Projects</h2>
+        </div>
+        <a class="inline-link font-sans text-sm" href="/projects">View all →</a>
+      </div>
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
