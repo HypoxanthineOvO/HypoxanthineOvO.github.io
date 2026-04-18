@@ -1,0 +1,62 @@
+[
+  {
+    "name": "文学论文",
+    "count": 8
+  },
+  {
+    "name": "常用技术笔记",
+    "count": 7
+  },
+  {
+    "name": "本科课程",
+    "count": 5
+  },
+  {
+    "name": "散文",
+    "count": 4
+  },
+  {
+    "name": "环境配置",
+    "count": 4
+  },
+  {
+    "name": "Paper Reading",
+    "count": 3
+  },
+  {
+    "name": "诗与词",
+    "count": 3
+  },
+  {
+    "name": "CS130",
+    "count": 2
+  },
+  {
+    "name": "工程",
+    "count": 2
+  },
+  {
+    "name": "数字电路设计与实践",
+    "count": 2
+  },
+  {
+    "name": "CS182",
+    "count": 1
+  },
+  {
+    "name": "实用工具",
+    "count": 1
+  },
+  {
+    "name": "毛概",
+    "count": 1
+  },
+  {
+    "name": "科研思考",
+    "count": 1
+  },
+  {
+    "name": "讲座笔记",
+    "count": 1
+  }
+]
