@@ -1,0 +1,34 @@
+<button
+  id="theme-toggle"
+  type="button"
+  class="rounded-full border border-paper-3 px-3 py-1.5 text-sm text-ink transition hover:border-accent hover:text-accent dark:border-ink-3 dark:text-paper dark:hover:border-paper dark:hover:text-paper"
+>
+  Theme
+</button>
+
+<script is:inline>
+  const applyTheme = (theme) => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    root.dataset.theme = theme;
+  };
+
+  const stored = localStorage.getItem('theme');
+  const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  applyTheme(stored || preferred);
+
+  const button = document.getElementById('theme-toggle');
+  if (button) {
+    const label = () => {
+      button.textContent = document.documentElement.classList.contains('dark') ? 'Light' : 'Dark';
+    };
+
+    label();
+    button.addEventListener('click', () => {
+      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+      label();
+    });
+  }
+</script>

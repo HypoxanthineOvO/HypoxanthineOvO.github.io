@@ -1,0 +1,30 @@
+---
+import Tag from './Tag.astro';
+
+type Props = {
+  href: string;
+  title: string;
+  summary?: string;
+  eyebrow?: string;
+  meta?: string;
+  tags?: string[];
+};
+
+const { href, title, summary, eyebrow, meta, tags = [] } = Astro.props as Props;
+---
+
+<article class="rounded-3xl border border-paper-3 bg-paper p-6 shadow-card transition hover:-translate-y-1 dark:border-ink-3 dark:bg-ink-2">
+  <a class="block space-y-3" href={href}>
+    {eyebrow && <p class="text-xs uppercase tracking-[0.18em] text-accent">{eyebrow}</p>}
+    <h3 class="text-xl font-semibold tracking-tight text-ink dark:text-paper">{title}</h3>
+    {meta && <p class="text-sm text-ink-3 dark:text-paper-3">{meta}</p>}
+    {summary && <p class="text-sm leading-7 text-ink-3 dark:text-paper-3">{summary}</p>}
+  </a>
+  {tags.length > 0 && (
+    <div class="mt-4 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <Tag tag={tag} href={`/tags/${encodeURIComponent(tag.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}/`} />
+      ))}
+    </div>
+  )}
+</article>

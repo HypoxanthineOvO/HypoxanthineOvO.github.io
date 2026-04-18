@@ -1,0 +1,34 @@
+---
+title: Blog Example Entry
+date: 2026-04-18
+subcategory: literature-notes
+tags:
+  - astro
+  - migration
+summary: Placeholder blog entry for layout and MDX component validation.
+draft: false
+---
+
+import Callout from '../../components/mdx/Callout.astro';
+import Note from '../../components/mdx/Note.astro';
+import Tabs from '../../components/mdx/Tabs.astro';
+
+# Example Heading
+
+<Callout title="Migration Note">
+This placeholder post verifies MDX components, math rendering, and code styles before content import.
+</Callout>
+
+Inline math works: $e^{i\pi} + 1 = 0$.
+
+```ts
+export function greet(name: string) {
+  return `hello, ${name}`;
+}
+```
+
+<Note>
+Prompt B can replace this with imported Hexo content and richer component mappings.
+</Note>
+
+<Tabs items={['Structure', 'Styling', 'Migration']} />

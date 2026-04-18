@@ -1,0 +1,49 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { formatDate, sortByDateDesc } from '../../../lib/content';
+import { blogSubcategories, blogSubcategoryLabels, type BlogSubcategory } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+  return blogSubcategories.map((subcategory) => ({
+    params: { subcategory },
+    props: {
+      subcategory,
+      posts: sortByDateDesc(posts.filter((post) => post.data.subcategory === subcategory)),
+    },
+  }));
+}
+
+const { subcategory, posts } = Astro.props as {
+  subcategory: BlogSubcategory;
+  posts: CollectionEntry<'blog'>[];
+};
+---
+
+<Base title={blogSubcategoryLabels[subcategory]} description={`Blog entries in ${blogSubcategoryLabels[subcategory]}.`}>
+  <section class="mx-auto max-w-6xl px-6 py-10">
+    <div class="mb-8 space-y-4">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">Blog / {blogSubcategoryLabels[subcategory]}</p>
+      <h1 class="text-4xl font-semibold tracking-tight">{blogSubcategoryLabels[subcategory]}</h1>
+      <p class="max-w-2xl text-base leading-8 text-ink-3 dark:text-paper-3">
+        Static subcategory page scaffold. Prompt B can refine editorial intros after migration.
+      </p>
+    </div>
+
+    <div class="grid gap-6">
+      {posts.map((post) => (
+        <PostCard
+          href={`/blog/${post.data.subcategory}/${post.id}/`}
+          title={post.data.title}
+          summary={post.data.summary}
+          eyebrow={blogSubcategoryLabels[post.data.subcategory]}
+          meta={formatDate(post.data.date)}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

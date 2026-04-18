@@ -1,0 +1,18 @@
+---
+const { tag, href } = Astro.props as { tag: string; href?: string };
+---
+
+{
+  href ? (
+    <a
+      class="inline-flex rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent transition hover:bg-accent hover:text-paper dark:bg-ink-2 dark:text-paper-3 dark:hover:bg-paper dark:hover:text-ink"
+      href={href}
+    >
+      #{tag}
+    </a>
+  ) : (
+    <span class="inline-flex rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent dark:bg-ink-2 dark:text-paper-3">
+      #{tag}
+    </span>
+  )
+}

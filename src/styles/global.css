@@ -1,0 +1,75 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource/noto-serif-sc';
+@import '@fontsource/noto-sans-sc';
+@import '@fontsource/jetbrains-mono';
+@import 'katex/dist/katex.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #fcfcfc;
+  --color-surface: #f4f4f5;
+  --color-border: #e5e5e5;
+  --color-text: #111111;
+  --color-text-muted: #4a4a4a;
+  --color-accent: #1e3a5f;
+  --color-accent-hover: #2b4c78;
+  --color-accent-soft: #e6edf5;
+}
+
+.dark {
+  --color-bg: #111111;
+  --color-surface: #1f1f1f;
+  --color-border: #4a4a4a;
+  --color-text: #fcfcfc;
+  --color-text-muted: #e5e5e5;
+  --color-accent: #e6edf5;
+  --color-accent-hover: #fcfcfc;
+  --color-accent-soft: #1e3a5f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter Variable', 'Noto Sans SC', system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+code,
+pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.prose {
+  --tw-prose-body: var(--color-text-muted);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-border);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-quote-borders: var(--color-border);
+  --tw-prose-captions: var(--color-text-muted);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: #f4f4f5;
+  --tw-prose-pre-bg: #1f1f1f;
+}
+
+.dark .prose {
+  --tw-prose-body: var(--color-text-muted);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-code: var(--color-text);
+}

@@ -1,0 +1,28 @@
+---
+type Heading = {
+  depth: number;
+  slug: string;
+  text: string;
+};
+
+const { headings = [] } = Astro.props as { headings?: Heading[] };
+---
+
+{
+  headings.length > 0 && (
+    <nav class="rounded-3xl border border-paper-3 bg-paper-2/80 p-5 text-sm dark:border-ink-3 dark:bg-ink-2/80">
+      <p class="mb-3 font-semibold text-ink dark:text-paper">On this page</p>
+      <ol class="space-y-2 text-ink-3 dark:text-paper-3">
+        {headings
+          .filter((heading) => heading.depth <= 3)
+          .map((heading) => (
+            <li style={`padding-left: ${(heading.depth - 2) * 0.75}rem`}>
+              <a class="transition hover:text-accent dark:hover:text-paper" href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+      </ol>
+    </nav>
+  )
+}

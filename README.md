@@ -1,10 +1,11 @@
 # HypoxanthineOvO.github.io
 
-This branch is reserved for the Astro-based rebuild of the site.
+Astro rebuild scaffold for `https://HypoxanthineOvO.github.io`.
 
-The previous Hexo-generated site has been preserved in:
+Legacy Hexo output has been preserved in:
 
 - Branch: `hexo-legacy`
 - Tag: `hexo-archive-20260418`
+- Read-only worktree: `/home/heyx/Hypo-Website-legacy`
 
-Content migration and the new Astro implementation will be added on top of this clean `main` branch.
+This `main` branch now contains the Astro skeleton, content collection schemas, route placeholders, theme system, and GitHub Pages deployment workflow.

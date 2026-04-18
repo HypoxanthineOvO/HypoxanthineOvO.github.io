@@ -1,0 +1,37 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { mdxComponents } from '../../../components/mdx';
+import Academia from '../../../layouts/Academia.astro';
+import Tag from '../../../components/Tag.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('courses');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<'courses'> };
+const { Content } = await render(entry);
+---
+
+<Academia title={entry.data.title} description={entry.data.summary}>
+  <Fragment slot="hero">
+    <div class="mb-8 rounded-[2rem] border border-paper-3 bg-paper p-8 dark:border-ink-3 dark:bg-ink-2">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">{entry.data.code}</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight">{entry.data.title}</h1>
+      <p class="mt-3 text-sm text-ink-3 dark:text-paper-3">
+        {[entry.data.institution, entry.data.semester].filter(Boolean).join(' · ')}
+      </p>
+      {entry.data.tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {entry.data.tags.map((tag) => (
+            <Tag tag={tag} href={`/tags/${encodeURIComponent(tag.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}/`} />
+          ))}
+        </div>
+      )}
+    </div>
+  </Fragment>
+
+  <article class="prose prose-slate max-w-none dark:prose-invert">
+    <Content components={mdxComponents} />
+  </article>
+</Academia>

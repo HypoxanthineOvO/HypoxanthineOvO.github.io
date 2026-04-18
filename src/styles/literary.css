@@ -1,0 +1,22 @@
+.literary-shell {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(30, 58, 95, 0.06), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(30, 58, 95, 0.04), transparent 24%),
+    linear-gradient(0deg, rgba(244, 244, 245, 0.92), rgba(252, 252, 252, 0.96));
+}
+
+.dark.literary-shell {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(230, 237, 245, 0.08), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(230, 237, 245, 0.05), transparent 24%),
+    linear-gradient(0deg, rgba(17, 17, 17, 0.98), rgba(31, 31, 31, 0.96));
+}
+
+.literary-prose {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  line-height: 1.9;
+}
+
+.literary-prose p {
+  text-wrap: pretty;
+}

@@ -1,0 +1,15 @@
+---
+import Base from './Base.astro';
+import '../styles/academia.css';
+
+const { title, description } = Astro.props as { title?: string; description?: string };
+---
+
+<Base title={title} description={description} pageClass="academia-shell">
+  <section class="mx-auto max-w-6xl px-6 py-10">
+    <slot name="hero" />
+    <div class="academia-content">
+      <slot />
+    </div>
+  </section>
+</Base>

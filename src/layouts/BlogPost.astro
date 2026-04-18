@@ -1,0 +1,46 @@
+---
+import Tag from '../components/Tag.astro';
+import Literary from './Literary.astro';
+import Technical from './Technical.astro';
+
+const {
+  title,
+  description,
+  date,
+  tags = [],
+  subcategoryLabel,
+  headings = [],
+  variant = 'technical',
+} = Astro.props as {
+  title: string;
+  description?: string;
+  date: string;
+  tags?: string[];
+  subcategoryLabel: string;
+  headings?: { depth: number; slug: string; text: string }[];
+  variant?: 'literary' | 'technical';
+};
+
+const Layout = variant === 'literary' ? Literary : Technical;
+---
+
+<Layout title={title} description={description} headings={headings}>
+  <Fragment slot="hero">
+    <header class="mx-auto mb-10 max-w-3xl space-y-4">
+      <p class="text-xs uppercase tracking-[0.18em] text-accent">{subcategoryLabel}</p>
+      <h1 class="text-4xl font-semibold tracking-tight text-ink dark:text-paper">{title}</h1>
+      <p class="text-sm text-ink-3 dark:text-paper-3">{date}</p>
+      {description && <p class="max-w-2xl text-base leading-8 text-ink-3 dark:text-paper-3">{description}</p>}
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Tag tag={tag} href={`/tags/${encodeURIComponent(tag.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}/`} />
+          ))}
+        </div>
+      )}
+    </header>
+  </Fragment>
+  <article>
+    <slot />
+  </article>
+</Layout>

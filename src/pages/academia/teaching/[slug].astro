@@ -1,0 +1,45 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { mdxComponents } from '../../../components/mdx';
+import Academia from '../../../layouts/Academia.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('teaching');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<'teaching'> };
+const { Content } = await render(entry);
+---
+
+<Academia title={entry.data.title} description={entry.data.summary}>
+  <Fragment slot="hero">
+    <div class="mb-8 rounded-[2rem] border border-paper-3 bg-paper p-8 dark:border-ink-3 dark:bg-ink-2">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">{entry.data.role}</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight">{entry.data.title}</h1>
+      <p class="mt-3 text-sm text-ink-3 dark:text-paper-3">
+        {entry.data.course} · {entry.data.semester}
+        {entry.data.institution && ` · ${entry.data.institution}`}
+      </p>
+    </div>
+  </Fragment>
+
+  <article class="prose prose-slate max-w-none dark:prose-invert">
+    <Content components={mdxComponents} />
+  </article>
+
+  {entry.data.resources && entry.data.resources.length > 0 && (
+    <section class="rounded-[2rem] border border-paper-3 bg-paper p-6 dark:border-ink-3 dark:bg-ink-2">
+      <h2 class="text-lg font-semibold">Resources</h2>
+      <ul class="mt-4 space-y-2 text-sm text-ink-3 dark:text-paper-3">
+        {entry.data.resources.map((resource) => (
+          <li>
+            <a class="text-accent hover:text-accent-hover" href={resource.url}>
+              {resource.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Academia>

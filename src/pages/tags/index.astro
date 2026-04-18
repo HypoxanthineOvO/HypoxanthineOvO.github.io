@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Tag from '../../components/Tag.astro';
+import { collectTags } from '../../lib/content';
+
+const tagBuckets = collectTags([
+  ...(await getCollection('blog', ({ data }) => !data.draft)),
+  ...(await getCollection('teaching')),
+  ...(await getCollection('courses')),
+  ...(await getCollection('publications')),
+]);
+---
+
+<Base title="Tags" description="Tag index aggregated across taggable collections.">
+  <section class="mx-auto max-w-6xl px-6 py-10">
+    <div class="mb-8 space-y-4">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">Tags</p>
+      <h1 class="text-4xl font-semibold tracking-tight">All tags</h1>
+      <p class="max-w-2xl text-base leading-8 text-ink-3 dark:text-paper-3">
+        Aggregated tags across collections that define tag metadata.
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      {tagBuckets.map((bucket) => (
+        <div class="flex items-center gap-2 rounded-full border border-paper-3 px-2 py-2 dark:border-ink-3">
+          <Tag tag={bucket.tag} href={`/tags/${bucket.slug}/`} />
+          <span class="pr-2 text-xs text-ink-3 dark:text-paper-3">{bucket.entries.length}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import Tag from '../../components/Tag.astro';
+import { formatDate, sortByDateDesc } from '../../lib/content';
+import { blogSubcategories, blogSubcategoryLabels } from '../../lib/site';
+
+const posts = sortByDateDesc(await getCollection('blog', ({ data }) => !data.draft));
+---
+
+<Base title="Blog" description="Chronological writing archive with subcategory filters.">
+  <section class="mx-auto max-w-6xl px-6 py-10">
+    <div class="mb-8 space-y-4">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">Blog</p>
+      <h1 class="text-4xl font-semibold tracking-tight">Full timeline</h1>
+      <p class="max-w-2xl text-base leading-8 text-ink-3 dark:text-paper-3">
+        All blog entries in reverse chronological order, with fixed subcategory chips.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {blogSubcategories.map((subcategory) => (
+          <Tag tag={blogSubcategoryLabels[subcategory]} href={`/blog/${subcategory}/`} />
+        ))}
+      </div>
+    </div>
+
+    <div class="grid gap-6">
+      {posts.map((post) => (
+        <PostCard
+          href={`/blog/${post.data.subcategory}/${post.id}/`}
+          title={post.data.title}
+          summary={post.data.summary}
+          eyebrow={blogSubcategoryLabels[post.data.subcategory]}
+          meta={formatDate(post.data.date)}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

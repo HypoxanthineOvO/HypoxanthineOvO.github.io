@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { collectTags, getEntryHref, getEntryMeta, getEntrySummary, getEntryTags, type SiteEntry } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const allEntries = [
+    ...(await getCollection('blog', ({ data }) => !data.draft)),
+    ...(await getCollection('teaching')),
+    ...(await getCollection('courses')),
+    ...(await getCollection('publications')),
+  ];
+
+  return collectTags(allEntries).map((bucket) => ({
+    params: { tag: bucket.slug },
+    props: bucket,
+  }));
+}
+
+const { tag, entries } = Astro.props as {
+  tag: string;
+  entries: SiteEntry[];
+};
+---
+
+<Base title={`Tag: ${tag}`} description={`Entries tagged with ${tag}.`}>
+  <section class="mx-auto max-w-6xl px-6 py-10">
+    <div class="mb-8 space-y-4">
+      <p class="text-sm uppercase tracking-[0.2em] text-accent">Tags / {tag}</p>
+      <h1 class="text-4xl font-semibold tracking-tight">#{tag}</h1>
+    </div>
+
+    <div class="grid gap-6">
+      {entries.map((entry) => (
+        <PostCard
+          href={getEntryHref(entry)}
+          title={entry.data.title}
+          summary={getEntrySummary(entry)}
+          eyebrow={entry.collection}
+          meta={getEntryMeta(entry)}
+          tags={getEntryTags(entry)}
+        />
+      ))}
+    </div>
+  </section>
+</Base>

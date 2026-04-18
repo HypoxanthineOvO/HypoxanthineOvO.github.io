@@ -1,0 +1,47 @@
+---
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { siteConfig } from '../lib/site';
+import '../styles/global.css';
+
+type Props = {
+  title?: string;
+  description?: string;
+  pageClass?: string;
+};
+
+const { title, description = siteConfig.description, pageClass = '' } = Astro.props as Props;
+const pageTitle = title ? `${title} | ${siteConfig.title}` : siteConfig.title;
+
+const themeBootScript = `
+  (() => {
+    const stored = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark', (stored || preferred) === 'dark');
+  })();
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline set:html={themeBootScript} />
+    <slot name="head" />
+  </head>
+  <body class:list={['min-h-screen bg-paper text-ink antialiased transition-colors dark:bg-ink dark:text-paper', pageClass]}>
+    <Nav />
+    <div class="mx-auto flex max-w-6xl justify-end px-6 pt-4">
+      <ThemeToggle />
+    </div>
+    <main class="pb-16">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
