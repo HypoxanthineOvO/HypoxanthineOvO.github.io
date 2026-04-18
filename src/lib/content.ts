@@ -1,105 +1,123 @@
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-export type SiteEntry =
-  | CollectionEntry<'blog'>
-  | CollectionEntry<'teaching'>
-  | CollectionEntry<'courses'>
-  | CollectionEntry<'publications'>;
+import { noteTagLabels, postTagLabels } from './site';
 
-export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).format(date);
-}
+export type PostEntry = CollectionEntry<'posts'>;
+export type NoteEntry = CollectionEntry<'notes'>;
+export type PublicationEntry = CollectionEntry<'publications'>;
+export type ProjectEntry = CollectionEntry<'projects'>;
 
 export function sortByDateDesc<T extends { data: { date: Date } }>(entries: T[]) {
   return [...entries].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
-export function groupPostsByYear<T extends { data: { date: Date } }>(entries: T[]) {
-  return sortByDateDesc(entries).reduce<Record<string, T[]>>((groups, entry) => {
-    const year = entry.data.date.getFullYear().toString();
-    groups[year] ??= [];
-    groups[year].push(entry);
-    return groups;
-  }, {});
+export function groupEntriesByYear<T extends { data: { date: Date } }>(entries: T[]) {
+  const groups = new Map<number, T[]>();
+
+  for (const entry of entries) {
+    const year = entry.data.date.getUTCFullYear();
+    const bucket = groups.get(year) ?? [];
+    bucket.push(entry);
+    groups.set(year, bucket);
+  }
+
+  return [...groups.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([year, items]) => ({
+      year,
+      items: sortByDateDesc(items),
+    }));
 }
 
-export function tagToSlug(tag: string) {
+export function chunkEntries<T>(entries: T[], size: number) {
+  const pages: T[][] = [];
+
+  for (let index = 0; index < entries.length; index += size) {
+    pages.push(entries.slice(index, index + size));
+  }
+
+  return pages;
+}
+
+export function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
+export function toTagParam(tag: string) {
   return tag
-    .trim()
     .toLowerCase()
+    .trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 }
 
-export function getEntryHref(entry: SiteEntry) {
-  if (entry.collection === 'blog') {
-    return `/blog/${entry.data.subcategory}/${entry.id}/`;
+export function formatTagLabel(tag: string, mode: 'post' | 'note' = 'post') {
+  const overrides = mode === 'post' ? postTagLabels : noteTagLabels;
+  if (overrides[tag]) {
+    return overrides[tag];
   }
 
-  if (entry.collection === 'teaching') {
-    return `/academia/teaching/${entry.id}/`;
-  }
-
-  if (entry.collection === 'courses') {
-    return `/academia/courses/${entry.id}/`;
-  }
-
-  return `/academia/publications/#${entry.id}`;
+  return tag
+    .split('-')
+    .map((part) => {
+      if (part === 'gpu') {
+        return 'GPU';
+      }
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    })
+    .join(' ');
 }
 
-export function getEntryMeta(entry: SiteEntry) {
-  if (entry.collection === 'blog') {
-    return formatDate(entry.data.date);
-  }
-
-  if (entry.collection === 'teaching') {
-    return `${entry.data.course} · ${entry.data.semester}`;
-  }
-
-  if (entry.collection === 'courses') {
-    return [entry.data.code, entry.data.semester].filter(Boolean).join(' · ');
-  }
-
-  return `${entry.data.venue} · ${entry.data.year}`;
-}
-
-export function getEntrySummary(entry: SiteEntry) {
-  if ('summary' in entry.data && typeof entry.data.summary === 'string') {
-    return entry.data.summary;
-  }
-
-  if ('abstract' in entry.data && typeof entry.data.abstract === 'string') {
-    return entry.data.abstract;
-  }
-
-  return undefined;
-}
-
-export function getEntryTags(entry: SiteEntry) {
-  const maybeTags = (entry.data as { tags?: string[] }).tags;
-  return Array.isArray(maybeTags) ? maybeTags : [];
-}
-
-export function collectTags(entries: SiteEntry[]) {
-  const tagMap = new Map<string, { tag: string; slug: string; entries: SiteEntry[] }>();
+export function collectTags<T extends { data: { tags?: string[] } }>(entries: T[]) {
+  const counts = new Map<string, number>();
 
   for (const entry of entries) {
-    const maybeTags = (entry.data as { tags?: string[] }).tags;
-    if (!Array.isArray(maybeTags)) {
-      continue;
-    }
-
-    for (const tag of maybeTags) {
-      const slug = tagToSlug(tag);
-      const bucket = tagMap.get(slug) ?? { tag, slug, entries: [] };
-      bucket.entries.push(entry);
-      tagMap.set(slug, bucket);
+    for (const tag of entry.data.tags ?? []) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
     }
   }
 
-  return [...tagMap.values()].sort((a, b) => a.tag.localeCompare(b.tag));
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, 'en'));
+}
+
+export async function getPosts() {
+  return sortByDateDesc((await getCollection('posts')).filter((entry) => !entry.data.draft));
+}
+
+export async function getNotes() {
+  return sortByDateDesc(await getCollection('notes'));
+}
+
+export async function getPublications() {
+  return [...(await getCollection('publications'))].sort((a, b) => {
+    if (b.data.year !== a.data.year) {
+      return b.data.year - a.data.year;
+    }
+    return a.data.title.localeCompare(b.data.title, 'en');
+  });
+}
+
+export async function getProjects() {
+  return [...(await getCollection('projects'))].sort((a, b) => {
+    if (a.data.order !== b.data.order) {
+      return a.data.order - b.data.order;
+    }
+    return a.data.name.localeCompare(b.data.name, 'en');
+  });
+}
+
+export function getAdjacentEntries<T extends { id: string }>(entries: T[], id: string) {
+  const index = entries.findIndex((entry) => entry.id === id);
+
+  return {
+    newer: index > 0 ? entries[index - 1] : null,
+    older: index >= 0 && index < entries.length - 1 ? entries[index + 1] : null,
+  };
 }

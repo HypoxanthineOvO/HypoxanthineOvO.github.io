@@ -1,58 +1,49 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { blogSubcategories } from '../lib/site';
 
-const blog = defineCollection({
+const posts = defineCollection({
   loader: glob({
     pattern: '**/*.{md,mdx}',
-    base: './src/content/blog',
+    base: './src/content/posts',
   }),
   schema: z.object({
+    // Public title used in cards, metadata, and article pages.
     title: z.string(),
+    // Original publish date.
     date: z.date(),
-    subcategory: z.enum(blogSubcategories),
+    // Optional short summary used in list pages and feeds.
+    description: z.string().optional(),
+    // Flat tag list for posts and post tag pages.
     tags: z.array(z.string()).default([]),
-    summary: z.string().optional(),
-    cover: z.string().optional(),
+    // Draft posts stay out of production lists and routes.
     draft: z.boolean().default(false),
+    // Enable KaTeX styles only when math markup is present.
+    math: z.boolean().default(false),
+    // Optional last updated date for migrated or revised posts.
+    updated: z.date().optional(),
   }),
 });
 
-const teaching = defineCollection({
+const notes = defineCollection({
   loader: glob({
     pattern: '**/*.{md,mdx}',
-    base: './src/content/teaching',
+    base: './src/content/notes',
   }),
   schema: z.object({
+    // Note title shown in index pages and note detail pages.
     title: z.string(),
-    course: z.string(),
-    role: z.string(),
-    semester: z.string(),
-    institution: z.string().optional(),
-    summary: z.string().optional(),
-    resources: z
-      .array(
-        z.object({
-          label: z.string(),
-          url: z.string().url(),
-        })
-      )
-      .optional(),
-  }),
-});
-
-const courses = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/courses',
-  }),
-  schema: z.object({
-    title: z.string(),
-    code: z.string(),
-    institution: z.string().optional(),
-    semester: z.string().optional(),
-    summary: z.string().optional(),
+    // Date of the note itself.
+    date: z.date(),
+    // Source material such as a paper, book, or talk.
+    source: z.string().optional(),
+    // Authors of the source material when relevant.
+    authors: z.array(z.string()).optional(),
+    // Canonical source link for the original material.
+    link: z.string().url().optional(),
+    // Flat tags used only for the client-side note filter.
     tags: z.array(z.string()).default([]),
+    // Optional note summary for cards and feeds.
+    description: z.string().optional(),
   }),
 });
 
@@ -62,27 +53,59 @@ const publications = defineCollection({
     base: './src/content/publications',
   }),
   schema: z.object({
+    // Publication title.
     title: z.string(),
+    // Ordered author list; highlight Hypoxanthine He in the UI.
     authors: z.array(z.string()),
+    // Venue such as conference, journal, or workshop.
     venue: z.string(),
+    // Publication year used for sorting and grouping.
     year: z.number().int(),
-    type: z.enum(['conference', 'journal', 'workshop', 'preprint']),
-    links: z
-      .object({
-        pdf: z.string().url().optional(),
-        code: z.string().url().optional(),
-        arxiv: z.string().url().optional(),
-        doi: z.string().url().optional(),
-        project: z.string().url().optional(),
-      })
-      .optional(),
-    abstract: z.string().optional(),
+    // Research area section heading.
+    research_area: z.string(),
+    // Optional PDF link.
+    pdf: z.string().url().optional(),
+    // Optional code repository link.
+    code: z.string().url().optional(),
+    // Optional standalone project page link.
+    project_page: z.string().url().optional(),
+    // Optional BibTeX string for quick copy.
+    bibtex: z.string().optional(),
+    // Optional teaser image path.
+    teaser: z.string().optional(),
+    // Featured publications appear on the landing page.
+    featured: z.boolean().default(false),
+  }),
+});
+
+const projects = defineCollection({
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/projects',
+  }),
+  schema: z.object({
+    // Project name displayed on cards and detail snippets.
+    name: z.string(),
+    // Single-line summary for list pages.
+    description: z.string(),
+    // Current lifecycle state.
+    status: z.enum(['Active', 'WIP', 'Archived', 'Idea']),
+    // Main technologies or domains.
+    tech: z.array(z.string()),
+    // Optional source repository.
+    repo: z.string().optional(),
+    // Optional live project link.
+    link: z.string().optional(),
+    // Featured projects appear on the landing page.
+    featured: z.boolean().default(false),
+    // Explicit ordering control for the projects page.
+    order: z.number().int().default(0),
   }),
 });
 
 export const collections = {
-  blog,
-  teaching,
-  courses,
+  posts,
+  notes,
   publications,
+  projects,
 };

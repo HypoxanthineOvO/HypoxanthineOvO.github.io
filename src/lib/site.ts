@@ -1,37 +1,38 @@
 export const siteConfig = {
-  title: 'HypoxanthineOvO',
-  description: 'Astro rebuild scaffold for essays, notes, and academic work.',
-  site: 'https://HypoxanthineOvO.github.io',
+  site: 'https://hypoxanthineovo.github.io',
+  title: 'Hypoxanthine',
+  description: 'Minimal academia-style home for posts, notes, publications, and the Hypo-* ecosystem.',
+  author: 'Hypoxanthine He',
+  tagline: 'Research notes, literary writing, and GPU-adjacent systems collected in one quiet place.',
+  email: 'contact@hypoxanthine.cn',
+  github: 'https://github.com/HypoxanthineOvO',
+  avatar: '/avatar.png',
 };
 
 export const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/academia/', label: 'Academia' },
-  { href: '/archive/', label: 'Archive' },
-  { href: '/tags/', label: 'Tags' },
-  { href: '/about/', label: 'About' },
+  { href: '/posts', label: 'Posts' },
+  { href: '/notes', label: 'Notes' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
 ];
 
-export const blogSubcategories = [
-  'literature-papers',
-  'literature-notes',
-  'engineering',
-  'research',
-] as const;
+export const socialLinks = [
+  { href: siteConfig.github, label: 'GitHub' },
+  { href: `mailto:${siteConfig.email}`, label: 'Email' },
+];
 
-export type BlogSubcategory = (typeof blogSubcategories)[number];
-
-export const blogSubcategoryLabels: Record<BlogSubcategory, string> = {
-  'literature-papers': 'Literature Papers',
-  'literature-notes': 'Literature Notes',
-  engineering: 'Engineering',
-  research: 'Research',
+export const postTagLabels: Record<string, string> = {
+  'creative-writing': 'Creative Writing',
+  'literary-essay': 'Literary Essay',
+  'personal-essay': 'Personal Essay',
+  'research-notes': 'Research Notes',
+  'tooling-notes': 'Tooling Notes',
 };
 
-export const blogSubcategoryVariants: Record<BlogSubcategory, 'literary' | 'technical'> = {
-  'literature-papers': 'literary',
-  'literature-notes': 'literary',
-  engineering: 'technical',
-  research: 'technical',
+export const noteTagLabels: Record<string, string> = {
+  'gpu-research': 'GPU Research',
+  'lecture-notes': 'Lecture Notes',
+  'tooling-notes': 'Tooling Notes',
+  'course-material': 'Course Material',
 };
