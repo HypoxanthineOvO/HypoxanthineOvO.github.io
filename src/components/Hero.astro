@@ -1,12 +1,10 @@
 ---
-import { GitBranch, Mail } from '@lucide/astro';
+import { Mail } from '@lucide/astro';
 
 import { siteConfig, socialLinks } from '../lib/site';
 
-const iconMap = {
-  GitHub: GitBranch,
-  Email: Mail,
-} as const;
+const githubMarkPath =
+  'M12 .297a12 12 0 0 0-3.794 23.385c.6.113.82-.258.82-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416a3.18 3.18 0 0 0-1.335-1.755c-1.09-.745.083-.729.083-.729a2.52 2.52 0 0 1 1.84 1.237 2.555 2.555 0 0 0 3.49.997 2.554 2.554 0 0 1 .762-1.6C7.16 17.31 4.36 16.27 4.36 11.67a4.573 4.573 0 0 1 1.218-3.172 4.25 4.25 0 0 1 .116-3.127s.996-.318 3.26 1.214a11.274 11.274 0 0 1 5.932 0c2.264-1.532 3.26-1.214 3.26-1.214a4.25 4.25 0 0 1 .116 3.127 4.573 4.573 0 0 1 1.218 3.172c0 4.61-2.804 5.636-5.475 5.932a2.868 2.868 0 0 1 .814 2.224v3.293c0 .322.216.694.825.576A12.003 12.003 0 0 0 12 .297Z';
 ---
 
 <section class="grid gap-8 pb-10 pt-6 md:grid-cols-[180px_minmax(0,1fr)] md:items-center">
@@ -25,13 +23,19 @@ const iconMap = {
     </div>
     <p class="mt-5 flex flex-wrap items-center gap-3 font-sans text-sm">
       {socialLinks.map((link, index) => {
-        const Icon = iconMap[link.label as keyof typeof iconMap];
-
         return (
           <>
             {index > 0 && <span class="text-muted">·</span>}
             <a class="social-link" href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-              {Icon && <Icon size={16} stroke-width={1.8} aria-hidden="true" />}
+              {
+                link.label === 'GitHub' ? (
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                    <path d={githubMarkPath}></path>
+                  </svg>
+                ) : (
+                  <Mail size={16} stroke-width={1.8} aria-hidden="true" />
+                )
+              }
               {link.label}
             </a>
           </>
