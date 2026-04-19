@@ -145,4 +145,22 @@ If the user checks screenshots tomorrow, the most important places to inspect ar
 6. Any post or note detail page:
    confirm blockquotes and inline code now “speak” visually without becoming noisy.
 
+## D.1 Patch
+
+- Header nav height normalization:
+  `src/components/Nav.astro`, `src/components/ThemeToggle.astro`, and `src/styles/global.css` now share a single `.nav-item` treatment so `Posts / Notes / Publications / Projects / About` and the theme toggle use the same `inline-flex`, padding, font sizing, line-height, and vertical alignment. This removes the taller `Posts` bounding box and keeps every item on one baseline.
+- GitHub icon correction:
+  `src/components/Hero.astro` no longer uses the Lucide fallback hack for GitHub. The Hero social link now renders the official GitHub brand mark as an inline SVG path, while Email continues to use Lucide `Mail`.
+- Publications layout change:
+  `src/components/PublicationCard.astro`, `src/pages/index.astro`, `src/pages/publications/index.astro`, and `src/styles/global.css` now render publication cards in a full-width single-column stack. Each card keeps metadata on the left and utility links on the right on larger screens, which fits the current small publication count better than the previous multi-column grid.
+
+Suggested visual check for this patch:
+
+1. Header desktop nav:
+   compare the top and bottom edges of `Posts`, `Notes`, `Publications`, `Projects`, `About`, and the theme icon in browser inspector. Their bounding boxes should now match.
+2. Hero social links:
+   confirm the GitHub icon is the proper cat/octocat brand mark instead of the earlier generic fallback icon.
+3. Landing `Featured Publications` and `/publications`:
+   confirm each paper occupies one full row, with the action buttons aligned to the right on desktop and stacked naturally on mobile.
+
 READY FOR HYPO REVIEW
