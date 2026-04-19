@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { publication } = Astro.props;
+const isAcademic = publication.data.kind !== 'literary';
 
 const links: { href: string; label: string }[] = [];
 
@@ -26,29 +27,41 @@ if (publication.data.project_page) {
   <div class="publication-card__inner">
     <div class="publication-card__meta">
       <h3 class="mb-3 text-[1.2rem]">{publication.data.title}</h3>
-      <p class="mb-2 text-sm leading-relaxed text-muted">
-        {
-          publication.data.authors.map((author, index) => (
-            <>
-              {index > 0 && ', '}
-              {author === 'Hypoxanthine He' ? (
-                <strong class="font-semibold text-text underline decoration-accent/60 underline-offset-4">{author}</strong>
-              ) : (
-                author
-              )}
-            </>
-          ))
-        }
-      </p>
+      {publication.data.authors?.length && (
+        <p class="mb-2 text-sm leading-relaxed text-muted">
+          {
+            publication.data.authors.map((author, index) => (
+              <>
+                {index > 0 && ', '}
+                {author === 'Hypoxanthine He' ? (
+                  <strong class="font-semibold text-text underline decoration-accent/60 underline-offset-4">{author}</strong>
+                ) : (
+                  author
+                )}
+              </>
+            ))
+          }
+        </p>
+      )}
       <p class="font-sans text-sm text-muted">
-        {publication.data.venue} · {publication.data.year}
+        {isAcademic ? (
+          <>
+            {publication.data.venue ?? 'Venue TBD'} · {publication.data.year}
+          </>
+        ) : publication.data.venue ? (
+          <>
+            {publication.data.year} · {publication.data.venue}
+          </>
+        ) : (
+          <>{publication.data.year}</>
+        )}
       </p>
     </div>
 
     {links.length > 0 && (
       <div class="publication-card__actions font-sans text-sm">
         {links.map((link) => (
-          <a class="link-btn" href={link.href} target="_blank" rel="noreferrer">
+          <a class="link-btn" href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
             [{link.label}]
           </a>
         ))}

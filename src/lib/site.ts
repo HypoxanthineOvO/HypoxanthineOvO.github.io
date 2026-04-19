@@ -25,14 +25,14 @@ export const socialLinks = [
 export const postTagLabels: Record<string, string> = {
   'creative-writing': 'Creative Writing',
   'literary-essay': 'Literary Essay',
-  'personal-essay': 'Personal Essay',
-  'research-notes': 'Research Notes',
   'tooling-notes': 'Tooling Notes',
 };
 
 export const noteTagLabels: Record<string, string> = {
+  'literary-essay': 'Literary Essay',
   'gpu-research': 'GPU Research',
   'lecture-notes': 'Lecture Notes',
   'tooling-notes': 'Tooling Notes',
+  'engineering-practice': 'Engineering Practice',
   'course-material': 'Course Material',
 };

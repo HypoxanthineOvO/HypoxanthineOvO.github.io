@@ -97,6 +97,9 @@ export async function getNotes() {
 
 export async function getPublications() {
   return [...(await getCollection('publications'))].sort((a, b) => {
+    if (a.data.kind !== b.data.kind) {
+      return a.data.kind === 'academic' ? -1 : 1;
+    }
     if (b.data.year !== a.data.year) {
       return b.data.year - a.data.year;
     }

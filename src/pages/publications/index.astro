@@ -4,20 +4,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublications } from '../../lib/content';
 
 const publications = await getPublications();
-const years = [...new Set(publications.map((entry) => entry.data.year))].sort((a, b) => b - a);
+const academicPublications = publications.filter((entry) => entry.data.kind !== 'literary');
+const literaryPublications = publications.filter((entry) => entry.data.kind === 'literary');
+const academicYears = [...new Set(academicPublications.map((entry) => entry.data.year))].sort((a, b) => b - a);
 
-const grouped = years.map((year) => {
-  const items = publications.filter((entry) => entry.data.year === year);
-  const areas = [...new Set(items.map((entry) => entry.data.research_area))].map((area) => ({
+const academicGrouped = academicYears.map((year) => {
+  const items = academicPublications.filter((entry) => entry.data.year === year);
+  const areas = [...new Set(items.map((entry) => entry.data.research_area ?? 'Research'))].map((area) => ({
     area,
-    items: items.filter((entry) => entry.data.research_area === area),
+    items: items.filter((entry) => (entry.data.research_area ?? 'Research') === area),
   }));
 
   return { year, areas };
 });
+
+const literaryYears = [...new Set(literaryPublications.map((entry) => entry.data.year))].sort((a, b) => b - a);
+const literaryGrouped = literaryYears.map((year) => ({
+  year,
+  items: literaryPublications.filter((entry) => entry.data.year === year),
+}));
 ---
 
-<BaseLayout title="Publications" description="Publication list grouped by year and research area.">
+<BaseLayout title="Publications" description="Publication list split into academic and literary records.">
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
@@ -26,24 +34,53 @@ const grouped = years.map((year) => {
       </div>
     </div>
 
-    <div class="space-y-12">
-      {grouped.map((yearGroup) => (
-        <section>
-          <h2 class="mb-6">{yearGroup.year}</h2>
-          <div class="space-y-8">
-            {yearGroup.areas.map((areaGroup) => (
-              <div>
-                <p class="mb-4 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-muted">
-                  {areaGroup.area}
-                </p>
-                <div class="publication-stack">
-                  {areaGroup.items.map((publication) => <PublicationCard publication={publication} />)}
-                </div>
+    <div class="space-y-16">
+      <section>
+        <div class="mb-8">
+          <p class="section-kicker">Academic</p>
+          <h2>Academic Publications</h2>
+        </div>
+
+        <div class="space-y-12">
+          {academicGrouped.map((yearGroup) => (
+            <section>
+              <h3 class="mb-6">{yearGroup.year}</h3>
+              <div class="space-y-8">
+                {yearGroup.areas.map((areaGroup) => (
+                  <div>
+                    <p class="mb-4 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-muted">
+                      {areaGroup.area}
+                    </p>
+                    <div class="publication-stack">
+                      {areaGroup.items.map((publication) => <PublicationCard publication={publication} />)}
+                    </div>
+                  </div>
+                ))}
               </div>
+            </section>
+          ))}
+        </div>
+      </section>
+
+      {literaryGrouped.length > 0 && (
+        <section>
+          <div class="mb-8">
+            <p class="section-kicker">Literary</p>
+            <h2>Literary Publications</h2>
+          </div>
+
+          <div class="space-y-10">
+            {literaryGrouped.map((yearGroup) => (
+              <section>
+                <h3 class="mb-6">{yearGroup.year}</h3>
+                <div class="publication-stack">
+                  {yearGroup.items.map((publication) => <PublicationCard publication={publication} />)}
+                </div>
+              </section>
             ))}
           </div>
         </section>
-      ))}
+      )}
     </div>
   </section>
 </BaseLayout>

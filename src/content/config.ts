@@ -53,22 +53,24 @@ const publications = defineCollection({
     base: './src/content/publications',
   }),
   schema: z.object({
+    // Academic publications vs. literary publications.
+    kind: z.enum(['academic', 'literary']).default('academic'),
     // Publication title.
     title: z.string(),
     // Ordered author list; highlight Hypoxanthine He in the UI.
-    authors: z.array(z.string()),
+    authors: z.array(z.string()).optional(),
     // Venue such as conference, journal, or workshop.
-    venue: z.string(),
+    venue: z.string().optional(),
     // Publication year used for sorting and grouping.
     year: z.number().int(),
-    // Research area section heading.
-    research_area: z.string(),
+    // Research area section heading for academic publications.
+    research_area: z.string().optional(),
     // Optional PDF link.
-    pdf: z.string().url().optional(),
+    pdf: z.string().optional(),
     // Optional code repository link.
-    code: z.string().url().optional(),
+    code: z.string().optional(),
     // Optional standalone project page link.
-    project_page: z.string().url().optional(),
+    project_page: z.string().optional(),
     // Optional BibTeX string for quick copy.
     bibtex: z.string().optional(),
     // Optional teaser image path.
