@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       colors: {
         bg: 'var(--bg)',
+        'bg-alt': 'var(--bg-alt)',
+        'bg-subtle': 'var(--bg-subtle)',
         text: 'var(--text)',
         muted: 'var(--muted)',
         border: 'var(--border)',

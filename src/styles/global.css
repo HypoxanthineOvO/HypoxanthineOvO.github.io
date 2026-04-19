@@ -4,11 +4,13 @@
 
 :root {
   --bg: #ffffff;
+  --bg-alt: #f7f8fa;
+  --bg-subtle: #f9fafc;
   --text: #111111;
   --muted: #6b7280;
   --border: #e5e7eb;
   --accent: #1e3a5f;
-  --code-bg: #f6f8fa;
+  --code-bg: #f0f3f8;
   --surface: rgba(255, 255, 255, 0.84);
   --shadow: 0 12px 30px -24px rgba(17, 17, 17, 0.35);
   color-scheme: light;
@@ -16,11 +18,13 @@
 
 :root.dark {
   --bg: #0d1117;
+  --bg-alt: #161b22;
+  --bg-subtle: #141a24;
   --text: #e6edf3;
   --muted: #8b949e;
   --border: #30363d;
   --accent: #4a7fb8;
-  --code-bg: #161b22;
+  --code-bg: #141b26;
   --surface: rgba(13, 17, 23, 0.84);
   --shadow: 0 14px 36px -26px rgba(0, 0, 0, 0.65);
   color-scheme: dark;
@@ -100,9 +104,12 @@
   }
 
   blockquote {
-    border-left: 3px solid var(--accent);
-    color: var(--muted);
-    padding-left: 1rem;
+    border-left: 4px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    border-radius: 0 6px 6px 0;
+    color: var(--text);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
   }
 
   hr {
@@ -112,18 +119,21 @@
 
   code {
     @apply font-mono text-[0.92em];
-    background: var(--code-bg);
-    border-radius: 0.3rem;
-    padding: 0.12rem 0.32rem;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-radius: 4px;
+    color: var(--accent);
+    padding: 0.125rem 0.375rem;
   }
 
   pre {
     @apply overflow-x-auto rounded-2xl border border-border bg-code-bg p-4 font-mono text-sm;
+    border-left: 3px solid var(--accent);
   }
 
   pre code {
     background: transparent;
     border-radius: 0;
+    color: inherit;
     padding: 0;
   }
 
@@ -164,12 +174,13 @@
   }
 
   .section-kicker {
-    @apply mb-3 font-sans text-xs font-semibold uppercase tracking-[0.16em];
-    color: var(--muted);
+    @apply mb-3 font-sans text-[0.75rem] font-semibold uppercase;
+    color: var(--accent);
+    letter-spacing: 0.15em;
   }
 
   .section-heading {
-    @apply mb-8 flex items-end justify-between gap-4 border-b border-border pb-4;
+    @apply mb-8 flex flex-wrap items-end justify-between gap-4;
   }
 
   .surface-card {
@@ -188,8 +199,137 @@
   }
 
   .tag-pill {
-    @apply inline-flex items-center rounded-full border border-border px-2.5 py-1 text-[0.72rem] font-medium tracking-wide;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-[0.8125rem] font-medium;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    color: var(--accent);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .tag-pill:hover {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .section-band {
+    width: 100%;
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .section-band--default {
+    background: var(--bg);
+  }
+
+  .section-band--alt {
+    background: var(--bg-alt);
+  }
+
+  .section-band--subtle {
+    background: var(--bg-subtle);
+  }
+
+  .section-link {
+    @apply inline-flex items-center gap-1 font-sans text-sm;
     color: var(--muted);
+    transition: color 0.15s ease;
+  }
+
+  .section-link:hover {
+    color: var(--accent);
+  }
+
+  .section-link-arrow {
+    transition: transform 0.15s ease;
+  }
+
+  .section-link:hover .section-link-arrow {
+    transform: translateX(2px);
+  }
+
+  .nav-link {
+    @apply inline-flex items-center rounded-lg px-3 py-2 font-sans text-sm leading-none transition-colors duration-150;
+  }
+
+  .theme-toggle {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 leading-none text-muted transition-colors duration-150;
+  }
+
+  .theme-toggle:hover {
+    background: var(--border);
+    color: var(--accent);
+  }
+
+  .social-link {
+    @apply inline-flex items-center gap-2 font-sans text-sm;
+    color: var(--accent);
+    transition: color 0.15s ease;
+  }
+
+  .social-link:hover {
+    color: color-mix(in srgb, var(--accent) 82%, white);
+  }
+
+  .link-btn {
+    @apply inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1 font-sans text-[0.8125rem] font-medium;
+    background: var(--bg);
+    color: var(--text);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .link-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  .status-badge {
+    @apply inline-flex items-center rounded px-2 py-0.5 font-sans text-[0.75rem] font-semibold uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .status-badge--active {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  .status-badge--wip {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  .status-badge--archived {
+    background: #e2e3e5;
+    color: #383d41;
+  }
+
+  .status-badge--idea {
+    background: #d1ecf1;
+    color: #0c5460;
+  }
+
+  :root.dark .status-badge--active {
+    background: #1e3a1e;
+    color: #86e89b;
+  }
+
+  :root.dark .status-badge--wip {
+    background: #3a3a1e;
+    color: #ffd966;
+  }
+
+  :root.dark .status-badge--archived {
+    background: #2a2e33;
+    color: #b0b5ba;
+  }
+
+  :root.dark .status-badge--idea {
+    background: #1e2e3a;
+    color: #7abedb;
   }
 
   .prose-content {
