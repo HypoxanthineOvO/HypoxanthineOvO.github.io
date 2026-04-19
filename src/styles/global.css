@@ -249,11 +249,31 @@
   }
 
   .nav-link {
-    @apply inline-flex items-center rounded-lg px-3 py-2 font-sans text-sm leading-none transition-colors duration-150;
+    @apply text-muted;
+  }
+
+  .nav-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    line-height: 1;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .nav-item:hover {
+    color: var(--accent);
   }
 
   .theme-toggle {
-    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 leading-none text-muted transition-colors duration-150;
+    @apply nav-item text-muted;
   }
 
   .theme-toggle:hover {

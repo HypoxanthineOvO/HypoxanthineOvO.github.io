@@ -12,11 +12,11 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
         const active = href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
         return (
-          <li>
+          <li class="flex items-center">
             <a
               href={link.href}
               class:list={[
-                'nav-link',
+                'nav-item nav-link',
                 active ? 'text-text' : 'text-muted',
               ]}
               aria-current={active ? 'page' : undefined}
