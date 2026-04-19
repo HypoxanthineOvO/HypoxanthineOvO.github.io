@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { entry, Content, headings, newer, older } = Astro.props;
-const metaDescription = entry.data.description ?? 'Post detail page';
+const metaDescription = entry.data.description ?? '文章详情页';
 const katexStyles = entry.data.math ? katexCss : '';
 ---
 
@@ -29,11 +29,11 @@ const katexStyles = entry.data.math ? katexCss : '';
 
   <article class="shell pb-20">
     <div class="content-shell xl:mr-[18rem]">
-      <p class="section-kicker">Posts</p>
+      <p class="section-kicker">文章</p>
       <h1 class="mb-4">{entry.data.title}</h1>
       <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm text-muted">
-        <span>{formatDate(entry.data.date)}</span>
-        {entry.data.updated && <span>Updated {formatDate(entry.data.updated)}</span>}
+        <span>发布于 {formatDate(entry.data.date)}</span>
+        {entry.data.updated && <span>更新于 {formatDate(entry.data.updated)}</span>}
       </div>
       <div class="mb-10">
         <TagList tags={entry.data.tags} mode="post" />
@@ -47,7 +47,7 @@ const katexStyles = entry.data.math ? katexCss : '';
         <div>
           {newer && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Newer</p>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更新</p>
               <a class="inline-link" href={`/posts/${newer.id}`}>
                 {newer.data.title}
               </a>
@@ -57,7 +57,7 @@ const katexStyles = entry.data.math ? katexCss : '';
         <div class="md:text-right">
           {older && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Older</p>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更早</p>
               <a class="inline-link" href={`/posts/${older.id}`}>
                 {older.data.title}
               </a>

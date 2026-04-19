@@ -4,7 +4,7 @@ title: "Analysis and Design of Precision-scalable Computation Array for Efficien
 authors:
   - "K. Long"
   - "C. Rao"
-  - "Hypoxanthine He"
+  - "Yunxiang He"
   - "Z. Yuan"
   - "P. Zhou"
   - "J. Yu"
@@ -14,4 +14,3 @@ year: 2023
 research_area: "Neural Rendering Hardware"
 featured: true
 ---
-

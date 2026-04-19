@@ -7,6 +7,7 @@ interface Props {
 
 const { publication } = Astro.props;
 const isAcademic = publication.data.kind !== 'literary';
+const detailHref = `/publications/${publication.id}`;
 
 const links: { href: string; label: string }[] = [];
 
@@ -26,14 +27,18 @@ if (publication.data.project_page) {
 <article class="surface-card publication-card p-6">
   <div class="publication-card__inner">
     <div class="publication-card__meta">
-      <h3 class="mb-3 text-[1.2rem]">{publication.data.title}</h3>
+      <h3 class="mb-3 text-[1.2rem]">
+        <a class="transition-colors duration-150 hover:text-accent" href={detailHref}>
+          {publication.data.title}
+        </a>
+      </h3>
       {publication.data.authors?.length && (
         <p class="mb-2 text-sm leading-relaxed text-muted">
           {
             publication.data.authors.map((author, index) => (
               <>
                 {index > 0 && ', '}
-                {author === 'Hypoxanthine He' ? (
+                {author === 'Yunxiang He' ? (
                   <strong class="font-semibold text-text underline decoration-accent/60 underline-offset-4">{author}</strong>
                 ) : (
                   author
@@ -46,7 +51,7 @@ if (publication.data.project_page) {
       <p class="font-sans text-sm text-muted">
         {isAcademic ? (
           <>
-            {publication.data.venue ?? 'Venue TBD'} · {publication.data.year}
+            {publication.data.venue ?? '期刊 / 会议待补'} · {publication.data.year}
           </>
         ) : publication.data.venue ? (
           <>
@@ -65,6 +70,16 @@ if (publication.data.project_page) {
             [{link.label}]
           </a>
         ))}
+        <a class="link-btn" href={detailHref}>
+          [详情]
+        </a>
+      </div>
+    )}
+    {links.length === 0 && (
+      <div class="publication-card__actions font-sans text-sm">
+        <a class="link-btn" href={detailHref}>
+          [详情]
+        </a>
       </div>
     )}
   </div>

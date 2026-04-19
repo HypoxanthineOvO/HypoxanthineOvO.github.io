@@ -1,15 +1,14 @@
 ---
 name: "Hypo-Agent"
-description: "Research assistant agent for drafting, retrieval, and workflow automation."
-status: "Active"
-tech:
-  - Agent Systems
-  - Python
-  - Automation
-repo: ""
-link: ""
+emoji: "🤖"
+description: "面向个人场景的常驻 AI 助手，多渠道（微信 / QQ / Notion）接入。"
+status: "active"
+githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Agent"
 featured: true
-order: 1
 ---
 
-Placeholder summary for the Hypo-Agent branch of the ecosystem.
+# Hypo-Agent
+
+面向个人场景的常驻 AI 助手，多渠道（微信 / QQ / Notion）接入。
+
+<!-- TODO: 补充完整项目介绍 / 技术栈 / 截图 -->

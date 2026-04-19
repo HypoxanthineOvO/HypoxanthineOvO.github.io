@@ -8,19 +8,28 @@ const githubMarkPath =
 ---
 
 <section class="grid gap-8 pb-10 pt-6 md:grid-cols-[180px_minmax(0,1fr)] md:items-center">
-  <div class="mx-auto w-full max-w-[160px] overflow-hidden rounded-[28px] border border-border">
-    <img src={siteConfig.avatar} alt="Portrait of Hypoxanthine" width="160" height="160" loading="eager" />
-  </div>
+  <div class="md:col-span-2">
+    <div class="mb-4 flex items-center gap-3">
+      <img
+        class="h-14 w-14 rounded-full border border-border object-cover"
+        src={siteConfig.avatar}
+        alt="Yunxiang He avatar"
+        width="56"
+        height="56"
+        loading="eager"
+      />
+      <p class="section-kicker mb-0">个人站点</p>
+    </div>
 
-  <div>
-    <p class="section-kicker">Landing</p>
     <h1 class="mb-4 font-bold tracking-[-0.02em]">Hypoxanthine</h1>
     <p class="mb-4 font-sans text-[1.125rem] font-medium leading-[1.6] text-accent">{siteConfig.tagline}</p>
-    <div class="space-y-2 text-[1.03rem] text-muted">
-      <p>Graduate student at ShanghaiTech University, working around Cryo-GPU systems, research workflows, and computational tools.</p>
-      <p>This site separates longer posts, quick notes, publications, and the Hypo-* project ecosystem into a single minimal archive.</p>
-      <p>The archive now carries forward legacy Hexo writing into a simpler Astro structure with flattened tags and cleaner long-term routing.</p>
+
+    <div class="max-w-[780px] space-y-2 text-[1.03rem] text-muted">
+      <p>Yunxiang He，网名 Hypoxanthine，现阶段主要围绕 GPU 邻近系统、研究工作流与长篇写作展开个人积累。</p>
+      <p>新站把旧 Hexo 内容重构为四条主线：文章、笔记、发表，以及持续扩张中的 Hypo-* 项目生态。</p>
+      <p>这里既保留学术语境下的正式署名，也继续使用长期沿用的 Hypoxanthine 身份来串联公开内容与 GitHub handle。</p>
     </div>
+
     <p class="mt-5 flex flex-wrap items-center gap-3 font-sans text-sm">
       {socialLinks.map((link, index) => {
         return (

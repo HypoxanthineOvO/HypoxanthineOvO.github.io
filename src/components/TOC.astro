@@ -17,7 +17,7 @@ const items = headings.filter((heading) => heading.depth >= 2 && heading.depth <
   items.length > 0 && (
     <>
       <details class="mb-8 rounded-2xl border border-border px-4 py-3 xl:hidden">
-        <summary class="cursor-pointer font-sans text-sm font-semibold text-text">Table of Contents</summary>
+        <summary class="cursor-pointer font-sans text-sm font-semibold text-text">目录</summary>
         <ul class="mt-3 space-y-2 text-sm text-muted">
           {items.map((heading) => (
             <li class:list={[heading.depth === 3 ? 'pl-4' : 'pl-0']}>
@@ -31,7 +31,7 @@ const items = headings.filter((heading) => heading.depth >= 2 && heading.depth <
 
       <aside class="fixed right-6 top-28 hidden w-60 xl:block 2xl:right-[max(2rem,calc(50%-700px))]">
         <div class="rounded-2xl border border-border bg-[var(--surface)] p-4 backdrop-blur">
-          <p class="mb-3 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-muted">Contents</p>
+          <p class="mb-3 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-muted">目录</p>
           <ul class="space-y-2 text-sm">
             {items.map((heading) => (
               <li class:list={[heading.depth === 3 ? 'pl-4' : 'pl-0']}>

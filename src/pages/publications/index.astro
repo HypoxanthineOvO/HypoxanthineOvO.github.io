@@ -25,20 +25,20 @@ const literaryGrouped = literaryYears.map((year) => ({
 }));
 ---
 
-<BaseLayout title="Publications" description="Publication list split into academic and literary records.">
+<BaseLayout title="发表" description="按学术与文学分组的发表记录。">
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
-        <p class="section-kicker">Record</p>
-        <h1>Publications</h1>
+        <p class="section-kicker">发表记录</p>
+        <h1>发表</h1>
       </div>
     </div>
 
     <div class="space-y-16">
       <section>
         <div class="mb-8">
-          <p class="section-kicker">Academic</p>
-          <h2>Academic Publications</h2>
+          <p class="section-kicker">学术</p>
+          <h2>学术发表</h2>
         </div>
 
         <div class="space-y-12">
@@ -65,8 +65,8 @@ const literaryGrouped = literaryYears.map((year) => ({
       {literaryGrouped.length > 0 && (
         <section>
           <div class="mb-8">
-            <p class="section-kicker">Literary</p>
-            <h2>Literary Publications</h2>
+            <p class="section-kicker">文学</p>
+            <h2>文学发表</h2>
           </div>
 
           <div class="space-y-10">

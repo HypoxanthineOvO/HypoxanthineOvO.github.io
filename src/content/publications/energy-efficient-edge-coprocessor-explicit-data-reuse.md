@@ -9,7 +9,7 @@ authors:
   - "H. Wan"
   - "Z. Yuan"
   - "J. Chen"
-  - "Y. He"
+  - "Yunxiang He"
   - "J. Ding"
   - "X. Zhang"
   - "C. Rao"
@@ -21,4 +21,3 @@ venue: "IEEE Transactions on Very Large Scale Integration (VLSI) Systems"
 year: 2025
 research_area: "Neural Rendering Hardware"
 ---
-

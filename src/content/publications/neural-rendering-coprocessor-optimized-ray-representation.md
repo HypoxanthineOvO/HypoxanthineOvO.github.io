@@ -6,7 +6,7 @@ authors:
   - "B. Yuan"
   - "C. Rao"
   - "Y. Zhu"
-  - "Hypoxanthine He"
+  - "Yunxiang He"
   - "P. Zhou"
   - "J. Yu"
   - "X. Lou"
@@ -15,4 +15,3 @@ year: 2025
 research_area: "Neural Rendering Hardware"
 featured: true
 ---
-

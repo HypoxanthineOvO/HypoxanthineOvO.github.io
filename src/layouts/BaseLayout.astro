@@ -35,11 +35,12 @@ const themeScript = `
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.author} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -51,6 +52,7 @@ const themeScript = `
     <meta name="twitter:description" content={description} />
     <meta name="theme-color" content="#1E3A5F" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{pageTitle}</title>
     <script is:inline set:html={themeScript} />
     <slot name="head" />

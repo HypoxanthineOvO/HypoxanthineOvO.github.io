@@ -11,7 +11,7 @@ import { getNotes, getPosts, getProjects, getPublications } from '../lib/content
 const recentPosts = (await getPosts()).slice(0, 3);
 const recentNotes = (await getNotes()).slice(0, 3);
 const featuredPublications = (await getPublications()).filter((entry) => entry.data.featured).slice(0, 3);
-const featuredProjects = (await getProjects()).filter((entry) => entry.data.featured).slice(0, 3);
+const featuredProjects = (await getProjects()).filter((entry) => entry.data.featured).slice(0, 4);
 ---
 
 <BaseLayout>
@@ -23,15 +23,13 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
 
   <section class="section-band section-band--alt">
     <div class="shell">
-      <SectionHeader kicker="About" title="Short Context" href="/about" actionLabel="Read more" />
+      <SectionHeader kicker="关于" title="站点说明" href="/about" actionLabel="阅读全文" />
       <div class="content-shell space-y-4 text-muted md:mx-0 md:max-w-[760px] md:px-0">
         <p>
-          The rebuilt site now carries forward the legacy Hexo archive as three main flows: literary posts, technical
-          and course notes, plus structured publications.
+          这次重建把旧 Hexo 站里的内容重新整理成四条主线：中文长文、研究与课程笔记、结构化发表记录，以及持续演化中的 Hypo-* 项目。
         </p>
         <p>
-          The migration keeps the old writing readable while flattening the old category system into the final seven-tag
-          taxonomy used by the Astro rebuild.
+          目前的骨架已经把身份署名、路由、内容集合和视觉层统一起来，后续只需要继续补充更完整的个人简介与项目细节。
         </p>
       </div>
     </div>
@@ -39,7 +37,7 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
 
   <section class="section-band section-band--default">
     <div class="shell">
-      <SectionHeader kicker="Featured" title="Publications" href="/publications" actionLabel="View all" />
+      <SectionHeader kicker="精选发表" title="发表" href="/publications" actionLabel="查看全部" />
       <div class="publication-stack">
         {featuredPublications.map((publication) => <PublicationCard publication={publication} />)}
       </div>
@@ -48,7 +46,7 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
 
   <section class="section-band section-band--alt">
     <div class="shell">
-      <SectionHeader kicker="Recent Posts" title="Posts" href="/posts" actionLabel="View all" />
+      <SectionHeader kicker="最新文章" title="文章" href="/posts" actionLabel="查看全部" />
       <div class="content-shell rounded-3xl border border-border bg-bg px-6 py-2 md:mx-0 md:max-w-none md:px-8">
         {recentPosts.map((post) => <PostCard post={post} />)}
       </div>
@@ -57,7 +55,7 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
 
   <section class="section-band section-band--default">
     <div class="shell">
-      <SectionHeader kicker="Recent Notes" title="Notes" href="/notes" actionLabel="View all" />
+      <SectionHeader kicker="最新笔记" title="笔记" href="/notes" actionLabel="查看全部" />
       <div class="content-shell rounded-3xl border border-border bg-bg px-6 py-2 md:mx-0 md:max-w-none md:px-8">
         {recentNotes.map((note) => <NoteCard note={note} />)}
       </div>
@@ -66,7 +64,7 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
 
   <section class="section-band section-band--alt">
     <div class="shell">
-      <SectionHeader kicker="Projects" title="Featured Projects" href="/projects" actionLabel="View all" />
+      <SectionHeader kicker="精选项目" title="项目" href="/projects" actionLabel="查看全部" />
       <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {featuredProjects.map((project) => <ProjectCard project={project} />)}
       </div>

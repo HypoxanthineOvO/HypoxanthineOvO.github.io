@@ -129,18 +129,18 @@ const terms: CourseTerm[] = [
 ];
 ---
 
-<BaseLayout title="Courses" description="Course archive merged from legacy MyCourses and Overview pages.">
+<BaseLayout title="课程" description="由旧站 MyCourses 与 Overview 合并而来的课程页。">
   <section class="shell pb-20">
     <div class="content-shell md:mx-0 md:max-w-[820px] md:px-0">
-      <p class="section-kicker">Courses</p>
-      <h1 class="mb-6">Courses</h1>
+      <p class="section-kicker">课程</p>
+      <h1 class="mb-6">课程</h1>
       <div class="space-y-4 text-muted">
         <p>本页合并了旧 Hexo 站里的 <code>MyCourses.md</code> 与 <code>本科课程/Overview.md</code>。</p>
         <p>保留了课程时间线与仍然有效的外部链接，同时把原先硬编码到旧 Hexo 域名的内部文章链接改到了当前 Astro 站内路由。</p>
       </div>
 
       <div class="mt-10 rounded-3xl border border-border bg-bg px-6 py-6">
-        <h2 class="mb-4 text-[1.2rem]">Legacy Quick Index</h2>
+        <h2 class="mb-4 text-[1.2rem]">旧站快速索引</h2>
         <ul class="space-y-2 pl-5 text-muted">
           {quickIndex.map((item) => <li>{item}</li>)}
         </ul>

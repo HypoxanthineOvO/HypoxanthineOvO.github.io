@@ -1,7 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
-import { noteTagLabels, postTagLabels } from './site';
-
 export type PostEntry = CollectionEntry<'posts'>;
 export type NoteEntry = CollectionEntry<'notes'>;
 export type PublicationEntry = CollectionEntry<'publications'>;
@@ -40,10 +38,10 @@ export function chunkEntries<T>(entries: T[], size: number) {
 }
 
 export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat('en-US', {
+  return new Intl.DateTimeFormat('zh-CN', {
     year: 'numeric',
-    month: 'short',
-    day: '2-digit',
+    month: 'long',
+    day: 'numeric',
     timeZone: 'UTC',
   }).format(date);
 }
@@ -57,20 +55,8 @@ export function toTagParam(tag: string) {
 }
 
 export function formatTagLabel(tag: string, mode: 'post' | 'note' = 'post') {
-  const overrides = mode === 'post' ? postTagLabels : noteTagLabels;
-  if (overrides[tag]) {
-    return overrides[tag];
-  }
-
-  return tag
-    .split('-')
-    .map((part) => {
-      if (part === 'gpu') {
-        return 'GPU';
-      }
-      return part.charAt(0).toUpperCase() + part.slice(1);
-    })
-    .join(' ');
+  void mode;
+  return tag;
 }
 
 export function collectTags<T extends { data: { tags?: string[] } }>(entries: T[]) {
@@ -108,9 +94,11 @@ export async function getPublications() {
 }
 
 export async function getProjects() {
+  const statusOrder = ['active', 'wip', 'archived', 'internal'] as const;
   return [...(await getCollection('projects'))].sort((a, b) => {
-    if (a.data.order !== b.data.order) {
-      return a.data.order - b.data.order;
+    const statusDelta = statusOrder.indexOf(a.data.status) - statusOrder.indexOf(b.data.status);
+    if (statusDelta !== 0) {
+      return statusDelta;
     }
     return a.data.name.localeCompare(b.data.name, 'en');
   });

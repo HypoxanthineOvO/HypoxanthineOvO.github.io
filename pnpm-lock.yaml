@@ -69,9 +69,15 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.8
         version: 0.9.8(prettier@3.8.3)(typescript@5.9.3)
+      jpeg-js:
+        specifier: ^0.4.4
+        version: 0.4.4
       playwright:
         specifier: ^1.59.1
         version: 1.59.1
+      pngjs:
+        specifier: ^7.0.0
+        version: 7.0.0
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1558,6 +1564,9 @@ packages:
     resolution: {integrity: sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A==}
     hasBin: true
 
+  jpeg-js@0.4.4:
+    resolution: {integrity: sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==}
+
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
@@ -1930,6 +1939,10 @@ packages:
     resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
     engines: {node: '>=18'}
     hasBin: true
+
+  pngjs@7.0.0:
+    resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
+    engines: {node: '>=14.19.0'}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -4170,6 +4183,8 @@ snapshots:
 
   jiti@1.21.7: {}
 
+  jpeg-js@0.4.4: {}
+
   js-yaml@4.1.1:
     dependencies:
       argparse: 2.0.1
@@ -4809,6 +4824,8 @@ snapshots:
       playwright-core: 1.59.1
     optionalDependencies:
       fsevents: 2.3.2
+
+  pngjs@7.0.0: {}
 
   postcss-import@15.1.0(postcss@8.5.10):
     dependencies:

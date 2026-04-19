@@ -6,7 +6,7 @@ authors:
   - "B. Yuan"
   - "Y. Gu"
   - "Y. Zheng"
-  - "Hypoxanthine He"
+  - "Yunxiang He"
   - "X. Wang"
   - "C. Rao"
   - "P. Zhou"
@@ -16,4 +16,3 @@ venue: "IEEE Custom Integrated Circuits Conference (CICC)"
 year: 2024
 research_area: "Neural Rendering Hardware"
 ---
-

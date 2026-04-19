@@ -8,19 +8,18 @@ const posts = await getPosts();
 const postPages = chunkEntries(posts, 6).map((entries) => groupEntriesByYear(entries));
 ---
 
-<BaseLayout title="Posts" description="Long-form posts, grouped by year and paginated in place.">
+<BaseLayout title="文章" description="按年份分组的长文列表。">
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
-        <p class="section-kicker">Archive</p>
-        <h1>Posts</h1>
+        <p class="section-kicker">文章归档</p>
+        <h1>文章</h1>
       </div>
     </div>
 
     <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
       <p class="mb-8 text-muted">
-        Longer writing lives here. The page stays on a single route and paginates client-side to keep the final route
-        table aligned with the migration spec.
+        这里收纳篇幅更长的中文写作。页面保持单一路由，通过前端分页切换内容，以维持既定路由结构。
       </p>
 
       <div data-post-pages>

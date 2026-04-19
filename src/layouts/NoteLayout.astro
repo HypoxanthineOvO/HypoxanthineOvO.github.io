@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { entry, Content, headings, newer, older } = Astro.props;
-const metaDescription = entry.data.description ?? 'Note detail page';
+const metaDescription = entry.data.description ?? '笔记详情页';
 const katexStyles = katexCss;
 ---
 
@@ -28,19 +28,19 @@ const katexStyles = katexCss;
 
   <article class="shell pb-20">
     <div class="content-shell xl:mr-[18rem]">
-      <p class="section-kicker">Notes</p>
+      <p class="section-kicker">笔记</p>
       <h1 class="mb-4">{entry.data.title}</h1>
       <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm text-muted">
-        <span>{formatDate(entry.data.date)}</span>
-        {entry.data.source && <span>Source: {entry.data.source}</span>}
+        <span>发布于 {formatDate(entry.data.date)}</span>
+        {entry.data.source && <span>来源：{entry.data.source}</span>}
       </div>
 
       {(entry.data.authors?.length || entry.data.link) && (
         <div class="mb-4 space-y-2 text-sm text-muted">
-          {entry.data.authors?.length && <p>Authors: {entry.data.authors.join(', ')}</p>}
+          {entry.data.authors?.length && <p>作者：{entry.data.authors.join(', ')}</p>}
           {entry.data.link && (
             <p>
-              Source Link:{' '}
+              原文链接：{' '}
               <a class="inline-link" href={entry.data.link} target="_blank" rel="noreferrer">
                 {entry.data.link}
               </a>
@@ -61,7 +61,7 @@ const katexStyles = katexCss;
         <div>
           {newer && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Newer</p>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更新</p>
               <a class="inline-link" href={`/notes/${newer.id}`}>
                 {newer.data.title}
               </a>
@@ -71,7 +71,7 @@ const katexStyles = katexCss;
         <div class="md:text-right">
           {older && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">Older</p>
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更早</p>
               <a class="inline-link" href={`/notes/${older.id}`}>
                 {older.data.title}
               </a>

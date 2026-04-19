@@ -86,22 +86,20 @@ const projects = defineCollection({
     base: './src/content/projects',
   }),
   schema: z.object({
-    // Project name displayed on cards and detail snippets.
+    // Project name displayed on cards and detail pages.
     name: z.string(),
+    // Optional emoji marker shown next to the project name.
+    emoji: z.string().optional(),
     // Single-line summary for list pages.
     description: z.string(),
     // Current lifecycle state.
-    status: z.enum(['Active', 'WIP', 'Archived', 'Idea']),
-    // Main technologies or domains.
-    tech: z.array(z.string()),
-    // Optional source repository.
-    repo: z.string().optional(),
-    // Optional live project link.
-    link: z.string().optional(),
+    status: z.enum(['active', 'wip', 'archived', 'internal']),
+    // Optional GitHub repository link.
+    githubUrl: z.string().url().optional(),
+    // Optional main technologies or domains.
+    tech: z.array(z.string()).default([]),
     // Featured projects appear on the landing page.
     featured: z.boolean().default(false),
-    // Explicit ordering control for the projects page.
-    order: z.number().int().default(0),
   }),
 });
 

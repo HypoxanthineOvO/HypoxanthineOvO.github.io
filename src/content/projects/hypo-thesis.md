@@ -1,15 +1,13 @@
 ---
 name: "Hypo-Thesis"
-description: "Writing and experiment workspace for thesis-era materials, figures, and references."
-status: "WIP"
-tech:
-  - LaTeX
-  - Python
-  - BibTeX
-repo: ""
-link: ""
-featured: false
-order: 5
+emoji: "📜"
+description: "LaTeX 论文模板，含 texlive Docker CI。"
+status: "active"
+githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Thesis"
 ---
 
-Placeholder entry pending confirmation of the actual repo and scope.
+# Hypo-Thesis
+
+LaTeX 论文模板，含 texlive Docker CI。
+
+<!-- TODO: 补充完整项目介绍 / 技术栈 / 截图 -->

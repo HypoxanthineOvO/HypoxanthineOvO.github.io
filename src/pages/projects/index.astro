@@ -4,24 +4,48 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getProjects } from '../../lib/content';
 
 const projects = await getProjects();
+const statusOrder = ['active', 'wip', 'archived', 'internal'] as const;
+const statusLabelMap = {
+  active: '进行中',
+  wip: '开发中',
+  archived: '已归档',
+  internal: '内部使用',
+} as const;
+
+const groupedProjects = statusOrder
+  .map((status) => ({
+    status,
+    label: statusLabelMap[status],
+    items: projects.filter((project) => project.data.status === status),
+  }))
+  .filter((group) => group.items.length > 0);
 ---
 
-<BaseLayout title="Projects" description="Hypo-* ecosystem project cards.">
+<BaseLayout title="项目" description="Hypo-* 生态项目索引。">
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
-        <p class="section-kicker">Ecosystem</p>
-        <h1>Projects</h1>
+        <p class="section-kicker">Hypo-* 生态</p>
+        <h1>项目</h1>
       </div>
     </div>
 
     <p class="mb-8 max-w-[760px] text-muted">
-      A compact map of the Hypo-* stack, mixing verified local repositories with clearly marked placeholders where the
-      public repo or final scope is still undecided.
+      这里收拢了当前公开中的 Hypo-* 项目。项目按状态分区展示，GitHub 链接目前统一指向占位仓库地址，后续可继续替换为真实仓库。
     </p>
 
-    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-      {projects.map((project) => <ProjectCard project={project} />)}
+    <div class="space-y-12">
+      {groupedProjects.map((group) => (
+        <section>
+          <div class="mb-5">
+            <p class="section-kicker">{group.label}</p>
+            <h2>{group.label}项目</h2>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {group.items.map((project) => <ProjectCard project={project} />)}
+          </div>
+        </section>
+      ))}
     </div>
   </section>
 </BaseLayout>

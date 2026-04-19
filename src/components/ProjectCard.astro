@@ -8,38 +8,58 @@ interface Props {
 const { project } = Astro.props;
 
 const badgeClassMap = {
-  Active: 'status-badge--active',
-  WIP: 'status-badge--wip',
-  Archived: 'status-badge--archived',
-  Idea: 'status-badge--idea',
+  active: 'status-badge--active',
+  wip: 'status-badge--wip',
+  archived: 'status-badge--archived',
+  internal: 'status-badge--internal',
 } as const;
+
+const statusLabelMap = {
+  active: '进行中',
+  wip: '开发中',
+  archived: '已归档',
+  internal: '内部使用',
+} as const;
+
+const githubMarkPath =
+  'M12 .297a12 12 0 0 0-3.794 23.385c.6.113.82-.258.82-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416a3.18 3.18 0 0 0-1.335-1.755c-1.09-.745.083-.729.083-.729a2.52 2.52 0 0 1 1.84 1.237 2.555 2.555 0 0 0 3.49.997 2.554 2.554 0 0 1 .762-1.6C7.16 17.31 4.36 16.27 4.36 11.67a4.573 4.573 0 0 1 1.218-3.172 4.25 4.25 0 0 1 .116-3.127s.996-.318 3.26 1.214a11.274 11.274 0 0 1 5.932 0c2.264-1.532 3.26-1.214 3.26-1.214a4.25 4.25 0 0 1 .116 3.127 4.573 4.573 0 0 1 1.218 3.172c0 4.61-2.804 5.636-5.475 5.932a2.868 2.868 0 0 1 .814 2.224v3.293c0 .322.216.694.825.576A12.003 12.003 0 0 0 12 .297Z';
 ---
 
 <article class="surface-card p-6">
-  <div class="mb-4 flex flex-wrap items-center gap-3">
-    <h3 class="text-[1.2rem]">{project.data.name}</h3>
+  <div class="mb-4 flex items-start justify-between gap-4">
+    <div class="min-w-0 flex-1">
+      <div class="mb-3 flex flex-wrap items-center gap-3">
+        {project.data.emoji && <span class="text-[1.3rem]" aria-hidden="true">{project.data.emoji}</span>}
+        <h3 class="text-[1.2rem]">
+          <a class="transition-colors duration-150 hover:text-accent" href={`/projects/${project.id}`}>
+            {project.data.name}
+          </a>
+        </h3>
+      </div>
+      <p class="text-muted">{project.data.description}</p>
+    </div>
+
     <span class:list={['status-badge', badgeClassMap[project.data.status]]}>
-      {project.data.status}
+      {statusLabelMap[project.data.status]}
     </span>
   </div>
 
-  <p class="mb-4 text-muted">{project.data.description}</p>
+  <div class="flex items-center justify-between gap-3">
+    <a class="inline-link font-sans text-sm" href={`/projects/${project.id}`}>
+      查看详情
+    </a>
 
-  <div class="mb-4 flex flex-wrap gap-2">
-    {project.data.tech.map((item) => (
-      <span class="tag-pill">{item}</span>
-    ))}
-  </div>
-
-  <div class="flex flex-wrap gap-3 font-sans text-sm">
-    {project.data.repo && (
-      <a class="inline-link" href={project.data.repo} target="_blank" rel="noreferrer">
-        Repository
-      </a>
-    )}
-    {project.data.link && (
-      <a class="inline-link" href={project.data.link} target="_blank" rel="noreferrer">
-        Project Link
+    {project.data.githubUrl && (
+      <a
+        class="inline-flex items-center rounded-full border border-border p-2 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
+        href={project.data.githubUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${project.data.name} GitHub`}
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <path d={githubMarkPath}></path>
+        </svg>
       </a>
     )}
   </div>

@@ -381,9 +381,9 @@
     color: #383d41;
   }
 
-  .status-badge--idea {
-    background: #d1ecf1;
-    color: #0c5460;
+  .status-badge--internal {
+    background: #eadcf6;
+    color: #5a2d82;
   }
 
   :root.dark .status-badge--active {
@@ -401,9 +401,9 @@
     color: #b0b5ba;
   }
 
-  :root.dark .status-badge--idea {
-    background: #1e2e3a;
-    color: #7abedb;
+  :root.dark .status-badge--internal {
+    background: #32203f;
+    color: #d5a8ff;
   }
 
   .prose-content {

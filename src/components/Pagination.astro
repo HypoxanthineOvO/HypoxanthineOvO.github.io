@@ -8,13 +8,13 @@ const { totalPages } = Astro.props;
 
 {
   totalPages > 1 && (
-    <nav class="mt-8 flex flex-wrap items-center gap-2 font-sans text-sm" data-pagination-nav data-total-pages={totalPages} aria-label="Pagination">
+    <nav class="mt-8 flex flex-wrap items-center gap-2 font-sans text-sm" data-pagination-nav data-total-pages={totalPages} aria-label="分页">
       <button
         type="button"
         class="rounded-full border border-border px-3 py-1.5 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
         data-page-prev
       >
-        Prev
+        上一页
       </button>
       {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
         <button
@@ -30,7 +30,7 @@ const { totalPages } = Astro.props;
         class="rounded-full border border-border px-3 py-1.5 text-muted transition-colors duration-150 hover:border-accent hover:text-accent"
         data-page-next
       >
-        Next
+        下一页
       </button>
     </nav>
   )

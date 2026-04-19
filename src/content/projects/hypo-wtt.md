@@ -1,15 +1,14 @@
 ---
 name: "Hypo-WTT"
-description: "Ranking and verification toolkit for ITTF/WTT data with API and TUI ambitions."
-status: "WIP"
-tech:
-  - Python
-  - FastAPI
-  - Textual
-repo: "https://github.com/HypoxanthineOvO/Hypo-WTT"
-link: ""
-featured: false
-order: 4
+emoji: "🏓"
+description: "乒乓球数据系统：比赛采集 + 排名计算 + 赛事资讯。"
+status: "active"
+githubUrl: "https://github.com/HypoxanthineOvO/Hypo-WTT"
+featured: true
 ---
 
-The local README marks the project as unfinished, so it is listed as work in progress.
+# Hypo-WTT
+
+乒乓球数据系统：比赛采集 + 排名计算 + 赛事资讯。
+
+<!-- TODO: 补充完整项目介绍 / 技术栈 / 截图 -->

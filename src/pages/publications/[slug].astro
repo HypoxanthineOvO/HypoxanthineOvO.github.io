@@ -1,0 +1,65 @@
+---
+import { render } from 'astro:content';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Prose from '../../components/Prose.astro';
+import { getPublications } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const publications = await getPublications();
+
+  return publications.map((publication) => ({
+    params: { slug: publication.id },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+const { Content } = await render(publication);
+
+const links: { href: string; label: string }[] = [];
+
+if (publication.data.pdf) {
+  links.push({ href: publication.data.pdf, label: 'PDF' });
+}
+
+if (publication.data.code) {
+  links.push({ href: publication.data.code, label: 'Code' });
+}
+
+if (publication.data.project_page) {
+  links.push({ href: publication.data.project_page, label: 'Site' });
+}
+---
+
+<BaseLayout title={publication.data.title} description={`${publication.data.year} 年发表记录。`}>
+  <article class="shell pb-20">
+    <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
+      <p class="section-kicker">发表</p>
+      <h1 class="mb-4">{publication.data.title}</h1>
+
+      {publication.data.authors?.length && (
+        <p class="mb-2 text-sm text-muted">作者：{publication.data.authors.join(', ')}</p>
+      )}
+
+      <p class="mb-6 text-sm text-muted">
+        {publication.data.year}
+        {publication.data.venue && <> · {publication.data.venue}</>}
+        {publication.data.research_area && <> · {publication.data.research_area}</>}
+      </p>
+
+      <div class="mb-10 flex flex-wrap gap-3 font-sans text-sm">
+        {links.map((link) => (
+          <a class="link-btn" href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+            [{link.label}]
+          </a>
+        ))}
+        <a class="inline-link" href="/publications">返回发表列表</a>
+      </div>
+
+      <Prose>
+        <Content />
+      </Prose>
+    </div>
+  </article>
+</BaseLayout>

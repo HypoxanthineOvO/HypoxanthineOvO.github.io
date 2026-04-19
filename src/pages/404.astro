@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="404" description="Not found.">
+<BaseLayout title="404" description="页面未找到。">
   <section class="shell flex min-h-[50vh] items-center justify-center pb-20">
     <div class="text-center">
-      <p class="section-kicker">Not Found</p>
+      <p class="section-kicker">页面未找到</p>
       <h1 class="mb-4">404</h1>
-      <p class="text-muted">The page you were looking for is not in this rebuild.</p>
+      <p class="mb-4 text-muted">你访问的页面不在当前重建版本中。</p>
+      <a class="inline-link font-sans text-sm" href="/">返回首页</a>
     </div>
   </section>
 </BaseLayout>

@@ -19,12 +19,12 @@ export async function getStaticPaths() {
 const { tag, posts } = Astro.props;
 ---
 
-<BaseLayout title={`Tag: ${formatTagLabel(tag)}`} description={`Posts tagged ${formatTagLabel(tag)}.`}>
+<BaseLayout title={`标签：${formatTagLabel(tag)}`} description={`标签「${formatTagLabel(tag)}」下的文章。`}>
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
-        <p class="section-kicker">Filtered Posts</p>
-        <h1>{formatTagLabel(tag)}</h1>
+        <p class="section-kicker">标签文章</p>
+        <h1>标签「{formatTagLabel(tag)}」下的文章</h1>
       </div>
     </div>
 

@@ -1,15 +1,14 @@
 ---
 name: "Hypo-Info"
-description: "Personal information dashboard that consolidates day-to-day data views into one interface."
-status: "Active"
-tech:
-  - Vue 3
-  - TypeScript
-  - Vite
-repo: "https://github.com/HypoxanthineOvO/Hypo-Info"
-link: ""
+emoji: "📡"
+description: "个人信息门户：自动采集 + AI 增强摘要，双部署（Lab / Personal）。"
+status: "active"
+githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Info"
 featured: true
-order: 2
 ---
 
-Local repo evidence suggests the project is active and still receiving changes.
+# Hypo-Info
+
+个人信息门户：自动采集 + AI 增强摘要，双部署（Lab / Personal）。
+
+<!-- TODO: 补充完整项目介绍 / 技术栈 / 截图 -->

@@ -7,19 +7,18 @@ const notes = await getNotes();
 const tags = collectTags(notes);
 ---
 
-<BaseLayout title="Notes" description="Compact notes with an inline tag filter.">
+<BaseLayout title="笔记" description="带内联标签过滤的笔记列表。">
   <section class="shell pb-20">
     <div class="section-heading">
       <div>
-        <p class="section-kicker">Index</p>
-        <h1>Notes</h1>
+        <p class="section-kicker">笔记索引</p>
+        <h1>笔记</h1>
       </div>
     </div>
 
     <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
       <p class="mb-6 text-muted">
-        Notes stay lighter than posts: lecture fragments, tool records, and reading traces. The filter below is
-        client-side only and does not create extra routes.
+        笔记比文章更轻，主要记录讲座、工具链、课程材料与阅读过程。下方筛选仅在前端生效，不会额外生成路由。
       </p>
 
       <div class="mb-8 flex flex-wrap gap-2" data-note-filters>
@@ -28,7 +27,7 @@ const tags = collectTags(notes);
           class="tag-pill border-accent text-accent"
           data-note-filter-button="all"
         >
-          All notes
+          全部笔记
         </button>
         {tags.map(({ tag, count }) => (
           <button type="button" class="tag-pill transition-colors duration-150 hover:border-accent hover:text-accent" data-note-filter-button={tag}>
@@ -42,7 +41,7 @@ const tags = collectTags(notes);
       </div>
 
       <p class="mt-4 hidden font-sans text-sm text-muted" data-note-empty>
-        No notes match the current tag.
+        无匹配结果。
       </p>
     </div>
   </section>
