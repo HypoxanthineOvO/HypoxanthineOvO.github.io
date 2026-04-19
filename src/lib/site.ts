@@ -11,10 +11,12 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { href: '/posts', label: '文章' },
-  { href: '/notes', label: '笔记' },
-  { href: '/publications', label: '发表' },
+  { href: '/', label: '首页' },
+  { href: '/series', label: '系列' },
+  { href: '/tags', label: '标签' },
   { href: '/projects', label: '项目' },
+  { href: '/publications', label: '发表' },
+  { href: '/courses', label: '课程' },
   { href: '/about', label: '关于' },
 ];
 

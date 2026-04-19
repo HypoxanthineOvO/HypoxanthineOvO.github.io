@@ -4,8 +4,8 @@ import { getNotes, getPosts } from '../lib/content';
 import { siteConfig } from '../lib/site';
 
 export async function GET(context) {
-  const posts = await getPosts();
-  const notes = await getNotes();
+  const posts = await getPosts({ includeArchived: false });
+  const notes = await getNotes({ includeArchived: false });
 
   const items = [
     ...posts.map((entry) => ({

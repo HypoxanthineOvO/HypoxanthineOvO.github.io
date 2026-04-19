@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getSeriesEntries } from '../../lib/content';
+import { seriesList } from '../../lib/series';
+
+const counts = new Map(
+  await Promise.all(
+    seriesList.map(async (meta) => [meta.slug, (await getSeriesEntries(meta.slug)).length] as const)
+  )
+);
+
+const groups = ['Notes', 'Posts'] as const;
+---
+
+<BaseLayout title="系列" description="按系列组织的文章与笔记总览。">
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">系列</p>
+        <h1>系列</h1>
+      </div>
+    </div>
+
+    <div class="space-y-12">
+      {groups.map((group) => (
+        <section>
+          <h2 class="mb-5">{group === 'Notes' ? 'Notes 组' : 'Posts 组'}</h2>
+          <div class="grid gap-5 md:grid-cols-2">
+            {seriesList
+              .filter((item) => item.group === group)
+              .map((item) => (
+                <a class="surface-card block p-6" href={`/series/${item.slug}`}>
+                  <div class="mb-3 flex items-center justify-between gap-4">
+                    <h3 class="text-[1.2rem]">{item.label}</h3>
+                    <span class="font-sans text-sm text-muted">{counts.get(item.slug) ?? 0} 篇</span>
+                  </div>
+                  <p class="text-sm text-muted">{item.description}</p>
+                </a>
+              ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

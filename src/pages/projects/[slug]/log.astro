@@ -1,0 +1,107 @@
+---
+import TagArchiveCard from '../../../components/TagArchiveCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getProjectLogEntries, getProjects } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  const paths = [];
+
+  for (const project of projects) {
+    const entries = await getProjectLogEntries(project.id);
+
+    if (entries.length > 0) {
+      paths.push({
+        params: { slug: project.id },
+        props: { project, entries },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { project, entries } = Astro.props;
+---
+
+<BaseLayout title={`${project.data.name} 日志`} description={`${project.data.name} 的项目日志归档。`}>
+  <section class="shell pb-20">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">项目日志</p>
+        <h1>{project.data.name}</h1>
+      </div>
+      <a class="section-link" href={`/projects/${project.id}`}>
+        返回项目页 <span class="section-link-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
+      <div class="mb-6 flex flex-wrap gap-2" data-log-filters>
+        <button type="button" class="filter-tab is-active" data-log-filter="all">全部</button>
+        <button type="button" class="filter-tab" data-log-filter="diary">日记</button>
+        <button type="button" class="filter-tab" data-log-filter="release">发布</button>
+      </div>
+
+      <div class="rounded-3xl border border-border px-6 py-2 md:px-8" data-log-list>
+        {entries.map((entry) => (
+          <div data-log-entry={entry.kind ?? 'diary'}>
+            <TagArchiveCard
+              href={entry.href}
+              title={entry.title}
+              description={entry.description}
+              date={entry.date}
+              tags={entry.tags}
+              type={entry.type}
+              series={entry.series}
+            />
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-4 hidden font-sans text-sm text-muted" data-log-empty>当前筛选下暂无日志。</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    const filterButtons = [...document.querySelectorAll('[data-log-filter]')];
+    const cards = [...document.querySelectorAll('[data-log-entry]')];
+    const emptyState = document.querySelector('[data-log-empty]');
+
+    if (filterButtons.length > 0) {
+      const setFilter = (kind) => {
+        let visible = 0;
+
+        filterButtons.forEach((button) => {
+          const active = button.getAttribute('data-log-filter') === kind;
+          button.classList.toggle('is-active', active);
+        });
+
+        cards.forEach((card) => {
+          const entryKind = card.getAttribute('data-log-entry') || 'diary';
+          const show = kind === 'all' || kind === entryKind;
+          card.hidden = !show;
+          if (show) visible += 1;
+        });
+
+        emptyState?.classList.toggle('hidden', visible > 0);
+        const url = new URL(window.location.href);
+        if (kind === 'all') {
+          url.searchParams.delete('kind');
+        } else {
+          url.searchParams.set('kind', kind);
+        }
+        history.replaceState({}, '', `${url.pathname}${url.search}`);
+      };
+
+      const current = new URL(window.location.href).searchParams.get('kind') || 'all';
+      setFilter(current);
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          setFilter(button.getAttribute('data-log-filter') || 'all');
+        });
+      });
+    }
+  </script>
+</BaseLayout>

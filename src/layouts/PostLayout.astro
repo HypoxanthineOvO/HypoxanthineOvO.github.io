@@ -4,17 +4,18 @@ import type { CollectionEntry } from 'astro:content';
 import katexCss from 'katex/dist/katex.min.css?raw';
 
 import Prose from '../components/Prose.astro';
+import SeriesBadge from '../components/SeriesBadge.astro';
 import TOC from '../components/TOC.astro';
 import TagList from '../components/TagList.astro';
-import { formatDate } from '../lib/content';
+import { formatDate, type AdjacentArchiveEntry } from '../lib/content';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   entry: CollectionEntry<'posts'>;
   Content: any;
   headings: { depth: number; slug: string; text: string }[];
-  newer: CollectionEntry<'posts'> | null;
-  older: CollectionEntry<'posts'> | null;
+  newer: AdjacentArchiveEntry | null;
+  older: AdjacentArchiveEntry | null;
 }
 
 const { entry, Content, headings, newer, older } = Astro.props;
@@ -33,6 +34,7 @@ const katexStyles = entry.data.math ? katexCss : '';
       <h1 class="mb-4">{entry.data.title}</h1>
       <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm text-muted">
         <span>发布于 {formatDate(entry.data.date)}</span>
+        <SeriesBadge series={entry.data.series} />
         {entry.data.updated && <span>更新于 {formatDate(entry.data.updated)}</span>}
       </div>
       <div class="mb-10">
@@ -47,9 +49,9 @@ const katexStyles = entry.data.math ? katexCss : '';
         <div>
           {newer && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更新</p>
-              <a class="inline-link" href={`/posts/${newer.id}`}>
-                {newer.data.title}
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">同系列更新</p>
+              <a class="inline-link" href={newer.href}>
+                {newer.title}
               </a>
             </>
           )}
@@ -57,9 +59,9 @@ const katexStyles = entry.data.math ? katexCss : '';
         <div class="md:text-right">
           {older && (
             <>
-              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">更早</p>
-              <a class="inline-link" href={`/posts/${older.id}`}>
-                {older.data.title}
+              <p class="mb-1 text-xs uppercase tracking-[0.16em] text-muted">同系列更早</p>
+              <a class="inline-link" href={older.href}>
+                {older.title}
               </a>
             </>
           )}

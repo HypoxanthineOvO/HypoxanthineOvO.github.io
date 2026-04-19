@@ -2,22 +2,20 @@
 import { render } from 'astro:content';
 
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getAdjacentEntries, getPosts } from '../../lib/content';
+import { getAdjacentArchiveEntries, getSeriesEntries, getPosts } from '../../lib/content';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
 
-  return posts.map((entry) => {
-    const { newer, older } = getAdjacentEntries(posts, entry.id);
-
-    return {
-      params: { slug: entry.id },
-      props: { entry, newer, older },
-    };
-  });
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
 
-const { entry, newer, older } = Astro.props;
+const { entry } = Astro.props;
+const seriesEntries = await getSeriesEntries(entry.data.series, { includeArchived: entry.data.archived });
+const { newer, older } = getAdjacentArchiveEntries(seriesEntries, `/posts/${entry.id}`);
 const { Content, headings } = await render(entry);
 ---
 

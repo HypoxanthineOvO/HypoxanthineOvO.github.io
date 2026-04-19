@@ -1,9 +1,10 @@
 ---
 import { render } from 'astro:content';
 
+import TagArchiveCard from '../../components/TagArchiveCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Prose from '../../components/Prose.astro';
-import { getProjects } from '../../lib/content';
+import { getProjectLogEntries, getProjects } from '../../lib/content';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -16,6 +17,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const logEntries = await getProjectLogEntries(project.id);
+const recentLogs = logEntries.slice(0, 5);
 
 const statusLabelMap = {
   active: '进行中',
@@ -64,6 +67,33 @@ const githubMarkPath =
       <Prose>
         <Content />
       </Prose>
+
+      {recentLogs.length > 0 && (
+        <section class="mt-12">
+          <div class="mb-5 flex items-center justify-between gap-4">
+            <h2 class="text-[1.5rem]">最近日志</h2>
+            {logEntries.length > 5 && (
+              <a class="section-link" href={`/projects/${project.id}/log`}>
+                查看全部 {logEntries.length} 篇 <span class="section-link-arrow">→</span>
+              </a>
+            )}
+          </div>
+
+          <div class="rounded-3xl border border-border px-6 py-2 md:px-8">
+            {recentLogs.map((entry) => (
+              <TagArchiveCard
+                href={entry.href}
+                title={entry.title}
+                description={entry.description}
+                date={entry.date}
+                tags={entry.tags}
+                type={entry.type}
+                series={entry.series}
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   </article>
 </BaseLayout>

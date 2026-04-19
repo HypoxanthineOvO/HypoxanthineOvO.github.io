@@ -1,12 +1,43 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+import type { SeriesSlug } from './series';
+
 export type PostEntry = CollectionEntry<'posts'>;
 export type NoteEntry = CollectionEntry<'notes'>;
 export type PublicationEntry = CollectionEntry<'publications'>;
 export type ProjectEntry = CollectionEntry<'projects'>;
+export type ContentEntry = PostEntry | NoteEntry;
+export type ContentKind = 'post' | 'note';
+
+export interface ArchiveEntry {
+  id: string;
+  title: string;
+  description?: string;
+  date: Date;
+  tags: string[];
+  series: SeriesSlug;
+  archived: boolean;
+  type: ContentKind;
+  href: string;
+  kind?: 'diary' | 'release';
+  project?: string;
+  milestone?: string;
+  status?: 'shipped' | 'wip' | 'abandoned';
+  duration?: string;
+}
+
+export interface AdjacentArchiveEntry {
+  title: string;
+  href: string;
+  type: ContentKind;
+}
 
 export function sortByDateDesc<T extends { data: { date: Date } }>(entries: T[]) {
   return [...entries].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+}
+
+export function sortArchiveEntries(entries: ArchiveEntry[]) {
+  return [...entries].sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
 export function groupEntriesByYear<T extends { data: { date: Date } }>(entries: T[]) {
@@ -24,6 +55,24 @@ export function groupEntriesByYear<T extends { data: { date: Date } }>(entries: 
     .map(([year, items]) => ({
       year,
       items: sortByDateDesc(items),
+    }));
+}
+
+export function groupArchiveEntriesByYear(entries: ArchiveEntry[]) {
+  const groups = new Map<number, ArchiveEntry[]>();
+
+  for (const entry of entries) {
+    const year = entry.date.getUTCFullYear();
+    const bucket = groups.get(year) ?? [];
+    bucket.push(entry);
+    groups.set(year, bucket);
+  }
+
+  return [...groups.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([year, items]) => ({
+      year,
+      items: sortArchiveEntries(items),
     }));
 }
 
@@ -73,12 +122,21 @@ export function collectTags<T extends { data: { tags?: string[] } }>(entries: T[
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag, 'en'));
 }
 
-export async function getPosts() {
-  return sortByDateDesc((await getCollection('posts')).filter((entry) => !entry.data.draft));
+interface ContentQueryOptions {
+  includeArchived?: boolean;
 }
 
-export async function getNotes() {
-  return sortByDateDesc(await getCollection('notes'));
+function filterArchived<T extends { data: { archived?: boolean } }>(entries: T[], includeArchived = false) {
+  return includeArchived ? entries : entries.filter((entry) => !entry.data.archived);
+}
+
+export async function getPosts(options: ContentQueryOptions = {}) {
+  const entries = (await getCollection('posts')).filter((entry) => !entry.data.draft);
+  return sortByDateDesc(filterArchived(entries, options.includeArchived));
+}
+
+export async function getNotes(options: ContentQueryOptions = {}) {
+  return sortByDateDesc(filterArchived(await getCollection('notes'), options.includeArchived));
 }
 
 export async function getPublications() {
@@ -104,11 +162,77 @@ export async function getProjects() {
   });
 }
 
+export function toArchiveEntry(entry: PostEntry | NoteEntry, type: ContentKind): ArchiveEntry {
+  return {
+    id: entry.id,
+    title: entry.data.title,
+    description: entry.data.description,
+    date: entry.data.date,
+    tags: entry.data.tags ?? [],
+    series: entry.data.series,
+    archived: entry.data.archived ?? false,
+    type,
+    href: type === 'post' ? `/posts/${entry.id}` : `/notes/${entry.id}`,
+    kind: entry.data.kind,
+    project: entry.data.project,
+    milestone: entry.data.milestone,
+    status: entry.data.status,
+    duration: entry.data.duration,
+  };
+}
+
+export async function getArchiveEntries(options: ContentQueryOptions = {}) {
+  const [posts, notes] = await Promise.all([getPosts(options), getNotes(options)]);
+
+  return sortArchiveEntries([
+    ...posts.map((entry) => toArchiveEntry(entry, 'post')),
+    ...notes.map((entry) => toArchiveEntry(entry, 'note')),
+  ]);
+}
+
+export async function getSeriesEntries(series: SeriesSlug, options: ContentQueryOptions = {}) {
+  const entries = await getArchiveEntries({
+    includeArchived: options.includeArchived ?? series === 'humanities',
+  });
+
+  return entries.filter((entry) => entry.series === series);
+}
+
+export async function getProjectLogEntries(project: string, options: ContentQueryOptions = {}) {
+  const [posts, notes] = await Promise.all([getPosts(options), getNotes(options)]);
+
+  return sortArchiveEntries([
+    ...posts
+      .filter((entry) => entry.data.series === 'project-log' && entry.data.project === project)
+      .map((entry) => toArchiveEntry(entry, 'post')),
+    ...notes
+      .filter((entry) => entry.data.series === 'project-log' && entry.data.project === project)
+      .map((entry) => toArchiveEntry(entry, 'note')),
+  ]);
+}
+
 export function getAdjacentEntries<T extends { id: string }>(entries: T[], id: string) {
   const index = entries.findIndex((entry) => entry.id === id);
 
   return {
     newer: index > 0 ? entries[index - 1] : null,
     older: index >= 0 && index < entries.length - 1 ? entries[index + 1] : null,
+  };
+}
+
+export function getAdjacentArchiveEntries(entries: ArchiveEntry[], href: string) {
+  const index = entries.findIndex((entry) => entry.href === href);
+  const toLink = (entry: ArchiveEntry | undefined): AdjacentArchiveEntry | null =>
+    entry
+      ? {
+          title: entry.title,
+          href: entry.href,
+          type: entry.type,
+        }
+      : null;
+
+  return {
+    newer: index > 0 ? toLink(entries[index - 1]) : null,
+    older: index >= 0 && index < entries.length - 1 ? toLink(entries[index + 1]) : null,
   };
 }
