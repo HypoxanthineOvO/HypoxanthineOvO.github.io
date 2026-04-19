@@ -88,4 +88,30 @@ Result (41 files):
 - 更新 landing / hero 文案，移除 Prompt B 残留占位描述
 - 给 `NoteLayout` 注入 KaTeX CSS，以兼容迁入的数学 note
 
+## 8. Post-merge build fix
+
+- 触发背景：
+  - 内容迁移阶段只跑了 `astro check`，没有补跑 `pnpm build`
+  - push 到 `main` 后，GitHub Actions 在 build step 失败
+- 本地复现：
+  - 在仓库根目录执行 `pnpm build`
+  - 完整失败输出与后续修复链已记录在 `BUILD_ERROR.log`
+- root cause：
+  - 不是图片路径、`kind` schema、tag 路由或 KaTeX 引用路径错误
+  - 真正的问题是若干 legacy Markdown 在迁移成 `.mdx` 后仍保留了 **MDX 不兼容语法**
+  - 具体包含四类：
+    - HTML 注释 `<!-- ... -->` 出现在 `.mdx` 中
+    - 原始 `<div>...</div>` 布局块嵌在 Markdown 列表流里，MDX 解析闭合关系失败
+    - 原始 `<aside>...</aside>` callout 包裹列表，MDX 同样无法正确解析
+    - 正文里的裸比较符号如 `<=1 FPS`、`> 0`、`< 0` 被 MDX 当作标签起始
+- 修复动作：
+  - 将缺失资源占位注释从 HTML comment 改成 MDX comment：`{/* ... */}`
+  - 把 `paper-3dgaussian`、`paper-neurex` 中的 legacy `<div>` 网格块改写为纯 Markdown 结构
+  - 把三份 cheatsheet note 里的 `<aside>` callout 改成 blockquote callout
+  - 将会触发 MDX 词法冲突的比较符号包进 code span，或改回合法数学写法
+  - 同步补强 `scripts/migrate-content.mjs`，避免未来重跑迁移时重新生成同类问题
+- 修复结果：
+  - `pnpm build` 已本地通过
+  - 当前构建仍会打印若干 KaTeX strict-mode 提示，但不会导致构建失败
+
 READY FOR HYPO REVIEW

@@ -184,11 +184,8 @@ Process: OS abstraction of what is needed to run a single program.
 
 ## 2.0. Process Control Block ( Compare with TCB! )
 
-<aside>
-💡 POSIX: Portable Operation System Interfaces in UNIX.
-It’s the **Interface for application programmers**
-
-</aside>
+> 💡 POSIX: Portable Operation System Interfaces in UNIX.
+> It’s the **Interface for application programmers**
 
 - Process Status (running, ready, blocked, …)
 - Register state (when not ready)
@@ -225,12 +222,12 @@ There are also **Hardware Support** for Interrupt Control !
 
 ### Fork
 
-- Return > 0
+- Return `> 0`
     - Running in **Parent Process**
     - Return value is PID of new child!
-- Return = 0
+- Return `= 0`
     - Running in new **Child Process**
-- Return < 0
+- Return `< 0`
     - Error
 
 **All state of original process** is **duplicated** in both Parent and Child process
@@ -642,7 +639,7 @@ Allow `wait(&lock)` , `signal()` and `broadcast()` operations.
         - Circular wait（避免无限的资源申请：对所有资源类型进行全局排序，并要求进程按照递增的枚举顺序请求资源。如果持有类型为N的资源，进程只能请求类型大于N的资源。）
             - Impose a total ordering of all resource types
             - Require that processes request resources in increasing order of enumeration
-            - If a resource of type N is held, process can only request resources of types > N
+            - If a resource of type N is held, process can only request resources of types `> N`
     2. Avoidance（避免）
         - Require additional Apriori information
             - Simplest and Most useful Mode

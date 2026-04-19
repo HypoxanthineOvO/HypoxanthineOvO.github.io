@@ -53,29 +53,190 @@ const BROKEN_REPLACEMENTS = {
   '本科课程/CS130/Final-Cheatsheet.md': [
     {
       find: '![Use main memory as “cache” for disk](Cheatsheet-Final%20a3ede0b2d25945df9dd63986f8a9b2fb/Untitled%2017.png)',
-      replace: '<!-- TODO: 资源缺失，待从备份补回 -->\n（图片暂缺：原图文件待补回）',
+      replace: '{/* TODO: 资源缺失，待从备份补回 */}\n\n（图片暂缺：原图文件待补回）',
     },
   ],
   '个人创作/人文课论文/宋词中的感性和理性.md': [
     {
       find: '- [PDF](/files/宋词中的感性和理性.pdf)',
-      replace: '<!-- TODO: 资源缺失，待从备份补回 -->\n（附件暂缺：PDF 文件待补回）',
+      replace: '{/* TODO: 资源缺失，待从备份补回 */}\n\n（附件暂缺：PDF 文件待补回）',
     },
   ],
   '个人创作/人文课论文/婉约词中的风骨.md': [
     {
       find: '- [PDF](/files/婉约词中的风骨.pdf)',
-      replace: '<!-- TODO: 资源缺失，待从备份补回 -->\n（附件暂缺：PDF 文件待补回）',
+      replace: '{/* TODO: 资源缺失，待从备份补回 */}\n\n（附件暂缺：PDF 文件待补回）',
     },
   ],
   '个人创作/人文课论文/元代之后陆上丝绸之路凋敝的必然性.md': [
     {
       find: '- [Docx](/files/元代之后陆上丝绸之路凋敝的必然性.docx)',
-      replace: '<!-- TODO: 资源缺失，待从备份补回 -->\n（附件暂缺：DOCX 文件待补回）',
+      replace: '{/* TODO: 资源缺失，待从备份补回 */}\n\n（附件暂缺：DOCX 文件待补回）',
     },
     {
       find: '- [PDF](/files/元代之后陆上丝绸之路凋敝的必然性.pdf)',
-      replace: '<!-- TODO: 资源缺失，待从备份补回 -->\n（附件暂缺：PDF 文件待补回）',
+      replace: '{/* TODO: 资源缺失，待从备份补回 */}\n\n（附件暂缺：PDF 文件待补回）',
+    },
+  ],
+};
+
+const CONTENT_REPLACEMENTS = {
+  'PaperReading/Paper-3DGaussian.md': [
+    {
+      find: `<div style="display: grid; grid-template-columns: 1fr 1fr;">
+    <div>
+
+
+### 优化对象
+
+- Position $\\mathbf p$
+
+- 不透明度 $\\alpha$
+
+- 协方差 $\\Sigma$
+
+- 表征颜色的球谐函数系数 $\\text{SH}$
+
+  </div>
+
+  <div>
+
+### 优化方法
+
+- 随机梯度下降
+
+- 对于 $\\alpha$ 使用 Sigmoid 激活函数
+
+- 对于 $\\Sigma$ 的 Scale 部分，使用指数激活函数
+
+- Loss 表示为 L1 和 D-SSIM 的组合：
+
+  - $\\mathcal{L} = (1-\\lambda)\\mathcal{L} + \\lambda\\mathcal{L}_{\\text{D-SSIM}}$
+
+    </div>
+    </div>`,
+      replace: `### 优化对象
+
+- Position $\\mathbf p$
+- 不透明度 $\\alpha$
+- 协方差 $\\Sigma$
+- 表征颜色的球谐函数系数 $\\text{SH}$
+
+### 优化方法
+
+- 随机梯度下降
+- 对于 $\\alpha$ 使用 Sigmoid 激活函数
+- 对于 $\\Sigma$ 的 Scale 部分，使用指数激活函数
+- Loss 表示为 L1 和 D-SSIM 的组合：
+  - $\\mathcal{L} = (1-\\lambda)\\mathcal{L} + \\lambda\\mathcal{L}_{\\text{D-SSIM}}$`,
+    },
+    {
+      find: '- 密集化的同时，移除 $\\alpha <\\epsilon_\\alpha$ 的 Gauss Function',
+      replace: '- 密集化的同时，移除 $\\alpha < \\epsilon_\\alpha$ 的 Gauss Function',
+    },
+  ],
+  'PaperReading/Paper-NeuRex.md': [
+    {
+      find: `<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+
+
+<img src="https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/arc.png">
+
+  </div>
+
+  <div>
+
+两个主要模块：
+
+- Encoding Engine（EE）
+
+  - 主要负责 Hash Table Lookups 和 Interpola
+
+- Tensor Compute Engine（TCE）
+
+  - 脉动阵列实现 MLP 计算
+
+  </div>
+  </div>`,
+      replace: `![](https://raw.githubusercontent.com/HypoxanthineOvO/HypoImager/main/arc.png)
+
+两个主要模块：
+
+- Encoding Engine（EE）
+  - 主要负责 Hash Table Lookups 和 Interpola
+- Tensor Compute Engine（TCE）
+  - 脉动阵列实现 MLP 计算`,
+    },
+  ],
+  '本科课程/CS130/Midterm-Cheatsheet.md': [
+    {
+      find: `<aside>
+💡 POSIX: Portable Operation System Interfaces in UNIX.
+It’s the **Interface for application programmers**
+
+</aside>`,
+      replace: `> 💡 POSIX: Portable Operation System Interfaces in UNIX.
+> It’s the **Interface for application programmers**`,
+    },
+    {
+      find: '- Return > 0',
+      replace: '- Return `> 0`',
+    },
+    {
+      find: '- Return = 0',
+      replace: '- Return `= 0`',
+    },
+    {
+      find: '- Return < 0',
+      replace: '- Return `< 0`',
+    },
+    {
+      find: '- If a resource of type N is held, process can only request resources of types > N',
+      replace: '- If a resource of type N is held, process can only request resources of types `> N`',
+    },
+  ],
+  '本科课程/CS182/Cheatsheet.md': [
+    {
+      find: `<aside>
+💡 这里的 $\\mathbf v^T\\mathbf X$ 是投影，再乘上 $\\mathbf v$ 就是 在投影上的向量。
+
+
+</aside>`,
+      replace: `> 💡 这里的 $\\mathbf v^T\\mathbf X$ 是投影，再乘上 $\\mathbf v$ 就是 在投影上的向量。`,
+    },
+  ],
+  '本科课程/CS130/Final-Cheatsheet.md': [
+    {
+      find: `<aside>
+💡 **Example**: How many disk accesses to resolve “/my/book/count”?
+
+
+- Read in file header for root (fixed spot on disk)
+- Read in first data block for root
+  - Table of file name/index pairs. Search linearly – ok since directories typically very small
+- Read in file header for “my”
+- Read in first data block for “my”; search for “book”
+- Read in file header for “book”
+- Read in first data block for “book”; search for “count”
+- Read in file header for “count”
+  </aside>`,
+      replace: `> 💡 **Example**: How many disk accesses to resolve “/my/book/count”?
+>
+> - Read in file header for root (fixed spot on disk)
+> - Read in first data block for root
+>   - Table of file name/index pairs. Search linearly – ok since directories typically very small
+> - Read in file header for “my”
+> - Read in first data block for “my”; search for “book”
+> - Read in file header for “book”
+> - Read in first data block for “book”; search for “count”
+> - Read in file header for “count”`,
+    },
+  ],
+  '科研思考/辐射场中的显式表达和隐式表达.md': [
+    {
+      find: '- NeRF：5MB，<=1 FPS',
+      replace: '- NeRF：5MB，`<=1 FPS`',
     },
   ],
 };
@@ -405,6 +566,16 @@ function applyBrokenReplacements(relativePath, body, brokenLinkActions) {
   return nextBody;
 }
 
+function applyContentReplacements(relativePath, body) {
+  let nextBody = body;
+  for (const rule of CONTENT_REPLACEMENTS[relativePath] ?? []) {
+    if (nextBody.includes(rule.find)) {
+      nextBody = nextBody.replace(rule.find, rule.replace);
+    }
+  }
+  return nextBody;
+}
+
 function transformBody(relativePath, body, imagePlan) {
   const imports = [];
   const seenImports = new Set();
@@ -482,7 +653,10 @@ async function writeCollectionEntry(record, summary) {
   const sourcePath = path.join(postsRoot, record.relativePath);
   const raw = await fs.readFile(sourcePath, 'utf8');
   const { data, body } = parseFrontMatter(raw);
-  const processedBody = applyBrokenReplacements(record.relativePath, body, summary.brokenLinkActions);
+  const processedBody = applyContentReplacements(
+    record.relativePath,
+    applyBrokenReplacements(record.relativePath, body, summary.brokenLinkActions),
+  );
   const externalUrls = [];
 
   for (const match of processedBody.matchAll(/!\[[^\]]*]\((.*?)\)/g)) {

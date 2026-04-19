@@ -73,44 +73,26 @@ $$\Sigma' = JW\Sigma W^TJ^T$$
 - 将 $\Sigma$ 分解为 Scale Matrix $S$ 和 Rotation Matrix $R$：
   $$\Sigma = RSS^TR^T$$
 
-<div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <div>
-
-
 ### 优化对象
 
 - Position $\mathbf p$
-
 - 不透明度 $\alpha$
-
 - 协方差 $\Sigma$
-
 - 表征颜色的球谐函数系数 $\text{SH}$
-
-  </div>
-
-  <div>
 
 ### 优化方法
 
 - 随机梯度下降
-
 - 对于 $\alpha$ 使用 Sigmoid 激活函数
-
 - 对于 $\Sigma$ 的 Scale 部分，使用指数激活函数
-
 - Loss 表示为 L1 和 D-SSIM 的组合：
-
   - $\mathcal{L} = (1-\lambda)\mathcal{L} + \lambda\mathcal{L}_{\text{D-SSIM}}$
-
-    </div>
-    </div>
 
 
 ## Adaptive Control of Gaussians
 
 - 每 100 个 iter 进行一次密集化（Densify）
-- 密集化的同时，移除 $\alpha <\epsilon_\alpha$ 的 Gauss Function
+- 密集化的同时，移除 $\alpha < \epsilon_\alpha$ 的 Gauss Function
 
 ## Densification Overview
 

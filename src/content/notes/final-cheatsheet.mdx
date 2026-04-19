@@ -648,7 +648,8 @@ The Virtual-to-Physical Translation fails
 - What happens on a write? (write-through, write back)
   - Definitely write-back – need dirty bit!
 
-<!-- TODO: 资源缺失，待从备份补回 -->
+{/* TODO: 资源缺失，待从备份补回 */}
+
 （图片暂缺：原图文件待补回）
 
 Use main memory as “cache” for disk
@@ -913,19 +914,16 @@ graph LR
 - Links (hard links) make it a **DAG**, not just a tree
   - Softlinks (aliases) are another name for an entry
 
-<aside>
-💡 **Example**: How many disk accesses to resolve “/my/book/count”?
-
-
-- Read in file header for root (fixed spot on disk)
-- Read in first data block for root
-  - Table of file name/index pairs. Search linearly – ok since directories typically very small
-- Read in file header for “my”
-- Read in first data block for “my”; search for “book”
-- Read in file header for “book”
-- Read in first data block for “book”; search for “count”
-- Read in file header for “count”
-  </aside>
+> 💡 **Example**: How many disk accesses to resolve “/my/book/count”?
+>
+> - Read in file header for root (fixed spot on disk)
+> - Read in first data block for root
+>   - Table of file name/index pairs. Search linearly – ok since directories typically very small
+> - Read in file header for “my”
+> - Read in first data block for “my”; search for “book”
+> - Read in file header for “book”
+> - Read in first data block for “book”; search for “count”
+> - Read in file header for “count”
 
 - **Current working directory**: Per-address-space pointer to a directory (inode) used for resolving file names
 
