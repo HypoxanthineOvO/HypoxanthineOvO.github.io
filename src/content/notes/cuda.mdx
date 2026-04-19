@@ -1,0 +1,37 @@
+---
+title: "【环境配置】CUDA环境配置"
+date: 2024-02-26
+description: "前置知识 什么是 CUDA？ CUDA 的全称是 统一计算设备架构 （Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。 在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架"
+tags:
+  - "tooling-notes"
+---
+
+import img64d80911 from "../../assets/images/cuda/20240226122713.png";
+
+# 前置知识
+## 什么是 CUDA？
+CUDA 的全称是**统一计算设备架构**（Compute Unified Device Architecture, CUDA），是由 NVIDIA 推出的通用并行计算架构。
+
+在当前最热门的领域：人工智能里，由于深度学习的热门程度独占鳌头，而深度学习的模型结构又非常适合 GPU 上的并行计算架构，因此 CUDA 也成为了深度学习的必备环境。
+
+## CUDA Driver 和 CUDA Runtime
+### CUDA Driver
+CUDA Driver 是 CUDA 的**驱动**，有点类似 GPU 的“操作系统”，一个硬件设备上只会有一个版本。
+
+我们可以通过 `nvidia-smi` 命令查看当前系统中的 CUDA Driver 版本。
+
+### CUDA Runtime
+CUDA Runtime 是 CUDA 的**运行时库**，是一个软件库，用于在程序中调用 GPU 的计算资源。一个系统中可以有很多个 CUDA Runtime，不同的程序可能会使用不同的 CUDA Runtime。
+
+我们可以通过 `nvcc --version` 命令查看当前系统中的 CUDA Runtime 版本。通常，CUDA Runtime 的路径是 `/usr/local/cuda-xxx`。
+
+# CUDA On Linux（以 Ubuntu 为例）
+首先，进入 NVIDIA 的官网，进入对应的下载页面：
+<img src={img64d80911.src} alt="" />
+
+你需要依次选择这些项目，以便获得合适的安装包。
+
+通常，最后一项推荐选择 `runfile`，这是一个自解压文件，你可以通过命令行来安装。
+
+# CUDA On Windows
+Windows 下的 CUDA 安装相对来说更加简单，只需要下载对应的安装包，然后一路下一步即可。

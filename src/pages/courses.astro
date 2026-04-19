@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface CourseItem {
+  label: string;
+  href?: string;
+  children?: CourseItem[];
+}
+
+interface CourseTerm {
+  term: string;
+  items: CourseItem[];
+}
+
+const quickIndex: string[] = ['SI100B EE Part', 'CS100', 'VSP100'];
+
+const terms: CourseTerm[] = [
+  {
+    term: '21 Fall（大一上学期）',
+    items: [
+      { label: 'SI100B 信息科学与技术导论' },
+      { label: 'GEMA1009 数学分析 I' },
+      { label: 'MATH1112 线性代数 I' },
+      {
+        label: '中华文明通论（刘勋）',
+        children: [{ label: '期末论文：元代之后陆上丝绸之路凋敝的必然性', href: '/posts/元代之后陆上丝绸之路凋敝的必然性' }],
+      },
+    ],
+  },
+  {
+    term: '22 Spring（大一下学期）',
+    items: [
+      { label: 'CS100 计算机编程', href: 'https://coursebench.geekpie.club/course/84?answer=340' },
+      { label: 'GEMA1010 数学分析 II' },
+      { label: 'SI120 离散数学' },
+    ],
+  },
+  {
+    term: '22 Fall（大二上学期）',
+    items: [
+      { label: 'CS101 数据结构与算法', href: 'https://coursebench.geekpie.club/course/347?answer=881' },
+      { label: 'SI140A 面向信息科学的概率论与数理统计', href: 'https://coursebench.geekpie.club/course/494?answer=488' },
+      { label: 'CS171 计算机图形学', href: 'https://coursebench.geekpie.club/course/352?answer=1051' },
+      {
+        label: 'GEHA1152 唐宋文学精华',
+        href: 'https://coursebench.geekpie.club/course/403?answer=887',
+        children: [{ label: '期末论文：婉约词中的风骨', href: '/posts/婉约词中的风骨' }],
+      },
+    ],
+  },
+  {
+    term: '23 Spring（大二下学期）',
+    items: [
+      {
+        label: 'CS110 计算机体系结构',
+        href: 'https://coursebench.geekpie.club/course/85?answer=1183',
+        children: [{ label: 'CS110P 计算机体系结构课程设计', href: 'https://coursebench.geekpie.club/course/86?answer=1193' }],
+      },
+      {
+        label: 'EE150 信号与系统',
+        href: 'https://coursebench.geekpie.club/course/128?answer=876',
+        children: [{ label: '课程笔记', href: 'https://epan.shanghaitech.edu.cn/l/lF33j1' }],
+      },
+      { label: 'EE150L 信号与系统实验' },
+      {
+        label: 'CS182 机器学习引论',
+        href: 'https://coursebench.geekpie.club/course/93?answer=878',
+        children: [{ label: 'Final Review', href: '/notes/cheatsheet' }],
+      },
+      { label: '现代生命科学导论 C', href: 'https://coursebench.geekpie.club/course/27?answer=1375' },
+      { label: '思想道德与法治（从思修看“基本写作素养”和通识课绩点的一定相关性）', href: 'https://coursebench.geekpie.club/course/193?answer=1046' },
+    ],
+  },
+  {
+    term: '23 Fall（大三上学期）',
+    items: [
+      { label: 'CS181 人工智能 I', href: 'https://coursebench.geekpie.club/course/92?answer=877' },
+      {
+        label: 'CS130 操作系统',
+        href: 'https://coursebench.geekpie.club/course/350?answer=875',
+        children: [
+          { label: 'Midterm Review', href: '/notes/midterm-cheatsheet' },
+          { label: 'Final Review', href: '/notes/final-cheatsheet' },
+        ],
+      },
+      {
+        label: 'GEHA1117 宋词导读',
+        href: 'https://coursebench.geekpie.club/course/659?answer=704',
+        children: [{ label: '读书报告：宋词中的感性与理性', href: '/posts/宋词中的感性和理性' }],
+      },
+      { label: 'GESS1023 毛泽东思想和中国特色社会主义理论体系概论', href: 'https://coursebench.geekpie.club/course/190?answer=712' },
+    ],
+  },
+  {
+    term: '24 Spring（大三下学期）',
+    items: [
+      { label: 'EE116 基于FPGA 的硬件系统设计', href: 'https://coursebench.geekpie.club/course/541?answer=907' },
+      { label: 'SI114H 计算科学与工程', href: 'https://coursebench.geekpie.club/course/262?answer=906' },
+      {
+        label: '科技文明通论',
+        href: 'https://coursebench.geekpie.club/course/156?answer=983',
+        children: [{ label: '期末论文：智能的逆流与边界：AI 浪潮下的“为何”与“如何”', href: '/posts/智能的逆流与边界' }],
+      },
+      { label: '中外歌剧赏析', href: 'https://coursebench.geekpie.club/course/646?answer=908' },
+    ],
+  },
+  {
+    term: '24 Fall（大四上学期）',
+    items: [
+      { label: 'SI152 数值最优化', href: 'https://coursebench.geekpie.club/course/264?answer=1580' },
+      {
+        label: '马克思主义基本原理',
+        children: [{ label: '马原期末论文', href: '/posts/马克思技术观在当代的应用和启示' }],
+      },
+      {
+        label: '唐前诗文之美',
+        href: 'https://coursebench.geekpie.club/course/172?answer=1543',
+        children: [
+          { label: '创意写作：你见过停滞在空中的云吗', href: '/posts/你见过停滞在空中的云吗' },
+          { label: '期末论文：古代文学中“加餐”的流变（To be released）' },
+        ],
+      },
+    ],
+  },
+  {
+    term: '25 Spring（大四下学期）',
+    items: [{ label: '这学期值得花时间的只有毕业设计了 QwQ' }],
+  },
+];
+---
+
+<BaseLayout title="Courses" description="Course archive merged from legacy MyCourses and Overview pages.">
+  <section class="shell pb-20">
+    <div class="content-shell md:mx-0 md:max-w-[820px] md:px-0">
+      <p class="section-kicker">Courses</p>
+      <h1 class="mb-6">Courses</h1>
+      <div class="space-y-4 text-muted">
+        <p>本页合并了旧 Hexo 站里的 <code>MyCourses.md</code> 与 <code>本科课程/Overview.md</code>。</p>
+        <p>保留了课程时间线与仍然有效的外部链接，同时把原先硬编码到旧 Hexo 域名的内部文章链接改到了当前 Astro 站内路由。</p>
+      </div>
+
+      <div class="mt-10 rounded-3xl border border-border bg-bg px-6 py-6">
+        <h2 class="mb-4 text-[1.2rem]">Legacy Quick Index</h2>
+        <ul class="space-y-2 pl-5 text-muted">
+          {quickIndex.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <div class="mt-12 space-y-10">
+        {terms.map((section) => (
+          <section>
+            <h2 class="mb-4 text-[1.3rem]">{section.term}</h2>
+            <ol class="space-y-3 pl-5 text-muted">
+              {section.items.map((item) => (
+                <li>
+                  {item.href ? (
+                    <a class="inline-link" href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>
+                      {item.label}
+                    </a>
+                  ) : (
+                    item.label
+                  )}
+                  {item.children?.length ? (
+                    <ul class="mt-2 space-y-2 pl-5">
+                      {item.children.map((child) => (
+                        <li>
+                          {child.href ? (
+                            <a class="inline-link" href={child.href} target={child.href.startsWith('http') ? '_blank' : undefined} rel={child.href.startsWith('http') ? 'noreferrer' : undefined}>
+                              {child.label}
+                            </a>
+                          ) : (
+                            child.label
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

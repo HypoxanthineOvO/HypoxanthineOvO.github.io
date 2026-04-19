@@ -1,0 +1,213 @@
+---
+title: "【PaperReading】NeuRex"
+date: 2023-06-21
+description: "NeuRex: A Case for Neural Rendering Acceleration Seoul National University 首尔大学 Modern Neural Rendering 目前神经渲染中的典型模型 NeRF: Neural Radiance Field NSDF: Neural Si"
+tags:
+  - "gpu-research"
+---
+
+import img9f5bad8b from "../../assets/images/paper-neurex/Pipeline.png";
+import img0246f14e from "../../assets/images/paper-neurex/NeRFWithNGP.png";
+import imgbc51e055 from "../../assets/images/paper-neurex/NGPPara.png";
+import img36aca68e from "../../assets/images/paper-neurex/NGPFeaturePipeline.png";
+import img32021195 from "../../assets/images/paper-neurex/LatencyBreakdown.png";
+import imgf42ac5fa from "../../assets/images/paper-neurex/HashTableAccess.png";
+import img6f05ea05 from "../../assets/images/paper-neurex/Exeflow.png";
+import img0cbf1b1a from "../../assets/images/paper-neurex/rh.png";
+import imgdce2a2ec from "../../assets/images/paper-neurex/arc.png";
+import imgca58d61b from "../../assets/images/paper-neurex/SpeedOnGPU.png";
+import img5a5d3b35 from "../../assets/images/paper-neurex/SpeedUpPart.png";
+import img0479d145 from "../../assets/images/paper-neurex/RenderQuality.png";
+import img9e9caacf from "../../assets/images/paper-neurex/ResImages.png";
+import img58ef6ec5 from "../../assets/images/paper-neurex/SourceOfGain.png";
+import imgc3ec4dd0 from "../../assets/images/paper-neurex/bachgrid.png";
+
+# NeuRex: A Case for Neural Rendering Acceleration
+
+> Seoul National University 首尔大学
+
+---
+
+
+# Modern Neural Rendering
+
+## 目前神经渲染中的典型模型
+
+- NeRF: Neural Radiance Field
+- NSDF: Neural Signed Distance Field
+- GIA: Gigapixel Image Approximation
+- NVR: Neural Volume Rendering
+
+
+## Modern Neural Rendering Pipeline
+
+<img src={img9f5bad8b.src} alt="" />
+
+
+
+## Input Encoding: Multi-Resolution Hash Encoding
+
+<img src={img0246f14e.src} alt="" height="500" />
+
+
+
+## Computations Of Multi-Resolution Hash Encoding
+
+### Default Parameters Of NGP
+
+<img src={imgbc51e055.src} alt="" height="350" />
+
+---
+
+<img src={img36aca68e.src} alt="" />
+
+
+- $N_\text{point}$ 个 Input Position
+- 通过十六个 Hash Table，每个 Table 取 $F=2$ 个 Feature
+  - 形成 $N_\text{Point}\times 32$ 大小的 Input Feature Matrix
+- 以上 Input Feature Matrix 输入 The Density MLP
+  - 得到 $N_\text{Point}\times 16$ 大小的 Position Feature
+- Direction 被 （SH）Encoding 成 $N_\text{Point}\times 16$ 大小的 Direction Feature
+- 以上两个 Feature 被拼成 $N_\text{Point}\times 32$ 大小的 Feature 输入 Color MLP中，输出最终预测的颜色。
+
+---
+
+# Motivation: Latency Breakdown
+
+<img src={img32021195.src} alt="" />
+
+
+瓶颈：
+
+- ENC：Hash Encoding
+- MLP：Feature Computation
+
+---
+
+# Observations
+
+## Performance portability of multi-resolution hash encodings
+
+- 尽管哈希表查找的时间复杂度是 $𝑂(1)$，但**这不是一种适合硬件的操作**。
+  - 理想的 Hash Function 输出 随机的 Index，**没有 Locality**
+    - 会频繁发生 **Off-Chip Memory Access**
+  - 每次的 Access 仅使用 4 Byte 数据（For $F=2$），**带宽大量浪费**
+
+
+##  一种目前的解决方案
+
+- 按层次加载 Hash Table
+- 每次先遍历所有的点，把这层 Hash Table 对应的 Feature 取出来
+- 再 Load 下一层 Hash Table
+- 仍然很慢
+
+## Serialized execution of rendering pipeline
+
+- 目前花费渲染时间最多的两个主要操作是哈希编码（ENC）和特征计算（MLP）
+- 这两个主要操作会串行执行
+  - ENC对存储带宽要求较高，而MLP需要更多的计算资源
+- 在完成所有 Hash Table 查找之前，MLP 无法进行
+
+## Difference in access characteristics across different levels of hash tables.
+
+<img src={imgf42ac5fa.src} alt="" height="350" />
+
+
+- 对于没有哈希冲突的分辨率级别（例如， $𝐿=1$ ）
+  - 哈希表条目仅被分配给体素网格的单个顶点
+  - 一个体素中有大量的采样位置共享相同的顶点
+  - 访问在几个条目上有一定的局部化，并且每个条目的访问次数很高
+- 对于更细的分辨率级别（例如，$𝐿=13$ ）
+  - 访问更均匀（且随机）地分布在哈希表条目之间
+  - 每个条目的访问次数非常低。
+
+---
+
+# NeuRex: Neural Graphics Engine
+
+## Execution FLow
+
+<img src={img6f05ea05.src} alt="" />
+
+
+## Restricted Hashing
+
+- 将 Input Coordinate Grid 划分为若干 Subgrids 
+  - 每个 Subgrid 都拥有每个层级的大型哈希表的一部分
+- 在处理另一个子网格之前，先完成所有分辨率下的一个子网格的处理。
+
+<img src={img0cbf1b1a.src} alt="" height="400" />
+
+---
+## Architecture Overview
+
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+
+
+<img src={imgdce2a2ec.src} alt="" />
+
+  </div>
+
+  <div>
+
+两个主要模块：
+
+- Encoding Engine（EE）
+
+  - 主要负责 Hash Table Lookups 和 Interpola
+
+- Tensor Compute Engine（TCE）
+
+  - 脉动阵列实现 MLP 计算
+
+  </div>
+  </div>
+
+---
+
+# Experiment & Evaluation
+
+<img src={imgca58d61b.src} alt="" />
+
+## NeuRex Performance
+
+- NeuRex-Server: $2.88\times$
+- NeuRex-Edge: $9.17\times$
+  - On-Chip Cache 比较小的时候，对 Hash Table 的 Random Access 成为性能瓶颈
+
+
+<img src={img5a5d3b35.src} alt="" height="450" />
+
+
+- 与GPU相比，NeuRex的峰值计算吞吐量较低
+- 但它执行MLP计算的速度更快
+  - 全连接层层较小，GPU Tensor Core 的利用率较低，而 NeuRex 中的 TCE 实现了更高的计算利用率
+- NeuRex 的整体加速度（图13）高于对 ENC 和 MLP 的单独加速度
+  - 这两个操作在原始执行流中是串行的，而 NeuRex 通过受限制的哈希使它们可以重叠执行。
+
+---
+
+
+## Rendering Quality
+
+<img src={img0479d145.src} alt="" height="420" />
+
+
+- Restricted Hashing 限制了每个 Batch 只能访问单个 Subgrid Buffer 内的输入编码。
+- 增加哈希表大小对性能影响较小，因为每次只需加载部分 Entries 到芯片上。
+  - 配置了一个 4 倍大的哈希表（ Ours-LT ；每个级别 8MB ），以进一步提高 PSNR 而不影响性能
+  - 结果显示，Ours-LT在最坏情况下仅导致PSNR轻微下降 $1.1\%$ ，在其他几个场景中，甚至产生比 Org-Hash 更高的 PSNR 值。
+
+
+<img src={img9e9caacf.src} alt="" height="350" />
+
+> DT: Default Table Size
+
+<img src={img58ef6ec5.src} alt="" height="400" />
+
+- GC: Grid Cache
+- RH: Restricted Hashing
+
+
+<img src={imgc3ec4dd0.src} alt="" />

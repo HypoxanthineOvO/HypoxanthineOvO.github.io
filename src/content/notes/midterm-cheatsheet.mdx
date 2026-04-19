@@ -1,0 +1,678 @@
+---
+title: "【CS130】Midterm Review"
+date: 2023-11-22
+description: "0. Overview 0.0. What is OS? OS is an special layer of Software. Provides application SW access to HW resources Convenient abstraction of complex HW devices Pro"
+tags:
+  - "course-material"
+---
+
+import imgf299baa1 from "../../assets/images/midterm-cheatsheet/Untitled.png";
+import img82941d78 from "../../assets/images/midterm-cheatsheet/Untitled-1.png";
+import img6682ecbf from "../../assets/images/midterm-cheatsheet/Untitled-2.png";
+import img8c135a94 from "../../assets/images/midterm-cheatsheet/Untitled-3.png";
+import imgab49752a from "../../assets/images/midterm-cheatsheet/Untitled-4.png";
+import img197d9697 from "../../assets/images/midterm-cheatsheet/Untitled-5.png";
+import imga83a8160 from "../../assets/images/midterm-cheatsheet/Untitled-6.png";
+import imgec3103dc from "../../assets/images/midterm-cheatsheet/Untitled-7.png";
+import imge0ef50ea from "../../assets/images/midterm-cheatsheet/Untitled-8.png";
+import img5315bf93 from "../../assets/images/midterm-cheatsheet/Untitled-9.png";
+
+# 0. Overview
+
+## 0.0. What is OS?
+
+**OS is an special layer of Software.**
+
+- Provides application SW access to HW resources
+- Convenient abstraction of complex HW devices
+- Protected access to shared resources
+- Security and authentication
+- Communication amongst logical entities
+
+## 0.1. OS’s Basic Behaviors
+
+- Translate programs to processes
+- Deals with context switch
+- Scheduling, Protection
+- I/O
+- Loading
+
+## 0.2. OS Boot
+
+1. Initialization at a fixed memory location
+2. Bootstrap Loader
+3. Loads Kernel
+
+## 0.3. Three Roles Of OS
+
+### OS is an illusionist
+
+- Provide clean, easy-to-use abstractions of physical resources
+    - Infinite memory, dedicated（专心的，一致的） machine
+    - Higher level objects: FIles, users, messages……
+    - Masking Limitations, Virtualization
+
+### OS is a Referee
+
+- Manage protection, isolation, and sharing of resources
+
+### OS is a glue
+
+- Storage, Networking
+- Sharing, authorization
+
+# 1. Four Basic OS Concepts
+
+## 1.0. Overview
+
+### Abstractions of Underlying HW
+
+- Processor → Thread
+- Memory → Address Space
+- Disks, SSDs,… → Files
+- Networks → Sockets
+- Machines → Processes
+
+### Basic OS Concepts
+
+1. Thread
+    - Execution Context
+    - Fully Describes Program State
+    - PC, Regs, Execution Flags, Stack…
+2. Address Space
+    - Set of memory address accessible to program
+    - May be distinct from memory space of physical machine ( in which case programs operate in a virtual machine )
+3. Process
+    - An instance of Running Program
+    - Protected Address Space + One / More Threads
+4. Dual-Mode Operation / Protection
+    - Only the “System” can access certain resources
+    - Combined with translation, isolates programs from each other, and isolates OS from programs.
+
+## 1.1. Thread
+
+Thread is **single unique execution context.**
+
+- A thread is suspended（挂起，即不执行）when its state is not loaded (resident，常驻 ) into the processor.
+    - Resident: Register hold the root state of the thread. Include the PC Regs and currently executing instruction.
+- Illusion of Multiple Processors
+    - **Threads are virtual cores!**
+
+### Thread Control Block（TCB）
+
+- Holds contents of registers when thread is not running
+- Contains:
+    - Execution State: CPU Registers, Pprogram Counter (PC), Pointer to Stack (SP)
+    - Scheduling info: State, Priority, CPU time
+    - Various Pointers (for implementing scheduling queues)
+    - Pointer to Enclosing Process (PCB)
+
+<img src={imgf299baa1.src} alt="" />
+
+### Super scalar and Hyper threading
+
+- Super scalar processors can execute multiple instructions that are independent.
+- Hyper threading duplicates register state to make a second “thread”, allowing more instructions to run.（本质上是通过寄存器的复制来创建额外线程）
+
+## 1.2. Address Space
+
+Address space is **the set of accessible addresses** + **state associated with them**.
+
+- Space Size?
+    - For 32 Bit: $2^{32} = 4\text{GB}$
+    - For 64 Bit: $2^{64}\approx 10^{18}\text{Bytes}$
+
+- Four Segment:
+    - Stack
+    - Heap
+    - Static Data
+    - Code.
+
+<img src={img82941d78.src} alt="" />
+
+### OS Protection?
+
+- OS must protect itself from user programs
+    - Reliability, Security, Privacy, Fairness
+- OS must protect user programs from one another
+
+**Simple Protection: Base & Bound**
+
+<img src={img6682ecbf.src} alt="" />
+
+## 1.3. Process
+
+**Execution environment with Restricted Rights**.
+
+> Fundamental tradeoff between protection and efficiency
+> 
+- (Protected) Address Space with One or More Threads
+- Owns memory ( Address Space )
+- Owns file descriptors, file system context, …
+- Encapsulate（封装） one or more threads sharing processes resources
+
+### Why Processes ?
+
+- **Protected from each other**
+- **OS protected from them**
+
+### Multi-Threaded Processes
+
+- **Threads encapsulate Concurrency**
+    - “Active” component（主动的组件，推动程序向前）
+- **Address Spaces encapsulate Protection**
+    - “Passive ” part（被动的部分，存储机制的提供者）
+    - Keeps buggy program from trashing the system
+
+## 1.4. Dual Mode Operation
+
+- Only the “system” has the ability to access certain resources
+- OS and HW protected from user programs
+- User programs isolated from one another
+- Hardware provides at least two modes ( Kernel Mode and User Mode )
+    - Need: A bit of state, Certain operations only permitted in system / kernel.
+    - User → Kernel Transition: Set System Mode, Saves User PC
+    - Kernel → User Transition: Clear System Mode, Restores Appropriate User PC.
+
+<img src={img8c135a94.src} alt="" />
+
+# 2. Process Management
+
+Process: OS abstraction of what is needed to run a single program.
+
+<img src={imgab49752a.src} alt="" />
+
+## 2.0. Process Control Block ( Compare with TCB! )
+
+<aside>
+💡 POSIX: Portable Operation System Interfaces in UNIX.
+It’s the **Interface for application programmers**
+
+</aside>
+
+- Process Status (running, ready, blocked, …)
+- Register state (when not ready)
+- Process ID (PID), User, Executable, Priority, …
+- Execution time, …
+- Memory space, translation, …
+- Kernel Scheduler maintains a data structure containing the PCBs
+
+In Context switch, we save the current process’s state to it’s PCB, and reload another process’s state. 
+
+## 2.1. System Call
+
+- **Vector through well-defined syscall entry points**
+    - “定义良好的 System Call 入口“
+    - Table mapping system call number to handle
+- Locate argunments
+    - In registers or on user stack
+- Copy arguments
+    - From user memory into kernel memory
+    - Protect kernel from malicious code evading checked
+- Validate arguments
+    - Protect kernel from errors in user code
+- Copy results back
+    - Into user memory
+
+There are also **Hardware Support** for Interrupt Control !
+
+- Not be visible to the user process
+
+## 2.2. Web Server
+
+<img src={img197d9697.src} alt="" />
+## 2.3. Process Creation
+
+### Fork
+
+- Return > 0
+    - Running in **Parent Process**
+    - Return value is PID of new child!
+- Return = 0
+    - Running in new **Child Process**
+- Return < 0
+    - Error
+
+**All state of original process** is **duplicated** in both Parent and Child process
+
+> 值得注意的是，`fork()` 后面的所有代码都会被子线程执行
+考点经常结合逻辑运算符的短路特性。
+e.g.1. `if(fork() || fork()) fork();` 就会产生 5 个子线程。
+e.g.2. `fork() && fork() || fork()` 会产生 4 个子线程
+> 
+
+### Unix Process Management
+
+- `fork`
+    - Create a copy of current process, and start it running
+- `exec`
+    - Change the program being run by the current process
+    - 在 Fork 之后使用，替换 Process 的 Memory Space
+- `wait`
+    - Wait for a process to finish
+    - Return status information and the pid of terminated process: `pid = wait(&status);`
+
+- `kill`
+    - Send a signal to another process
+- `exit`
+    - Process asks OS to delete it
+    - return status data from child to parent
+- `abort`
+    - Process terminate the execution of children process
+    
+
+## 2.4. Threads
+
+Motivation: **OS need to be able to handle multiple things at once.**
+
+### Thread States
+
+- State shared by all thread in process / address space
+    - Content of memory ( Global Variables, Heap )
+    - I / O State ( File Descriptors, Network connection, … )
+- State “Private” to each thread
+    - Kept in TCB
+    - CPU Registers ( Include PC! )
+    - Execution stack
+        - Parameters, Temporary Variables
+        - Return PCs are kept while called procedures are executing.
+
+### Actual Thread Operations
+
+- `thread_fork(func, args)`
+    - Create a new thread to run `func(args)`.
+- `thread_yield()`
+    - Relinquish processor voluntarily.（自愿放弃处理器的使用权或控制权。）
+- `thread_join(thread)`
+    - In parent, wait for forked thread to exit, then return
+- `thread_exit()`
+    - Quit thread and clean up, wake up joiner if any.
+- pThreads
+
+### The core of Concurrency
+
+That’s the Dispatch（调度程序、调度器） Loop!
+
+```c
+Loop {
+		RunThread();
+		ChooseNextThread();
+		SaveSyayeOfCPU(CurrentTCB);
+		LoadStateOfCPU(NextTCB);
+}
+```
+
+Running the thread:
+
+- Load it’s state (Reg, PC, Stack pt) into CPU.
+- Load enviroment (VM,…)
+- Jump to the PC
+
+### Events: Let Dispatcherget control back
+
+- Internal event: Thread returns control voluntarily
+    - Blocking on I/O
+    - Waiting on a “signal” frin itger thread
+    - Thread executes a `yield()`
+- External Events: Thread get preempted
+    - Interrupts: signals from HW or SW that stop the running code and jump to kernel
+    - Timer: like an alarm clock that goes off every some may milliseconds
+
+## 2.5. Comparison
+
+|  | Same Process | Diff. Process |
+| --- | --- | --- |
+| Switch Overhead | Low | High |
+| Protection Overhead | Low | High |
+| Sharing Overhead | Low | High |
+
+|  | Same core | Diff. Core |
+| --- | --- | --- |
+| Switch Overhead | Low | High |
+| Protection Overhead | Low | High |
+| Sharing Overhead | Low | High |
+
+## 2.6. Multi-Thread Processes
+
+- PCB points to multiple TCBs
+
+### Multi-Threading Models
+
+- Many-to-One
+    - User-level threads mapped to single kernel thread
+    - One thread blocking causes all to block
+- One-to-One
+    - Each User-level thread maps to kernel thread
+    - Creating a user-level thread creates a kernel thread
+    - More concurrency, more overhead
+- Many-to-Many
+    - Allows many user-level threads to be mapped to many kernel threads
+    - Allow OS to create a sufficient number of kernel threads.
+
+# 3. Synchronization
+
+## 3.1. Definitions
+
+### Atomic Operations
+
+An operation that always run to completion or not at all
+
+- **Indivisible**: Cannot be stopped in the middle and state cannot bemodified by someone else in the middle.
+- **Fundamental building block**: If no atomic operations, then have no way for threads to work together.
+
+### Synchronization
+
+Using atomic operations to ensure cooperation between threads
+
+### Mutual Exclusion
+
+Ensuring that only one thread does a particular thing at a time.
+
+### Critical Section
+
+Piece of code that only one thread can execute at once.
+
+### Lock
+
+Prevents someone from doing something.
+
+- **Lock** before **entering critical section** and before **accessing shared data**
+- **Unlock** when leaving, after accessing shared data
+- Wait if locked
+    - **Important idea: all synchronization involves waiting**
+
+## 3.2. “Too Much Milk”
+
+Solved with lock:
+
+```c
+milkLock.Acquire();
+if (noMilk) buy milk;
+milkLock.Release();
+```
+
+> Section of code between `Acquire()` and `Release()` called a “Critical Section”
+> 
+
+Use lock, the **critical section is very short** !
+
+## 3.3. Lock
+
+### Basic Inplementation
+
+```c
+int value = FREE;
+```
+
+```c
+Acquire() {
+		disable interrupts;
+		if (value == BUSY) {
+				put thread on wait queue;
+				Go to sleep();
+				// Enable?
+		}
+		else {
+				value = BUSY;
+		}
+		enable interrupts;
+}
+```
+
+```c
+Release() {
+		disable interrupts;
+		if (anyone on wait queue) {
+				take thread off wait queue;
+				Place on ready queue;
+		}
+		else {
+				value = FREE;
+		}
+		enable interrupts;
+}
+```
+
+Why do we need to disable interrupts?
+
+- Avoid interruption between checking and setting lock value
+- Otherwise two threads could think that they both have lock
+
+When we enable interrupt?
+
+- Before `put thread on wait queue;` ?
+    - Release can check the queue and not wakeup thread
+- Between `put...` and `Go to sleep();` ?
+    - Release puts the thread on the ready queue, but the thread still think it needs to go to sleep
+    - Misses wakeup and still holds lock ( Calls Deadlock! )
+
+- How to solve?
+- When the sleeping thread wakes up, returns to acquire and re-enable interrupts.
+
+<img src={imga83a8160.src} alt="" />
+
+### Atomic Read Modify Write Instructions
+
+These instructions read a value and write a new value atomically
+
+```c
+test&set(&address){
+	result = Mem[address];
+	Mem[address] = 1;
+	return result;
+}
+```
+
+```cpp
+compare&swap(&address, reg1, reg2) {
+	if (reg1 == Mem[address]) {
+		Mem[address] = reg2;
+		return success;
+	}
+	else {
+		return failure;
+	}
+}
+```
+
+### Impelment Lock with test&set
+
+```c
+int value = 0; // FREE
+Acquire() {
+		while(test&set(value));
+}
+
+```
+
+```cpp
+Release() {
+		value = 0;
+}
+```
+
+**Busy-Waiting: thread consumes cycles while waiting!**
+
+- For multi-processors: every test&set is a write, which makes value ping-pong around in cache (using lots of network BW)
+- It will cause Priority Inversion!
+
+### Solution: test&test&set (Multi-Processor: Spin Locks)
+
+```c
+int mylock = 0; // Free
+Acquire() {
+		do {
+		while(mylock); // Wait until might be free
+		} while(test&set(&mylock)); // exit if get lock
+}
+Release() {
+		mylock = 0;
+}
+```
+
+- Solve Multi-processors Problem.
+- Still Busy Waiting!
+
+### Better Locks with test&set
+
+```c
+int guard = 0;
+int value = FREE;
+```
+
+```c
+Acquire() {
+		while(test&set(guard));
+		if (value == BUSY) {
+				Put thread on wait queue;
+				Go to sleep() & guard = 0;
+		}
+		else {
+				value = BUSY;
+				guard = 0;
+		}
+}
+```
+
+```c
+Release() {
+		while(test&set(guard));
+		if anyone on wait queue {
+				Take thread off wait queue;
+				Place on ready queue;
+		}
+		else {
+				value = FREE;
+		}
+}
+```
+
+## 3.4. Semaphore
+
+Semaphore has a non-negative integer value and supports the following two atomic operations:
+
+- `P()` : Waits for semaphore to become positive, then decrements it by 1.
+    - Also called `wait()`
+
+- `V()` : Increments the semaphore by 1, waking up a waiting P if any.
+    - Also called `signal()`
+
+### Implementation
+
+```c
+while(S) {
+	while(S <= 0);
+	S--;
+}
+```
+
+```c
+signal(S) {
+	S++;
+}
+```
+
+### Usage
+
+- Binary Semaphore (Block/Resume Semaphore)
+    - Int range only between 0 and 1 (with initial value = 1)
+    - Same as a Mutex Lock.
+- Counring Semaphore, for scheduling constrainrs ( with initial value = 0)
+    - Allow thread 1 to wait for thread 2
+
+### Lock vs Semaphore
+
+|  | Advantage | Disadvantage | Use Case |
+| --- | --- | --- | --- |
+| Locks | A lock allows only one thread to enter the section or resource that’s locked at a time, simple to use. | Locks can lead to problems like deadlocks if not used carefully.|Locks are more suitable when you need to ensure that only one thread can access a resource at a time, such as writing to a shared source. (Other reasonable answers are acceptable.)|
+| Semaphores | Semaphores can control access of multiple threads to one or more resources | Semaphores can be more complex to use correctly compared to locks, and misuse can lead to problems such as deadlocks and starvation.|Semaphores are suitable for Producer and Consumer case where there exists threads producing data and threads consuming data. (Other reasonable answers are acceptable.)|
+
+## 3.5. Monitors
+
+A lock and zero or more condition variables for managing concurrent access to shared data.
+
+- Lock: Provides Mutual Exclusion to shared data
+- Condition Variable: A queue of threads waiting for something inside a critical section
+
+### Condition Variables
+
+Allow `wait(&lock)` , `signal()` and `broadcast()` operations.
+
+- **Rule: Must hold lock when doing condition variable ops**
+
+## 3.6. Deadlock and Starvation
+
+### Overview
+
+- Resources
+    - Serially reusable resources (CPU cycles, memory space, I/O devices, files); Consumable resources (message, buffer of information, interrupts)
+- Comparision
+    - Deadlock → Starvation
+    - Starvation can and, Deadlock can’t end without external intervention
+
+- Deadlock
+    - Two or more processes are waiting indefinitely for an event that can be caused by only of the waiting processes
+- Starvation
+    - Indefinite blocking
+    - A process may never be removed from the semaphore queue in which it’s suspended
+
+### Deadlock
+
+- Definitions
+    - A process is deadlocked if it’s waiting for an event that will never occur
+- Conditions:
+    - Mutual exclusion
+    - Hold and wait
+    - No preemption
+    - Circular wait
+- Deadlock Management
+    - 死锁预防是在**系统设计和资源分配阶段**采取措施防止死锁的发生，而死锁避免是**在运行时**动态地检测和避免可能导致死锁的状态。
+    1. Prevention（预防）
+        - Ensure that at least one of the necessary conditions for deadlock cannot hold.
+        - Mutual Exclusion
+            - No issue for sharable resources
+            - Can not deny this for non-sharable resources
+        - Hold and wait（确保当一个进程请求资源时，它不持有其他资源。）
+            - Guarantee that when a process requests a resource, it does not hold other resources
+        - No Preemption（如果一个持有某些资源的进程请求无法立即分配的另一个资源，该进程将释放当前持有的资源，并将被抢占的资源添加到等待列表中。只有当该进程能够重新获取其原有的资源以及请求的新资源时，才会重新启动。）
+            - If a process that is holding some resources requests another resource that cannot be immediately allocated to it, the process releases the resources currently being held.
+            - Preempted resources are added to the list of resources for which the process is waiting
+            - Process will be restarted only when it can regain its old resources as well as the new
+            ones that is requesting.
+        - Circular wait（避免无限的资源申请：对所有资源类型进行全局排序，并要求进程按照递增的枚举顺序请求资源。如果持有类型为N的资源，进程只能请求类型大于N的资源。）
+            - Impose a total ordering of all resource types
+            - Require that processes request resources in increasing order of enumeration
+            - If a resource of type N is held, process can only request resources of types > N
+    2. Avoidance（避免）
+        - Require additional Apriori information
+            - Simplest and Most useful Mode
+                - Maximum number of resources
+            - Deadlock-Avoidance algorithm
+                - Resource-Allocation state to ensure that there can never be a circular-wait condition
+                - Resource-Allocation State
+                    - the number of available and allocated resources
+                    - the maximum demands of the processes
+        - Safe state
+          
+            <img src={imgec3103dc.src} alt="" />
+            
+            - When a process requests an available resource, must decide if immediate allocation leaves the system in a safe state
+            - System in safe sate → there exists a safe sequence of all processes
+            - Banker’s Algorithm
+    3. Detection
+        - Allow deadlocks to occur but then rely on the operating system to detect the deadlock and deal with it
+    4. Recovery
+        - Process Termination
+        - Resource Preemption
+
+### Bank Algorithm
+
+银行家算法的实质就是**要设法保证系统动态分配资源后不进入不安全状态，以避免可能产生的死锁。**即没当进程提出资源请求且系统的资源能够满足该请求时，系统将判断满足此次资源请求后系统状态是否安全，如果判断结果为安全，则给该进程分配资源，否则不分配资源，申请资源的进程将阻塞。
+
+银行家算法的执行有个前提条件，即要求进程预先提出自己的最大资源请求，并假设系统拥有固定的资源总量。下面介绍银行家算法所用的主要的数据结构。
+
+<img src={imge0ef50ea.src} alt="" />
+
+<img src={imge0ef50ea.src} alt="" />
+
+<img src={img5315bf93.src} alt="" />

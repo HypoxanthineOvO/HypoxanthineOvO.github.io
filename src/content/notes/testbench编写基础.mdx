@@ -1,0 +1,407 @@
+---
+title: "【数字IC设计】Testbench 编写基础"
+date: 2024-03-08T21:12:21
+description: "How to write Testbench 本文将讲述如何使用Verilog 编写一个基础的 测试脚本（testbench） 。 在考虑一些关键概念之前，先来看看 Testbench 的架构是什么样的。架构包括建模时间、initial 块（initial block）和任务（task）。此文最后将以一个完整的 Tes"
+tags:
+  - "engineering-practice"
+---
+
+import img578c2566 from "../../assets/images/testbench编写基础/TestbenchArch.png";
+import imgf9cca0d0 from "../../assets/images/testbench编写基础/Example-Module.png";
+
+# How to write Testbench
+
+本文将讲述如何使用Verilog 编写一个基础的**测试脚本（testbench）**。
+
+在考虑一些关键概念之前，先来看看 Testbench 的架构是什么样的。架构包括建模时间、initial 块（initial block）和任务（task）。此文最后将以一个完整的 Testbench 编写作为示例。
+
+在使用verilog设计数字电路时，设计人员通常还会创建一个testbench来仿真代码以确保其按预期设计运行。设计人员可以使用多种语言构建 Testbench，其中最流行的是 VHDL、Verilog 和 System verilog 。
+
+System Verilog 在行业中被广泛应用，可能是用于测试的最常用语言，但本文仅介绍 verilog 中Testbench 设计的基本原则。
+
+# **1. Testbench 的架构**
+
+Testbench由**不可综合**的 Verilog 代码组成，这些代码生成被测设计的输入并验证被测设计的输出是否正确（输出是否符合预期）。
+
+下图展示了一个基本testbench的典型架构。
+
+<img src={img578c2566.src} alt="" />
+
+- **激励（stimulus block）**是为 FPGA 设计生成的输入
+- **输出校验（output checker）**检查被测模块的输出是否符合预期
+- **被测模块（design under test，DUT）**即是编写的 Verilog 模块，Testbench 的主要设计目的就是对其进行验证，以确保在特定输入下，其输出均与预期一致
+
+对于较大规模的设计，激励和输出校验可以位于单独的文件中，也可以将所有这些不同的模块都包含在同一个文件中。
+
+# **2. 例化被测模块**
+
+编写 Testbench 的第一步是**创建一个 Verilog 模块作为测试的顶层**。
+
+与的 Verilog module 不同，在这种情况下，设计人员要创建的是一个**没有输入和输出的模块**。这是因为设计人员希望 Testbench 模块是完全独立的（self contained）。
+
+下面的代码片段展示了一个空模块的语法，这可以被用作testbench。
+
+```verilog
+module <module_name> ();
+    // 在这里写testbench
+endmodule : <module_name>
+```
+
+创建了一个 Testbench 之后，必须例化被测设计，这可以将信号连接到被测设计以激励代码运行。
+
+下面的代码片段展示了如何例化一个被测模块。
+
+```verilog
+
+<module_name> # (
+  // 例化参数
+  .<parameter_name> (<parameter_value>)
+)
+<instance_name> (
+  // 连接端口信号
+  .<port_name> (<signal_name>),
+  .<port_name> (signal_name>)
+);
+```
+
+完成此操作后，就可以开始将激励写入testbench。激励包括时钟信号和复位信号，以及创建发送到testbench的测试数据。
+
+为此，需要使用一些尚未学过的 verilog 结构：**initial块**（initial block）、**foever循环**（foever loop）和**时间控制**（time consuming）语句。
+
+# **3. Verilog 中的建模时间（Modelling Time）**
+
+Testbench 代码和设计代码之间的主要区别是 Testbench 并不需要被综合成实际电路，为此可以使用时间控制语句这种特殊结构。事实上，这对于创建测试激励至关重要。
+
+在 Verilog 中有一个可用的结构——它能够对仿真进行延时。在 verilog 中使用 **#** 字符后跟多个时间单位来模拟延时。
+
+例如，下面的 Verilog 代码展示使用延时运算符等待 10 个时间单位。
+
+```verilog
+#10
+```
+
+这里要注意的是代码末尾并**没有分号**。
+
+将延时语句写在与赋值相同的代码行中也很常见，这可以有效地行使调度功能，将信号的变化安排在延迟时间之后。下面的代码片段是此种情况的一个示例。
+
+```verilog
+#10 a = 1'b1;    // 在10个时间单位后，a 将被赋值为1
+```
+
+## **3.1. 时间单位（Timescale ）编译指令**
+
+在上一节已经讨论了十个时间单位的延时用法，但在设计人员真正定义所使用的时间单位之前，这样的讨论是毫无意义的。
+
+为了指定在仿真期间所使用的时间单位，需要使用指定**时间单位**和**时间精度**（分辨率）的 Verilog 编译器指令。这只需要在 Testbench 中运行该指令一次，而且应在模块外完成。
+
+下面的代码片段展示用来在 Verilog 中指定时间单位和精度的编译指令。
+
+```verilog
+`timescale <unit_time> / <resolution>
+```
+
+**`<unit_time>`** 指定时间的单位，**`<resolution>`** 则指定时间精度。
+
+`<resolution>` 很重要，因为设计人员可以使用小数来指定 verilog 代码中的延时。例如，如果设计人员想要 10.5ns 的延迟，就可以简单地写为 **#10.5**。因此，编译指令中的 `<resolution>` 决定了可以实现最小时间的步长（即精度）。
+
+此编译指令中的两个参数都采用时间类型，例如 1ps 或 1ns。
+
+# **4. Verilog initial block（初始块）**
+
+在**initial 块**中编写的任何代码都会在仿真开始时**执行一次且仅执行一次**。
+
+下面的 Verilog 代码展示了initial 块的一般语法。
+
+```verilog
+initial begin
+  // 这里写代码
+end
+```
+
+与 always 块不同，在 initial 块中编写的 verilog 代码几乎是**不可综合的**，因此其几乎只被用于仿真。但是，在verilog RTL 中**也可以使用 initial 块来初始化信号（几乎很少用）**。
+
+为了更好地理解如何使用 initial 块在 Verilog 中编写激励，请来看一个基本示例：
+
+假设现在想要测试一个基本的两输入与门，为此需要编写代码来生成所有可能的四种输入。此外还需要使用延时运算符以在生成不同的输入之间延迟一段时间。这很重要，因为这可以允许信号有时间来传播。
+
+下面的 Verilog 代码展示了在 initial 块中编写此测试的方法。
+
+```verilog
+initial begin
+  // 每隔10个时间单位就生成一个输入
+  and_in = 2b'00;
+  #10 and_in = 2b'01;
+  #10 and_in = 2b'10;
+  #10 and_in = 2b'11;
+end
+
+```
+
+值得注意的是，这种写法的时延是相对时延，如果想使用相对 0 时刻的绝对时延，可以使用非阻塞性赋值：
+
+```verilog
+initial begin
+  // 每隔 10 个时间单位就生成一个输入
+  and_in <= 2b'00;
+  and_in <= #10 2b'01;
+  and_in <= #30 2b'10;
+  and_in <= #50 2b'11;
+end
+
+```
+
+# **5. Verilog Foever 循环（Loop）**
+
+在 Verilog Testbench中可以使用一种重要的循环类型——**forever**循环。
+
+使用这个构造时，实际上是创建了一个无限的循环——这意味着创建了一段在仿真过程中将永远运行的代码。
+
+下面的 verilog 代码展示了用来编写foever循环的一般语法。
+
+```verilog
+forever begin
+  // our code goes here
+end
+```
+
+当用其他编程语言编写代码时，无限循环一般被视为应极力避免的严重错误。但是，verilog 与其他编程语言不同，编写 verilog 代码是在描述硬件而不是在编写软件。
+
+因此，**至少有一种情况是可以使用无限循环的——时钟信号**。为此需要一种定期连续反转信号的方法，foever 循环与此相当契合。
+
+下面的 verilog 代码展示了如何使用 foever 循环在 testbench 中生成一个时钟。需要注意的是，所编写的任何循环都必须包含在过程块（procedural block）中或生成块（generate块）中。
+
+```verilog
+initial begin
+   clk = 1'b0;
+   forever begin
+     #1 clk = ~clk;
+   end
+end
+```
+
+当然，重复序列也可以使用 always 语句产生。
+
+# **6. Verilog 系统任务（System Tasks）**
+
+在 verilog 中编写testbench时，有一些内置的任务和函数可以提供帮助。这些被统称为**系统任务或系统函数**，它们很容易被识别----总是以**美元符号（$）**开头。
+
+虽然有很多这样的系统任务可用，但是这三个是最常用的 ：**`$display`、`$monitor` 和 `$time`**。
+
+## **6.1. `$display`**
+
+`$display` 是 verilog 中最常用的系统任务之一。设计人员可以使用它来输出一条消息，该消息在仿真时将会显示在控制台上。
+
+`$display` 的使用方式与C语言中的 `printf` 函数非常类似，这意味着设计人员可以轻松地在 Testbench 中创建文本语句，并使用它们来显示有关仿真状态的信息。
+
+设计人员还可以在字符串中使用特殊字符 (%) 来显示设计中的信号。这样做时，还必须使用一个格式字母来决定以何种格式显示变量。最常用的格式是 **b（二进制）、d（十进制）和 h（十六进制）**。设计人员还可以在这个格式代码前面加上一个数字来确定要显示的位数。
+
+下面的 verilog 代码展示了 $display 系统任务的一般语法。此代码片段还包括一个示例用例。
+
+```verilog
+// 一般语法
+$display(<string_to_display>, <variables_to_display);
+
+// 例子：分别用2进制、16进制和10进制来打印x的值
+$display("x (bin) = %b, x (hex) = %h, x (decimal) = %d", x, x, x);
+
+```
+
+设计人员可以在 `$display` 系统任务中使用的不同格式的完整列表如下所示。
+
+| 格式代码 | 描述 |
+| --- | --- |
+| %b 或 %B | 显示为二进制 |
+| %d 或 %D | 显示为十进制 |
+| %h 或 %H | 显示为十六进制 |
+| %o 或 %O | 显示为八进制格式 |
+| %c 或 %C | 显示为 ASCII 字符 |
+| %m 或 %M | 显示模块的层级名称 |
+| %s 或 %S | 显示为字符串 |
+| %t 或 %T | 显示为时间 |
+
+## **6.2. `$monitor`**
+
+`$monitor` 函数与 `$display` 函数非常相似，但它一般被用来监视 Testbench 的信号值，这些信号中的任何一个改变状态，都会在终端打印一条消息。
+
+所有的系统任务在使用时都会被综合工具忽略，因此甚至可以在 Verilog RTL 代码中使用 `$monitor` 语句，尽管这并不常见。
+
+此系统任务的一般语法显示在下面的代码片段中。此代码片段还包括一个示例用例。
+
+```verilog
+//一般语法
+$ monitor(<message_to_display>, <variables_to_display>);
+
+//例子：监控信号in_a和in_b的值。其中任何一个发生变化都会立即在终端打印出两个信号的值
+$ monitor("in_a=%b, in_b=%b\n", in_a, in_b);
+
+```
+
+## **6.3. `$time`**
+
+在 Testbench 中常用的最后一个系统任务是 `$time` 。这个系统任务可以用来获取当前的仿真时间。
+
+在 Testbench 中通常将 `$time` 与 `$display` 或 `$monitor` 一起使用，以便在打印的消息中显示具体仿真时间。
+
+下面的 verilog 代码展示了如何一起使用 `$time` 和 `$display` 来打印信息。
+
+```verilog
+$display("Current simulation time = %t", $time);    //打印当前仿真时间
+```
+
+## 6.4. `$readmemb`
+
+系统任务 `$readmemb` 从文件中将向量读入到存储器 VMem 中。
+
+```verilog
+reg [1:BITS] VMem[1:WORDS];
+
+initial begin
+	$readmemb ("Test.vec", VMem);
+end
+```
+
+## 6.5. 向文本中写入向量: `$fdisplay` , `$fmonitor` , `$fstrobe`
+
+信号值可以通过这些系统任务输出到文件中，这样可以避免通过复杂的重定向操作输出结果。
+
+# **7. Verilog testbench示例**
+
+接下来将为一个非常简单的电路构建一个 Testbench 以检查其功能的正确性。
+
+下面显示的电路是将用于此示例的电路，由一个简单的两输入与门以及一个寄存器组成。
+
+<img src={imgf9cca0d0.src} alt="" />
+
+## **7.1. 创建一个 Testbench 模块**
+
+在 **Testbench** 中做的第一件事就是声明一个空模块来写入代码。
+
+下面的代码片段展示了此 **Testbench** 的模块声明。请注意，最好让被测试设计的名称与 Testbench 的名称**保持相似**。一般可以简单地将 **`_tb` 或 `_test`** 附加到被测设计名称的末尾。
+
+```verilog
+module example_tb ();
+  //在这里写测试代码
+endmodule : example_tb
+
+```
+
+## **7.2. 例化被测模块**
+
+现在只有一个空白的 Testbench 模块，接下来需要例化要测试的设计模块。
+
+下面的代码片段展示了如何例化被测模块，假设信号 `clk`、`in_a`、`in_b` 和 `out_q` 之前就已声明。
+
+```verilog
+example_design dut (
+    .clock (clk),
+    .reset (reset),
+    .a     (in_a),
+    .b     (in_b),
+    .q     (out_q)
+);
+
+```
+
+## **7.3. 生成时钟和复位信号**
+
+接下来要做的是在 Testbench 中生成一个时钟和复位信号。可以在 initial 块中为时钟和复位信号编写代码，然后使用延时运算符来实现信号状态的变化。
+
+对于时钟信号，可以使用 `forever` 关键字在仿真期间持续运行时钟信号。使用此语法将每 1 ns 进行一次反转，从而实现 500MHz 的时钟频率——选择此频率纯粹是为了实现快速仿真，实际上FPGA 中的 500MHz 时钟速率很难实现，所以 Testbench 的时钟频率应尽量与硬件时钟频率匹配。
+
+下面的 verilog 代码展示了如何在 Testbench 中生成时钟和复位信号。
+
+```verilog
+// 生成时钟信号
+initial begin
+    clk = 1'b0;
+    forever #1 clk = ~clk;
+end
+
+// 生成复位信号
+initial begin
+   reset = 1'b1;
+    #10
+   reset = 1'b0;
+end
+
+```
+
+### **7.4、编写测试激励信号**
+
+最后一部分是编写测试激励。为了测试被测电路，需要依次生成四种可能输入中的每一种，然后需要等待一小段时间，让信号通过代码块传播。
+
+为此，将为输入赋值，然后使用延时语句来通过 FPGA 进行传播。如果还想监控输入和输出的值，可以使用 `$monitor` 这个系统任务来完成。
+
+下面的代码片段展示了相关代码。
+
+```verilog
+initial begin
+    $monitor("time=%3d, in_a=%b, in_b=%b, q=%2b \n",
+              $time, in_a, in_b, q);
+
+    in_a = 1'b0;in_b = 1'b0;
+    #20 in_a = 1'b1;
+    #20 in_a = 1'b0;in_b = 1'b1;
+    #20 in_a = 1'b1;
+end
+
+```
+
+## **7.5. 完整示例代码**
+
+下面的 verilog 代码展示了完整的 Testbench 示例。
+
+```verilog
+`timescale 1ns / 1ps    //时间单位1ns，精度1ps
+
+module example_tb ();
+
+//声明时钟和复位信号
+reg clk;
+reg reset;
+
+//输入和输出信号
+reg in_a;
+reg in_b;
+wire out_q;
+
+//例化被测模块
+example_design dut (
+  .clock (clk),
+  .reset (reset),
+  .a     (in_a),
+  .b     (in_b),
+  .q     (out_q)
+);
+
+//生成时钟信号
+initial begin
+  clk = 1'b0;
+  forever #1 clk = ~clk;
+end
+
+//生成复位信号
+initial begin
+ reset = 1'b1;
+ #10 reset = 1'b0;
+end
+
+//生成测试激励信号
+  initial begin
+  $monitor("time=%3d, in_a=%b, in_b=%b, q=%2b \n",
+            $time, in_a, in_b, q);
+
+  in_a = 1'b0;
+  in_b = 1'b0;
+  #20
+  in_a = 1'b1;
+  #20
+  in_a = 1'b0;
+  in_b = 1'b1;
+  #20
+  in_a = 1'b1;
+  end
+
+endmodule
+
+```

@@ -1,0 +1,1175 @@
+---
+title: "【CS130】Final Review"
+date: 2024-01-08
+description: "Cheatsheet Final 4. Scheduling 4.0. Overview Definition Scheduling：Deciding which threads are given access to resources from moment to moment. Often, we think i"
+tags:
+  - "course-material"
+---
+
+import imgd7c17077 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet0.png";
+import img473c7e0b from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet1.png";
+import img01596486 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet2.png";
+import img4e2aed6d from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet3.png";
+import img265f10c5 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet4.png";
+import imgd1185107 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet5.png";
+import imgf4d85912 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet6.png";
+import img6ef9cf00 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet7.png";
+import img4055bd8e from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet8.png";
+import imgd758e29e from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet9.png";
+import img1f1cab24 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet10.png";
+import imga38a93e5 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet11.png";
+import img99546d84 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet12.png";
+import img75f78204 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet13.png";
+import imgf3bd712a from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet14.png";
+import imge7642705 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet15.png";
+import img0b4e0390 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet16.png";
+import img27ae7ce2 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet18.png";
+import img699d7567 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet19.png";
+import imgac292fb4 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet20.png";
+import img802b7877 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet21.png";
+import imgd1ccf418 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet22.png";
+import imge0e646dd from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet23.png";
+import imge279ce34 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet24.png";
+import img54248c73 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet25.png";
+import img4b380752 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet26.png";
+import img497df756 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet27.png";
+import img8535bbb0 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet28.png";
+import img70af4057 from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet29.png";
+import imgfd79f7df from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet30.png";
+import imgc6a827cc from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet31.png";
+import img597dd60b from "../../assets/images/final-cheatsheet/OS-Final-Cheatsheet32.png";
+
+# Cheatsheet-Final
+
+# 4. Scheduling
+
+## 4.0. Overview
+
+### Definition
+
+Scheduling：Deciding which threads are given access to resources from moment to moment.
+
+- Often, we think in terms of CPU time, but could also think about access to resources like network BW or disk access.
+
+### Scheduling Assumptions
+
+- One program per user
+- One thread per program
+- Programs are independent
+
+### Scheduling Policy Goals / Criteria（调度的主要目的）
+
+- Minimize Response Time（最小化响应时间）
+  - Minimize elapsed time to do an operation / job
+- Maximize Throughput（最大化吞吐量）
+  - Throughput related to response time, but not identical:
+    - Minimizing response time will lead to more context switching than if you only maximized throughput
+  - Two parts to maximizing throughput
+    - Minimize overhead（最小化调度的开销）
+    - Efficient use of resources（最大化利用资源）
+- Fairness
+  - Share CPU among users in some equitable way
+- 程序既使用CPU，也使用I/O设备。操作系统通过调度算法决定下一个要在CPU上执行的作业。时间片轮转调度算法确保每个线程都能获得一定的CPU时间。某些I/O活动可能会被视为计算，因为CPU仍在使用中。I/O指的是进程进入阻塞状态，等待外部设备完成工作。
+
+### Scheduling Algorithms
+
+- First Come, First Served
+- Round Robin
+- Priority
+- Multi Level Queue
+- Real-Time Scheduling
+
+## 4.1. FCFS Scheduling
+
+### Ideas
+
+- **First-Come, First Served**
+- **Convoy Effort**: short process behind long process
+
+### Example
+
+<img src={imgd7c17077.src} alt="" />
+<img src={img473c7e0b.src} alt="" />
+
+## 4.2. Round Robin Scheduling
+
+### Ideas
+
+- Idea：Preemption
+  - Each process gets a small unit of CPU time quantum, usually 10-100ms
+  - After quantum expires, the process is preempted and added to the end of the ready queue
+- $n$ process in ready queue and time quantum is $q$
+  - Each process get $\frac{1}{n}$ of the CPU time
+  - In chunks of at most $q$ time units
+  - **No process waits more than $(n-1)\cdot q$ time units**
+- Performance
+  - $q$ large → FCFS
+  - $q$ small → Interleaved（交错调度）（Really small → HT，超线程）
+  - $q$ must be large with respect to context switch, otherwise overhead is too high.
+- How to choose time slices
+  - What if too big?
+    - Response time suffers
+  - What if infinite?
+    - Get back to FCFS
+  - What if too small?
+    - Through suffers
+  - Actually choices:
+    - In practice, need to balance short job performance and long job throughput
+    - Typical time slice today is between 10 - 100 ms
+    - Typical context-switching overhead is 0.1 - 1 ms
+    - Roughly 1% overhead due to context-switching
+
+### Example
+
+<img src={img01596486.src} alt="" />
+
+## 4.3. Priority Scheduling
+
+- A priority value (int.) is associated with eachprocess.
+- Based on:
+  - Cost to user
+  - Importance to user
+  - Aging
+  - %CPU time used in last XX hours
+- Execution Plan
+  - Always execute highest-priority runnable jobs to completion
+  - Each queue can be processed in RR with some time quantum
+- Problem
+  - Starvation
+  - Deadlock
+- How to fix problems
+  - Dynamic Properties
+    - Adjust base-level priority up or down based on heuristicsabout interactivity, locking, burst behavior, etc…
+- How to implement fairness?
+  - Give each queue some fraction of the CPU
+  - Increase priority of jobs that don’t get service
+
+## 4.4. Lottery Scheduling
+
+### Definition
+
+- Give each job some number of lottery tickets
+- On each time slice, randomly pick a winning ticket
+- On average, CPU time is proportional to number of tickets given to each job
+
+### Tickets Assignment
+
+- SRTF: Short Running Jobs get more, long running jobs get fewer
+- to avoid starvation, every job gets at least one ticket
+
+<img src={img4e2aed6d.src} alt="" />
+
+### How to evaluate a scheduling algorithm?
+
+- Deterministic modeling
+- Queueing models
+- Implementation / Simulation
+
+## 4.6. What if We Knew the Future?
+
+### Algorithms
+
+- Shortest Job First (SJF)
+- Shortest Remaining Time First (SRTF)
+  - Sometimes called “Shortest Remaining Time to Completion First” (SRTCF)
+
+### Discussion
+
+SJF / SRTF are the best you can do at minimizing average response time
+
+- **Provably optimal** !
+
+- SRTF is always at least as good as SJF, we focus on it.
+
+- Comparison of SRTF with FCFS
+
+  - What if all jobs the same length?
+    - SRTF becomes the same as FCFS (i.e. FCFS is best can do if all jobs the same length)
+  - What if jobs have varying length?
+    - SRTF: short jobs not stuck behind long ones
+
+- Benefits of SRTF
+
+  <img src={img265f10c5.src} alt="" />
+
+<img src={imgd1185107.src} alt="" />
+
+- Starvation
+  - **SRTF can lead to starvation if many small jobs!**
+  - Large jobs never run
+- Somehow need to predict future
+  - Some systems ask the user
+- SRTF Pros & Cons
+  - Pros: Optimal (average response time)
+  - Cons: Hard to predict future; unfair
+
+### Predicting the length of the next CPU burst
+
+- Adaptive: Changing policy based on past behavior
+  - CPU scheduling, in virtual memory, in file systems, etc
+  - Works because programs have predictable behavior
+    - If program was I/O bound in past, likely in future
+    - If computer behavior were random, wouldn’t help
+
+## 4.7. Multi-level Queue
+
+- Ready queue partitioned into separate queues
+  - e.g. system processes. foreground(interactive), background(batch), student processes…
+- Each queue has its own scheduling algorithm
+  - e.g. foreground(RR), background(FCFS)
+- Processes assigned to one queue permanently
+- Scheduling must be done between the queues
+  - Fixed priority
+  - Time slice: Each queue get some CPU time that it schedules
+
+### Multilevel Feedback Queue
+
+- **Multilevel queue, each with different priorities**
+  - Higher priority queue ofter considered “foreground” tasks
+- **Each queue has its own scheduling algorithm**
+  - e.g., Foreground - RR, background - FCFS
+- **A process can move between the queues**
+  - Aging can be implemented this way
+- Parameters for a multilevel feedback queue scheduler
+  - Number of queues
+  - Scheduling algorithm for each queue
+  - Method used to determine
+    - When to upgrade a process
+    - When to demote a process
+    - Which queue a process will enter when that process needs services
+- **Scheduling must be done between the queues**
+  - Fixed priority scheduling
+  - Time slice
+  - Countermeasure: user action that can ruin intent for the OS designers
+
+### Linux O(1) Scheduler
+
+Priority-based scheduler: 140 priorities
+
+- 40 for User Tasks
+- 100 for Real-time/Kernel
+- Lower priority value → Higher priority
+- All algorithms $O(1)$: schedule n processes in constant time
+  - compute time-slices/priorities/interactivity credits when job finishes time slice
+  - 140-bit bit mask indicates presence or absence of job(s) at given priority level
+
+Two separate priority queues (arrays)
+
+- Active
+- Expired
+- All tasks in the active queue use up their time slices and get placed on the expired queue, after which queue swapped
+
+Time slice depends on priority - linearly mapped onto time slice range
+
+- Like multi-level queue (one queue per priority) with different time slice at each level
+- Execution split into “Time slice Granularity” chunks — RR through priority
+
+Heuristics
+
+- User-task priority adjusted ±5 based on heuristics
+  - `p -> sleep_avg = sleep_time - run_time`
+  - Higher `sleep_avg` → more I/O bound the task, more reward
+- Interactive Credit
+  - Earned when task sleeps for “long” time, Spend when task runs for “long” time
+  - IC is used to provide hysteresis to avoid changing interactivity for temporary changes in behavior
+- BUT, interactive tasks get special dispensation
+  - To try to maintain interactivity
+  - Placed back into active queue, unless another track has starved for too long..
+
+Real-Time tasks
+
+- Always preempt non-RT tasks and no dynamic adjustment of priorities
+- Scheduling schemes
+  - `SCHED_FIFO`: preempts other tasks, no timeslice limit
+  - `SCHED_RR`: preempts normal tasks, RR scheduling amongst tasks of same priority
+
+## 4.8. Real-Time Scheduling
+
+Efficiency is important but **predictability** is essential
+
+- Hard real-time computing
+  - Attempt to meet all deadlines
+  - EDF (earliest deadline first), LLF (least laxity first)
+  - RMS (Rate-Monotonic Scheduling), DM (Deadline Monotonic Scheduling)
+- Soft real-time computing
+  - Attempt to meed deadlines with high probability
+  - Minimize miss ratio / Maximize completion ratio
+  - CBS (Constant Bandwidth Server)
+
+### Issues in Real-Time Scheduling
+
+- Dispatch Latency
+- Priority Inversion and Inheritance
+  - priority inversion: Higher priority process needs kernel resource currently being used by another lower priority process, thus Higher priority process must wait
+  - Priority inheritance (Solution of Priority inversion): Low priority process now inherits high priority until it has completed use of the resource in question.
+
+## 4.9. EDF (Earliest Deadline FIrst)
+
+- Tasks **periodic** with period $P$ and computation $C$ in each period: $(P_i, C_i)$ for each task $i$
+
+- Preemptive priority-based dynamic scheduling:
+
+  - Each task is assigned a (current) priority based on how close the absolute deadline is (i.e. $D^{t+1} = D_i^t + P_i$ for each task!)
+  - **The scheduler always schedules the active task with the closest absolute deadline**
+
+  <img src={imgf4d85912.src} alt="" />
+
+  - Schedulable when $\sum_{i=1}^n(\frac{C_i}{P_i})\leq 1$
+
+<img src={img6ef9cf00.src} alt="" />
+
+# 5. Address Translation
+
+## 5.1. Address & Address Space
+
+Definition: Set of accessible addresses and the state associated with them.
+
+What happens when processor reads or writes to an address?
+
+- Perhaps acts like regular memory
+- Perhaps causes I/O operation (Memory-mapped I/O)
+- Causes program to abort (segfault)?
+- Communicate with another program
+
+Virtualizing Resources：Why worry about Resources？
+
+为什么要担心内存共享？
+
+- 进程和/或内核的完整工作状态由其在内存（和寄存器）中的数据定义。
+- 因此，不能让不同的控制线程使用相同的内存。
+  - 物理上：两个不同的数据不能占用内存中的同一个位置。
+- 保护机制。
+  - 不希望不同的线程访问彼此的内存。
+
+## 5.2. Important Aspects of Memory Multiplexing
+
+### Protection
+
+- Prevent access to private memory of other processes
+  - Different pages of memory can be given special behavior (e.g., Read Only, Invisible to user programs, etc.)
+  - Kernel data protected from user programs
+  - Programs protected from themselves
+
+### Controlled Overlap
+
+- Separate state of threads should not collide in physical memory. Obviously, unexpected overlap
+  causes chaos!
+- Conversely, would like the ability to overlap when desired (for communication)
+
+### Translation
+
+- Ability to translate accesses from one address space (virtual) to a different one (physical)
+- When translation exists, processor uses virtual addresses, physical memory uses physical
+  addresses
+- Side effects:
+  - Can be used to avoid overlap
+  - Can be used to give uniform view of memory to programs
+
+Addresses is bounded to final valuesanywhere in this path
+
+- Depends on HW support
+- Also depends on OS
+
+<img src={img4055bd8e.src} alt="" />
+
+## 5.3. Simple B&B Method
+
+### Multi-programming (Version w/ Protection)——Base & Bound
+
+Can we protect programs from each other without translation?
+
+- Yes: use two special registers BaseAddr and LimitAddr to prevent user from straying outside designated area
+  - Cause error if user tries to access an illegal address
+- During switch, kernel loads new base/limit from PCB (Process Control Block)
+- User not allowed to change base/limit registers
+
+### Issue with simble B&B Method
+
+- Fragmentation problem over time
+  - Not every process is same size → memory becomes fragmented over time
+- Missing support for sparse address space
+  - Would like to have multiple chunks/program (Code, Data, Stack, Heap, etc)
+- Hard to do inter-process sharing
+  - Want to share code segments when possible
+  - Want to share memory between processes
+  - Helped by providing multiple segments per process
+
+## 5.4. Multi Segment Model
+
+- Segment map resides in processor
+  - **Segment number** mapped into **base/limit pair**
+  - Base added to offset to generate physical address
+  - Error check catches offset out of range
+- As many chunks of physical memory as entries
+  - Segment addressed by portion of virtual address
+  - However, could be included in instruction instead:
+    - x86 Example: mov [es:bx],ax
+
+<img src={imgd758e29e.src} alt="" />
+
+### Observations about Segmentation
+
+- Virtual address space has holes
+  - Segmentation efficient for **sparse address spaces**
+  - A correct program should never address gaps (except as mentioned in moment)
+    - If it does, trap to kernel and dump core
+- When it is OK to address outside valid range?
+  - This is how the stack and heap are allowed to grow
+  - For instance, stack takes fault, system automatically increases size of stack
+- Need protection mode in segment table
+  - For example, code segment would be read-only
+  - **Data and stack** would be **read-write** (stores allowed)
+  - Shared segment could be read-only or read-write
+- What must be saved/restored on context switch?
+  - Segment table stored in CPU, not in memory (small)
+  - Might store all of process’ memory onto disk when switched (called “**swapping**”)
+
+### Problems with Segmantation
+
+- Must fit variable-sized chunks into physical memory
+- May move processes multiple times to fit everything
+- Limited options for swapping to disk
+- **Fragmentation**: wasted space
+  - External: free gaps between allocated chunks
+  - Internal: don’t need all memory within allocated chunks
+
+## 5.5. Paging
+
+- Physical Memory in **Fixed Size Chunks**
+- Can use simple vector of bits to handle allocation: 00110001110001101 … 110010（BitMap）
+  - Each bit represents page of physical memory：1 → allocated, 0 → free
+- Typically have **small pages** (1K-16K)
+  - Consequently: need multiple pages/segment
+
+### How to implement Simple Paging
+
+- Page Table (One per process)
+  - Resides in physical memory
+  - Contains physical page and permission for each virtual page
+    - Permissions include: Valid bits, Read, Write, etc
+- Virtual address mapping
+  - Offset from Virtual address copied to Physical Address
+    - Example: 10 bit offset fi 1024-byte pages
+  - Virtual page # is all remaining bits
+    - Example for 32-bits: 32-10 = 22 bits, i.e. 4 million entries
+    - Physical page # copied from table into physical address
+- Check Page Table bounds and permissions
+
+### Where is page sharing used ?
+
+- The “kernel region” of every process has the same page table entries
+- Different processes running same binary!
+- User-level system libraries (execute only)
+- Shared-memory segments between different processes
+
+### Some Simple Security Measures
+
+- Address Space Randomization
+- Kernel address space isolation
+
+## 5.6. Multi-Level Translation
+
+Motivation：单层 Page Table 太大了，全部放在memory里很不方便。
+
+<img src={img1f1cab24.src} alt="" />
+
+# 6. Caching, TLB
+
+## 6.1. Page Table & Page Table Entry
+
+<img src={imga38a93e5.src} alt="" />
+
+### Two-level page table
+
+- Tree Of Page Tables: 10b-10b-12b pattern
+- Table Fixed Size（1024 Entries）
+  - On Context-Switch: Save single PageTablePtr Register
+- Valid bits on Page Table Entries
+  - Don’t need every 2nd-level table
+  - Even when exist, 2nd-level tables **can reside on disk** if not in use
+
+### Page Table Entry（PTE）
+
+Example：x86 PTE
+
+<img src={img99546d84.src} alt="" />
+
+- P: Present (same as “valid” bit in other architectures)
+- W: Writeable
+- U: User accessible
+- PWT: Page write transparent: external cache write-through
+- PCD: Page cache disabled (page cannot be cached)
+- A: Accessed: page has been accessed recently
+- D: Dirty (PTE only): page has been modified recently
+- PS: Page Size: PS=1 → 4MB page (directory only).
+- Bottom 22 bits of virtual address serve as offset
+
+### How to use PTE?
+
+1. Demand Paging
+   - Keep only active pages in memory
+   - Place others on disk and mark their PTEs invalid
+2. Copy on Write
+   - UNIX fork gives copy of parent address space to child
+     - Address spaces disconnected after child created
+   - How to do this cheaply?
+     - Make copy of parent’s page tables (point at same memory)
+     - **Mark entries in both sets of page tables as read-only**
+     - **Page fault on write creates two copies（只在需要 Write 的时候，再创建新的页面）**
+3. Zero Fill On Demand
+   - New data pages must carry no information (say be zeroed)
+   - Mark PTEs as invalid; page fault on use gets zeroed page
+   - Often, OS creates zeroed pages in background
+
+### Multi-level Translation: Segments + Pages
+
+What about a tree of tables?
+
+- Lowest level page table fi memory still allocated with bitmap
+- Higher levels often segmented
+
+## 6.2. Inverted Page Table
+
+<img src={img75f78204.src} alt="" />
+
+IA64: 64bit addresses: Six-level page table?
+
+- No! Too slow! Too Many Almost-Empty Tables
+- 核心问题：Physical memory may be much less than Virtual Memory allocated
+
+### Inverted Page Table
+
+Using a hash table
+
+- Called an “**Inverted Page Table**”
+- Size is **independent of virtual address space**
+- Directly related to amount of physical memory
+- Very attractive option for 64-bit address spaces
+  - PowerPC, UltraSPARC, IA64
+
+## 6.3. Address Translation Comparison
+
+<img src={imgf3bd712a.src} alt="" />
+
+MMU（内存管理单元）的位置和功能。
+
+MMU是位于处理器和内存系统之间的一个组件。当处理器发出读取虚拟地址的请求时，请求会通过MMU转发到缓存（再传递到内存）。一段时间后，内存系统会以物理地址的形式回复存储在该物理地址上的数据（这是通过虚拟地址到物理地址的转换得到的结果）。这个过程在缓存命中时非常快速，但在缓存未命中时会比较慢。
+
+那么MMU具体在做什么呢？在每次引用（指令获取、加载、存储）时，MMU会读取（多层级的）页表项，以获取物理帧或发生错误（FAULT）。这个过程会经过缓存再传递到内存，并且最终会读取或写入到物理位置上。
+
+简而言之，MMU的主要功能是实现虚拟地址到物理地址的转换。它通过查找页表来确定虚拟地址对应的物理地址，并将数据从物理地址读取或写入。这个过程中会使用缓存来提高访问速度，但如果在缓存中未找到对应的数据，则需要从内存中读取，这会比较慢。
+
+总结一下，MMU的作用是管理虚拟地址和物理地址之间的转换，并通过读取和写入物理位置来实现对内存的访问。它是处理器和内存系统之间的重要桥梁，对于实现高效的内存管理至关重要。
+
+## 6.4. TLB: Translation Look-Aside Buffer
+
+<img src={imge7642705.src} alt="" />
+
+### What TLB Organization Makes Sense?
+
+- Needs to be really fast
+  - **Critical path of memory access**
+    - In simplest view: before the cache
+    - Thus, this adds to access time (reducing cache speed)
+  - Seems to argue for Direct Mapped or Low Associativity
+- However, needs to have very few conflicts!
+  - With TLB, the Miss Time extremely high! (PT traversal)
+  - Cost of Conflict (Miss Time) is high
+  - Hit Time – dictated by clock cycle
+- Thrashing: continuous conflicts between accesses
+
+### Current Example: Memory Hierarchy
+
+Caches (all 64 B line size)
+
+- L1 I-Cache: 32 KiB/core, 8-way set assoc.
+- L1 D Cache: 32 KiB/core, 8-way set assoc., 4-5 cycles load-to-use, Writeback policy
+- L2 Cache: 1 MiB/core, 16-way set assoc., Inclusive, Write-back policy, 14 cycles latency
+- L3 Cache: 1.375 MiB/core, 11-way set assoc., shared across cores, Noninclusive victim cache, Write-back policy, 50-70 cycles latency
+
+TLB
+
+- L1 ITLB, 128 entries; 8-way set assoc. for 4 KB pages
+  - 8 entries per thread; fully associative, for 2 MiB / 4 MiB page
+- L1 DTLB 64 entries; 4-way set associative for 4 KB pages
+  - 32 entries; 4-way set associative, 2 MiB / 4 MiB page translations:
+  - 4 entries; 4-way associative, 1G page translations:
+- L2 STLB: 1536 entries; 12-way set assoc. 4 KiB + 2 MiB pages
+  - 16 entries; 4-way set associative, 1 GiB page translations:
+
+### What Happens on a Context Switch?
+
+- Invalidate TLB: simple but might be expensive
+  - What if switching frequently between processes
+- Include ProcessID in TLB
+  - This is an architectural solution: needs **hardware**
+
+What if translation tables change?
+
+- For example, to move page from memory to disk or vice versa…
+  - Must invalidate TLB entry!
+  - Otherwise, might think that page is still in memory!
+- Called “**TLB Consistency**”
+
+# 7. Demand Paging
+
+## 7.1. Page Fault
+
+### Definition
+
+The Virtual-to-Physical Translation fails
+
+- PTE marked invalid, Priv. Level Violation, Access violation, or does not exist
+  - Causes an Fault / Trap
+- **Not an interrupt** because synchronous to instruction execution
+  - May occur on instruction fetch or data access
+  - Protection violations typically terminate the instruction
+
+### Page Fault → Demand Paging
+
+<img src={img0b4e0390.src} alt="" />
+
+### Inversion of HW/SW Boundary
+
+硬件和软件边界的反转现象：在执行指令时，如果发生页面错误（Page Fault），操作系统的软件会介入并采取相应的措施来解决问题。这可能包括加载页面、创建页面、写时复制等操作，并更新页表项以确保后续的地址转换成功。然后，操作系统会重新启动或恢复指令的执行。这种反转现象在RISC（精简指令集计算机）指令集中是一个巨大的简化，但在x86指令集等复杂指令集中可能会更加复杂，因为指令可能会修改状态。
+
+## 7.2. Demand Paging
+
+- What “block size”? - 1 page (e.g, 4 KB)
+- What “organization” ie. direct-mapped, set-assoc., fullyassociative?
+  - Any page in any frame of memory,
+  - i.e., fully associative: arbitrary virtual → physical mapping
+- How do we locate a page?
+  - First check TLB, then page-table traversal
+- What is page replacement policy? (i.e. LRU, Random…)
+  - This requires more explanation… (kinda LRU)
+- What happens on a miss?
+  - Go to lower level to fill miss (i.e. disk)
+- What happens on a write? (write-through, write back)
+  - Definitely write-back – need dirty bit!
+
+<!-- TODO: 资源缺失，待从备份补回 -->
+（图片暂缺：原图文件待补回）
+
+Use main memory as “cache” for disk
+
+## 7.3. Illusion of Infinite Memory
+
+Transparent Level of Indirection (page table)
+
+<img src={img27ae7ce2.src} alt="" />
+
+## 7.4. Demand Paging Mechanisms
+
+PTE makes demand paging implementatable
+
+- Valid → Page in memory, PTE points at physical page
+- Not Valid → Page not in memory; use info in PTE to find it on disk when necessary
+
+### What does OS do on a Page Fault
+
+Choose an old page to replace
+
+- If old page modified (“D=1”), write contents back to disk
+- Change its PTE and any cached TLB to be invalid
+- Load new page into memory from disk
+- Update page table entry, invalidate TLB for new entry
+- Continue thread from original faulting location
+
+TLB for new page will be loaded when thread continued!
+
+### Some Questions
+
+During a page fault, where does the OS get a free frame?
+
+- Keeps a free list
+  - Unix runs a “reaper” if memory gets too full
+    - Schedule dirty pages to be written back on disk
+    - Zero (clean) pages which haven’t been accessed in a while
+  - As a last resort, evict a dirty page first
+- How can we organize these mechanisms?
+  - Work on the replacement policy
+- How many page frames/process?
+  - Like thread scheduling, need to “schedule” memory resources:
+    - Utilization? fairness? priority?
+  - Allocation of disk paging bandwidth
+
+操作系统通过维护一个空闲列表来管理可用的物理页帧。当内存空间不足时，Unix系统会运行一个“回收器”，将脏页面写回磁盘，并清除一段时间内未被访问的干净页面。作为最后的手段，如果没有空闲的干净页面，操作系统将优先驱逐一个脏页面。为了组织和管理这些机制，需要制定合适的替换策略。
+
+另外，还讨论了每个进程应分配多少个页帧的问题。类似于线程调度，需要对内存资源进行“调度”，考虑利用率、公平性和优先级等因素。此外，还需要合理分配磁盘分页带宽，以满足不同进程的需求。
+
+## 7.5. Cost Model
+
+<img src={img699d7567.src} alt="" />
+
+# 8. General I/O
+
+## 8.1. What about I/O?
+
+- Without I/O, computers are useless (disembodied brains?)
+- But… thousands of devices, each slightly different
+  - How can we **standardize the interfaces to these devices**?
+- Devices unreliable: media failures and transmission errors
+  - How can we **make them reliable**?
+- Devices unpredictable and/or slow
+  - How can we manage them if we don’t know what they will do or how they will perform?
+
+## 8.2. Visualize IO
+
+<img src={imgac292fb4.src} alt="" />
+
+<img src={img802b7877.src} alt="" />
+
+## 8.3. I/O Design
+
+### Operational Parameters for I/O
+
+- Data granularity: Byte vs. Block
+  - Some devices provide single byte at a time (e.g., keyboard)
+  - Others provide whole blocks (e.g., disks, networks, etc.)
+- Access pattern: Sequential vs. Random
+  - Some devices must be accessed sequentially (e.g., tape)
+  - Others can be accessed “randomly” (e.g., disk, cd, etc.)
+    - Fixed overhead to start transfers
+  - Some devices require continual monitoring
+  - Others generate interrupts when they need service
+- Transfer Mechanism: Programmed IO and DMA
+
+### The goal of the I/O Subsystem
+
+Provide Uniform Interfaces, Despite Wide Range of Different Devices
+
+### Standard Interfaces to Devices
+
+- **Block Devices**: e.g. disk drives, tape drives, DVD-ROM
+  - Access **blocks of data**
+  - Commands include `open()`, `read()`, `write()`, `seek()`
+  - Raw I/O or file-system access
+  - Memory-mapped file access possible
+- **Character Devices**: e.g. keyboards, mice, serial ports, some USB devices
+  - **Single characters at a time**
+  - Commands include `get()`, `put()`
+  - Libraries layered on top allow line editing
+- **Network Devices**: e.g. Ethernet, Wireless, Bluetooth
+  - Different enough from block/character to have own interface
+  - Unix and Windows include socket interface
+    - Separates network protocol from network operation
+    - Includes select() functionality
+  - Usage: pipes, FIFOs, streams, queues, mailboxes
+
+### How does User Deal with Timing
+
+- **Blocking Interface**: “Wait”
+  - When request data (e.g. `read()` system call), put process to sleep until data is ready
+  - When write data (e.g. `write()` system call), put process to sleep until device is ready for data
+- **Non-blocking Interface**: “Don’t Wait”
+  - Returns quickly from read or write request with count of bytes successfully transferred
+  - Read may return nothing, write may write nothing
+- **Asynchronous Interface**: “Tell Me Later”
+  - When request data, take pointer to user’s buffer, return immediately; later kernel fills buffer and notifies user
+  - When send data, take pointer to user’s buffer, return immediately; later kernel takes data and notifies user
+
+### Transferring Data to/from Controller
+
+- Programmed I/O:
+  - Each byte transferred via processor in/out or load/store
+  - Pro: Simple hardware, easy to program
+  - Con: Consumes processor cycles proportional to data size
+- **Direct Memory Access**:
+  - Give controller access to memory bus
+  - Ask it to transfer data blocks to/from memory directly
+- Sample interaction with DMA controller (from OSC book):
+
+<img src={imgd1ccf418.src} alt="" />
+
+<img src={imge0e646dd.src} alt="" />
+
+### I/O Device Notifying the OS
+
+- The OS needs to know when:
+  - The I/O device has completed an operation
+  - The I/O operation has encountered an error
+- **I/O Interrupt**:
+  - Device generates an interrupt whenever it needs service
+  - Pro: handles unpredictable events well
+  - Con: interrupts relatively high overhead
+- **Polling**:
+  - OS periodically checks a device-specific status register
+    - I/O device puts completion information in status register
+  - Pro: low overhead
+  - Con: may waste many cycles on polling if infrequent or unpredictable I/O operations
+- Actual devices combine both polling and interrupts
+  - For instance – High-bandwidth network adapter:
+    - Interrupt for first incoming packet
+    - Poll for following packets until hardware queues are empty
+
+### Device Drivers
+
+- **Device Driver**: Device-specific code in the kernel that interacts directly with the device hardware
+  - Supports a standard, internal interface
+  - Same kernel I/O system can interact easily with different device drivers
+  - Special device-specific configuration supported with the ioctl() system call
+- Device Drivers typically divided into two pieces:
+  - **Top half**: accessed in call path from system calls
+    - implements a set of **standard, cross-device calls** like open(), close(), read(), write(), ioctl(), strategy()
+    - This is the kernel’s interface to the device driver
+    - Top half will start I/O to device, may put thread to sleep until finished
+- **Bottom half**: run as interrupt routine
+  - Gets input or transfers next block of output
+  - May wake sleeping threads if I/O now complete
+
+# 9. File System
+
+## 9.1. File
+
+### File Concept
+
+Contiguous logical address space
+
+- OS abstracts from the physical properties of its storage device to define a logical storage unit called file
+- Persistent
+- OS maps files to physical devices
+
+Types: Data, Program, Documents
+
+### File Structure
+
+- None - sequence of words/bytes
+- Simple record structure
+- Complex structures
+- Can simulate last two with first method by inserting appropriate control
+  characters
+- Who decides? OS / Programs
+
+### File Attibutes
+
+- Name
+- Identifier
+- Type
+- Location
+- Size
+- Protection
+- Time, Date, User Identification
+- Information about files are kept in the directory structure, maintained on disk
+
+### File Operations
+
+- Create
+- Write
+- Read
+- Reposition within file - file seek
+- Delete
+- Truncate
+- Open/Close
+
+## 9.2. Directory
+
+### Information in a Device Directory
+
+- File name
+- File type
+- Address or location
+- Current length
+- Maximum length
+- Date created, last accessed, last updated
+- Owner ID, Protection Information
+
+### Operations Performed on Directory
+
+- Search for a file
+- Create a file
+- Delete a file
+- List a directory
+- Rename a file
+- Traverse the file system
+
+### Directory Organization
+
+Goals: **Efficiency**, **Naming**, **Grouping**
+
+## 9.3. File System
+
+### Components of a File System
+
+<img src={imge279ce34.src} alt="" />
+
+```mermaid
+graph LR
+  File_Name_Offset --Directory--> File_Number_Offset --Index_Structure--> Storage_Block
+```
+
+- Open performs **Name Resolution**
+  - **Translates pathname into a “file number”**
+  - Used as an “index” to locate the blocks
+    - Creates a file descriptor in PCB within kernel
+    - Returns a “handle” (another integer) to user process
+
+### Directory
+
+- Basically a hierarchical structure
+- Each directory entry is a collection of Files / Directories(A link to another entries)
+- Each has a name and attributes
+  - Files have data
+- Links (hard links) make it a **DAG**, not just a tree
+  - Softlinks (aliases) are another name for an entry
+
+<aside>
+💡 **Example**: How many disk accesses to resolve “/my/book/count”?
+
+
+- Read in file header for root (fixed spot on disk)
+- Read in first data block for root
+  - Table of file name/index pairs. Search linearly – ok since directories typically very small
+- Read in file header for “my”
+- Read in first data block for “my”; search for “book”
+- Read in file header for “book”
+- Read in first data block for “book”; search for “count”
+- Read in file header for “count”
+  </aside>
+
+- **Current working directory**: Per-address-space pointer to a directory (inode) used for resolving file names
+
+### File
+
+- Named permanent storage
+- Contains:
+  - Data
+    - Blocks on disk somewhere
+  - Metadata (Attributes)
+    - Owner, size, last opened, …
+    - Access rights
+      - R, W, X
+      - Owner, Group, Other (in Unix systems)
+      - Access control list in Windows system
+
+### In-Memory File System Structures
+
+<img src={img54248c73.src} alt="" />
+
+- Open system call:
+  - Resolves file name, finds **file control block (inode)**
+  - Makes entries in per-process and system-wide tables
+  - Returns index (called “file handle”) in open-file table
+- Read/write system calls:
+  - Use file handle to locate **inode**
+  - Perform appropriate reads or writes
+
+## 9.4. Our First FileSystem: FAT
+
+### FAT: File Allication Table
+
+- Assume (for now) we have a way to translate a path to a “file number”
+  - i.e., a directory structure
+- Disk Storage is a collection of Blocks
+  - Just hold file data:
+  - offset `o = < B, x >`
+- E.g.,: `file_read 31, < 2, x >`
+  - Index into FAT with file number
+  - Follow linked list to block
+  - Read the block from disk into memory
+
+<img src={img4b380752.src} alt="" />
+
+### FAT Properties
+
+- File is collection of disk blocks
+- FAT is linked list 1-1 with blocks
+- File Number is index of root of block list for the file
+- File offset (`o = < B, x >`)
+- Follow list to get block #
+- Unused blocks → Marked free (no ordering, must scan to find)
+- E.g. `file_write(31, < 3, y >)`
+  - Grab free block
+  - Linking them into file
+- Grow file by allocating free blocks and linking them in
+
+<img src={img497df756.src} alt="" />
+
+### FAT Assessment
+
+FAT32 (32 instead of 12 bits) used in Windows, USB drives, SD…
+
+- Where is FAT stored?
+  - On Disk, on boot cache in memory, second (backup) copy on disk
+- What happens when you format a disk?
+  - Zero the blocks, Mark FAT entries “free”
+- What happens when you quick format a disk?
+  - Mark all entries in FAT as free
+- Simple
+  - Can implement in device firmware
+
+### FAT Directories
+
+Directory is a file containing `<file_name: file_number>` mappings
+
+- Free space for new/deleted entries
+- In FAT: file attributes are kept in directory (!!!)
+- Each directory is a linked list of entries
+
+Where do you find root directory ( “/” )?
+
+- **At well-defined place on disk**
+- For FAT, this is at block 2 (there are no blocks 0 or 1)
+- Remaining directories are accessed via their file_number
+
+### FAT Security Holes
+
+- FAT has no access rights
+- FAT has no header in the file blocks
+- Just gives an index into the FAT to read data
+
+## 9.5. Unix File System
+
+### Intro
+
+- Original inode format appeared in BSD 4.1
+  - Berkeley Standard Distribution Unix
+  - Similar structure for Linux Ext2/3
+- File Number is index into inode arrays
+- Multi-level index structure
+  - Great for little and large files
+  - Asymmetric tree with fixed sized blocks
+- Metadata associated with the file
+  - Rather than in the directory that points to it
+- UNIX Fast File System (FFS) BSD 4.2 Locality Heuristics:
+  - Block group placement
+  - Reserve space
+- Scalable directory structure
+
+### Inode Structure
+
+<img src={img8535bbb0.src} alt="" />
+
+### UNIX BSD 4.2 Problem 1
+
+When create a file, don’t know how big it will become (in UNIX, most writes are by appending)
+
+- How much contiguous space do you allocate for a file?
+- In BSD 4.2, just find some range of free blocks
+- Put each new file at the front of different range
+- To expand a file, you first try successive blocks in bitmap, then choose new range of blocks
+  - Also in BSD 4.2: store files from same directory near each other
+
+### UNIX BSD 4.2 Problem 2
+
+Missing blocks due to rotational delay
+
+> Issue: Read one block, do processing, and read next block. In meantime, disk has continued turning: missed next block! Need 1 revolution/block!
+
+- Solution1: Skip sector positioning (“interleaving”)
+  - Place the blocks from one file on every other block of a track: give time for processing to overlap rotation
+  - Can be done by OS or in modern drives by the disk controller
+- Solution 2: Read ahead: read next block right after first, even if application hasn’t asked for it yet
+  - This can be done either by OS (read ahead)
+  - By disk itself (track buffers) - many disk controllers have internal RAM that allows them to read a complete track
+
+## 9.6. Links
+
+### Hard link
+
+- Sets another directory entry to contain the file number for the file
+- Creates another name (path) for the file
+- Each is “first class”
+
+### Soft link (or Symbolic Link or Shortcut)
+
+- Directory entry contains the path and name of the file
+- Map one name to another name
+
+## 9.7. NTFS
+
+- New Technology File System (NTFS)
+  - Default on Microsoft Windows systems
+- **Variable length extents**
+  - Rather than fixed blocks
+- Everything (almost) is a sequence of `attribute:value` pairs
+  - Meta-data and data
+- Mix direct and indirect freely
+- Directories organized in **B-tree structure** by default
+- Master File Table
+  - Database with Flexible 1KB entries for metadata/data
+  - Variable-sized attribute records (data or metadata)
+  - Extend with variable depth tree (non-resident)
+- Extents – variable length contiguous regions
+  - Block pointers cover runs of blocks
+  - Similar approach in Linux (ext4)
+  - File create can provide hint as to size of file
+- journaling for reliability
+
+<img src={img70af4057.src} alt="" />
+
+<img src={imgfd79f7df.src} alt="" />
+
+<img src={imgc6a827cc.src} alt="" />
+
+## 9.8. Memory Mapped Files
+
+- Traditional I/O involves explicit transfers between buffers in process address space to/ from regions of a file
+  - This involves multiple copies into caches in memory, plus system calls
+- What if we could “map” the file directly into an empty region of our address space
+  - Implicitly “page it in” when we read it
+  - Write it and “eventually” page it out
+- Executable files are treated this way when we exec the process!!
+
+<img src={img597dd60b.src} alt="" />
+
+## 9.9. File System Caching
+
+- Key Idea: Exploit locality by caching data in memory
+  - Name translations: Mapping from paths → inodes
+  - Disk blocks: Mapping from block address → disk content
+- **Buffer Cache**: Memory used to cache kernel resources, including disk blocks and name translations
+  - Can contain “dirty” blocks (blocks yet on disk)
+- Replacement policy? LRU
+  - Can afford overhead of timestamps for each disk block
+  - Advantages:
+    - Works very well for name translation
+    - Works well in general as long as memory is big enough to accommodate a host’s working set of files.
+  - Disadvantages:
+    - Fails when some application scans through file system, thereby flushing the cache with data used only once
+    - E.g., : `find . –exec grep foo {} \;`
+- Other Replacement Policies?
+  - Some systems allow applications to request other policies
+  - E.g., ‘Use Once’:
+    - File system can discard blocks as soon as they are used
+- Cache Size: How much memory should the OS allocate to the buffer cache vs virtual memory?
+  - Too much memory to the file system cache → won’t be able to run many applications at once
+  - Too little memory to file system cache → many applications may run slowly (disk caching not effective)
+  - Solution: **adjust boundary dynamically** so that the disk access rates for paging and file access are balanced
+- Read Ahead Prefetching: **fetch sequential blocks early**
+  - Key Idea: exploit fact that most common file access is sequential by prefetching subsequent disk blocks ahead of current read request (if they are not already in memory)
+  - Elevator algorithm can efficiently interleave groups of prefetches from
+    concurrent applications
+  - How much to prefetch?
+    - Too many imposes delays on requests by other applications
+    - Too few causes many seeks (and rotational delays) among concurrent file requests
+- Delayed Writes: **Writes to files not immediately** sent out to disk
+  - Instead, `write()` copies data from user space buffer to kernel buffer (in
+    cache)
+      - Enabled by presence of buffer cache: can leave written file blocks in cache
+        for a while
+      - If some other application tries to read data before written to disk, file system
+        will read from cache
+- Flushed to disk periodically (e.g. in UNIX, every 30 sec)
+- Advantages:
+  - Disk scheduler can efficiently order lots of requests
+  - Disk allocation algorithm can be run with correct size value for a file
+  - Some files need never get written to disk! (e..g temporary scratch files written
+    `/tmp` often don’t exist for 30 sec)
+- Disadvantages
+  - What if system crashes before file has been written out?
+  - Worse yet, what if system crashes before a directory file has been written
+    out? (lose pointer to inode!)
+
+## 9.10. Important Ilities
+
+- **Availability**: the probability that the system can accept and process requests
+  - Often measured in “nines” of probability. So, a 99.9% probability is considered “3-nines of availability”
+  - Key idea here is independence of failures
+- **Durability**: the ability of a system to recover data despite faults
+  - This idea is fault tolerance applied to data
+  - Doesn’t necessarily imply availability: information on pyramids was very durable, but could not be accessed until discovery of Rosetta Stone
+- **Reliability**: the ability of a system or component to perform its required functions under stated conditions for a specified period of time (IEEE definition)
+  - Usually stronger than simply availability: means that the system is not only “up”, but also working correctly
+  - Includes availability, security, fault tolerance/durability
+  - Must make sure data survives system crashes, disk crashes, other problems

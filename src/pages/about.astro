@@ -3,25 +3,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../lib/site';
 ---
 
-<BaseLayout title="About" description="Placeholder about page for the Astro rebuild.">
+<BaseLayout title="About" description="About page rebuilt from the legacy Hexo about stub and current site profile.">
   <section class="shell pb-20">
-    <div class="content-shell md:mx-0 md:px-0">
+    <div class="content-shell md:mx-0 md:max-w-[820px] md:px-0">
       <p class="section-kicker">Profile</p>
       <h1 class="mb-6">About</h1>
+      <img
+        class="mb-8 w-full rounded-3xl border border-border object-cover"
+        src="/imgs/IC_Cover.jpg"
+        alt="Legacy banner image from the Hexo about page"
+      />
       <div class="space-y-4 text-muted">
         <p>
-          Hypoxanthine He is currently represented here with placeholder copy for the Prompt B skeleton. The long-form
-          biography will be rewritten after the content migration step.
+          旧 Hexo 站的 <code>about/index.md</code> 只保留了页面标题、layout 标记和这张横幅图，因此这里沿用该图像作为历史入口，
+          并保留当前 Astro 站的最小个人介绍框架。
         </p>
         <p>
-          Current placeholder frame: graduate student at ShanghaiTech University, broadly interested in Cryo-GPU
-          systems, research tooling, and computational workflows that connect theory with usable infrastructure.
+          Hypoxanthine He is currently focused on research tooling, GPU-adjacent systems, and long-form writing that
+          sits between literary essays and technical notes.
         </p>
         <p>
-          Contact links for the rebuilt site stay intentionally minimal:
+          联系方式保持最小化：
           <a class="inline-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
-          and
-          <a class="inline-link" href={`mailto:${siteConfig.email}`}>Email</a>.
+          和
+          <a class="inline-link" href={`mailto:${siteConfig.email}`}>Email</a>。
         </p>
       </div>
     </div>

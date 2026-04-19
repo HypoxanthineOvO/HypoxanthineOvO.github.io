@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
+import katexCss from 'katex/dist/katex.min.css?raw';
+
 import Prose from '../components/Prose.astro';
 import TOC from '../components/TOC.astro';
 import TagList from '../components/TagList.astro';
@@ -17,9 +19,11 @@ interface Props {
 
 const { entry, Content, headings, newer, older } = Astro.props;
 const metaDescription = entry.data.description ?? 'Note detail page';
+const katexStyles = katexCss;
 ---
 
 <BaseLayout title={entry.data.title} description={metaDescription}>
+  <style slot="head" is:inline set:html={katexStyles} />
   <TOC headings={headings} />
 
   <article class="shell pb-20">

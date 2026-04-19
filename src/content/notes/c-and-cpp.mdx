@@ -1,0 +1,97 @@
+---
+title: "【环境配置】C 与 C++ 的编译环境"
+date: 2024-02-26
+description: "写在前面 环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。 关于比较完整的，适合上课使用的 C&C++ 环境配置，可以参考视频 。这里对其内容做一个梳理和总结，方便懒得看视频的同学。 常用术语 编辑器：用于编辑代码文本的工具。 On Windows：记事本，VS Code...... On Lin"
+tags:
+  - "tooling-notes"
+---
+
+import img2319b43b from "../../assets/images/c-and-cpp/env.png";
+import imgaaecd634 from "../../assets/images/c-and-cpp/env2.png";
+import img35bc6727 from "../../assets/images/c-and-cpp/env3.png";
+
+# 写在前面
+环境配置确实是一个非常痛苦的问题，经常能遇到让人感觉摸不着头脑的问题。
+
+关于比较完整的，适合上课使用的 C&C++ 环境配置，可以参考视频 [GKxx: C/C++环境配置](https://www.bilibili.com/video/BV1id4y1n7Kw/?spm_id_from=333.337.search-card.all.click&vd_source=3bbc7395fdcea11b679cb15cd7812635)。这里对其内容做一个梳理和总结，方便懒得看视频的同学。
+
+# 常用术语
+- 编辑器：用于编辑代码文本的工具。
+  - On Windows：记事本，VS Code......
+  - On Linux：Vim，Emacs......
+- 编译器：用于**将源代码转换为可执行文件（“计算机能看懂的代码”）**的工具。
+  - On Windows：MSVC
+  - On Linux：GCC, Clang
+- IDE（Integrated Development Environment）：集成开发环境，包含编辑器、编译器、调试器等工具。
+  - On Windows：Visual Studio......
+  - On Linux：CLion, Eclipse......
+
+# Compiler On Linux（以 Ubuntu 为例）
+Linux 上我们一般使用 gcc 编译器，它是 GNU Compiler Collection 的缩写，是一个由 GNU 开发的编程语言编译器。
+
+## 默认版本的安装
+以 Ubuntu 为例，我们通常直接使用系统自带的 `apt` 工具来安装软件：
+```bash
+sudo apt update # 更新软件源。
+sudo apt install build-essential # Build-essential 是一个包，包含了编译器、链接器等工具。
+```
+
+然后我们可以查看安装是否成功：
+```bash
+gcc --version
+```
+
+如果安装成功，会显示类似如下的信息：
+```bash
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+## gcc-11 的安装
+我们可以通过添加软件源的方式来安装 gcc-11：
+```bash
+sudo apt-add-repository ppa:ubuntu-toolchain-r/test
+sudo apt install gcc-11 g++-11
+```
+
+# Compiler On Windows（MingW）
+Windows 不能直接使用 gcc，但我们可以安装 MinGW（**Min**imalist **G**NU for **W**indows）来使用 gcc。
+
+事实上，由于 MinGW 已经很久没有更新了，所以我们一般使用 MinGW-w64，它是 MinGW 的一个分支，支持 64 位系统。
+
+## 下载与解压
+我们在 [Winlibs](https://winlibs.com/) 中进行下载：
+- 在 **Download** 下选择 **UCRT runtime** 中标有 **(LATEST)** 的那个 release 里的 Win64 Zip archive（建议选带有 LLVM/Clang 的）
+- [GCC 12.2.0 + Clang 15.0.7 + MinGW-w64 10.0.0 (UCRT) release 64, Win64 Zip](https://github.com/brechtsanders/winlibs_mingw/releases/download/12.2.0-15.0.7-10.0.0-ucrt-r4/winlibs-x86_64-posix-seh-gcc-12.2.0-llvm-15.0.7-mingw-w64ucrt-10.0.0-r4.zip)
+- 解压后将 `mingw64` 这个文件夹放在 C 盘或 D 盘，**路径最好简单一点，不要给自己找麻烦**，例如 `C:\mingw64` 或者 `D:\mingw64`。
+
+## 环境变量的配置
+- 按 `Win` 键，输入 `env`（或者在 `此电脑` 上右键，选择 `属性`，然后选择 `高级系统设置`，再选择 `环境变量`），即可看到
+  <img src={img2319b43b.src} alt="" />
+  
+  点击它，进入编辑界面
+
+- 通过编辑 `Path`：
+  
+  <img src={imgaaecd634.src} alt="" />
+
+- 新建一个环境变量，输入 `mingw64\bin` 的绝对路径（在文件管理器中复制路径，然后粘贴到这里），类似于：
+  <img src={img35bc6727.src} alt="" />
+
+## 测试
+在命令行中输入 `gcc --version`，如果出现类似的信息：
+```powershell
+gcc.exe (MinGW-W64 x86_64-ucrt-posix-seh，built by Brecht Sanders) 12.2.0
+Copyright (C) 2022 Free Software Foundation， Inc.
+This is free software; see the source for copying
+conditions.There is NO
+warranty; not even for MERCHANTABILITY OP FITNESS FOR A PARTICULAR PURPOSE
+```
+
+# Compiler On Windows（Visual Studio）
+个人不推荐使用 Visual Studio：
+1. VS 在只需要写一些小程序的初学阶段并不好用，会掩盖程序编译执行的一些非常基础的细节
+2. VS 的安装包非常大，而且安装过程非常繁琐
+
+如果你一定要使用 VS，这里贴个教程：[VS On Windows的安装](https://zhuanlan.zhihu.com/p/71110525)
