@@ -21,3 +21,13 @@ export const socialLinks = [
   { href: siteConfig.github, label: 'GitHub' },
   { href: `mailto:${siteConfig.email}`, label: 'Email' },
 ];
+
+export const knownTags = [
+  'literary-essay',
+  'creative-writing',
+  'gpu-research',
+  'lecture-notes',
+  'tooling-notes',
+  'engineering-practice',
+  'course-material',
+] as const;

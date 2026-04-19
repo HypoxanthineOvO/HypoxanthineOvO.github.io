@@ -406,6 +406,11 @@
     color: #d5a8ff;
   }
 
+  .status-badge--tag-type {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
   .prose-content {
     @apply font-serif text-base;
     color: var(--text);

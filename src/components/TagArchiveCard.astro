@@ -1,0 +1,39 @@
+---
+import TagList from './TagList.astro';
+
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  date: Date;
+  tags: string[];
+  type: 'post' | 'note';
+}
+
+const { href, title, description, date, tags, type } = Astro.props;
+
+const typeLabel = type === 'post' ? '文章' : '笔记';
+const formattedDate = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(date);
+---
+
+<article class="border-b border-border py-6 last:border-b-0">
+  <div class="mb-2 flex flex-wrap items-center gap-3 font-sans text-xs tracking-[0.16em] text-muted">
+    <span>{formattedDate}</span>
+    <span class="status-badge status-badge--tag-type">{typeLabel}</span>
+  </div>
+
+  <h3 class="mb-2 text-[1.25rem]">
+    <a class="transition-colors duration-150 hover:text-accent" href={href}>
+      {title}
+    </a>
+  </h3>
+
+  {description && <p class="mb-3 text-[0.98rem] text-muted">{description}</p>}
+
+  <TagList tags={tags} mode={type} linkToTags={false} />
+</article>
