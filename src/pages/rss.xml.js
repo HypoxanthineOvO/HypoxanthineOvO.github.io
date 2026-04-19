@@ -24,7 +24,7 @@ export async function GET(context) {
 
   return rss({
     title: `${siteConfig.title} RSS`,
-    description: 'Yunxiang He 的文章与笔记更新。',
+    description: siteConfig.description,
     site: context.site ?? siteConfig.site,
     customData: `<language>zh-CN</language><author>${siteConfig.author}</author>`,
     items,

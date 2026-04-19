@@ -1,10 +1,11 @@
 export const siteConfig = {
   site: 'https://hypoxanthineovo.github.io',
   title: 'Hypoxanthine',
-  description: '何云翔的个人站点，收录文章、笔记、发表与 Hypo-* 项目。',
+  description: 'ShanghaiTech VSPLab 研究生，方向 Cryo Computing × AI Acceleration。也写一些非技术的东西。',
   author: 'Yunxiang He',
   tagline: 'Hypoxanthine (Yunxiang He)',
-  email: 'contact@hypoxanthine.cn',
+  subtitle: 'ShanghaiTech · VSPLab · Cryo Computing × AI Acceleration',
+  email: 'hyx021203@163.com',
   github: 'https://github.com/HypoxanthineOvO',
   avatar: '/avatar.jpg',
 };

@@ -3,48 +3,81 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../lib/site';
 ---
 
-<BaseLayout title="关于" description="Yunxiang He / Hypoxanthine 的简要介绍。">
+<BaseLayout title="关于" description="ShanghaiTech VSPLab 研究生，方向 Cryo Computing × AI Acceleration。也写一些非技术的东西。">
   <section class="shell pb-20">
     <div class="content-shell md:mx-0 md:max-w-[820px] md:px-0">
-      <p class="section-kicker">关于</p>
-      <h1 class="mb-6">Yunxiang He / Hypoxanthine</h1>
-      <div class="mb-8 flex flex-col gap-6 md:flex-row md:items-start">
+      <div class="mb-10 flex flex-col gap-6 md:flex-row md:items-start">
         <img
           class="h-40 w-40 rounded-full border border-border object-cover"
           src={siteConfig.avatar}
-          alt="Yunxiang He avatar"
+          alt="贺云翔头像"
           width="160"
           height="160"
           loading="eager"
         />
-        <div class="flex-1 space-y-4 text-muted">
-          <p>
-            真名是 Yunxiang He，公开写作和项目生态里长期使用的网名是 Hypoxanthine。这个页面目前仍是轻量版介绍，用来承接
-            旧 Hexo 站里仅存的 about stub，并为后续正式 bio 留位置。
-          </p>
-          <p>
-            研究兴趣集中在 GPU 邻近系统、神经渲染硬件、研究工作流，以及技术写作与文学写作之间的交叉地带。学术发表统一使用
-            Yunxiang He，GitHub handle 继续保留为 HypoxanthineOvO。
-          </p>
-          <p>
-            联系方式：
-            <a class="inline-link" href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a>
-            /
-            <a class="inline-link" href={`mailto:${siteConfig.email}`}>Email</a>
-          </p>
-        </div>
-      </div>
 
-      <div class="space-y-4 text-muted">
-        <p>
-          旧 Hexo 站的 <code>about/index.md</code> 只留下了页面标题、layout 标记和一张横幅图，本轮没有强行扩写成长传记，而是先把真实署名、
-          头像入口和基本身份信息补齐。
-        </p>
-        <img
-          class="w-full rounded-3xl border border-border object-cover"
-          src="/imgs/IC_Cover.jpg"
-          alt="Legacy banner image from the Hexo about page"
-        />
+        <div class="flex-1 space-y-10">
+          <div class="space-y-4 text-muted">
+            <h1>关于我</h1>
+
+            <p>
+              你好，我是 <strong>贺云翔（Yunxiang He）</strong>，网名 <strong>Hypoxanthine</strong>。目前在 ShanghaiTech 的{' '}
+              <strong>VSPLab</strong>（导师 Xin Lou）读研。
+            </p>
+
+            <p>
+              本科期间我做过一段神经渲染方向的工作，主要围绕 NeRF 与 3D Gaussian Splatting
+              ——简单说，是琢磨怎么让那些&quot;看起来像魔法&quot;的渲染方法真的能跑得动、跑得快。研究生阶段我的方向已经转向{' '}
+              <strong>Cryo Computing × AI Acceleration</strong>，关注冷冻计算与 AI 硬件加速的交叉点上还能做些什么。
+            </p>
+
+            <p>
+              技术之外，我喜欢自己搭东西。右边 Projects 里列的十几个 <strong>Hypo-*</strong> 项目——从记账、表情包抠图、乒乓球数据系统，到面向个人的 LLM 入口和内网 AI 编程助手——大多是从某个具体的不爽或一闪而过的好奇心开的坑。有的稳定运行，有的长期 WIP，很少能写进简历，但它们构成了我&quot;日常在折腾什么&quot;的实际切面。
+            </p>
+
+            <p>
+              我也写一点技术之外的东西。读文字、写散文、偶尔做点小设计。这个博客的分区反映了这件事：一边是研究与工程（论文笔记、组会 PPT、课程讲义、工具笔记），一边是随笔与练习（婉约词、创作习作）。两边的比例会随阶段变化，但我希望两边都一直在。
+            </p>
+
+            <p>我倾向于长期地、可追溯地、肯留下痕迹地工作。这个站点就是其中一份痕迹。</p>
+          </div>
+
+          <div class="space-y-4 text-muted">
+            <h2>在哪里找到我</h2>
+            <ul class="space-y-3">
+              <li>
+                <strong>GitHub</strong> <span aria-hidden="true">—</span>{' '}
+                <a class="inline-link" href={siteConfig.github} target="_blank" rel="noreferrer">
+                  HypoxanthineOvO
+                </a>
+              </li>
+              <li>
+                <strong>邮箱</strong> <span aria-hidden="true">—</span>{' '}
+                <a class="inline-link" href={`mailto:${siteConfig.email}`}>
+                  {siteConfig.email}
+                </a>
+              </li>
+              <li>
+                <strong>发表</strong> <span aria-hidden="true">—</span>{' '}
+                <a class="inline-link" href="/publications">
+                  /publications
+                </a>
+              </li>
+              <li>
+                <strong>项目</strong> <span aria-hidden="true">—</span>{' '}
+                <a class="inline-link" href="/projects">
+                  /projects
+                </a>
+              </li>
+              <li>
+                <strong>RSS</strong> <span aria-hidden="true">—</span>{' '}
+                <a class="inline-link" href="/rss.xml">
+                  /rss.xml
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
