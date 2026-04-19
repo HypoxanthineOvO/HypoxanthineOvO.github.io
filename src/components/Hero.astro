@@ -1,5 +1,12 @@
 ---
+import { GitBranch, Mail } from '@lucide/astro';
+
 import { siteConfig, socialLinks } from '../lib/site';
+
+const iconMap = {
+  GitHub: GitBranch,
+  Email: Mail,
+} as const;
 ---
 
 <section class="grid gap-8 pb-10 pt-6 md:grid-cols-[180px_minmax(0,1fr)] md:items-center">
@@ -9,22 +16,27 @@ import { siteConfig, socialLinks } from '../lib/site';
 
   <div>
     <p class="section-kicker">Landing</p>
-    <h1 class="mb-4">Hypoxanthine</h1>
-    <p class="mb-4 font-sans text-lg text-text">{siteConfig.tagline}</p>
+    <h1 class="mb-4 font-bold tracking-[-0.02em]">Hypoxanthine</h1>
+    <p class="mb-4 font-sans text-[1.125rem] font-medium leading-[1.6] text-accent">{siteConfig.tagline}</p>
     <div class="space-y-2 text-[1.03rem] text-muted">
       <p>Graduate student at ShanghaiTech University, working around Cryo-GPU systems, research workflows, and computational tools.</p>
       <p>This site separates longer posts, quick notes, publications, and the Hypo-* project ecosystem into a single minimal archive.</p>
       <p>The current copy is placeholder text for Prompt B and will be revised once the migration pass lands.</p>
     </div>
     <p class="mt-5 flex flex-wrap items-center gap-3 font-sans text-sm">
-      {socialLinks.map((link, index) => (
-        <>
-          {index > 0 && <span class="text-muted">/</span>}
-          <a class="inline-link" href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-            {link.label}
-          </a>
-        </>
-      ))}
+      {socialLinks.map((link, index) => {
+        const Icon = iconMap[link.label as keyof typeof iconMap];
+
+        return (
+          <>
+            {index > 0 && <span class="text-muted">·</span>}
+            <a class="social-link" href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+              {Icon && <Icon size={16} stroke-width={1.8} aria-hidden="true" />}
+              {link.label}
+            </a>
+          </>
+        );
+      })}
     </p>
   </div>
 </section>

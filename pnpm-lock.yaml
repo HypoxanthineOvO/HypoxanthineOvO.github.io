@@ -35,6 +35,9 @@ importers:
       '@fontsource/source-serif-4':
         specifier: ^5.2.9
         version: 5.2.9
+      '@lucide/astro':
+        specifier: ^1.8.0
+        version: 1.8.0(astro@5.18.1(@types/node@24.12.2)(jiti@1.21.7)(rollup@4.60.2)(typescript@5.9.3)(yaml@2.8.3))
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@3.4.17)
@@ -669,6 +672,11 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@lucide/astro@1.8.0':
+    resolution: {integrity: sha512-ZrzTu1L8b2XEA/hfCB0ZqTCQN3BXjvomuSaTHJzIBDFggOUTyzw55/klEo6tDFSl54d0KQTvcI1qJ7RgAVuCyg==}
+    peerDependencies:
+      astro: ^4 || ^5 || ^6
 
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
@@ -3061,6 +3069,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@lucide/astro@1.8.0(astro@5.18.1(@types/node@24.12.2)(jiti@1.21.7)(rollup@4.60.2)(typescript@5.9.3)(yaml@2.8.3))':
+    dependencies:
+      astro: 5.18.1(@types/node@24.12.2)(jiti@1.21.7)(rollup@4.60.2)(typescript@5.9.3)(yaml@2.8.3)
 
   '@mdx-js/mdx@3.1.1':
     dependencies:

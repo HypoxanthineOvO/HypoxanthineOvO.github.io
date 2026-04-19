@@ -4,8 +4,8 @@ import { navLinks } from '../lib/site';
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
-<nav aria-label="Primary">
-  <ul class="flex flex-wrap items-center justify-end gap-3 md:gap-4">
+<nav class="flex items-center" aria-label="Primary">
+  <ul class="flex flex-wrap items-center justify-end gap-x-5 gap-y-1">
     {
       navLinks.map((link) => {
         const href = link.href.replace(/\/$/, '') || '/';
@@ -16,7 +16,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
             <a
               href={link.href}
               class:list={[
-                'font-sans text-xs transition-colors duration-150 hover:text-accent md:text-sm',
+                'nav-link',
                 active ? 'text-text' : 'text-muted',
               ]}
               aria-current={active ? 'page' : undefined}

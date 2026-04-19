@@ -23,6 +23,7 @@
     "@fontsource/noto-sans-sc": "^5.2.9",
     "@fontsource/noto-serif-sc": "^5.2.9",
     "@fontsource/source-serif-4": "^5.2.9",
+    "@lucide/astro": "^1.8.0",
     "@tailwindcss/typography": "^0.5.19",
     "astro": "^5.18.1",
     "cheerio": "^1.2.0",
