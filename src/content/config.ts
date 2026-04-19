@@ -1,27 +1,57 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { seriesValues } from '../lib/series';
+
+const projectLogFields = {
+  // Diary-style note or a release announcement.
+  kind: z.enum(['diary', 'release']).optional(),
+  // Project slug such as hypo-llm or hypo-wtt.
+  project: z.string().optional(),
+  // Semantic milestone name like v3-launch.
+  milestone: z.string().optional(),
+  // Outcome of the logged milestone.
+  status: z.enum(['shipped', 'wip', 'abandoned']).default('wip'),
+  // Human-readable time range such as 2026-03 ~ 2026-04.
+  duration: z.string().optional(),
+};
 
 const posts = defineCollection({
   loader: glob({
     pattern: '**/*.{md,mdx}',
     base: './src/content/posts',
   }),
-  schema: z.object({
-    // Public title used in cards, metadata, and article pages.
-    title: z.string(),
-    // Original publish date.
-    date: z.date(),
-    // Optional short summary used in list pages and feeds.
-    description: z.string().optional(),
-    // Flat tag list for posts and post tag pages.
-    tags: z.array(z.string()).default([]),
-    // Draft posts stay out of production lists and routes.
-    draft: z.boolean().default(false),
-    // Enable KaTeX styles only when math markup is present.
-    math: z.boolean().default(false),
-    // Optional last updated date for migrated or revised posts.
-    updated: z.date().optional(),
-  }),
+  schema: z
+    .object({
+      // Public title used in cards, metadata, and article pages.
+      title: z.string(),
+      // Original publish date.
+      date: z.date(),
+      // Optional short summary used in list pages and feeds.
+      description: z.string().optional(),
+      // Closed-set primary series used for navigation and archive pages.
+      series: z.enum(seriesValues),
+      // Open-set cross-cutting tags.
+      tags: z.array(z.string()).default([]),
+      // Archive-only entries stay inside the dedicated humanities series page.
+      archived: z.boolean().default(false),
+      // Draft posts stay out of production lists and routes.
+      draft: z.boolean().default(false),
+      // Enable KaTeX styles only when math markup is present.
+      math: z.boolean().default(false),
+      // Optional last updated date for migrated or revised posts.
+      updated: z.date().optional(),
+      ...projectLogFields,
+    })
+    .superRefine((data, ctx) => {
+      if (data.series === 'project-log') {
+        if (!data.kind) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require kind', path: ['kind'] });
+        }
+        if (!data.project) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require project', path: ['project'] });
+        }
+      }
+    }),
 });
 
 const notes = defineCollection({
@@ -29,22 +59,38 @@ const notes = defineCollection({
     pattern: '**/*.{md,mdx}',
     base: './src/content/notes',
   }),
-  schema: z.object({
-    // Note title shown in index pages and note detail pages.
-    title: z.string(),
-    // Date of the note itself.
-    date: z.date(),
-    // Source material such as a paper, book, or talk.
-    source: z.string().optional(),
-    // Authors of the source material when relevant.
-    authors: z.array(z.string()).optional(),
-    // Canonical source link for the original material.
-    link: z.string().url().optional(),
-    // Flat tags used only for the client-side note filter.
-    tags: z.array(z.string()).default([]),
-    // Optional note summary for cards and feeds.
-    description: z.string().optional(),
-  }),
+  schema: z
+    .object({
+      // Note title shown in index pages and note detail pages.
+      title: z.string(),
+      // Date of the note itself.
+      date: z.date(),
+      // Source material such as a paper, book, or talk.
+      source: z.string().optional(),
+      // Authors of the source material when relevant.
+      authors: z.array(z.string()).optional(),
+      // Canonical source link for the original material.
+      link: z.string().url().optional(),
+      // Closed-set primary series used for navigation and archive pages.
+      series: z.enum(seriesValues),
+      // Open-set cross-cutting tags.
+      tags: z.array(z.string()).default([]),
+      // Archive-only entries stay inside the dedicated humanities series page.
+      archived: z.boolean().default(false),
+      // Optional note summary for cards and feeds.
+      description: z.string().optional(),
+      ...projectLogFields,
+    })
+    .superRefine((data, ctx) => {
+      if (data.series === 'project-log') {
+        if (!data.kind) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require kind', path: ['kind'] });
+        }
+        if (!data.project) {
+          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require project', path: ['project'] });
+        }
+      }
+    }),
 });
 
 const publications = defineCollection({
