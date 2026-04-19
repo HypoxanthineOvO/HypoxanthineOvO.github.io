@@ -36,7 +36,7 @@ const grouped = years.map((year) => {
                 <p class="mb-4 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-muted">
                   {areaGroup.area}
                 </p>
-                <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <div class="publication-stack">
                   {areaGroup.items.map((publication) => <PublicationCard publication={publication} />)}
                 </div>
               </div>

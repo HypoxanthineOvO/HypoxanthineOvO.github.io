@@ -40,7 +40,7 @@ const featuredProjects = (await getProjects()).filter((entry) => entry.data.feat
   <section class="section-band section-band--default">
     <div class="shell">
       <SectionHeader kicker="Featured" title="Publications" href="/publications" actionLabel="View all" />
-      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      <div class="publication-stack">
         {featuredPublications.map((publication) => <PublicationCard publication={publication} />)}
       </div>
     </div>

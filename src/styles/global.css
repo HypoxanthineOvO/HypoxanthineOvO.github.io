@@ -307,6 +307,49 @@
     background: color-mix(in srgb, var(--accent) 5%, transparent);
   }
 
+  .publication-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .publication-card {
+    width: 100%;
+  }
+
+  .publication-card__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .publication-card__meta {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .publication-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .publication-card__inner {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .publication-card__actions {
+      justify-content: flex-end;
+      align-self: center;
+      flex-shrink: 0;
+    }
+  }
+
   .status-badge {
     @apply inline-flex items-center rounded px-2 py-0.5 font-sans text-[0.75rem] font-semibold uppercase;
     letter-spacing: 0.06em;
