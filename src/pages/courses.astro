@@ -1,9 +1,11 @@
 ---
+import CourseCard from '../components/CourseCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 interface CourseItem {
   label: string;
   href?: string;
+  note?: string;
   children?: CourseItem[];
 }
 
@@ -11,8 +13,6 @@ interface CourseTerm {
   term: string;
   items: CourseItem[];
 }
-
-const quickIndex: string[] = ['SI100B EE Part', 'CS100', 'VSP100'];
 
 const terms: CourseTerm[] = [
   {
@@ -62,11 +62,7 @@ const terms: CourseTerm[] = [
         children: [{ label: '课程笔记', href: 'https://epan.shanghaitech.edu.cn/l/lF33j1' }],
       },
       { label: 'EE150L 信号与系统实验' },
-      {
-        label: 'CS182 机器学习引论',
-        href: 'https://coursebench.geekpie.club/course/93?answer=878',
-        children: [{ label: 'Final Review', href: '/notes/cheatsheet' }],
-      },
+      { label: 'CS182 机器学习引论', href: 'https://coursebench.geekpie.club/course/93?answer=878' },
       { label: '现代生命科学导论 C', href: 'https://coursebench.geekpie.club/course/27?answer=1375' },
       { label: '思想道德与法治（从思修看“基本写作素养”和通识课绩点的一定相关性）', href: 'https://coursebench.geekpie.club/course/193?answer=1046' },
     ],
@@ -75,14 +71,7 @@ const terms: CourseTerm[] = [
     term: '23 Fall（大三上学期）',
     items: [
       { label: 'CS181 人工智能 I', href: 'https://coursebench.geekpie.club/course/92?answer=877' },
-      {
-        label: 'CS130 操作系统',
-        href: 'https://coursebench.geekpie.club/course/350?answer=875',
-        children: [
-          { label: 'Midterm Review', href: '/notes/midterm-cheatsheet' },
-          { label: 'Final Review', href: '/notes/final-cheatsheet' },
-        ],
-      },
+      { label: 'CS130 操作系统', href: 'https://coursebench.geekpie.club/course/350?answer=875' },
       {
         label: 'GEHA1117 宋词导读',
         href: 'https://coursebench.geekpie.club/course/659?answer=704',
@@ -117,7 +106,7 @@ const terms: CourseTerm[] = [
         href: 'https://coursebench.geekpie.club/course/172?answer=1543',
         children: [
           { label: '创意写作：你见过停滞在空中的云吗', href: '/posts/你见过停滞在空中的云吗' },
-          { label: '期末论文：古代文学中“加餐”的流变（To be released）' },
+          { label: '期末论文：古代文学中“加餐”的流变（待补）' },
         ],
       },
     ],
@@ -129,58 +118,64 @@ const terms: CourseTerm[] = [
 ];
 ---
 
-<BaseLayout title="课程" description="由旧站 MyCourses 与 Overview 合并而来的课程页。">
+<BaseLayout title="课程" description="修过的课程与 tutorial 入口。">
   <section class="shell pb-20">
-    <div class="content-shell md:mx-0 md:max-w-[820px] md:px-0">
+    <div class="content-shell md:mx-0 md:max-w-[860px] md:px-0">
       <p class="section-kicker">课程</p>
       <h1 class="mb-6">课程</h1>
-      <div class="space-y-4 text-muted">
-        <p>本页合并了旧 Hexo 站里的 <code>MyCourses.md</code> 与 <code>本科课程/Overview.md</code>。</p>
-        <p>保留了课程时间线与仍然有效的外部链接，同时把原先硬编码到旧 Hexo 域名的内部文章链接改到了当前 Astro 站内路由。</p>
-      </div>
 
-      <div class="mt-10 rounded-3xl border border-border bg-bg px-6 py-6">
-        <h2 class="mb-4 text-[1.2rem]">旧站快速索引</h2>
-        <ul class="space-y-2 pl-5 text-muted">
-          {quickIndex.map((item) => <li>{item}</li>)}
-        </ul>
-      </div>
+      <section class="mb-14">
+        <h2 class="mb-4 text-[1.4rem]">修过的课</h2>
+        <p class="mb-8 text-muted">
+          这里保留 MyCourses 与 Overview 合并后的课程时间线。课程评价暂以课程名和仍然有效的资源链接为主，不单独成文，也不纳入 tags 聚合。
+        </p>
 
-      <div class="mt-12 space-y-10">
-        {terms.map((section) => (
-          <section>
-            <h2 class="mb-4 text-[1.3rem]">{section.term}</h2>
-            <ol class="space-y-3 pl-5 text-muted">
-              {section.items.map((item) => (
-                <li>
-                  {item.href ? (
-                    <a class="inline-link" href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>
-                      {item.label}
-                    </a>
-                  ) : (
-                    item.label
-                  )}
-                  {item.children?.length ? (
-                    <ul class="mt-2 space-y-2 pl-5">
-                      {item.children.map((child) => (
-                        <li>
-                          {child.href ? (
-                            <a class="inline-link" href={child.href} target={child.href.startsWith('http') ? '_blank' : undefined} rel={child.href.startsWith('http') ? 'noreferrer' : undefined}>
-                              {child.label}
-                            </a>
-                          ) : (
-                            child.label
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-          </section>
-        ))}
-      </div>
+        <div class="space-y-10">
+          {terms.map((term) => (
+            <section>
+              <h3 class="mb-4 text-[1.2rem]">{term.term}</h3>
+              <ol class="space-y-3 pl-5 text-muted">
+                {term.items.map((item) => (
+                  <li>
+                    {item.href ? (
+                      <a class="inline-link" href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined}>
+                        {item.label}
+                      </a>
+                    ) : (
+                      item.label
+                    )}
+
+                    {item.note && <p class="mt-1 text-sm text-muted">{item.note}</p>}
+
+                    {item.children?.length ? (
+                      <ul class="mt-2 space-y-2 pl-5">
+                        {item.children.map((child) => (
+                          <li>
+                            {child.href ? (
+                              <a class="inline-link" href={child.href} target={child.href.startsWith('http') ? '_blank' : undefined} rel={child.href.startsWith('http') ? 'noreferrer' : undefined}>
+                                {child.label}
+                              </a>
+                            ) : (
+                              child.label
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-[1.4rem]">助教 / Tutorial</h2>
+        <div class="grid gap-5 md:grid-cols-2">
+          <CourseCard title="Hypo Courses" description="我的 tutorial 与让教材集" href="#" icon="🎓" />
+        </div>
+      </section>
     </div>
   </section>
 </BaseLayout>

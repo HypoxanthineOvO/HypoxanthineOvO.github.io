@@ -213,6 +213,26 @@
     background: color-mix(in srgb, var(--accent) 15%, transparent);
   }
 
+  .series-badge {
+    @apply inline-flex items-center rounded-md px-2 py-0.5 font-sans text-[0.72rem] font-semibold;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .series-badge--notes {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+  }
+
+  .series-badge--posts {
+    background: color-mix(in srgb, var(--text) 8%, transparent);
+    color: var(--text);
+  }
+
+  .series-badge--archived {
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
   .section-band {
     width: 100%;
     padding-block: clamp(2.5rem, 6vw, 4rem);
@@ -316,6 +336,29 @@
     border-color: var(--accent);
     color: var(--accent);
     background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  .filter-tab {
+    @apply inline-flex items-center rounded-full border border-border px-3 py-1.5 font-sans text-sm text-muted;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .filter-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-tab.is-active {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--accent);
+  }
+
+  .course-card:hover h3 {
+    color: var(--accent);
   }
 
   .publication-stack {

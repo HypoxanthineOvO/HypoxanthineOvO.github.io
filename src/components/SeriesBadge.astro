@@ -1,0 +1,20 @@
+---
+import { getSeriesMeta, type SeriesSlug } from '../lib/series';
+
+interface Props {
+  series: SeriesSlug;
+}
+
+const { series } = Astro.props;
+const meta = getSeriesMeta(series);
+---
+
+<span
+  class:list={[
+    'series-badge',
+    meta.group === 'Notes' ? 'series-badge--notes' : 'series-badge--posts',
+    meta.archivedOnly && 'series-badge--archived',
+  ]}
+>
+  {meta.label}
+</span>

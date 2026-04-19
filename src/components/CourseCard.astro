@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+}
+
+const { title, description, href, icon = '📚' } = Astro.props;
+---
+
+<a class="surface-card course-card block p-6" href={href} target="_blank" rel="noopener">
+  <div class="flex items-start gap-4">
+    <div class="text-[2rem]" aria-hidden="true">{icon}</div>
+
+    <div class="min-w-0 flex-1">
+      <div class="mb-2 flex items-start justify-between gap-3">
+        <h3 class="text-[1.2rem]">{title}</h3>
+        <span class="font-sans text-sm text-muted" aria-hidden="true">↗</span>
+      </div>
+      <p class="text-sm text-muted">{description}</p>
+    </div>
+  </div>
+</a>
