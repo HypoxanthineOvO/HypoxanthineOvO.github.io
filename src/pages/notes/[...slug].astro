@@ -2,22 +2,20 @@
 import { render } from 'astro:content';
 
 import NoteLayout from '../../layouts/NoteLayout.astro';
-import { getAdjacentEntries, getNotes } from '../../lib/content';
+import { getAdjacentArchiveEntries, getNotes, getSeriesEntries } from '../../lib/content';
 
 export async function getStaticPaths() {
   const notes = await getNotes();
 
-  return notes.map((entry) => {
-    const { newer, older } = getAdjacentEntries(notes, entry.id);
-
-    return {
-      params: { slug: entry.id },
-      props: { entry, newer, older },
-    };
-  });
+  return notes.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
 
-const { entry, newer, older } = Astro.props;
+const { entry } = Astro.props;
+const seriesEntries = await getSeriesEntries(entry.data.series, { includeArchived: entry.data.archived });
+const { newer, older } = getAdjacentArchiveEntries(seriesEntries, `/notes/${entry.id}`);
 const { Content, headings } = await render(entry);
 ---
 
