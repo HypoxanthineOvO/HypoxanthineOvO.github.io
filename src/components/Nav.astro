@@ -5,7 +5,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <nav class="flex items-center" aria-label="Primary">
-  <ul class="flex flex-wrap items-center justify-end gap-x-5 gap-y-1">
+  <ul class="nav-list flex flex-wrap items-center justify-end gap-x-5 gap-y-1">
     {
       navLinks.map((link) => {
         const href = link.href.replace(/\/$/, '') || '/';

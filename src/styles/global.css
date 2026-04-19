@@ -252,17 +252,28 @@
     @apply text-muted;
   }
 
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list > li + li {
+    margin-top: 0;
+  }
+
   .nav-item {
+    @apply font-sans;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
-    font-family: inherit;
     font-weight: 500;
     font-size: 0.9375rem;
     line-height: 1;
+    font-synthesis: none;
     transition:
       color 0.15s ease,
       background-color 0.15s ease;

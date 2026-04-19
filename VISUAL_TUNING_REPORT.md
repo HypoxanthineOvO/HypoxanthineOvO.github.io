@@ -163,4 +163,52 @@ Suggested visual check for this patch:
 3. Landing `Featured Publications` and `/publications`:
    confirm each paper occupies one full row, with the action buttons aligned to the right on desktop and stacked naturally on mobile.
 
+## D.2 Nav Height Root-Cause Patch
+
+Root cause:
+
+- The `Posts` link was not using a special component and `aria-current` was not the problem.
+- The actual cause was the global base rule in `src/styles/global.css`:
+  `li + li { margin-top: 0.35rem; }`
+- Header navigation uses a semantic `<ul><li>` structure, so every nav item after the first one inherited that top margin. That made `Notes / Publications / Projects / About` sit lower, which visually made `Posts` look a few pixels too high.
+
+Measured before fix with `scripts/measure-nav.mjs` on local `pnpm dev`:
+
+```text
+[/] Posts: top=14.8 bottom=45.8 height=31
+[/] Notes: top=17.6 bottom=48.6 height=31
+[/] Publications: top=17.6 bottom=48.6 height=31
+[/] Projects: top=17.6 bottom=48.6 height=31
+[/] About: top=17.6 bottom=48.6 height=31
+
+[/posts] Posts: top=14.8 bottom=45.8 height=31
+[/posts] Notes: top=17.6 bottom=48.6 height=31
+[/posts] Publications: top=17.6 bottom=48.6 height=31
+[/posts] Projects: top=17.6 bottom=48.6 height=31
+[/posts] About: top=17.6 bottom=48.6 height=31
+```
+
+Measured after fix:
+
+```text
+[/] Posts: top=20.5 bottom=51.5 height=31
+[/] Notes: top=20.5 bottom=51.5 height=31
+[/] Publications: top=20.5 bottom=51.5 height=31
+[/] Projects: top=20.5 bottom=51.5 height=31
+[/] About: top=20.5 bottom=51.5 height=31
+
+[/posts] Posts: top=20.5 bottom=51.5 height=31
+[/posts] Notes: top=20.5 bottom=51.5 height=31
+[/posts] Publications: top=20.5 bottom=51.5 height=31
+[/posts] Projects: top=20.5 bottom=51.5 height=31
+[/posts] About: top=20.5 bottom=51.5 height=31
+```
+
+Implemented fix:
+
+- Added a dedicated `nav-list` reset in `src/styles/global.css` so header navigation no longer inherits prose-style list spacing.
+- Kept the semantic `<ul><li>` structure in `src/components/Nav.astro`, but isolated it from the global `li + li` rhythm rule.
+- Set `.nav-item` to use the UI sans stack explicitly and disabled font synthesis so nav metrics are no longer coupled to the serif body stack.
+- Added `scripts/measure-nav.mjs` and `playwright` as a dev dependency to keep this measurable instead of visual-only.
+
 READY FOR HYPO REVIEW
