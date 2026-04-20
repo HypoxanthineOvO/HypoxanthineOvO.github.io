@@ -1,0 +1,22 @@
+---
+interface Props {
+  scope?: 'global' | 'series';
+  seriesName?: string;
+}
+
+const { scope = 'global', seriesName } = Astro.props as Props;
+const isSeries = scope === 'series';
+const ariaLabel = isSeries && seriesName ? `${seriesName} 正在重写中` : '技术类文章正在重写中';
+---
+
+<aside
+  class:list={['rewrite-notice surface-card', isSeries && 'rewrite-notice--series']}
+  aria-label={ariaLabel}
+  data-rewrite-notice={scope}
+>
+  <p class="font-sans text-sm font-medium leading-7 text-text">
+    {isSeries
+      ? '📝 本系列正在重写中。原有 legacy 内容已暂时下架，敬请期待。'
+      : '📝 技术类文章正在重写中。部分 legacy 内容已暂时下架，重写完成后会统一上线。创作类文章（散文 / 诗词）仍然可见。'}
+  </p>
+</aside>

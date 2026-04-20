@@ -1,6 +1,7 @@
 ---
 import Pagination from '../../components/Pagination.astro';
 import PostCard from '../../components/PostCard.astro';
+import RewriteNotice from '../../components/RewriteNotice.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { chunkEntries, getPosts, groupEntriesByYear } from '../../lib/content';
 
@@ -21,6 +22,7 @@ const postPages = chunkEntries(posts, 6).map((entries) => groupEntriesByYear(ent
       <p class="mb-8 text-muted">
         这里收纳篇幅更长的中文写作。页面保持单一路由，通过前端分页切换内容，以维持既定路由结构。
       </p>
+      <RewriteNotice />
 
       <div data-post-pages>
         {

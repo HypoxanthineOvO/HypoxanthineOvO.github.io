@@ -357,6 +357,19 @@
     color: var(--accent);
   }
 
+  .rewrite-notice {
+    margin-bottom: 1.5rem;
+    border-color: color-mix(in srgb, #b45309 22%, var(--border));
+    background: color-mix(in srgb, #f59e0b 10%, var(--bg));
+    box-shadow: none;
+    padding: 1rem 1.25rem;
+  }
+
+  .rewrite-notice--series {
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+    background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  }
+
   .course-card:hover h3 {
     color: var(--accent);
   }
