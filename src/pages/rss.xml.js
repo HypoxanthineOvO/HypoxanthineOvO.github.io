@@ -12,13 +12,13 @@ export async function GET(context) {
       title: entry.data.title,
       description: entry.data.description ?? '',
       pubDate: entry.data.date,
-      link: `/posts/${entry.slug}`,
+      link: `/posts/${entry.id}`,
     })),
     ...notes.map((entry) => ({
       title: entry.data.title,
       description: entry.data.description ?? '',
       pubDate: entry.data.date,
-      link: `/notes/${entry.slug}`,
+      link: `/notes/${entry.id}`,
     })),
   ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 

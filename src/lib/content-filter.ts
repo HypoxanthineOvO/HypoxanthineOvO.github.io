@@ -2,7 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 
 export type FilterableContentEntry = CollectionEntry<'posts'> | CollectionEntry<'notes'>;
 
-export const PREVIEW_DRAFTS = import.meta.env.PREVIEW_DRAFTS === '1';
+export const PREVIEW_DRAFTS = process.env.PREVIEW_DRAFTS === '1';
 
 export function isVisible(entry: FilterableContentEntry): boolean {
   if (PREVIEW_DRAFTS) {
