@@ -77,6 +77,8 @@ const notes = defineCollection({
       tags: z.array(z.string()).default([]),
       // Archive-only entries stay inside the dedicated humanities series page.
       archived: z.boolean().default(false),
+      // Draft notes stay out of production lists and routes.
+      draft: z.boolean().default(false),
       // Optional note summary for cards and feeds.
       description: z.string().optional(),
       ...projectLogFields,

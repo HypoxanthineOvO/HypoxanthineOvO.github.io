@@ -1,9 +1,19 @@
 ---
 import Pagination from '../../components/Pagination.astro';
+import RewriteNotice from '../../components/RewriteNotice.astro';
 import TagArchiveCard from '../../components/TagArchiveCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { chunkEntries, getSeriesEntries, groupArchiveEntriesByYear } from '../../lib/content';
 import { isSeriesSlug, seriesList } from '../../lib/series';
+
+const rewriteSeries = new Set([
+  'tooling-env',
+  'tooling-ops',
+  'tooling-hardware',
+  'research-nerf',
+  'research-cryo',
+  'research-essay',
+]);
 
 export async function getStaticPaths() {
   return Promise.all(
@@ -38,6 +48,7 @@ const totalPages = Math.max(pages.length, 1);
 
     <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
       <p class="mb-8 text-muted">{meta.description}</p>
+      {rewriteSeries.has(meta.slug) && <RewriteNotice scope="series" seriesName={meta.label} />}
 
       {pages.length > 0 ? (
         <>

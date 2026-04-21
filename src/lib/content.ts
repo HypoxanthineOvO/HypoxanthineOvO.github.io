@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+import { filterVisible } from './content-filter';
 import type { SeriesSlug } from './series';
 
 export type PostEntry = CollectionEntry<'posts'>;
@@ -131,12 +132,12 @@ function filterArchived<T extends { data: { archived?: boolean } }>(entries: T[]
 }
 
 export async function getPosts(options: ContentQueryOptions = {}) {
-  const entries = (await getCollection('posts')).filter((entry) => !entry.data.draft);
+  const entries = filterVisible(await getCollection('posts'));
   return sortByDateDesc(filterArchived(entries, options.includeArchived));
 }
 
 export async function getNotes(options: ContentQueryOptions = {}) {
-  return sortByDateDesc(filterArchived(await getCollection('notes'), options.includeArchived));
+  return sortByDateDesc(filterArchived(filterVisible(await getCollection('notes')), options.includeArchived));
 }
 
 export async function getPublications() {
