@@ -1,9 +1,9 @@
 ---
 kind: cycle
 name: C001-personal-site-rebuild
-status: active
+status: completed
 started: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-24
 builds_on: []
 plan: PLAN.md
 progress: PROGRESS.md

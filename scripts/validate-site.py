@@ -36,7 +36,11 @@ def main() -> int:
     observations: dict[str, object] = {}
     with sync_playwright() as playwright:
         installed = sorted(Path.home().glob('.cache/ms-playwright/chromium-*/chrome-linux64/chrome'))
-        browser = playwright.chromium.launch(headless=True, executable_path=str(installed[-1]) if installed else None)
+        browser = playwright.chromium.launch(
+            headless=True,
+            executable_path=str(installed[-1]) if installed else None,
+            args=['--no-proxy-server'],
+        )
 
         for name, viewport in VIEWPORTS.items():
             context = browser.new_context(viewport=viewport)

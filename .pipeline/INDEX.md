@@ -2,7 +2,7 @@
 
 ## Active Cycle
 
-- [C001-personal-site-rebuild](cycles/C001-personal-site-rebuild/CYCLE.md): evidence-backed bilingual personal website rebuild, production deployment, and domain migration. Status: active (M6, waiting for GitHub TLS issuance).
+- [C001-personal-site-rebuild](cycles/C001-personal-site-rebuild/CYCLE.md): evidence-backed bilingual personal website rebuild, production deployment, and domain migration. Status: completed.
 
 ## Memory
 

@@ -1,10 +1,21 @@
 ---
 kind: execution-log
 cycle: C001-personal-site-rebuild
-updated: 2026-08-24T01:13:00+08:00
+updated: 2026-08-24T01:26:00+08:00
 ---
 
 # Personal Site Rebuild and Launch 执行记录
+
+## 2026-08-24 01:26 - M6 HTTPS 与生产端到端验收完成
+
+- **计划项：** `M6`
+- **目的：** 完成 custom-domain TLS、全链路跳转和生产浏览器验收。
+- **动作：** 按 GitHub 官方故障排查建议移除并重新添加两个 custom domain，重新触发证书；启用两个 Pages 站点的 `https_enforced`；直连检查 TLS、HTTP 状态、canonical 与 RSS；在生产域运行完整 Playwright，并测试旧域任意历史路径。
+- **结果：** `hypox.cn` 证书 SAN 包含根域与 `www`，`hypoxanthine.cn` 证书同样覆盖根域与 `www`；HTTP 均升级到 HTTPS，两个 `www` 均归一化到 apex；旧域根路径与 `/2024/old/article?source=legacy` 最终到达 `https://hypox.cn/`。生产 Playwright `failures: []`，canvas 方差 1078.53、动态变化 86610 像素、reduced-motion 变化 0。
+- **证据：** Pages API 两站 `https_enforced=true`；OpenSSL SAN/有效期；direct curl 状态；`/tmp/hypox-site-validation/report.json`；生产 Playwright 输出。
+- **计划影响：** M6 与 C001 Cycle 完成。
+- **遇到的问题：** 证书首次等待超过一小时；按官方建议重绑域名后立即签发。生产首次浏览器回归在证书切换期间出现一次 `ERR_NETWORK_CHANGED`，资源直连均为 200，第二次冷启动完整通过。
+- **下一步：** 无。
 
 ## 2026-08-24 01:13 - M6 DNS 与旧域跳转完成，等待 TLS
 

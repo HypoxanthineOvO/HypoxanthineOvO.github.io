@@ -2,8 +2,8 @@
 kind: plan
 cycle: C001-personal-site-rebuild
 mode: goal
-status: active
-updated: 2026-08-23
+status: completed
+updated: 2026-08-24
 progress: PROGRESS.md
 execution: EXECUTION.md
 ---
