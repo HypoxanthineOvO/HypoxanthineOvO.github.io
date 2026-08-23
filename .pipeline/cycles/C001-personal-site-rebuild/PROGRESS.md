@@ -3,9 +3,9 @@ kind: progress
 cycle: C001-personal-site-rebuild
 plan: PLAN.md
 status: active
-updated: 2026-08-24T00:02:00+08:00
-current: M5
-next: 提交并推送生产分支，监看 GitHub Pages workflow
+updated: 2026-08-24T01:13:00+08:00
+current: M6
+next: 等待 GitHub Pages 证书签发，启用 HTTPS 并完成最终浏览器验收
 ---
 
 # Personal Site Rebuild and Launch 进度
@@ -22,12 +22,12 @@ M1-M4 已完成：网站已依据现有站、公开项目资料与 Hypo-Writer �
 | `M2` | 设计系统与交互架构 | `completed` | Research Instrument 双表面设计、首页六区、核心中英路由、Three.js 场景与 Field/Index 交互已落实 | 已交付 M3 |
 | `M3` | 网站与内容完整实现 | `completed` | 完成 98 期 AI 日报、10 篇公众号长文、15 篇旧文章、14 篇技术笔记及 Archive/Search/Series/Tags；构建共 248 页 | 已交付 M4 |
 | `M4` | 浏览器质量验证与修正 | `completed` | Astro 0 errors；248 页 canonical 和内部链接 0 failures；Playwright 四视口与 canvas 检查 `failures: []` | 已交付 M5 |
-| `M5` | GitHub Pages 生产发布 | `in_progress` | 生产 CNAME/canonical/Actions 配置已就绪，发布前检查通过 | 提交、push 并监看 Actions/Pages |
-| `M6` | DNS 迁移与端到端验收 | `pending` | 两域均在 DNSPod；`hypox.cn` profile 只读访问已验证 | 等待 M5 |
+| `M5` | GitHub Pages 生产发布 | `completed` | `4d36eb5` 已推送；Actions run `32650527649` build/deploy success；Pages custom domain 为 `hypox.cn` | 已交付 M6 |
+| `M6` | DNS 迁移与端到端验收 | `in_progress` | 主域与 `www` DNS 已生效；旧域 redirect repo `221eed6` 已部署并生效；HTTP Host 路由验证通过 | 等待两个 GitHub Pages 证书签发并启用 HTTPS |
 
 ## 阻塞
 
-- 无。
+- GitHub Pages 尚未签发 `hypox.cn` 与 `hypoxanthine.cn` custom-domain TLS 证书；DNS health 已确认 valid/served/HTTPS eligible。该外部队列可能最长需要 24 小时。
 
 ## 计划变化
 
@@ -35,4 +35,4 @@ M1-M4 已完成：网站已依据现有站、公开项目资料与 Hypo-Writer �
 
 ## 下一步
 
-提交并推送 `origin/main`，监看 GitHub Pages workflow、custom domain 与 HTTPS 状态。
+继续轮询两个 Pages 站点的证书；签发后设置 `https_enforced=true`，再验证 `https://hypox.cn`、`www` 与旧域跳转。

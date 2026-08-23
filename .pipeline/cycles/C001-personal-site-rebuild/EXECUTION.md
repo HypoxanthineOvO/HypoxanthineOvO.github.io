@@ -1,10 +1,32 @@
 ---
 kind: execution-log
 cycle: C001-personal-site-rebuild
-updated: 2026-08-24T00:02:00+08:00
+updated: 2026-08-24T01:13:00+08:00
 ---
 
 # Personal Site Rebuild and Launch 执行记录
+
+## 2026-08-24 01:13 - M6 DNS 与旧域跳转完成，等待 TLS
+
+- **计划项：** `M6`
+- **目的：** 让新主域解析到生产站，并保留旧域跳转。
+- **动作：** 在 DNSPod `hypohub` profile 为 `hypox.cn` 和 `hypoxanthine.cn` 分别创建两条 GitHub Pages A 与 `www` CNAME；因 DNSPod URL 转发要求备案，按用户选择创建公开 repo `HypoxanthineOvO/hypoxanthine.cn-redirect`，部署 index/404 跳转页并绑定旧域；系统 NS 全程未改。
+- **结果：** Google/Cloudflare 公共 DNS 已返回预期记录；主域 HTTP 返回新站 200，两个 `www` 均 301 到 apex，旧域 apex 返回含 canonical、meta refresh 与 `location.replace()` 的跳转页。GitHub Health 已确认主域 DNS valid、served by Pages、HTTPS eligible。
+- **证据：** DNSPod record IDs `2377155703`、`2377155708`、`2377155746`、`2377168847`、`2377168848`、`2377168849`；redirect commit `221eed6`；直接 Host 路由 curl 验证。
+- **计划影响：** M6 保持进行中，唯一剩余项为外部 TLS 签发。
+- **遇到的问题：** DNSPod 免费套餐限制同子域最多两条 A；显性 URL 因未备案被拒；GitHub custom-domain 证书在约一小时监看窗口内尚未签发。
+- **下一步：** 证书存在后启用两个 Pages 站点的 `https_enforced`，验证生产 HTTPS 与旧域跳转。
+
+## 2026-08-24 00:06 - M5 GitHub Pages 发布完成
+
+- **计划项：** `M5`
+- **目的：** 将重构站点提交并部署到生产 Pages。
+- **动作：** 提交 `4d36eb5` 并推送 `origin/main`；监看 Actions run `32650527649`；通过 Pages API 设置 `cname=hypox.cn`。
+- **结果：** build 与 deploy jobs 均 success，Pages status 为 built，custom domain 已绑定 `hypox.cn`。
+- **证据：** GitHub commit `4d36eb5`、Actions run `32650527649`、Pages API readback。
+- **计划影响：** M5 完成，进入 M6。
+- **遇到的问题：** 在证书尚不存在时同时请求 HTTPS enforcement 返回预期 404；改为先绑定域名、后等待证书。
+- **下一步：** 配置 DNS 并完成 TLS 验收。
 
 ## 2026-08-24 00:02 - M4 浏览器与发布前质量门完成
 
