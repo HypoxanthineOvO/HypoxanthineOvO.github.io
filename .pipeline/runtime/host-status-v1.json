@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "contract_version": "1",
+  "projection_status": "invalidated",
+  "generated_at": "2026-08-23T15:00:23.853Z",
+  "generation": 0,
+  "workspace": null,
+  "delivery": null,
+  "continuation": null,
+  "invalidation": {
+    "invalidated_at": "2026-08-23T15:00:23.853Z",
+    "reason": "authority_changed:init-8799318db9c883b3387fec59"
+  }
+}

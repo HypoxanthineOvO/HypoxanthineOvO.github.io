@@ -1,11 +1,20 @@
-# HypoxanthineOvO.github.io
+# Hypoxanthine
 
-Astro rebuild scaffold for `https://HypoxanthineOvO.github.io`.
+Personal site for Yunxiang He, published at [hypox.cn](https://hypox.cn).
 
-Legacy Hexo output has been preserved in:
+The site is built with Astro and deployed to GitHub Pages. It includes:
 
-- Branch: `hexo-legacy`
-- Tag: `hexo-archive-20260418`
-- Read-only worktree: `/home/heyx/Hypo-Website-legacy`
+- Research and publication records
+- Project and tooling portfolios
+- Hypo-Writer WeChat articles and AI daily issues
+- Legacy essays and technical notes
+- Chinese and English portfolio views
 
-This `main` branch now contains the Astro skeleton, content collection schemas, route placeholders, theme system, and GitHub Pages deployment workflow.
+```bash
+pnpm install
+pnpm dev
+pnpm check
+pnpm build
+```
+
+The production canonical URL and Pages custom domain are both `https://hypox.cn`.

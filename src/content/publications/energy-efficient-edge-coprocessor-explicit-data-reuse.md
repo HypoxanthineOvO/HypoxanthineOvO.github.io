@@ -18,6 +18,6 @@ authors:
   - "J. Yu"
   - "X. Lou"
 venue: "IEEE Transactions on Very Large Scale Integration (VLSI) Systems"
-year: 2025
+year: 2026
 research_area: "Neural Rendering Hardware"
 ---

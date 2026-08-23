@@ -1,0 +1,100 @@
+active_by_dedupe_key:
+  adoption_brief: decision-f28a6e9fccee9b2abacc76850377d2a9
+  current_public_identity: requirement-de01a7027b1fc11a24ec8c4c82056aae
+  hypo_writer_official_account_content: requirement-6e5dbb764c5f87dcdd5938188ee162ae
+  project_intent: requirement-fec4529f4a77e4fe04e306d64fd96429
+  wechat_information_architecture: requirement-f9a0df60736754a7b16fcb8a403ede4d
+authority_role: derived
+records:
+  - active: true
+    confidence: high
+    created_at: 2026-08-23T15:00:23.831Z
+    dedupe_key: adoption_brief
+    id: decision-f28a6e9fccee9b2abacc76850377d2a9
+    kind: decision
+    path: .pipeline/memory/records/project-9e3313f45149/decision/decision-f28a6e9fccee9b2abacc76850377d2a9.md
+    scope:
+      ref: project:hypoxanthine-personal-site
+      type: project
+    semantic_hash: f28a6e9fccee9b2abacc76850377d2a903e31d555f9fe47f63b685674ea6d23f
+    source_refs:
+      - locator: request.intent
+        ref: init
+        type: user_request
+    supersedes: []
+    updated_at: 2026-08-23T15:00:23.831Z
+  - active: true
+    confidence: confirmed
+    created_at: 2026-08-23T15:10:10.031Z
+    dedupe_key: hypo_writer_official_account_content
+    id: requirement-6e5dbb764c5f87dcdd5938188ee162ae
+    kind: requirement
+    path: .pipeline/memory/records/project-9e3313f45149/requirement/requirement-6e5dbb764c5f87dcdd5938188ee162ae.md
+    scope:
+      ref: project:hypoxanthine-personal-site
+      type: project
+    secret_refs: []
+    semantic_hash: 6e5dbb764c5f87dcdd5938188ee162aedc34f4d867cd73476d74eb759c25f3c2
+    source_refs:
+      - locator: 01a02f13-6aff-7431-b181-3cc1457bd175
+        ref: C001-personal-site-rebuild
+        type: discussion
+    supersedes: []
+    updated_at: 2026-08-23T15:10:10.031Z
+  - active: true
+    confidence: confirmed
+    created_at: 2026-08-23T15:04:19.900Z
+    dedupe_key: current_public_identity
+    id: requirement-de01a7027b1fc11a24ec8c4c82056aae
+    kind: requirement
+    path: .pipeline/memory/records/project-9e3313f45149/requirement/requirement-de01a7027b1fc11a24ec8c4c82056aae.md
+    scope:
+      ref: project:hypoxanthine-personal-site
+      type: project
+    secret_refs: []
+    semantic_hash: de01a7027b1fc11a24ec8c4c82056aae2d61b7861cda551f5eb88f889e07fa7a
+    source_refs:
+      - locator: user-current-research-correction
+        ref: C001-personal-site-rebuild
+        type: discussion
+      - locator: user-privacy-and-sections
+        ref: C001-personal-site-rebuild
+        type: discussion
+    supersedes: []
+    updated_at: 2026-08-23T15:04:19.900Z
+  - active: true
+    confidence: confirmed
+    created_at: 2026-08-23T15:13:20.781Z
+    dedupe_key: wechat_information_architecture
+    id: requirement-f9a0df60736754a7b16fcb8a403ede4d
+    kind: requirement
+    path: .pipeline/memory/records/project-9e3313f45149/requirement/requirement-f9a0df60736754a7b16fcb8a403ede4d.md
+    scope:
+      ref: project:hypoxanthine-personal-site
+      type: project
+    secret_refs: []
+    semantic_hash: f9a0df60736754a7b16fcb8a403ede4da72c8ad543692cae2ade4471758c6199
+    source_refs:
+      - locator: wechat-first-level-and-continuous-execution
+        ref: C001-personal-site-rebuild
+        type: discussion
+    supersedes: []
+    updated_at: 2026-08-23T15:13:20.781Z
+  - active: true
+    confidence: confirmed
+    created_at: 2026-08-23T15:00:23.831Z
+    dedupe_key: project_intent
+    id: requirement-fec4529f4a77e4fe04e306d64fd96429
+    kind: requirement
+    path: .pipeline/memory/records/project-9e3313f45149/requirement/requirement-fec4529f4a77e4fe04e306d64fd96429.md
+    scope:
+      ref: project:hypoxanthine-personal-site
+      type: project
+    semantic_hash: fec4529f4a77e4fe04e306d64fd964297fc2958328ba0df6713bb71e1540976a
+    source_refs:
+      - locator: request.intent
+        ref: init
+        type: user_request
+    supersedes: []
+    updated_at: 2026-08-23T15:00:23.831Z
+schema_version: '1'

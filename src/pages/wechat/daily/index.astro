@@ -1,0 +1,18 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import dailyIssues from '../../../data/wechat-daily.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const groups = new Map<string, typeof dailyIssues>();
+for (const issue of dailyIssues) {
+  const month = issue.date.slice(0,7);
+  const bucket = groups.get(month) ?? [];
+  bucket.push(issue);
+  groups.set(month,bucket);
+}
+const months = [...groups.entries()].sort(([a],[b]) => b.localeCompare(a));
+---
+<BaseLayout title="AI 日报" description="按日期归档的 AI 日报，每天一份 issue，每期内部包含当天全部新闻卡片。" image="/media/projects/ai-daily.webp">
+  <header class="inner-hero"><div class="page-shell"><p class="instrument-label instrument-label--dark">AI DAILY / ISSUE ARCHIVE</p><h1>一天一份日报，一期一组新闻卡片。</h1><p>这里保留 Hypo-Writer 从 2026 年 5 月开始生成的日报成品。日期页是独立 issue，新闻条目不会被压成一张总卡片。</p></div></header>
+  <section class="inner-section"><div class="page-shell">{months.map(([month, issues]) => <section class="daily-month"><h2>{month}</h2><div class="issue-list">{issues.map((issue) => <a class="issue-link" href={`/wechat/daily/${issue.date}`}><div><time datetime={issue.date}>{issue.date}</time><h3>{issue.title}</h3><p>{issue.summary}</p></div><footer><span>{issue.items.length} NEWS</span><span>{issue.published ? '已发布' : '写作档案'}</span><ArrowUpRight size={16} /></footer></a>)}</div></section>)}</div></section>
+</BaseLayout>

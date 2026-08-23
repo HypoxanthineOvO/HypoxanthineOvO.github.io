@@ -1,0 +1,44 @@
+authority_role: proposal
+journal_ref:
+  event_id: 5f27115bf42188d23bde2ba6a9035bffedb21a59eed8643e96dc267d3c06cef2
+  path: >-
+    .pipeline/runtime/objects/activity/ambient-maintain/events/personal-site-discussion-20260823/main/root/00000001.jsonl
+kind: ambient_maintain
+object_ref:
+  id: ambient-maintain
+  kind: activity
+record_patch:
+  body: >-
+    # 当前公开身份与内容边界
+
+
+    个人网站必须将 77 K cryogenic GPU 的 evidence-guided design-space exploration 表达为当前研究主线，并以 Computer Architecture 与 AI
+    Systems Tooling 补充系统构建者身份。Neural rendering
+    只属于历史研究演化与既往成果，不能再写成当前研究方向。第一版可以广泛使用个人笔记、项目和归档，但必须排除凭据、他人非公开私人信息，以及受实验室、合作或投稿约束而不可公开的材料。
+  confidence: confirmed
+  created_at: 2026-08-23T15:04:19.900Z
+  dedupe_key: current_public_identity
+  kind: requirement
+  scope:
+    ref: project:hypoxanthine-personal-site
+    type: project
+  secret_refs: []
+  source_refs:
+    - locator: user-current-research-correction
+      ref: C001-personal-site-rebuild
+      type: discussion
+    - locator: user-privacy-and-sections
+      ref: C001-personal-site-rebuild
+      type: discussion
+  supersedes: []
+  updated_at: 2026-08-23T15:04:19.900Z
+schema_version: '1'
+session_id: personal-site-discussion-20260823
+source: discussion
+staged_at: 2026-08-23T15:04:19.900Z
+status: staged
+summary: User corrected the site's current research identity and confirmed the public framing boundary.
+turn_id: current-public-identity
+writer:
+  id: root
+  kind: main

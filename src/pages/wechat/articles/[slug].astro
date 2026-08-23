@@ -1,0 +1,14 @@
+---
+import { ArrowLeft } from '@lucide/astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('wechat')).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.description} image={entry.data.cover ?? '/media/projects/hypo-writer.webp'}>
+  <article class="article-page"><header class="issue-header"><div class="content-shell"><a class="text-link text-link--dark" href="/wechat"><ArrowLeft size={16} /> 返回公众号</a><p class="instrument-label instrument-label--dark mt-8">{entry.data.series} / {entry.data.status === 'published' ? '已发布' : '写作档案'}</p><h1>{entry.data.title}</h1><p class="lead-copy mt-6">{entry.data.description}</p><div class="issue-header__meta"><span>{entry.data.date.toISOString().slice(0,10)}</span><span>HYPO-WRITER</span></div></div></header><div class="content-shell inner-section prose-content"><Content /></div></article>
+</BaseLayout>

@@ -151,9 +151,27 @@ const projects = defineCollection({
   }),
 });
 
+const wechat = defineCollection({
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/wechat',
+  }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    description: z.string(),
+    series: z.string(),
+    status: z.enum(['published', 'archive', 'draft']),
+    featured: z.boolean().default(false),
+    cover: z.string().nullable().default(null),
+    source: z.literal('hypo-writer'),
+  }),
+});
+
 export const collections = {
   posts,
   notes,
   publications,
   projects,
+  wechat,
 };

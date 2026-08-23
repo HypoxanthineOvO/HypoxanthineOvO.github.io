@@ -1,0 +1,19 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { getCollection } from 'astro:content';
+import { localize, researchTimeline, type Locale } from '../data/portfolio';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props { lang?: Locale }
+const { lang = 'zh' } = Astro.props;
+const publications = (await getCollection('publications')).filter((entry) => entry.data.kind === 'academic').sort((a,b) => b.data.year - a.data.year);
+const copy = lang === 'en'
+  ? { eyebrow: 'RESEARCH / 77 K', title: 'From neural-rendering accelerators to cryogenic GPU systems.', intro: 'My current work studies how device- and system-level changes at 77 K reshape GPU resource allocation and AI workloads. Earlier neural-rendering work remains the methodological origin, not the current destination.', current: 'Current question', currentTitle: 'Where should the cryogenic dividend go?', currentText: 'The ongoing work follows an evidence-first chain: normalize cryogenic measurements, synthesize bounded parameters, characterize representative workloads, and explore architecture choices in reproducible simulation. No unpublished results are disclosed here.', timeline: 'Trajectory', papers: 'Selected publications', paperNote: 'Existing publications document the earlier neural-rendering and accelerator phase.' }
+  : { eyebrow: '研究 / 77 K', title: '从神经渲染加速器，走向低温 GPU 系统。', intro: '当前工作研究 77 K 下器件与系统变化如何重塑 GPU 资源配置和 AI workload。早期神经渲染研究是方法论起点，而不是现在的目的地。', current: '当前问题', currentTitle: '低温带来的收益，应该分配到哪里？', currentText: '研究沿着 evidence-first 链条推进：规范化低温测量、合成有边界的参数、刻画代表性 workload，并在可复现实验中探索架构选择。这里不公开任何未发表结果。', timeline: '研究演化', papers: '代表发表', paperNote: '既有论文记录了此前的神经渲染与加速器阶段。' };
+---
+<BaseLayout lang={lang} title={lang === 'en' ? 'Research' : '研究'} description={copy.intro} image="/media/projects/neural-rendering.webp">
+  <header class="inner-hero"><div class="page-shell"><p class="instrument-label instrument-label--dark">{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.intro}</p></div></header>
+  <section class="content-band content-band--ink"><div class="page-shell current-research-block"><p class="instrument-label">{copy.current}</p><h2>{copy.currentTitle}</h2><p>{copy.currentText}</p><div class="research-chain research-chain--dark"><div><dt>EVIDENCE</dt><dd>77 K / 300 K</dd></div><div><dt>PARAMETERS</dt><dd>Bounded synthesis</dd></div><div><dt>WORKLOADS</dt><dd>Trace & characterize</dd></div><div><dt>ARCHITECTURE</dt><dd>Explore & explain</dd></div></div></div></section>
+  <section class="content-band content-band--signal"><div class="page-shell"><p class="instrument-label instrument-label--dark">{copy.timeline}</p><div class="trajectory-list mt-8">{researchTimeline.map((entry,index) => <article><span>0{index+1}</span><p>{entry.period}</p><h3>{localize(entry.title,lang)}</h3><div>{localize(entry.text,lang)}</div></article>)}</div></div></section>
+  <section class="inner-section"><div class="page-shell"><div class="section-intro"><div><p class="instrument-label instrument-label--dark">PUBLICATIONS</p><h2>{copy.papers}</h2><p class="mt-4 text-muted">{copy.paperNote}</p></div><a class="text-link text-link--dark" href="/publications">{lang === 'en' ? 'Full publication archive' : '完整发表档案'}<ArrowUpRight size={17} /></a></div><div class="index-list">{publications.map((entry) => <a class="index-row" href={`/publications/${entry.id}`}><span>{entry.data.year}</span><div><h3>{entry.data.title}</h3><div class="index-row__tags"><span>{entry.data.venue ?? 'Publication'}</span></div></div><div><p>{entry.data.authors?.join(', ')}</p></div><ArrowUpRight size={19} /></a>)}</div></div></section>
+</BaseLayout>

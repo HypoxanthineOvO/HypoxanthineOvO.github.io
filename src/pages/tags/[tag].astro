@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatTagLabel, getArchiveEntries, toTagParam } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const entries = await getArchiveEntries();
+  const entries = await getArchiveEntries({ includeArchived: true });
   const tags = [...new Set(entries.flatMap((entry) => entry.tags))];
 
   return tags.map((tag) => ({

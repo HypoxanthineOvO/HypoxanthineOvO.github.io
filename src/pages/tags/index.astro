@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { collectTags, formatTagLabel, getNotes, getPosts, toTagParam } from '../../lib/content';
 
-const tags = collectTags([...(await getPosts()), ...(await getNotes())]);
+const tags = collectTags([...(await getPosts({ includeArchived: true })), ...(await getNotes({ includeArchived: true }))]);
 const maxCount = Math.max(...tags.map((item) => item.count), 1);
 ---
 

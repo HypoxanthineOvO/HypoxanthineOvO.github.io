@@ -1,0 +1,32 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { getCollection } from 'astro:content';
+import dailyIssues from '../data/wechat-daily.json';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [posts, notes, wechat] = await Promise.all([getCollection('posts'), getCollection('notes'), getCollection('wechat')]);
+const entries = [
+  ...posts.map((entry) => ({ title: entry.data.title, date: entry.data.date, type: 'post', label: '文章', href: `/posts/${entry.id}`, description: entry.data.description ?? '', series: entry.data.series })),
+  ...notes.map((entry) => ({ title: entry.data.title, date: entry.data.date, type: 'note', label: '笔记', href: `/notes/${entry.id}`, description: entry.data.description ?? '', series: entry.data.series })),
+  ...wechat.map((entry) => ({ title: entry.data.title, date: entry.data.date, type: 'wechat', label: '公众号', href: `/wechat/articles/${entry.id}`, description: entry.data.description, series: entry.data.series })),
+  ...dailyIssues.map((issue) => ({ title: issue.title, date: new Date(`${issue.date}T00:00:00Z`), type: 'daily', label: 'AI 日报', href: `/wechat/daily/${issue.date}`, description: issue.summary, series: `${issue.items.length} 条新闻` })),
+].sort((a,b) => b.date.valueOf() - a.date.valueOf());
+const filterLabels: Record<string, string> = { all: '全部', wechat: '公众号', daily: 'AI 日报', post: '文章', note: '笔记' };
+---
+<BaseLayout title="档案" description="文章、技术笔记、公众号长文与 AI 日报的统一时间档案。">
+  <header class="inner-hero"><div class="page-shell"><p class="instrument-label instrument-label--dark">ARCHIVE / ALL THREADS</p><h1>不是一份简历，是一组持续留下的痕迹。</h1><p>技术笔记、研究文章、文学写作、公众号长文和逐日 AI 新闻在这里按时间汇合，同时保留各自的内容类型。</p></div></header>
+  <section class="inner-section"><div class="page-shell"><div class="section-intro"><div class="filter-bar" aria-label="档案类型">{['all','wechat','daily','post','note'].map((type,index) => <button type="button" aria-pressed={index === 0 ? 'true' : 'false'} data-archive-filter={type}>{filterLabels[type]}</button>)}</div><input class="search-input" type="search" placeholder="搜索标题、系列和摘要" data-archive-search /></div><div class="index-list">{entries.map((entry) => <a class="index-row" href={entry.href} data-archive-item data-type={entry.type} data-haystack={`${entry.title} ${entry.series} ${entry.description}`}><span>{entry.date.toISOString().slice(0,10)}</span><div><h2>{entry.title}</h2><div class="index-row__tags"><span>{entry.label}</span><span>{entry.series}</span></div></div><div><p>{entry.description}</p></div><ArrowUpRight size={19} /></a>)}</div></div></section>
+</BaseLayout>
+<script>
+  const filters = document.querySelectorAll<HTMLElement>('[data-archive-filter]');
+  const input = document.querySelector<HTMLInputElement>('[data-archive-search]');
+  let type = 'all';
+  const apply = () => {
+    const query = input?.value.trim().toLocaleLowerCase() ?? '';
+    document.querySelectorAll<HTMLElement>('[data-archive-item]').forEach((item) => {
+      item.hidden = !((type === 'all' || item.dataset.type === type) && (!query || item.dataset.haystack?.toLocaleLowerCase().includes(query)));
+    });
+  };
+  filters.forEach((button) => button.addEventListener('click', () => { type = button.dataset.archiveFilter ?? 'all'; filters.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button))); apply(); }));
+  input?.addEventListener('input', apply);
+</script>

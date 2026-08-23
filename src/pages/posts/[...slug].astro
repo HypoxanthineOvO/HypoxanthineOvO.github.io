@@ -1,11 +1,11 @@
 ---
-import { render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 import PostLayout from '../../layouts/PostLayout.astro';
-import { getAdjacentArchiveEntries, getSeriesEntries, getPosts } from '../../lib/content';
+import { getAdjacentArchiveEntries, getSeriesEntries } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const posts = await getPosts();
+  const posts = await getCollection('posts');
 
   return posts.map((entry) => ({
     params: { slug: entry.id },

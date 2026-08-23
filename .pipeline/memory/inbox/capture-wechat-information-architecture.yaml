@@ -1,0 +1,41 @@
+authority_role: proposal
+journal_ref:
+  event_id: 3826f5e56f5aef46e30de7de1e7685399b332df17cc89cd2b56ef854528bb8ec
+  path: >-
+    .pipeline/runtime/objects/activity/ambient-maintain/events/01a02f13-6aff-7431-b181-3cc1457bd175/main/root/00000001.jsonl
+kind: ambient_maintain
+object_ref:
+  id: ambient-maintain
+  kind: activity
+record_patch:
+  body: >-
+    # 公众号一级信息架构与连续执行
+
+
+    个人网站必须提供独立的公众号一级导航和页面，并依据 Hypo-Writer
+    中的真实分类分别设计内容形态：日报按一天一张稳定卡片形成时间流，科学与技术长文使用独立文章页，教程与系列内容保留系列主页、顺序和前后篇导航。主模型可按实际内容自主分配，不应在 Goal
+    中途等待视觉或内容确认；只有真实外部阻塞才中断。
+  confidence: confirmed
+  created_at: 2026-08-23T15:13:20.781Z
+  dedupe_key: wechat_information_architecture
+  kind: requirement
+  scope:
+    ref: project:hypoxanthine-personal-site
+    type: project
+  secret_refs: []
+  source_refs:
+    - locator: wechat-first-level-and-continuous-execution
+      ref: C001-personal-site-rebuild
+      type: discussion
+  supersedes: []
+  updated_at: 2026-08-23T15:13:20.781Z
+schema_version: '1'
+session_id: 01a02f13-6aff-7431-b181-3cc1457bd175
+source: discussion
+staged_at: 2026-08-23T15:13:20.781Z
+status: staged
+summary: User defined WeChat as a first-level site section and requested uninterrupted Goal execution.
+turn_id: wechat-information-architecture
+writer:
+  id: root
+  kind: main

@@ -1,0 +1,40 @@
+authority_role: proposal
+journal_ref:
+  event_id: a9dab4ad698ccccbe82b729155f7f1b22116bdb723b5ca1d4958752b9d98e268
+  path: >-
+    .pipeline/runtime/objects/activity/ambient-maintain/events/01a02f13-6aff-7431-b181-3cc1457bd175/main/root/00000001.jsonl
+kind: ambient_maintain
+object_ref:
+  id: ambient-maintain
+  kind: activity
+record_patch:
+  body: >-
+    # Hypo-Writer 公众号内容必须进入网站
+
+
+    `Workspace/Hypo/Hypo-Writer` 是个人网站的正式内容源。微信公众号文章不能缺失，必须进入首页写作精选、完整
+    Writing/Archive、文章详情与站内搜索，并尽量保留可核验的发布时间、系列、摘要、封面和原始发布链接。任何 `.secrets` 内容均不读取、不复制、不发布。
+  confidence: confirmed
+  created_at: 2026-08-23T15:10:10.031Z
+  dedupe_key: hypo_writer_official_account_content
+  kind: requirement
+  scope:
+    ref: project:hypoxanthine-personal-site
+    type: project
+  secret_refs: []
+  source_refs:
+    - locator: 01a02f13-6aff-7431-b181-3cc1457bd175
+      ref: C001-personal-site-rebuild
+      type: discussion
+  supersedes: []
+  updated_at: 2026-08-23T15:10:10.031Z
+schema_version: '1'
+session_id: 01a02f13-6aff-7431-b181-3cc1457bd175
+source: discussion
+staged_at: 2026-08-23T15:10:10.031Z
+status: staged
+summary: User made Hypo-Writer WeChat public-account content a mandatory website source.
+turn_id: hypo-writer-content-required
+writer:
+  id: root
+  kind: main

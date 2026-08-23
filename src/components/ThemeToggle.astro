@@ -1,3 +1,7 @@
+---
+import { Moon, Sun } from '@lucide/astro';
+---
+
 <button
   type="button"
   class="theme-toggle"
@@ -5,13 +9,8 @@
   aria-pressed="false"
   data-theme-toggle
 >
-  <svg data-theme-icon="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
-    <circle cx="12" cy="12" r="4.5" />
-    <path d="M12 2.5v2.3M12 19.2v2.3M4.8 4.8l1.6 1.6M17.6 17.6l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.8 19.2l1.6-1.6M17.6 6.4l1.6-1.6" />
-  </svg>
-  <svg data-theme-icon="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
-    <path d="M20 14.2A8 8 0 1 1 9.8 4a6.3 6.3 0 0 0 10.2 10.2Z" />
-  </svg>
+  <Sun data-theme-icon="sun" class="hidden h-4 w-4" stroke-width={1.8} aria-hidden="true" />
+  <Moon data-theme-icon="moon" class="hidden h-4 w-4" stroke-width={1.8} aria-hidden="true" />
 </button>
 
 <script>

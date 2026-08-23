@@ -1,23 +1,21 @@
 export const siteConfig = {
-  site: 'https://hypoxanthineovo.github.io',
-  title: 'Hypoxanthine',
-  description: 'ShanghaiTech VSPLab 研究生，方向 Cryo Computing × AI Acceleration。也写一些非技术的东西。',
+  site: 'https://hypox.cn',
+  title: '贺云翔 / Hypoxanthine',
+  description: '贺云翔（Hypoxanthine）：77 K 低温 GPU 研究者、系统构建者与科学写作者。',
   author: 'Yunxiang He',
-  tagline: 'Hypoxanthine (Yunxiang He)',
-  subtitle: 'ShanghaiTech · VSPLab · Cryo Computing × AI Acceleration',
+  tagline: '贺云翔 / Yunxiang He · Hypoxanthine',
+  subtitle: 'Cryogenic GPU Systems · Computer Architecture · AI Tooling',
   email: 'hyx021203@163.com',
   github: 'https://github.com/HypoxanthineOvO',
-  avatar: '/avatar.jpg',
+  avatar: '/media/profile/yunxiang-he.webp',
 };
 
 export const navLinks = [
-  { href: '/', label: '首页' },
-  { href: '/series', label: '系列' },
-  { href: '/tags', label: '标签' },
-  { href: '/projects', label: '项目' },
-  { href: '/publications', label: '发表' },
-  { href: '/courses', label: '课程' },
-  { href: '/about', label: '关于' },
+  { href: '/work', label: '项目', labelEn: 'Work' },
+  { href: '/research', label: '研究', labelEn: 'Research' },
+  { href: '/wechat', label: '公众号', labelEn: 'WeChat' },
+  { href: '/archive', label: '档案', labelEn: 'Archive' },
+  { href: '/about', label: '关于', labelEn: 'About' },
 ];
 
 export const socialLinks = [
