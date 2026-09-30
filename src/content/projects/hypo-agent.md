@@ -4,7 +4,7 @@ emoji: "🤖"
 description: "面向个人场景的常驻 AI 助手，多渠道（微信 / QQ / Notion）接入。"
 status: "active"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Agent"
-featured: true
+featured: false
 ---
 
 # Hypo-Agent

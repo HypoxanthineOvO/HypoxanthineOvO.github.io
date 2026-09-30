@@ -1,7 +1,7 @@
 ---
 title: "我做了一套自己的 AI 体感评测 | AI 模型观察"
 date: 2026-06-06
-description: ":::intro 不需要编程的轻度用户，到底怎么选择适合自己的 AI 模型？那些越来越高的编程榜单、Agent 榜单，真的能反映非专业用户的使用体验吗？"
+description: "不需要编程的轻度用户，到底怎么选择适合自己的 AI 模型？那些越来越高的编程榜单、Agent 榜单，真的能反映非专业用户的使用体验吗？"
 column: "AI 模型观察"
 status: archive
 featured: true

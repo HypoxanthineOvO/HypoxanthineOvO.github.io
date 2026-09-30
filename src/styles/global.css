@@ -133,6 +133,18 @@ html[data-skin='notes'] .skin, .skin--grid {
 /* astro check 的 html 深色代码块双主题 */
 .md-body .astro-code, .md-body pre.astro-code { background-color: #0d1117 !important; }
 
+/* hypo-writer 容器指令（:::intro / :::note → aside.directive） */
+.md-body .directive { border-radius: 4px; padding: 14px 18px; margin-top: 1.4em; }
+.md-body .directive--intro {
+  border-left: 3px solid var(--gate);
+  background: color-mix(in srgb, var(--gate) 7%, transparent);
+  font-size: 15.5px; line-height: 2;
+}
+.md-body .directive--note {
+  border: 1px dashed color-mix(in srgb, var(--gate) 40%, transparent);
+  color: var(--skin-muted); font-size: 14px;
+}
+
 /* ---- 散文子皮肤对阅读页的覆写（文章结构来自 ArticleLayout） ---- */
 
 html[data-skin='essay-classical'] .article { max-width: 37em; }

@@ -4,7 +4,7 @@ emoji: "📡"
 description: "个人信息门户：自动采集 + AI 增强摘要，双部署（Lab / Personal）。"
 status: "active"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Info"
-featured: true
+featured: false
 ---
 
 # Hypo-Info

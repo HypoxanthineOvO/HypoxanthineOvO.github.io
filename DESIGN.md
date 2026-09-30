@@ -148,7 +148,7 @@
 2. 发布门的名字：定名"发布"（英文标 PUBLISHING）
 3. 照片：用已有头像 `/media/profile/yunxiang-he.webp`，不再留虚线占位框
 4. 精选项目名单（上墙 6 个）：Cryo-GPU、VSPi、Hypo-Workflow、HypoDoc、Hypo-Writer、VSP-Codex；其余项目只进档案
-5. 学习档案资料：先入库已数字化的 8 篇（7 篇课程作品 + 1 篇《古典文学知识》文学发表），Windows 上的资料后续导入
+5. 学习档案资料：先入库已数字化的 9 篇（8 篇课程作品 + 1 篇《古典文学知识》文学发表），Windows 上的资料后续导入
 6. 印章：不用
 7. 散文 classical/modern 逐篇分类：楼林、灯河、行见录·相逢篇、行见录·遗憾篇 → 全部 classical（4 篇；modern 皮肤保留机制，暂无内容）
 8. 旧技术笔记去留：14 篇全部保持 draft 不上架，笔记门用"这个栏目在重写"诚实空态 + 重写进度，写完一篇上一篇
@@ -158,7 +158,7 @@
 
 - `essays`（4）：楼林、灯河、行见录-相逢篇、行见录-遗憾篇
 - `poetry`（3）：2021下半年-2022年诗词创作、2023年诗词创作、2024年诗词创作
-- `study`（8）：元代之后陆上丝绸之路凋敝的必然性、婉约词中的风骨、宋词导读拍照配词、宋词中的感性和理性、不醒人之梦-创作小记、智能的逆流与边界、你见过停滞在空中的云吗、（自 publications 移入）论中国古代诗词中的加餐
+- `study`（9）：元代之后陆上丝绸之路凋敝的必然性、婉约词中的风骨、宋词导读拍照配词、宋词中的感性和理性、不醒人之梦-创作小记、智能的逆流与边界、你见过停滞在空中的云吗、马克思技术观在当代的应用和启示、（自 publications 移入）论中国古代诗词中的加餐
 
 集合改名：`wechat` → `publish`（加 `platform` 字段，默认 wechat）；`wechat-daily.json` → `src/data/ai-daily.json`。
 
@@ -171,3 +171,21 @@
 4. 阶段四：档案页、关于页、旧文件清理（/en、series、tags、旧组件）、sitemap/RSS 校验
 
 每阶段结束 `pnpm check` 与 `pnpm build` 必须通过，并本地 preview 供验收。
+
+## 10. 实施记录（2026-09-30 全部完成）
+
+阶段一至四当日完成，逐项状态：
+
+1. ✅ 数据层：essays / poetry / study / notes / publications / projects / publish / project-log 八个集合就位；portfolio.ts 已并入 projects；wechat → publish（platform 字段）；wechat-daily.json → src/data/ai-daily.json
+2. ✅ 路由与重定向：~130 条旧 URL 重定向由 astro.config 按内容目录自动生成；/en、series、tags、courses、search、posts、projects、publications、wechat 全部下线
+3. ✅ 壳：BaseLayout v2（注册表驱动导航、系统主题+手动记忆、移动端折叠菜单）；皮肤变量层在 src/styles/global.css（`html[data-skin=…]`，每门亮暗两套）；楷体用系统字体栈（霞鹜文楷未自托管，如需再评估）
+4. ✅ 首页：介绍区（真名、两段式时态、现有头像照片）+ 七门卡片墙（lib/gates.ts 注册表驱动，桌面错位堆叠已校准到无碰撞，移动端单列）；three.js 已移除
+5. ✅ 各门：研究（demo 墙 + paper 皮肤详情）、项目（精选 6 卡、GitHub 快照卡 + 运行时刷新 + 静默回退、开发日记时间线）、散文（classical 落地 / modern 机制就绪暂无内容）、诗词（册页 + 居中断阕）、发布（日报 + 长文，:::intro/:::note 容器指令经 remark-directive 转为样式块）、学习档案（学期时间线）、技术笔记（诚实空态 + 0/14 进度条）
+6. ✅ 档案页：统一时间线 + 客户端搜索（吸收旧 /search）；关于页改中文单语；RSS 覆盖散文/诗词/笔记/发布长文；sitemap 校验无重定向页混入
+7. ✅ 清理：three/tailwind/未用字体依赖移除；旧组件、旧布局、旧校验脚本退役；新增 scripts/validate-site.mjs（22 项断言全过）与 scripts/shoot-site.mjs
+
+遗留待补（不阻塞）：
+
+- SCAR (ISCAS 2026) 的 PDF 文件入库后补 `public/files/Papers/`，题录里已留注释
+- 学校 email、B站/知乎主页地址拿到后更新 `src/lib/site.ts` 与首页联系胶囊
+- 学习档案的 Windows 资料导入；essay-modern 第一篇内容；印章未启用（按 §8 决定）

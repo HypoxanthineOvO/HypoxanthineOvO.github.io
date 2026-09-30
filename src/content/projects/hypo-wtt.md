@@ -4,7 +4,7 @@ emoji: "🏓"
 description: "乒乓球数据系统：比赛采集 + 排名计算 + 赛事资讯。"
 status: "active"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-WTT"
-featured: true
+featured: false
 ---
 
 # Hypo-WTT

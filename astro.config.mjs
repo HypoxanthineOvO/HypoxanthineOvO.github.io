@@ -2,9 +2,9 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import remarkMath from 'remark-math';
 import remarkBreaks from 'remark-breaks';
+import remarkDirective from 'remark-directive';
 import rehypeKatex from 'rehype-katex';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -85,15 +85,29 @@ Object.assign(redirects, {
   '/en/work': '/work',
 });
 
+// hypo-writer 流水线的 :::intro / :::note 容器指令 → <aside class="directive …">
+function remarkContainers() {
+  /** @param {any} tree */
+  return (tree) => {
+    /** @param {any} node */
+    const walk = (node) => {
+      if (node.type === 'containerDirective') {
+        node.data = node.data ?? {};
+        node.data.hName = 'aside';
+        node.data.hProperties = { class: `directive directive--${node.name}` };
+      }
+      if (node.children) node.children.forEach(walk);
+    };
+    walk(tree);
+  };
+}
+
 export default defineConfig({
   site: 'https://hypox.cn',
   output: 'static',
   integrations: [
     mdx(),
     sitemap(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
   ],
   redirects,
   markdown: {
@@ -105,7 +119,7 @@ export default defineConfig({
       },
       wrap: true,
     },
-    remarkPlugins: [remarkMath, remarkBreaks],
+    remarkPlugins: [remarkMath, remarkBreaks, remarkDirective, remarkContainers],
     rehypePlugins: [rehypeKatex],
   },
 });

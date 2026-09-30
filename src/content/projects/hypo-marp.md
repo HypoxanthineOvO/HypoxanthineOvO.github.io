@@ -4,7 +4,7 @@ emoji: "🎨"
 description: "Marp 主题与渲染工作台，上游供 Hypo-Courses 等以 submodule 消费。"
 status: "active"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Marp"
-featured: true
+featured: false
 ---
 
 # Hypo-Marp

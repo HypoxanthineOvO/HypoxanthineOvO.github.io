@@ -1,7 +1,7 @@
 ---
 title: "AI 时代，受益最大的，恰恰是「不会编程」的人 | AI 焦虑门诊（1）"
 date: 2026-07-02
-description: ":::intro AI 时代受益最大的人，恰恰是原本不懂编程的人。他们之前本就有东西可做、想做，但是缺乏实现这些想法的工具。"
+description: "AI 时代受益最大的人，恰恰是原本不懂编程的人。他们之前本就有东西可做、想做，但是缺乏实现这些想法的工具。"
 column: "AI 焦虑门诊"
 status: archive
 featured: true
