@@ -1,0 +1,83 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublications } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const pubs = await getPublications();
+  return pubs.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const isAuthor = (a: string) => a === 'Yunxiang He';
+const citation = `${(d.authors ?? []).map((a) => (isAuthor(a) ? 'Y. He' : a.split(' ').reverse().map((w, i) => (i === 0 ? w : w[0] + '.')).join(' '))).join(', ')}, "${d.title}," ${d.venue ?? ''} ${d.year}.`;
+---
+
+<BaseLayout skin="paper" title={d.title} description={`${d.venue} · ${d.year}`}>
+  <section class="skin">
+    <div class="shell paperpage">
+      <p class="crumbs"><a href="/research">研究</a> / {d.year}</p>
+      <article class="paperdoc">
+        <p class="doctype">{d.venue} · {d.year}{d.research_area ? ` · ${d.research_area}` : ''}</p>
+        <h1>{d.title}</h1>
+        <div class="byline">
+          {(d.authors ?? []).map((a, i) => (i > 0 ? '， ' : '') + (isAuthor(a) ? <b>{a}</b> : a))}
+          <span class="affil">ShanghaiTech University · VSP Lab</span>
+        </div>
+        <div class="body md-body">
+          <Content />
+        </div>
+        <div class="citebox">
+          <span class="cite">{citation}</span>
+          <span class="acts">
+            {d.pdf && <a class="act" href={d.pdf}>PDF</a>}
+            {d.code && <a class="act" href={d.code} target="_blank" rel="noreferrer">CODE</a>}
+            {d.project_page && <a class="act" href={d.project_page} target="_blank" rel="noreferrer">PROJECT</a>}
+            {d.bibtex && <button class="act" data-bibtex={d.bibtex}>BIBTEX</button>}
+          </span>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-bibtex]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.bibtex ?? '');
+        const old = btn.textContent;
+        btn.textContent = '已复制';
+        setTimeout(() => (btn.textContent = old), 1400);
+      } catch { /* 剪贴板不可用就静默 */ }
+    });
+  });
+</script>
+
+<style>
+  .crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--skin-muted); padding-top: 34px; }
+  .crumbs a { color: var(--gate); }
+  .paperpage { padding-bottom: 80px; }
+  .paperdoc { max-width: 44em; margin: 0 auto; font-family: var(--font-serif); color: var(--fg); }
+  .doctype { text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; color: var(--skin-muted); margin-top: 26px; }
+  .paperdoc h1 { text-align: center; font-size: 25px; line-height: 1.5; margin-top: 18px; font-weight: 700; }
+  .byline { text-align: center; margin-top: 14px; font-size: 14.5px; }
+  .byline b { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gate); }
+  .byline .affil { display: block; font-size: 12.5px; color: var(--skin-muted); margin-top: 4px; font-style: italic; }
+  .paperdoc :global(.md-body) { margin-top: 30px; }
+  .paperdoc :global(.md-body > p:first-child::first-letter) { font-size: 1.05em; }
+  .citebox {
+    margin-top: 40px; border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line);
+    padding: 14px 2px; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; color: var(--skin-muted);
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }
+  .citebox .cite { flex: 1; min-width: 16em; }
+  .acts { display: flex; gap: 8px; }
+  .act {
+    font-family: var(--font-mono); font-size: 11.5px; border: 1px solid var(--gate);
+    color: var(--gate); padding: 3px 12px; border-radius: 2px; cursor: pointer; background: none;
+  }
+  .act:hover { background: var(--gate); color: #fff; }
+</style>

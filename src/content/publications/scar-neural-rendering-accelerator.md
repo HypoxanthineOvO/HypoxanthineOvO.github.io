@@ -7,9 +7,9 @@ authors:
   - Chaofan Li
   - Qihan Ding
   - Xin Lou
-venue: ISCAS
+venue: "IEEE International Symposium on Circuits and Systems (ISCAS)"
 year: 2026
-pdfUrl: /files/SCAR-ISCAS2026.pdf
+# pdf 文件尚未入库，拿到正式版后补 /files/Papers/SCAR-ISCAS2026.pdf
 featured: true
 ---
 

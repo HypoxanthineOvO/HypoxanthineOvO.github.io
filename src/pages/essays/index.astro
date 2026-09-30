@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GateHead from '../../components/GateHead.astro';
+import { getEssays, formatDate } from '../../lib/content';
+
+const essays = await getEssays();
+const styleLabel = { classical: '古典', modern: '现代' } as const;
+---
+
+<BaseLayout skin="essay-classical" title="散文">
+  <section class="skin">
+    <div class="shell">
+      <GateHead
+        gate="essays"
+        blurb="城与人的记忆，少年时候的心事。写得不多，但每一篇都是真的。"
+        note={`${essays.length} 篇`}
+      />
+      <div class="list">
+        {essays.map((e) => (
+          <a class="essayrow" href={`/essays/${e.id}`}>
+            <div class="main">
+              <h3>{e.data.title}</h3>
+              {e.data.description && <p>{e.data.description.slice(0, 92)}{e.data.description.length > 92 ? '……' : ''}</p>}
+            </div>
+            <div class="side">
+              <span class="badge">{styleLabel[e.data.style]}</span>
+              <span class="date">{formatDate(e.data.date)}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .list { padding: 26px 0 64px; display: flex; flex-direction: column; }
+  .essayrow {
+    display: grid; grid-template-columns: 1fr auto; gap: 6px 26px; align-items: center;
+    padding: 17px 6px; border-bottom: 1px solid color-mix(in srgb, var(--skin-line) 80%, transparent);
+  }
+  .essayrow:hover h3 { color: var(--gate); }
+  .essayrow h3 { font-family: var(--font-serif); font-size: 16.5px; font-weight: 600; line-height: 1.55; }
+  .essayrow p { font-family: var(--font-serif); font-size: 13.5px; color: var(--skin-muted); margin-top: 5px; line-height: 1.9; }
+  .side { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+  .badge {
+    font-family: var(--font-serif); font-size: 11px; letter-spacing: .2em;
+    color: var(--gate); border: 1px solid color-mix(in srgb, var(--gate) 40%, transparent);
+    border-radius: 2px; padding: 1px 9px;
+  }
+  .date { font-family: var(--font-mono); font-size: 12px; color: var(--skin-muted); }
+  @media (max-width: 960px) {
+    .essayrow { grid-template-columns: 1fr; }
+    .side { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+</style>

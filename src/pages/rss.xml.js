@@ -1,25 +1,29 @@
 import rss from '@astrojs/rss';
 
-import { getNotes, getPosts } from '../lib/content';
+import { getEssays, getPoetry, getNotes, getPublishArticles } from '../lib/content';
 import { siteConfig } from '../lib/site';
 
+// RSS 覆盖散文、诗词、笔记、发布门长文（DESIGN.md §2.2）
 export async function GET(context) {
-  const posts = await getPosts({ includeArchived: false });
-  const notes = await getNotes({ includeArchived: false });
+  const [essays, poetry, notes, articles] = await Promise.all([
+    getEssays(),
+    getPoetry(),
+    getNotes(),
+    getPublishArticles(),
+  ]);
+
+  const itemOf = (entry, gateHref) => ({
+    title: entry.data.title,
+    description: entry.data.description ?? '',
+    pubDate: entry.data.date,
+    link: `${gateHref}/${entry.id}`,
+  });
 
   const items = [
-    ...posts.map((entry) => ({
-      title: entry.data.title,
-      description: entry.data.description ?? '',
-      pubDate: entry.data.date,
-      link: `/posts/${entry.id}`,
-    })),
-    ...notes.map((entry) => ({
-      title: entry.data.title,
-      description: entry.data.description ?? '',
-      pubDate: entry.data.date,
-      link: `/notes/${entry.id}`,
-    })),
+    ...essays.map((e) => itemOf(e, '/essays')),
+    ...poetry.map((e) => itemOf(e, '/poetry')),
+    ...notes.map((e) => itemOf(e, '/notes')),
+    ...articles.map((e) => itemOf(e, '/publish')),
   ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({

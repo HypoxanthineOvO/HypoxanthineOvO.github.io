@@ -1,0 +1,40 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getEssays, formatDate, getAdjacentEntries } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const essays = await getEssays();
+  return essays.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const essays = await getEssays();
+const { newer, older } = getAdjacentEntries(essays, entry.id);
+---
+
+<ArticleLayout
+  skin={`essay-${entry.data.style}`}
+  kicker={`散文 / ${entry.data.style === 'classical' ? '古典' : '现代'}`}
+  title={entry.data.title}
+  metas={[formatDate(entry.data.date), '贺云翔']}
+  description={entry.data.description}
+>
+  <Content />
+  {entry.data.updated && <p class="updated-note">最后修订于 {formatDate(entry.data.updated)}</p>}
+  <nav class="adj">
+    {older && <a href={`/essays/${older.id}`}>← {older.data.title}</a>}
+    {newer && <a href={`/essays/${newer.id}`}>{newer.data.title} →</a>}
+  </nav>
+</ArticleLayout>
+
+<style>
+  .updated-note { margin-top: 2.5em; font-size: 12.5px; color: var(--skin-muted); font-family: var(--font-mono); }
+  .adj {
+    margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--skin-line);
+    display: flex; justify-content: space-between; gap: 18px; font-size: 13.5px; flex-wrap: wrap;
+  }
+  .adj a { color: var(--skin-muted); }
+  .adj a:hover { color: var(--gate); }
+</style>

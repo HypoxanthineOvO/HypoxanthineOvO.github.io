@@ -1,0 +1,39 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getStudy, formatDate, getAdjacentEntries } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getStudy();
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const all = await getStudy();
+const { newer, older } = getAdjacentEntries(all, entry.id);
+const typeLabel = { coursework: '课程论文', review: '读书报告', creative: '创意写作', literary: '文学发表', summary: '年度总结' } as const;
+---
+
+<ArticleLayout
+  skin="study"
+  kicker={`学习档案 / ${entry.data.term}`}
+  title={entry.data.title}
+  metas={[formatDate(entry.data.date), entry.data.course ?? typeLabel[entry.data.type], typeLabel[entry.data.type]]}
+  description={entry.data.description}
+>
+  <Content />
+  <nav class="adj">
+    {older && <a href={`/study/${older.id}`}>← {older.data.title}</a>}
+    {newer && <a href={`/study/${newer.id}`}>{newer.data.title} →</a>}
+  </nav>
+</ArticleLayout>
+
+<style>
+  .adj {
+    margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--skin-line);
+    display: flex; justify-content: space-between; gap: 18px; font-size: 13.5px; flex-wrap: wrap;
+  }
+  .adj a { color: var(--skin-muted); }
+  .adj a:hover { color: var(--gate); }
+</style>

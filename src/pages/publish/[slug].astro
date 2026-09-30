@@ -1,0 +1,31 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getPublishArticles, formatDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const articles = await getPublishArticles();
+  return articles.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const platformLabel = { wechat: '公众号', zhihu: '知乎', bilibili: 'B站', xiaohongshu: '小红书' } as const;
+---
+
+<ArticleLayout
+  skin="publish"
+  kicker={`发布 / ${platformLabel[d.platform]}${d.column ? ` · ${d.column}` : ''}`}
+  title={d.title}
+  metas={[formatDate(d.date), platformLabel[d.platform]]}
+  description={d.description}
+>
+  <Content />
+  <p class="from-note">经 Hypo-Writer 流水线写作与发布 · <a href="/publish">返回发布门</a></p>
+</ArticleLayout>
+
+<style>
+  .from-note { margin-top: 3em; font-size: 12.5px; color: var(--skin-muted); font-family: var(--font-mono); }
+  .from-note a { color: var(--gate); }
+</style>

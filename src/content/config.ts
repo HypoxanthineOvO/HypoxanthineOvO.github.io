@@ -1,177 +1,126 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { seriesValues } from '../lib/series';
 
-const projectLogFields = {
-  // Diary-style note or a release announcement.
-  kind: z.enum(['diary', 'release']).optional(),
-  // Project slug such as hypo-llm or hypo-wtt.
-  project: z.string().optional(),
-  // Semantic milestone name like v3-launch.
-  milestone: z.string().optional(),
-  // Outcome of the logged milestone.
-  status: z.enum(['shipped', 'wip', 'abandoned']).default('wip'),
-  // Human-readable time range such as 2026-03 ~ 2026-04.
-  duration: z.string().optional(),
-};
-
-const posts = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/posts',
-  }),
-  schema: z
-    .object({
-      // Public title used in cards, metadata, and article pages.
-      title: z.string(),
-      // Original publish date.
-      date: z.date(),
-      // Optional short summary used in list pages and feeds.
-      description: z.string().optional(),
-      // Closed-set primary series used for navigation and archive pages.
-      series: z.enum(seriesValues),
-      // Open-set cross-cutting tags.
-      tags: z.array(z.string()).default([]),
-      // Archive-only entries stay inside the dedicated humanities series page.
-      archived: z.boolean().default(false),
-      // Draft posts stay out of production lists and routes.
-      draft: z.boolean().default(false),
-      // Enable KaTeX styles only when math markup is present.
-      math: z.boolean().default(false),
-      // Optional last updated date for migrated or revised posts.
-      updated: z.date().optional(),
-      ...projectLogFields,
-    })
-    .superRefine((data, ctx) => {
-      if (data.series === 'project-log') {
-        if (!data.kind) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require kind', path: ['kind'] });
-        }
-        if (!data.project) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require project', path: ['project'] });
-        }
-      }
-    }),
-});
-
-const notes = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/notes',
-  }),
-  schema: z
-    .object({
-      // Note title shown in index pages and note detail pages.
-      title: z.string(),
-      // Date of the note itself.
-      date: z.date(),
-      // Source material such as a paper, book, or talk.
-      source: z.string().optional(),
-      // Authors of the source material when relevant.
-      authors: z.array(z.string()).optional(),
-      // Canonical source link for the original material.
-      link: z.string().url().optional(),
-      // Closed-set primary series used for navigation and archive pages.
-      series: z.enum(seriesValues),
-      // Open-set cross-cutting tags.
-      tags: z.array(z.string()).default([]),
-      // Archive-only entries stay inside the dedicated humanities series page.
-      archived: z.boolean().default(false),
-      // Draft notes stay out of production lists and routes.
-      draft: z.boolean().default(false),
-      // Optional note summary for cards and feeds.
-      description: z.string().optional(),
-      ...projectLogFields,
-    })
-    .superRefine((data, ctx) => {
-      if (data.series === 'project-log') {
-        if (!data.kind) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require kind', path: ['kind'] });
-        }
-        if (!data.project) {
-          ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'project-log entries require project', path: ['project'] });
-        }
-      }
-    }),
-});
-
-const publications = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/publications',
-  }),
+// 散文：style 控制阅读页子皮肤（essay-classical / essay-modern）
+const essays = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/essays' }),
   schema: z.object({
-    // Academic publications vs. literary publications.
-    kind: z.enum(['academic', 'literary']).default('academic'),
-    // Publication title.
     title: z.string(),
-    // Ordered author list; highlight Hypoxanthine He in the UI.
-    authors: z.array(z.string()).optional(),
-    // Venue such as conference, journal, or workshop.
-    venue: z.string().optional(),
-    // Publication year used for sorting and grouping.
-    year: z.number().int(),
-    // Research area section heading for academic publications.
-    research_area: z.string().optional(),
-    // Optional PDF link.
-    pdf: z.string().optional(),
-    // Optional code repository link.
-    code: z.string().optional(),
-    // Optional standalone project page link.
-    project_page: z.string().optional(),
-    // Optional BibTeX string for quick copy.
-    bibtex: z.string().optional(),
-    // Optional teaser image path.
-    teaser: z.string().optional(),
-    // Featured publications appear on the landing page.
-    featured: z.boolean().default(false),
+    date: z.date(),
+    description: z.string().optional(),
+    style: z.enum(['classical', 'modern']).default('classical'),
+    math: z.boolean().default(false),
+    updated: z.date().optional(),
   }),
 });
 
-const projects = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/projects',
-  }),
+// 诗词：按年结集，正文里空行分组即断阕
+const poetry = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/poetry' }),
   schema: z.object({
-    // Project name displayed on cards and detail pages.
-    name: z.string(),
-    // Optional emoji marker shown next to the project name.
-    emoji: z.string().optional(),
-    // Single-line summary for list pages.
-    description: z.string(),
-    // Current lifecycle state.
-    status: z.enum(['active', 'wip', 'archived', 'internal']),
-    // Optional GitHub repository link.
-    githubUrl: z.string().url().optional(),
-    // Optional main technologies or domains.
-    tech: z.array(z.string()).default([]),
-    // Featured projects appear on the landing page.
+    title: z.string(),
+    date: z.date(),
+    description: z.string().optional(),
+    // 合集卡片上的选句
+    picked: z.string().optional(),
+    updated: z.date().optional(),
+  }),
+});
+
+// 学习档案：按学期组织的课程论文、读书报告、创意写作、文学发表
+const study = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    description: z.string().optional(),
+    term: z.string(),
+    type: z.enum(['coursework', 'review', 'creative', 'literary', 'summary']),
+    course: z.string().optional(),
+    math: z.boolean().default(false),
+  }),
+});
+
+// 技术笔记：待逐篇重写，draft 条目默认不进生产列表
+const notes = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/notes' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    description: z.string().optional(),
+    source: z.string().optional(),
+    authors: z.array(z.string()).optional(),
+    link: z.string().url().optional(),
+    draft: z.boolean().default(false),
+    math: z.boolean().default(false),
+  }),
+});
+
+// 学术发表（研究门）。文学发表已移入 study。
+const publications = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/publications' }),
+  schema: z.object({
+    title: z.string(),
+    authors: z.array(z.string()).optional(),
+    venue: z.string().optional(),
+    year: z.number().int(),
+    research_area: z.string().optional(),
+    pdf: z.string().optional(),
+    code: z.string().optional(),
+    project_page: z.string().optional(),
+    bibtex: z.string().optional(),
+    teaser: z.string().optional(),
     featured: z.boolean().default(false),
   }),
 });
 
-const wechat = defineCollection({
-  loader: glob({
-    pattern: '**/*.{md,mdx}',
-    base: './src/content/wechat',
+// 项目：合并自 portfolio.ts 与旧 projects 集合。featured 才上墙。
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
+  schema: z.object({
+    name: z.string(),
+    emoji: z.string().optional(),
+    description: z.string(),
+    status: z.enum(['active', 'wip', 'archived']),
+    statusNote: z.string().optional(),
+    featured: z.boolean().default(false),
+    cover: z.string().optional(),
+    githubUrl: z.string().url().optional(),
+    url: z.string().optional(),
+    tech: z.array(z.string()).default([]),
+    period: z.string().optional(),
+    category: z.enum(['research', 'systems', 'writing', 'tools']).optional(),
   }),
+});
+
+// 发布：公众号长文 + 未来知乎/B站/小红书，platform 区分渠道
+const publish = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/publish' }),
   schema: z.object({
     title: z.string(),
     date: z.date(),
     description: z.string(),
-    series: z.string(),
-    status: z.enum(['published', 'archive', 'draft']),
+    column: z.string().optional(),
+    platform: z.enum(['wechat', 'zhihu', 'bilibili', 'xiaohongshu']).default('wechat'),
+    status: z.enum(['published', 'archive', 'draft']).default('published'),
     featured: z.boolean().default(false),
     cover: z.string().nullable().default(null),
-    source: z.literal('hypo-writer'),
+    source: z.string().optional(),
   }),
 });
 
-export const collections = {
-  posts,
-  notes,
-  publications,
-  projects,
-  wechat,
-};
+// 开发日记：project-log 机制，project 字段关联项目 slug
+const projectLog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/project-log' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    kind: z.enum(['diary', 'release']),
+    project: z.string(),
+    milestone: z.string().optional(),
+    status: z.enum(['shipped', 'wip', 'abandoned']).default('wip'),
+    duration: z.string().optional(),
+  }),
+});
+
+export const collections = { essays, poetry, study, notes, publications, projects, publish, projectLog };

@@ -3,12 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="404" description="页面未找到。">
-  <section class="shell flex min-h-[50vh] items-center justify-center pb-20">
-    <div class="text-center">
-      <p class="section-kicker">页面未找到</p>
-      <h1 class="mb-4">404</h1>
-      <p class="mb-4 text-muted">你访问的页面不在当前重建版本中。</p>
-      <a class="inline-link font-sans text-sm" href="/">返回首页</a>
+  <section class="notfound">
+    <div>
+      <p class="kicker">NOT FOUND</p>
+      <h1>404</h1>
+      <p class="hint">你访问的页面不在。可能它搬去了七扇门中的某一扇。</p>
+      <a class="home" href="/">← 返回首页</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .notfound { min-height: 52vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .25em; color: var(--muted); }
+  h1 { font-size: 56px; font-family: var(--font-mono); margin-top: 8px; }
+  .hint { color: var(--muted); margin-top: 10px; }
+  .home { display: inline-block; margin-top: 18px; color: var(--fg); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); }
+</style>

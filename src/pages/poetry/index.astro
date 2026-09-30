@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GateHead from '../../components/GateHead.astro';
+import { getPoetry } from '../../lib/content';
+
+const vols = await getPoetry();
+---
+
+<BaseLayout skin="poetry" title="诗词">
+  <section class="skin">
+    <div class="shell">
+      <GateHead
+        gate="poetry"
+        title="诗词合集"
+        blurb="按年结集。少年时爱律诗，后来多写词——言志与言情的比例，一年比一年诚实。"
+        note={`${vols.length} 部合集`}
+        center
+      />
+      <div class="vols">
+        {vols.map((v) => (
+          <a class="vol" href={`/poetry/${v.id}`}>
+            <div class="yrs">{String(v.data.date.getUTCFullYear())}</div>
+            <h3>{v.data.title}</h3>
+            {v.data.picked && <p class="picked">{v.data.picked}</p>}
+            <span class="count">词 · 诗 · 联句</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .vols { padding: 30px 0 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .vol {
+    position: relative; border: 1px solid var(--skin-line); border-radius: 3px;
+    padding: 26px 24px 20px; text-align: center; font-family: var(--font-serif); color: var(--fg);
+    background: color-mix(in srgb, var(--skin-bg) 55%, #fff 45%);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  :global(html[data-theme='dark']) .vol { background: color-mix(in srgb, var(--skin-bg) 70%, #000 12%); }
+  .vol::after {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid color-mix(in srgb, var(--skin-line) 70%, transparent);
+    border-radius: 2px; pointer-events: none;
+  }
+  .vol:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(74,53,23,.16); }
+  .vol .yrs { font-size: 12px; letter-spacing: .3em; color: var(--gate); }
+  .vol h3 { font-size: 19px; margin-top: 8px; letter-spacing: .18em; }
+  .vol .picked { margin-top: 14px; font-size: 14px; line-height: 2.1; color: var(--skin-muted); }
+  .vol .count {
+    display: inline-block; margin-top: 14px; font-size: 11.5px; font-family: var(--font-mono);
+    color: var(--gate); border: 1px solid var(--skin-line); border-radius: 999px; padding: 1px 12px;
+  }
+  @media (max-width: 960px) { .vols { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GateHead from '../../components/GateHead.astro';
+import { getStudy } from '../../lib/content';
+
+const entries = await getStudy();
+// 学期按条目日期排序天然有序，同学期聚成一组
+const terms: { key: string; items: typeof entries }[] = [];
+for (const e of entries) {
+  const last = terms[terms.length - 1];
+  if (last && last.key === e.data.term) last.items.push(e);
+  else terms.push({ key: e.data.term, items: [e] });
+}
+const typeLabel = { coursework: '课程论文', review: '读书报告', creative: '创意写作', literary: '文学发表', summary: '年度总结' } as const;
+---
+
+<BaseLayout skin="study" title="学习档案">
+  <section class="skin">
+    <div class="shell">
+      <GateHead
+        gate="study"
+        blurb="本科四年人文课程写下的东西：课程论文、读书报告、创意写作，以及一篇侥幸发表的文学小论文。按学期归档。"
+      />
+      <div class="terms">
+        {terms.map((term) => (
+          <div class="term">
+            <div class="t-label"><span class="sem">{term.key}</span></div>
+            <div class="t-items">
+              {term.items.map((e) => (
+                <a class="srow" href={`/study/${e.id}`}>
+                  <h3>{e.data.title}</h3>
+                  {e.data.course && <span class="course">{e.data.course}</span>}
+                  <span class="type">{typeLabel[e.data.type]}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .terms { padding: 26px 0 64px; }
+  .term { display: grid; grid-template-columns: 130px 1fr; gap: 26px; position: relative; padding-bottom: 30px; }
+  .term::before { content: ''; position: absolute; left: 141px; top: 6px; bottom: -6px; width: 2px; background: var(--skin-line); }
+  .term:last-child::before { bottom: auto; height: calc(100% - 12px); }
+  .t-label { text-align: right; font-family: var(--font-mono); font-size: 13px; color: var(--gate); padding-top: 8px; letter-spacing: .1em; }
+  .t-items { display: flex; flex-direction: column; gap: 8px; }
+  .srow {
+    background: var(--panel); border: 1px solid var(--skin-line); border-radius: 4px;
+    padding: 11px 16px; display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; align-items: baseline;
+    transition: border-color .16s, transform .16s; position: relative;
+  }
+  .srow:hover { border-color: var(--gate); transform: translateX(3px); }
+  .srow::before {
+    content: ''; position: absolute; left: -30px; top: 50%; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--gate); transform: translateY(-50%);
+    box-shadow: 0 0 0 3px var(--skin-bg);
+  }
+  .srow h3 { font-family: var(--font-serif); font-size: 15px; font-weight: 600; line-height: 1.5; }
+  .srow .course { grid-column: 1; font-size: 12px; color: var(--skin-muted); }
+  .srow .type {
+    grid-row: 1 / span 2; align-self: center;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: var(--gate);
+    border: 1px solid var(--skin-line); border-radius: 2px; padding: 1px 8px;
+  }
+  @media (max-width: 960px) {
+    .term { grid-template-columns: 1fr; gap: 10px; }
+    .term::before { display: none; }
+    .t-label { text-align: left; }
+    .srow::before { display: none; }
+  }
+</style>

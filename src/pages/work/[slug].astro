@@ -1,0 +1,197 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects, getProjectLog } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+// 开发日记：预渲染正文组件
+const logEntries = await getProjectLog(entry.id);
+const logs = await Promise.all(
+  logEntries.map(async (log) => ({ log, LogBody: (await render(log)).Content })),
+);
+
+const statusDot = { active: 'green', wip: 'yellow', archived: 'gray' } as const;
+const statusLabel = { active: '活跃自用', wip: '施工中', archived: '已归档' } as const;
+
+// GitHub 信息卡：构建时烙快照，页面加载时向 API 刷新一次，失败静默回退
+interface GhSnapshot {
+  stars: number | null;
+  forks: number | null;
+  pushedAt: string | null;
+  release: string | null;
+}
+let snapshot: GhSnapshot | null = null;
+if (d.githubUrl) {
+  try {
+    const repo = new URL(d.githubUrl).pathname.replace(/\/$/, '');
+    const res = await fetch(`https://api.github.com/repos${repo}`, { headers: { 'User-Agent': 'hypox.cn-build' } });
+    if (res.ok) {
+      const data = await res.json();
+      let release: string | null = null;
+      try {
+        const relRes = await fetch(`https://api.github.com/repos${repo}/releases/latest`, { headers: { 'User-Agent': 'hypox.cn-build' } });
+        if (relRes.ok) release = (await relRes.json()).tag_name ?? null;
+      } catch { /* release 可选 */ }
+      snapshot = { stars: data.stargazers_count, forks: data.forks_count, pushedAt: data.pushed_at, release };
+    }
+  } catch { /* 离线构建：快照缺省，页面运行时再刷新 */ }
+}
+const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').replace(/\/$/, '') : '';
+---
+
+<BaseLayout skin="engineering" title={d.name} description={d.description}>
+  <section class="skin detail">
+    <div class="shell wrap">
+      <p class="crumbs"><a href="/work">项目</a> / {entry.id}</p>
+      <h1>{d.name} <i class:list={['dot', `dot--${statusDot[d.status]}`]} /></h1>
+      <p class="lead">{d.description}</p>
+
+      {d.cover && (
+        <div class="cover-big" style={`background-image:url('${d.cover}')`} role="img" aria-label={`${d.name} 封面`} />
+      )}
+
+      <div class="cols">
+        <div class="doc md-body">
+          <Content />
+          {logs.length > 0 && (
+            <div class="devlog" id="devlog">
+              <h2>开发日记</h2>
+              <div class="tl">
+                {logs.map(({ log, LogBody }) => (
+                  <div class:list={['entry', { wip: log.data.status === 'wip' }]}>
+                    <span class="when">{log.data.duration ?? log.data.date.toISOString().slice(0, 10)} · {log.data.status}</span>
+                    <h3>{log.data.title}<span class="kind">{log.data.kind}</span></h3>
+                    <div class="md-body logbody"><LogBody /></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <aside>
+          {repoPath && (
+            <div class="ghcard" data-repo={repoPath}>
+              <div class="gh-head"><span class="oct">⌥</span><a class="repo" href={d.githubUrl} target="_blank" rel="noreferrer">{repoPath}</a></div>
+              <dl>
+                <div><dt>STARS</dt><dd data-gh="stars">{snapshot?.stars ?? '—'}</dd></div>
+                <div><dt>FORKS</dt><dd data-gh="forks">{snapshot?.forks ?? '—'}</dd></div>
+                <div><dt>LAST PUSH</dt><dd data-gh="push">{snapshot?.pushedAt?.slice(0, 10) ?? '—'}</dd></div>
+                <div><dt>RELEASE</dt><dd data-gh="release">{snapshot?.release ?? '—'}</dd></div>
+              </dl>
+              <div class="gh-foot"><span data-gh="state">{snapshot ? `snapshot @ build` : 'no snapshot'}</span><span>runtime refresh</span></div>
+            </div>
+          )}
+          <div class="sidecard">
+            <h4>STATUS</h4>
+            <p class="statusline">
+              <i class:list={['dot', `dot--${statusDot[d.status]}`]} />
+              {statusLabel[d.status]}{d.period ? ` · ${d.period}` : ''}
+            </p>
+            {d.statusNote && <p class="statusnote">{d.statusNote}</p>}
+          </div>
+          {d.tech.length > 0 && (
+            <div class="sidecard">
+              <h4>TECH</h4>
+              <div class="chips">{d.tech.map((t) => <span class="chip">{t}</span>)}</div>
+            </div>
+          )}
+          {d.url && (
+            <div class="sidecard">
+              <h4>LINK</h4>
+              <a class="plainlink" href={d.url}>{d.url.startsWith('/') ? '站内页面' : d.url}</a>
+            </div>
+          )}
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ repoPath }}>
+  // 页面加载时向 GitHub API 刷新一次，失败静默回退构建快照
+  if (repoPath) {
+    (async () => {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repoPath}`, { headers: { Accept: 'application/vnd.github+json' } });
+        if (!res.ok) return;
+        const data = await res.json();
+        const set = (key, value) => {
+          const el = document.querySelector(`[data-gh="${key}"]`);
+          if (el && value != null) el.textContent = String(value);
+        };
+        set('stars', data.stargazers_count);
+        set('forks', data.forks_count);
+        set('push', data.pushed_at?.slice(0, 10));
+        const state = document.querySelector('[data-gh="state"]');
+        if (state) state.textContent = 'live from api';
+        try {
+          const relRes = await fetch(`https://api.github.com/repos/${repoPath}/releases/latest`);
+          if (relRes.ok) set('release', (await relRes.json()).tag_name);
+        } catch { /* release 可选 */ }
+      } catch { /* 静默回退 */ }
+    })();
+  }
+</script>
+
+<style>
+  .detail { padding: 26px 0 70px; }
+  .wrap { max-width: 880px; }
+  .crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--skin-muted); }
+  .crumbs a { color: var(--gate); }
+  h1 { font-size: 32px; margin-top: 10px; display: flex; align-items: center; gap: 12px; }
+  .lead { color: var(--skin-muted); margin-top: 8px; font-size: 15px; }
+  .cover-big { margin-top: 22px; aspect-ratio: 16 / 7; border-radius: 8px; background-size: cover; background-position: center; border: 1px solid var(--skin-line); }
+  .cols { display: grid; grid-template-columns: 1fr 300px; gap: 26px; margin-top: 26px; align-items: start; }
+  .doc { font-size: 15px; }
+
+  .devlog h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: .18em; color: var(--gate); }
+  .tl { margin-top: 16px; border-left: 2px solid var(--skin-line); padding-left: 22px; display: flex; flex-direction: column; gap: 18px; }
+  .tl .entry { position: relative; }
+  .tl .entry::before {
+    content: ''; position: absolute; left: -27.5px; top: 7px; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--gate); box-shadow: 0 0 0 3px var(--skin-bg);
+  }
+  .tl .entry.wip::before { background: #d29922; }
+  .tl .when { font-family: var(--font-mono); font-size: 11.5px; color: var(--skin-muted); }
+  .tl h3 { font-size: 15.5px; margin-top: 2px; }
+  .tl .kind {
+    font-family: var(--font-mono); font-size: 10.5px; border: 1px solid var(--skin-line);
+    border-radius: 2px; padding: 0 6px; color: var(--gate); margin-left: 8px; vertical-align: 2px;
+  }
+  .logbody { font-size: 13.5px; }
+
+  .ghcard {
+    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+    color: #e6edf3; font-family: var(--font-mono); font-size: 12.5px; overflow: hidden;
+  }
+  .gh-head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: 1px solid #30363d; }
+  .gh-head .repo { color: #7ee787; }
+  .ghcard dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; }
+  .ghcard dl > div { padding: 10px 14px; border-bottom: 1px solid #21262d; }
+  .ghcard dl > div:nth-child(odd) { border-right: 1px solid #21262d; }
+  .ghcard dt { font-size: 10.5px; color: #8b949e; letter-spacing: .12em; }
+  .ghcard dd { font-size: 16px; margin: 2px 0 0; }
+  .gh-foot { padding: 9px 14px; color: #8b949e; font-size: 11px; display: flex; justify-content: space-between; }
+
+  .sidecard { margin-top: 14px; border: 1px solid var(--skin-line); border-radius: 8px; padding: 13px 15px; background: var(--panel); }
+  .sidecard h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; color: var(--gate); }
+  .statusline { margin-top: 8px; font-size: 13.5px; display: flex; align-items: center; gap: 8px; }
+  .statusnote { font-size: 12.5px; color: var(--skin-muted); margin-top: 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .chip { font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--skin-line); border-radius: 3px; padding: 1px 8px; color: var(--skin-muted); }
+  .plainlink { color: var(--gate); font-size: 13.5px; margin-top: 8px; display: inline-block; }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+  .dot--green { background: #3fb950; box-shadow: 0 0 8px rgba(63,185,80,.55); }
+  .dot--yellow { background: #d29922; box-shadow: 0 0 8px rgba(210,153,34,.55); }
+  .dot--gray { background: #8b949e; }
+  @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
+</style>

@@ -1,4 +1,65 @@
 ---
-import AboutPage from '../components/AboutPage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../lib/site';
+
+const readout = [
+  { label: '现在', value: 'Cryogenic GPU Systems · VSP Lab · 77 K' },
+  { label: '此前', value: 'Neural Rendering · Hardware Acceleration · GPU Architecture' },
+  { label: '系统之外', value: '散文与诗词 · 教学材料 · 乒乓球与羽毛球' },
+];
 ---
-<AboutPage lang="zh" />
+
+<BaseLayout title="关于" description="贺云翔（Hypoxanthine），上海科技大学 VSP Lab 研究生，当前研究聚焦 77 K 低温 GPU 系统。">
+  <section class="skin about">
+    <div class="shell about__grid">
+      <aside>
+        <img src={siteConfig.avatar} alt={`${siteConfig.signature}的照片`} width="480" height="480" />
+        <div class="contact">
+          <h2>联系</h2>
+          <a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+          <a href="/publish">公众号（发布门）</a>
+        </div>
+      </aside>
+      <div class="copy">
+        <p class="kicker">关于 / {siteConfig.author.toUpperCase()}</p>
+        <h1>研究者、系统构建者，也是一个不太愿意丢掉痕迹的人。</h1>
+        <p class="lead">
+          我是{siteConfig.signature}，网名 Hypoxanthine，上海科技大学 VSP Lab 研究生。当前研究聚焦 77 K 低温 GPU 系统。
+        </p>
+        <p>
+          我从神经渲染硬件加速转向更广义的 GPU 架构与低温计算。方向变了，工作习惯没有变：把模糊的系统问题拆成可追溯证据、可复现模型，以及别人能够检查的工具。
+        </p>
+        <p>
+          研究之外，我持续搭建 Agent 工作流、文档系统、终端界面和中文写作管线。系统之外，我写诗和散文，也做教学材料。这个站点把这些线索放在一起，但不假装它们只是一种职位。
+        </p>
+        <dl class="readout">
+          {readout.map((r) => (
+            <div><dt>{r.label}</dt><dd>{r.value}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about { background: var(--bg); }
+  .about__grid { display: grid; grid-template-columns: 300px 1fr; gap: 44px; padding: 60px 22px 80px; align-items: start; }
+  aside img { width: 100%; border-radius: 6px; border: 1px solid var(--line); }
+  .contact { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .contact h2 { font-size: 13px; font-family: var(--font-mono); letter-spacing: .18em; color: var(--muted); font-weight: 600; }
+  .contact a { color: var(--fg); font-size: 14px; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; width: fit-content; }
+  .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--muted); }
+  h1 { font-family: var(--font-serif); font-size: 30px; line-height: 1.5; margin-top: 12px; font-weight: 700; max-width: 22em; }
+  .lead { margin-top: 22px; font-size: 16px; color: var(--fg); }
+  .copy p:not(.kicker):not(.lead) { margin-top: 14px; color: var(--muted); line-height: 2; max-width: 42em; }
+  .readout { margin-top: 30px; border-top: 1px solid var(--line); }
+  .readout > div { display: grid; grid-template-columns: 90px 1fr; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .readout dt { font-size: 12.5px; color: var(--muted); font-family: var(--font-mono); }
+  .readout dd { font-size: 14px; }
+  @media (max-width: 960px) {
+    .about__grid { grid-template-columns: 1fr; }
+    aside { max-width: 300px; }
+  }
+</style>

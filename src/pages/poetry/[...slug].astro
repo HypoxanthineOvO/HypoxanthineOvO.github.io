@@ -1,0 +1,61 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPoetry, formatDate, getAdjacentEntries } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const vols = await getPoetry();
+  return vols.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const vols = await getPoetry();
+const { newer, older } = getAdjacentEntries(vols, entry.id);
+---
+
+<BaseLayout skin="poetry" title={entry.data.title} description={entry.data.description}>
+  <section class="skin poempage">
+    <div class="shell">
+      <article class="poemdoc md-body">
+        <p class="doc-kicker">诗词合集</p>
+        <h1 class="doc-title">{entry.data.title}</h1>
+        <div class="doc-meta">{formatDate(entry.data.date)} · {String(entry.data.date.getUTCFullYear())} 年结集</div>
+        <Content />
+        <p class="doc-end">（完）</p>
+        <nav class="adj">
+          {older && <a href={`/poetry/${older.id}`}>← {older.data.title}</a>}
+          {newer && <a href={`/poetry/${newer.id}`}>{newer.data.title} →</a>}
+        </nav>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .poempage { padding: 56px 0 84px; }
+  .poemdoc { max-width: 36em; margin: 0 auto; text-align: center; font-family: var(--font-serif); color: var(--fg); }
+  .doc-kicker { font-size: 13px; letter-spacing: .55em; color: var(--gate); text-align: center; }
+  .doc-title { font-size: 30px; letter-spacing: .3em; margin-top: 14px; font-weight: 600; text-align: center; border: none; }
+  .doc-meta { margin-top: 12px; font-size: 12.5px; color: var(--skin-muted); font-family: var(--font-ui); text-align: center; }
+
+  /* 正文：序言/分集标题居中做眉标，词牌小标题居中加宽字距，段落=阕，居中 */
+  .poemdoc :global(h1) {
+    font-size: 19px; letter-spacing: .35em; color: var(--gate); font-weight: 600;
+    margin-top: 2.6em; text-align: center; border: none; padding: 0;
+  }
+  .poemdoc :global(h2) {
+    font-size: 16.5px; letter-spacing: .3em; color: var(--gate);
+    margin-top: 2.4em; text-align: center; font-weight: 600;
+  }
+  .poemdoc :global(h3) { font-size: 15px; letter-spacing: .25em; color: var(--skin-muted); text-align: center; margin-top: 2em; }
+  .poemdoc :global(p) { font-size: 17px; line-height: 2.3; letter-spacing: .12em; text-align: center; margin-top: 1.2em; }
+  .poemdoc :global(blockquote) { border: none; color: var(--skin-muted); text-align: center; }
+  .doc-end { margin-top: 46px; color: var(--skin-muted); font-size: 12px; letter-spacing: .5em; font-family: var(--font-ui); text-align: center; }
+  .adj {
+    margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--skin-line);
+    display: flex; justify-content: space-between; gap: 18px; font-size: 13.5px; font-family: var(--font-ui); flex-wrap: wrap;
+  }
+  .adj a { color: var(--skin-muted); }
+  .adj a:hover { color: var(--gate); }
+</style>

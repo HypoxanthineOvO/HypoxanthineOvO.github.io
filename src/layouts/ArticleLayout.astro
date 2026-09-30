@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  /** 皮肤名（essay-classical / essay-modern / study / publish / notes ...） */
+  skin: string;
+  kicker: string;
+  title: string;
+  /** meta 行（日期 · 栏目 · 作者 等） */
+  metas: string[];
+  description?: string;
+}
+
+const { skin, kicker, title, metas, description } = Astro.props;
+---
+
+<BaseLayout skin={skin} title={title} description={description}>
+  <section class="skin">
+    <div class="shell page">
+      <article class="article">
+        <p class="kicker">{kicker}</p>
+        <h1>{title}</h1>
+        <div class="meta">
+          {metas.map((meta, i) => (i === 0 ? <span>{meta}</span> : <span class="sep">{meta}</span>))}
+        </div>
+        <div class="body md-body">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding: 56px 0 80px; }
+  .article { max-width: 40em; margin: 0 auto; }
+  .kicker { font-size: 12.5px; letter-spacing: .25em; color: var(--skin-muted); }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 32px; line-height: 1.4; margin-top: 10px;
+    color: var(--fg); font-weight: 700;
+  }
+  .meta { margin-top: 12px; font-size: 13px; color: var(--skin-muted); display: flex; flex-wrap: wrap; gap: 14px; }
+  .sep::before { content: '·'; margin-right: 14px; color: var(--skin-line); }
+  .body { margin-top: 40px; }
+  /* 散文子皮肤对正文的覆写在 global.css（slot 内容吃不到 scoped 选择器） */
+</style>

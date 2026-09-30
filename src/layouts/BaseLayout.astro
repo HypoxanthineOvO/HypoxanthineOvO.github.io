@@ -1,40 +1,39 @@
 ---
-import '@fontsource-variable/inter/wght.css';
+import '@fontsource/noto-sans-sc/400.css';
+import '@fontsource/noto-sans-sc/500.css';
+import '@fontsource/noto-sans-sc/700.css';
 import '@fontsource/noto-serif-sc/400.css';
 import '@fontsource/noto-serif-sc/700.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
+import 'katex/dist/katex.min.css';
 
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import '../styles/global.css';
 import { siteConfig } from '../lib/site';
+import { navLinks } from '../lib/gates';
 
 interface Props {
   title?: string;
   description?: string;
-  lang?: 'zh' | 'en';
   image?: string;
-  home?: boolean;
+  /** 挂到 <html data-skin> 的皮肤名，见 global.css 皮肤变量层 */
+  skin?: string;
 }
 
-const {
-  title,
-  description = siteConfig.description,
-  lang = 'zh',
-  image = '/media/projects/ai-daily.webp',
-  home = false,
-} = Astro.props;
+const { title, description = siteConfig.description, image = siteConfig.avatar, skin = '' } = Astro.props;
 const pageTitle = title ? `${title} | ${siteConfig.title}` : siteConfig.title;
 const canonical = new URL(Astro.url.pathname, siteConfig.site);
-const alternatePath = lang === 'en' ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname === '/' ? '/en' : `/en${Astro.url.pathname}`;
+const currentPath = Astro.url.pathname;
+
+// 默认跟随系统，手动选择记忆在本地（DESIGN.md §6）
 const themeScript = `
 (() => {
   const stored = localStorage.getItem('hypo-theme');
   const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
 })();
 `;
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
@@ -47,39 +46,116 @@ const personSchema = {
 ---
 
 <!doctype html>
-<html lang={lang === 'en' ? 'en' : 'zh-CN'}>
+<html lang="zh-CN" data-theme="light" data-skin={skin}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.author} />
-    <meta name="theme-color" content="#090b0d" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={lang === 'en' ? 'zh-CN' : 'en'} href={new URL(alternatePath, siteConfig.site)} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', siteConfig.site)} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={siteConfig.title} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, siteConfig.site)} />
-    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'} />
+    <meta property="og:locale" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{pageTitle}</title>
     <script is:inline set:html={themeScript} />
-    {home && <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />}
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#main-content">{lang === 'en' ? 'Skip to content' : '跳到主要内容'}</a>
-    <Header lang={lang} />
-    <main id="main-content" class:list={[home ? 'page-main page-main--home' : 'page-main']}>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="brand" href="/">HYPOXANTHINE</a>
+        <nav class="topnav" aria-label="站内导航">
+          {navLinks.map((link) => (
+            <a href={link.href} class:list={{ here: currentPath.startsWith(link.href) && link.href !== '/' }}>{link.label}</a>
+          ))}
+        </nav>
+        <button class="theme-btn" id="themeBtn" aria-label="切换亮暗主题">◐</button>
+        <button class="menu-btn" id="menuBtn" aria-label="展开菜单" aria-expanded="false">☰</button>
+      </div>
+      <nav class="mobilenav" id="mobileNav" aria-label="移动端导航">
+        {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      </nav>
+    </header>
+
+    <main id="main-content">
       <slot />
     </main>
-    <Footer />
+
+    <footer class="sitefoot">
+      <div class="shell sitefoot__inner">
+        <span>© 2021–2026 {siteConfig.signature} · hypox.cn</span>
+        <span class="sitefoot__links">
+          <a href={siteConfig.github}>GitHub</a>
+          <a href={`mailto:${siteConfig.email}`}>Email</a>
+          <a href="/rss.xml">RSS</a>
+        </span>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const btn = document.getElementById('themeBtn');
+        btn.addEventListener('click', () => {
+          const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          localStorage.setItem('hypo-theme', next);
+        });
+        const menuBtn = document.getElementById('menuBtn');
+        const nav = document.getElementById('mobileNav');
+        menuBtn.addEventListener('click', () => {
+          const open = nav.classList.toggle('open');
+          menuBtn.setAttribute('aria-expanded', String(open));
+        });
+      })();
+    </script>
   </body>
 </html>
+
+<style>
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar__inner {
+    max-width: var(--shell-max); margin: 0 auto; padding: 0 22px;
+    height: 52px; display: flex; align-items: center; gap: 22px;
+  }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); transition: color .15s; }
+  .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: var(--gate); font-weight: 600; }
+  .theme-btn, .menu-btn {
+    border: 1px solid var(--line); background: var(--panel); color: var(--muted);
+    font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px;
+    cursor: pointer; line-height: 1.4;
+  }
+  .menu-btn { display: none; }
+  .mobilenav {
+    display: none; flex-direction: column; padding: 4px 22px 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .mobilenav a { padding: 8px 0; color: var(--muted); font-size: 14.5px; border-bottom: 1px dashed var(--line); }
+  .mobilenav.open { display: flex; }
+
+  .sitefoot { border-top: 1px solid var(--line); padding: 26px 0 46px; color: var(--muted); font-size: 12.5px; font-family: var(--font-mono); }
+  .sitefoot__inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .sitefoot__links { display: flex; gap: 16px; }
+  .sitefoot__links a:hover { color: var(--fg); }
+
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .menu-btn { display: inline-block; }
+  }
+</style>

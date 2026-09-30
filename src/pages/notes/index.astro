@@ -1,91 +1,77 @@
 ---
-import NoteCard from '../../components/NoteCard.astro';
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { collectTags, formatTagLabel, getNotes } from '../../lib/content';
+import GateHead from '../../components/GateHead.astro';
+import { getNotes, formatDate } from '../../lib/content';
 
-const notes = await getNotes();
-const tags = collectTags(notes);
+const visible = await getNotes();
+// 空态文案需要真实的旧库存量：全部条目数（含草稿）
+const allNotes = await getCollection('notes');
 ---
 
-<BaseLayout title="笔记" description="带内联标签过滤的笔记列表。">
-  <section class="shell pb-20">
-    <div class="section-heading">
-      <div>
-        <p class="section-kicker">笔记索引</p>
-        <h1>笔记</h1>
-      </div>
-    </div>
+<BaseLayout skin="notes" title="技术笔记">
+  <section class="skin">
+    <div class="shell">
+      <GateHead gate="notes" blurb="读书笔记与工程备忘，写给未来的自己。" />
 
-    <div class="content-shell md:mx-0 md:max-w-[780px] md:px-0">
-      <p class="mb-6 text-muted">
-        笔记比文章更轻，主要记录讲座、工具链、课程材料与阅读过程。下方筛选仅在前端生效，不会额外生成路由。
-      </p>
-
-      <div class="mb-8 flex flex-wrap gap-2" data-note-filters>
-        <button
-          type="button"
-          class="tag-pill border-accent text-accent"
-          data-note-filter-button="all"
-        >
-          全部笔记
-        </button>
-        {tags.map(({ tag, count }) => (
-          <button type="button" class="tag-pill transition-colors duration-150 hover:border-accent hover:text-accent" data-note-filter-button={tag}>
-            {formatTagLabel(tag, 'note')} ({count})
-          </button>
-        ))}
-      </div>
-
-      <div class="rounded-3xl border border-border px-6 py-2 md:px-8" data-note-list>
-        {notes.map((note) => <NoteCard note={note} />)}
-      </div>
-
-      <p class="mt-4 hidden font-sans text-sm text-muted" data-note-empty>
-        无匹配结果。
-      </p>
+      {visible.length === 0 ? (
+        <div class="empty">
+          <div class="card">
+            <h2>这个栏目在重写</h2>
+            <p>
+              旧库里有 {allNotes.length} 篇笔记（CUDA、LaTeX、NeRF 系列读书笔记等），
+              大多写于本科低年级，如今自己都读不下去。它们不会以旧样子回来，
+              我会按主题逐篇重写，写完一篇上一篇。
+            </p>
+            <div class="progress">
+              <span>重写进度 0 / {allNotes.length}</span>
+              <div class="bar">
+                {Array.from({ length: allNotes.length }).map(() => <i />)}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="grid">
+          {visible.map((n) => (
+            <a class="note-card" href={`/notes/${n.id}`}>
+              <span class="src">{n.data.source ? `SOURCE / ${n.data.source}` : 'NOTE'}</span>
+              <h3>{n.data.title}</h3>
+              {n.data.description && <p>{n.data.description.slice(0, 80)}……</p>}
+              <div class="foot"><span>{formatDate(n.data.date)}</span><span>note</span></div>
+            </a>
+          ))}
+        </div>
+      )}
     </div>
   </section>
-
-  <script is:inline>
-    const filterButtons = [...document.querySelectorAll('[data-note-filter-button]')];
-    const cards = [...document.querySelectorAll('[data-note-card]')];
-    const emptyState = document.querySelector('[data-note-empty]');
-
-    if (filterButtons.length > 0) {
-      const setFilter = (tag) => {
-        let visible = 0;
-
-        filterButtons.forEach((button) => {
-          const active = button.getAttribute('data-note-filter-button') === tag;
-          button.classList.toggle('border-accent', active);
-          button.classList.toggle('text-accent', active);
-        });
-
-        cards.forEach((card) => {
-          const tags = (card.getAttribute('data-note-tags') || '').split(',').filter(Boolean);
-          const show = tag === 'all' || tags.includes(tag);
-          card.hidden = !show;
-          if (show) visible += 1;
-        });
-
-        emptyState?.classList.toggle('hidden', visible > 0);
-        const hash = tag === 'all' ? '' : `#tag-${tag}`;
-        history.replaceState({}, '', `/notes${hash}`);
-      };
-
-      const hash = window.location.hash.match(/tag-(.+)$/)?.[1] || 'all';
-      setFilter(hash);
-
-      filterButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          setFilter(button.getAttribute('data-note-filter-button') || 'all');
-        });
-      });
-
-      window.addEventListener('hashchange', () => {
-        const next = window.location.hash.match(/tag-(.+)$/)?.[1] || 'all';
-        setFilter(next);
-      });
-    }
-  </script>
 </BaseLayout>
+
+<style>
+  .empty { padding: 34px 0 30px; display: flex; justify-content: center; }
+  .empty .card {
+    max-width: 560px; background: color-mix(in srgb, var(--skin-bg) 80%, #fff 20%);
+    border: 1px solid var(--skin-line); border-radius: 4px; padding: 30px 34px;
+    font-family: var(--font-mono);
+  }
+  :global(html[data-theme='dark']) .empty .card { background: color-mix(in srgb, var(--skin-bg) 75%, #000 15%); }
+  .empty h2 { font-size: 16px; font-weight: 600; color: var(--fg); font-family: var(--font-ui); }
+  .empty p { font-size: 13px; color: var(--skin-muted); margin-top: 10px; line-height: 2; font-family: var(--font-ui); }
+  .empty .progress { margin-top: 16px; font-size: 11.5px; }
+  .empty .bar { display: flex; gap: 3px; margin-top: 8px; }
+  .empty .bar i { flex: 1; height: 8px; border-radius: 2px; background: color-mix(in srgb, var(--gate) 14%, transparent); }
+
+  .grid { padding: 26px 0 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .note-card {
+    background: color-mix(in srgb, var(--skin-bg) 80%, #fff 20%);
+    border: 1px solid var(--skin-line); border-radius: 4px; padding: 15px 17px;
+    font-family: var(--font-mono); transition: border-color .16s, transform .16s;
+  }
+  :global(html[data-theme='dark']) .note-card { background: color-mix(in srgb, var(--skin-bg) 75%, #000 15%); }
+  .note-card:hover { border-color: var(--gate); transform: translateY(-2px); }
+  .note-card .src { font-size: 10.5px; color: var(--gate); letter-spacing: .1em; }
+  .note-card h3 { font-family: var(--font-ui); font-size: 15px; margin-top: 6px; }
+  .note-card p { font-size: 12px; color: var(--skin-muted); margin-top: 6px; line-height: 1.8; font-family: var(--font-ui); }
+  .note-card .foot { margin-top: 10px; font-size: 11px; color: var(--skin-muted); display: flex; justify-content: space-between; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
+</style>

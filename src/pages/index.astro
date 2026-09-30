@@ -1,5 +1,314 @@
 ---
-import HomePage from '../components/HomePage.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { gates } from '../lib/gates';
+import { siteConfig } from '../lib/site';
+import {
+  getPublications, getFeaturedProjects, getEssays, getPoetry,
+  getPublishArticles, getAiDailyIssues, getStudy,
+} from '../lib/content';
+
+// 卡片墙数据：每扇门一份摘要（注册表驱动，加减门只改 gates.ts + 这里）
+const [pubs, projects, essays, poetry, articles, issues, study, allNotes] = await Promise.all([
+  getPublications(), getFeaturedProjects(), getEssays(), getPoetry(),
+  getPublishArticles(), getAiDailyIssues(), getStudy(), getCollection('notes'),
+]);
+const latestEssay = essays[0];
+const latestVol = poetry[0];
+const latestDaily = issues[0];
+const terms = [...new Set(study.map((s) => s.data.term))].slice(0, 5);
+const noteTopics = ['CUDA', 'LaTeX', 'NeRF', 'SSH', 'Verilog'];
+
+const gateData: Record<string, { count?: string; items?: any[] }> = {
+  research: { count: `${pubs.length} PAPERS`, items: pubs.slice(0, 3) },
+  work: { count: 'SELECTED', items: projects.slice(0, 3) },
+  essays: { count: `${essays.length} 篇` },
+  poetry: { count: `${poetry.length} 部合集` },
+  publish: { count: `${issues.length} 期` },
+  notes: { count: `${allNotes.length} 篇待重写` },
+  study: { items: terms },
+};
+
+const statusDot = { active: 'green', wip: 'yellow', archived: 'gray' } as const;
+const firstName = '贺云翔';
+const footText: Record<string, string> = {
+  research: '完整题录与 PDF',
+  work: 'GitHub 实时信息 · 开发日记',
+  publish: '公众号 · 知乎 · B站',
+  notes: '栏目重写中',
+  study: '课程论文 · 教评 · 年度总结',
+};
 ---
 
-<HomePage lang="zh" />
+<BaseLayout>
+  <!-- ============ 介绍区：严肃自述（两段式时态） ============ -->
+  <section class="intro">
+    <div class="shell intro__grid">
+      <div>
+        <h1 class="intro__name">{firstName}</h1>
+        <p class="intro__affil">{siteConfig.affil}</p>
+        <p class="intro__bio">
+          此前做<b>神经渲染加速器的软硬件协同设计</b>，论文都收在研究门。现在正把方向投向
+          <b>77 K 低温 GPU 架构</b>，这项工作还在进行中，暂无可公开的结果。
+        </p>
+        <p class="intro__side">
+          主线之外，长期折腾 <a href="/work">AI 与 Agent 工具</a>，它们收在项目门。
+        </p>
+        <div class="intro__contacts">
+          <a class="pill" href={siteConfig.github}>GitHub</a>
+          <a class="pill" href={`mailto:${siteConfig.email}`}>Email</a>
+          <a class="pill" href="/publish">公众号</a>
+        </div>
+      </div>
+      <img class="intro__photo" src={siteConfig.avatar} alt={`${firstName}的照片`} width="416" height="520" />
+    </div>
+  </section>
+
+  <!-- ============ 卡片墙：七扇门（注册表驱动） ============ -->
+  <section class="shell">
+    <div class="wall-head"><h2>DOORS / 七扇门</h2><span class="hint">点卡片进入对应门</span></div>
+    <div class="wall">
+      {gates.map((gate) => {
+        const data = gateData[gate.slug] ?? {};
+        return (
+          <a class={`door door--${gate.slug}`} href={gate.href}>
+            {gate.slug !== 'work' && (
+              <div class="door__head"><span>{gate.name} / {gate.en}</span><span>{data.count ?? ''}</span></div>
+            )}
+
+            {gate.slug === 'research' && (
+              <>
+                <h2 class="door__title">学术发表</h2>
+                <ul class="paperlist">
+                  {(data.items ?? []).map((p: any) => (
+                    <li><span class="y">{p.data.year}</span><span class="t">{p.data.title}</span><span class="v">{(p.data.venue ?? '').replace('IEEE ', '').slice(0, 14)}</span></li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {gate.slug === 'work' && (
+              <>
+                <div class="door__head door__head--inner"><span>$ ls ~/work --featured</span><span>SELECTED</span></div>
+                <h2 class="door__title">项目</h2>
+                <ul class="projlist">
+                  {(data.items ?? []).map((p: any) => (
+                    <li><i class:list={['dot', `dot--${statusDot[p.data.status as keyof typeof statusDot]}`]} /><b>{p.data.name}</b><span>{p.data.statusNote ?? ''}</span></li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {gate.slug === 'essays' && latestEssay && (
+              <>
+                <h2 class="door__title">散文</h2>
+                <p class="excerpt">{(latestEssay.data.description ?? '').slice(0, 60)}……</p>
+                <div class="door__foot"><span>《{latestEssay.data.title.replace(/^【.+?】/, '')}》· {latestEssay.data.date.getUTCFullYear()}</span><span class="arrow">-&gt;</span></div>
+              </>
+            )}
+
+            {gate.slug === 'poetry' && latestVol && (
+              <>
+                <div class="poem">
+                  <h3>{String(latestVol.data.date.getUTCFullYear())} 年结集</h3>
+                  <p>{latestVol.data.picked?.split(/(?<=[，。？])/).map((line) => <>{line}<br /></>)}</p>
+                </div>
+                <div class="door__foot"><span>{poetry.length} 部合集 · 词与诗</span><span class="arrow">-&gt;</span></div>
+              </>
+            )}
+
+            {gate.slug === 'publish' && latestDaily && (
+              <>
+                <h2 class="door__title">长文与日报</h2>
+                <div class="daily">
+                  <b>AI 日报 · 第 {issues.length} 期</b>
+                  <span>{latestDaily.date} · 每天一期，收录当日的 AI 资讯</span>
+                </div>
+                <ul class="artlist">
+                  {articles.slice(0, 2).map((a) => (
+                    <li><span>{a.data.title.split('|')[0].trim()}</span><em>{a.data.column ?? '长文'}</em></li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {gate.slug === 'notes' && (
+              <div class="note-body">
+                <h2 class="door__title">技术笔记</h2>
+                <div class="chips">{noteTopics.map((t) => <span class="chip">{t}</span>)}</div>
+              </div>
+            )}
+
+            {gate.slug === 'study' && (
+              <>
+                <h2 class="door__title">学习档案</h2>
+                <ul class="terms">
+                  {terms.map((t) => <li><span>{t}</span></li>)}
+                </ul>
+              </>
+            )}
+
+            {gate.slug !== 'essays' && gate.slug !== 'poetry' && (
+              <div class="door__foot"><span class="foot-text">{footText[gate.slug] ?? gate.blurb}</span><span class="arrow">-&gt;</span></div>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---- 介绍区 ---- */
+  .intro { padding: 64px 0 44px; border-bottom: 1px solid var(--line); }
+  .intro__grid { display: grid; grid-template-columns: 1fr 208px; gap: 40px; align-items: start; }
+  .intro__name { font-family: var(--font-serif); font-size: 44px; font-weight: 700; letter-spacing: .02em; }
+  .intro__affil { margin-top: 6px; color: var(--muted); font-size: 14.5px; }
+  .intro__bio { margin-top: 22px; max-width: 40em; font-size: 15.5px; }
+  .intro__bio b { font-weight: 600; }
+  .intro__side { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+  .intro__side a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+  .intro__contacts { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px 13px;
+    font-size: 12.5px; color: var(--muted); background: var(--panel);
+    transition: color .15s, border-color .15s;
+  }
+  .pill:hover { color: var(--fg); border-color: var(--muted); }
+  .intro__photo { width: 100%; max-width: 208px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
+
+  /* ---- 卡片墙 ---- */
+  .wall-head { display: flex; align-items: baseline; justify-content: space-between; padding: 40px 0 18px; }
+  .wall-head h2 { font-size: 15px; font-weight: 600; letter-spacing: .06em; color: var(--muted); font-family: var(--font-mono); }
+  .hint { color: var(--muted); font-size: 12.5px; }
+  .wall {
+    display: grid; grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 92px; grid-auto-flow: dense; gap: 14px; padding-bottom: 72px;
+  }
+  .door {
+    position: relative; display: flex; flex-direction: column;
+    border-radius: 6px; overflow: hidden; border: 1px solid var(--line);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .door:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.10); }
+  .door__head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; padding: 20px 22px 0; }
+  .door__head--inner { padding: 12px 0 0; color: inherit; }
+  .door__title { font-size: 21px; font-weight: 700; margin: 2px 22px 0; }
+  .door__foot {
+    margin: auto 22px 0; padding: 10px 0 14px; font-size: 12.5px;
+    display: flex; justify-content: space-between; align-items: center; border-top-width: 1px; border-top-style: solid;
+  }
+  .door__foot--static { border-top: none; }
+  .arrow { font-family: var(--font-mono); }
+
+  /* 门 1：研究（冷静仪器） */
+  .door--research { grid-column: span 6; grid-row: span 4; background: linear-gradient(160deg, #eef4f7, #e6eef3); border-color: #ccdbe3; color: #16323e; }
+  :global(html[data-theme='dark']) .door--research { background: linear-gradient(160deg, #131a1e, #101820); border-color: #26333a; color: #cfe0e8; }
+  .door--research .door__head, .door--research .door__foot { color: #3d7a93; border-color: #d3e0e7; }
+  .door--research .door__title { font-family: var(--font-serif); }
+  .paperlist { list-style: none; margin: 12px 22px 0; }
+  .paperlist li { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: baseline; padding: 8px 0; border-top: 1px solid #d3e0e7; font-size: 13px; }
+  :global(html[data-theme='dark']) .paperlist li { border-color: #26333a; }
+  .paperlist .y { font-family: var(--font-mono); color: #4c8298; font-size: 12px; }
+  .paperlist .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .paperlist .v { color: #7d99a5; font-size: 11.5px; font-family: var(--font-mono); }
+
+  /* 门 2：项目（终端，双主题常暗） */
+  .door--work { grid-column: span 6; grid-row: span 4; background: #0d1117; border-color: #30363d; color: #e6edf3; }
+  .door--work:hover { box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+  .door--work .door__head { color: #7ee787; }
+  .projlist { list-style: none; margin: 12px 22px 0; font-family: var(--font-mono); font-size: 13px; }
+  .projlist li { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-top: 1px solid #21262d; }
+  .projlist b { font-weight: 600; }
+  .projlist span { color: #8b949e; font-size: 12px; }
+  .door--work .door__foot { color: #7ee787; border-color: #21262d; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; align-self: center; }
+  .dot--green { background: #3fb950; box-shadow: 0 0 8px rgba(63,185,80,.55); }
+  .dot--yellow { background: #d29922; box-shadow: 0 0 8px rgba(210,153,34,.55); }
+  .dot--gray { background: #8b949e; }
+
+  /* 门 3：散文（轻纸） */
+  .door--essays { grid-column: span 4; grid-row: span 3; background: #faf6ec; border-color: #e4d9bd; color: #3d3828; padding-bottom: 0; }
+  :global(html[data-theme='dark']) .door--essays { background: #1a1712; border-color: #332c1c; color: #d8d2bf; }
+  .door--essays .door__head { color: #9e2b25; font-family: var(--font-serif); letter-spacing: .2em; font-size: 12px; }
+  .door--essays .door__title { font-family: var(--font-serif); color: #2f2a1c; }
+  :global(html[data-theme='dark']) .door--essays .door__title { color: #e8e2cf; }
+  .excerpt { margin: 12px 22px 0; font-family: var(--font-serif); font-size: 14px; line-height: 2; color: #55503d; }
+  :global(html[data-theme='dark']) .excerpt { color: #b3ab8f; }
+  .door--essays .door__foot { color: #9e2b25; border-color: #e8dfc8; }
+
+  /* 门 4：诗词（古意稍重，双线框） */
+  .door--poetry { grid-column: span 4; grid-row: span 4; background: #f4eedd; border-color: #cdbd93; color: #40372a; transform: translateY(13px); }
+  .door--poetry:hover { transform: translateY(9px); }
+  :global(html[data-theme='dark']) .door--poetry { background: #1a1611; border-color: #3a3222; color: #ddd2b8; }
+  .door--poetry::after { content: ''; position: absolute; inset: 7px; border: 1px solid #ded1ab; border-radius: 3px; pointer-events: none; }
+  .door--poetry .door__head { color: #8a5a2b; justify-content: center; font-family: var(--font-serif); letter-spacing: .35em; font-size: 12px; }
+  .poem { text-align: center; font-family: var(--font-serif); margin: 14px 0 0; }
+  .poem h3 { font-size: 15px; letter-spacing: .3em; color: #6b4c22; font-weight: 600; }
+  .poem p { font-size: 14.5px; line-height: 2.15; color: #4a4130; margin-top: 8px; }
+  .door--poetry .door__foot { color: #8a5a2b; border-color: #ded1ab; position: relative; z-index: 1; }
+
+  /* 门 5：发布（媒体感） */
+  .door--publish { grid-column: span 4; grid-row: span 3; background: var(--panel); }
+  .door--publish .door__head { color: #b3541e; }
+  .daily { margin: 10px 22px 0; border-left: 3px solid #b3541e; padding-left: 12px; }
+  .daily b { font-size: 14.5px; }
+  .daily span { display: block; color: var(--muted); font-size: 12.5px; }
+  .artlist { list-style: none; margin: 12px 22px 0; font-size: 13px; color: var(--muted); }
+  .artlist li { padding: 4px 0; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; gap: 10px; }
+  .artlist span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .artlist em { font-style: normal; font-size: 11.5px; font-family: var(--font-mono); flex: none; }
+  .door--publish .door__foot { color: #b3541e; border-color: var(--line); }
+
+  /* 门 6：技术笔记（方格纸） */
+  .door--notes {
+    grid-column: span 7; grid-row: span 2;
+    background-color: #fbfcfd;
+    background-image:
+      linear-gradient(rgba(63,109,158,.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63,109,158,.09) 1px, transparent 1px);
+    background-size: 22px 22px;
+    border-color: #d3dde6; color: #33404c;
+    flex-direction: row; align-items: center; gap: 20px; padding: 18px 22px;
+  }
+  :global(html[data-theme='dark']) .door--notes {
+    background-color: #0f1319;
+    background-image:
+      linear-gradient(rgba(110,160,210,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,160,210,.07) 1px, transparent 1px);
+    border-color: #26313d; color: #c7d9ea;
+  }
+  .door--notes .door__head { color: #3f6d9e; padding: 0; }
+  .door--notes .door__title { font-size: 18px; margin: 2px 0 0; }
+  .note-body { flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+  .chip {
+    font-family: var(--font-mono); font-size: 11px; color: #4a6c93;
+    border: 1px solid #c6d5e3; border-radius: 3px; padding: 1px 8px; background: rgba(255,255,255,.72);
+  }
+  :global(html[data-theme='dark']) .chip { color: #8fb3d9; border-color: #26313d; background: rgba(15,19,25,.72); }
+  .door--notes .door__foot { border-top: none; color: #3f6d9e; flex-direction: column; align-items: flex-end; gap: 4px; margin: 0; padding: 0; }
+
+  /* 门 7：学习档案（学期线） */
+  .door--study { grid-column: span 5; grid-row: span 2; background: var(--panel); }
+  .door--study .door__head { color: #4a6b4f; }
+  .terms { list-style: none; margin: 10px 22px 0; display: flex; font-size: 12px; color: var(--muted); }
+  .terms li { flex: 1; padding: 6px 0 0; border-top: 2px solid var(--line); position: relative; }
+  .terms li:last-child { border-top-color: #4a6b4f; color: var(--fg); }
+  .terms li::before {
+    content: ''; position: absolute; top: -4.5px; left: 0; width: 7px; height: 7px;
+    border-radius: 50%; background: var(--bg); border: 1.5px solid var(--line);
+  }
+  .terms li:last-child::before { background: #4a6b4f; border-color: #4a6b4f; }
+  .terms span { display: block; padding-right: 8px; }
+  .door--study .door__foot { color: #4a6b4f; border-color: var(--line); }
+
+  @media (max-width: 960px) {
+    .intro__grid { grid-template-columns: 1fr; }
+    .intro__photo { max-width: 208px; }
+    .wall { display: flex; flex-direction: column; }
+    .door, .door--poetry, .door--notes { transform: none; }
+    .door { min-height: 220px; }
+    .door--notes { flex-direction: column; align-items: stretch; }
+  }
+</style>
