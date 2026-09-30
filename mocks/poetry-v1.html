@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="poetry">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 诗词门：合集陈列 + 居中词页 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · poetry-v1
+  - 上半：诗词门列表——三个年集，各一张"册页"卡：年号 + 选句。
+  - 下半：词详情页——居中排版，上下阕分组（内容里空行即断阕），词牌做眉标。
+  - 古意稍重但不过度：双线框、暖纸色、无印章、不竖排。
+-->
+<style>
+  /* ============ 壳：与 home-v1 同一套 ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    --shell-max: 1180px;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: #8a5a2b; font-weight: 600; }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 皮肤：poetry ============ */
+  html[data-skin='poetry'] {
+    --gate: #8a5a2b; --gate-deep: #4a3517;
+    --skin-bg: #f6f0e1; --skin-line: #ddcfa8; --skin-muted: #8f8265; --ink: #40372a;
+  }
+  html[data-theme='dark'][data-skin='poetry'] {
+    --skin-bg: #171410; --skin-line: #3a3222; --skin-muted: #9a8d6d; --ink: #ddd2b8;
+  }
+  .skin { background: var(--skin-bg); border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line); }
+  .gate-head { padding: 52px 0 8px; text-align: center; }
+  .gate-head .kicker { font-family: var(--font-serif); font-size: 12.5px; letter-spacing: .5em; color: var(--gate); }
+  .gate-head h1 { font-family: var(--font-serif); font-size: 34px; color: var(--gate-deep); margin-top: 10px; letter-spacing: .25em; }
+  html[data-theme='dark'] .gate-head h1 { color: var(--ink); }
+  .gate-head p { font-family: var(--font-serif); color: var(--skin-muted); margin-top: 10px; font-size: 14.5px; }
+
+  /* ---- 合集册页 ---- */
+  .vols { padding: 30px 0 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .vol {
+    position: relative; border: 1px solid var(--skin-line); border-radius: 3px;
+    padding: 26px 24px 20px; text-align: center; font-family: var(--font-serif); color: var(--ink);
+    background: color-mix(in srgb, var(--skin-bg) 55%, #fff 45%);
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  html[data-theme='dark'] .vol { background: color-mix(in srgb, var(--skin-bg) 70%, #000 12%); }
+  .vol::after { content: ''; position: absolute; inset: 6px; border: 1px solid color-mix(in srgb, var(--skin-line) 70%, transparent); border-radius: 2px; pointer-events: none; }
+  .vol:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(74,53,23,.16); }
+  .vol .yrs { font-size: 12px; letter-spacing: .3em; color: var(--gate); }
+  .vol h3 { font-size: 19px; margin-top: 8px; letter-spacing: .18em; }
+  .vol .picked { margin-top: 14px; font-size: 14px; line-height: 2.1; color: var(--skin-muted); }
+  .vol .count { display: inline-block; margin-top: 14px; font-size: 11.5px; font-family: var(--font-mono); color: var(--gate); border: 1px solid var(--skin-line); border-radius: 999px; padding: 1px 12px; }
+
+  /* ---- 词详情页：居中，上下阕分组 ---- */
+  .poempage { padding: 64px 0 84px; }
+  .poemdoc { max-width: 34em; margin: 0 auto; text-align: center; font-family: var(--font-serif); color: var(--ink); }
+  .poemdoc .cipai { font-size: 13px; letter-spacing: .55em; color: var(--gate); }
+  .poemdoc h1 { font-size: 30px; letter-spacing: .3em; margin-top: 14px; font-weight: 600; }
+  .poemdoc .meta { margin-top: 12px; font-size: 12.5px; color: var(--skin-muted); font-family: var(--font-ui); }
+  .poemdoc .stanza { margin-top: 34px; }
+  .poemdoc .stanza p { font-size: 17px; line-height: 2.3; letter-spacing: .12em; }
+  .poemdoc .stanza + .stanza { padding-top: 26px; border-top: 1px solid color-mix(in srgb, var(--skin-line) 60%, transparent); }
+  .poemdoc .end { margin-top: 46px; color: var(--skin-muted); font-size: 12px; letter-spacing: .5em; font-family: var(--font-ui); }
+
+  .section-lbl { font-family: var(--font-serif); font-size: 12px; letter-spacing: .4em; color: var(--muted); text-align: center; padding: 56px 0 0; }
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .vols { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a href="#">研究</a><a href="#">项目</a><a href="#">技术笔记</a><a href="#">散文</a><a class="here" href="#">诗词</a><a href="#">发布</a><a href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn">◐ theme</button>
+  </div>
+</header>
+
+<!-- ============ 列表：合集册页 ============ -->
+<section class="skin">
+  <div class="shell">
+    <div class="gate-head">
+      <p class="kicker">诗 词</p>
+      <h1>诗词合集</h1>
+      <p>按年结集。少年时爱律诗，后来多写词——言志与言情的比例，一年比一年诚实。</p>
+    </div>
+    <div class="vols">
+      <a class="vol" href="#poem">
+        <div class="yrs">2021 — 2022</div>
+        <h3>起程集</h3>
+        <p class="picked">漫漫长路从此始，<br />不到云霄不回头。</p>
+        <span class="count">离家 · 西江月 · 水调歌头 …</span>
+      </a>
+      <a class="vol" href="#poem">
+        <div class="yrs">2023</div>
+        <h3>少年集</h3>
+        <p class="picked">身如新过客，<br />心似旧学生。</p>
+        <span class="count">鹧鸪天 · 临江仙 · 拍照配词 …</span>
+      </a>
+      <a class="vol" href="#poem">
+        <div class="yrs">2024</div>
+        <h3>雪泥集</h3>
+        <p class="picked">君若似此三更雪，<br />何惧输谁一段香？</p>
+        <span class="count">雪后小记 · 临江仙 …</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<p class="section-lbl shell">—— 以下为词详情页 ——</p>
+
+<!-- ============ 详情：居中词页 ============ -->
+<section class="skin poempage" id="poem">
+  <div class="shell">
+    <article class="poemdoc">
+      <p class="cipai">临 江 仙</p>
+      <h1>少年时</h1>
+      <div class="meta">2024 年诗词创作 · 选自《雪泥集》</div>
+      <div class="stanza">
+        <p>晴雨江城真难测，冶游无怪阴云。<br />故园砖瓦已更新。<br />身如新过客，心似旧学生。</p>
+      </div>
+      <div class="stanza">
+        <p>一觉三年魔都梦，吾身虽在堪惊。<br />闲随故友论心情。<br />此间多少事，都入短长声。</p>
+      </div>
+      <p class="end">（完）</p>
+    </article>
+  </div>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="essay-classical">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 散文阅读页：古典 / 现代双皮肤 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · essay-skins-v1
+  - 同一篇《楼林》，用工具条在两种子皮肤之间切换，直接对比效果。
+  - 切换只改 <html data-skin>，正文结构完全不变：这就是 DESIGN.md 第 4 节的变量层机制。
+  - 古典 = 纸色、宋体、居中楷体引用；现代 = 中性、社科期刊感、GitHub 式引用。
+  - 楷体优先用 CDN 的霞鹜文楷，加载失败会退回系统楷体或宋体。
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" />
+<style>
+  /* ============ 壳（与 home-v1 同一套） ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: 1180px; margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: 1180px; margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+
+  /* 工具条：皮肤与主题切换 */
+  .toolbar { display: flex; gap: 8px; }
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .seg button {
+    border: none; background: transparent; color: var(--muted); cursor: pointer;
+    font-family: var(--font-ui); font-size: 12.5px; padding: 4px 14px;
+  }
+  .seg button.on { background: var(--fg); color: var(--bg); }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 阅读区（只吃皮肤变量） ============ */
+  .page { padding: 56px 0 80px; }
+  .article { max-width: var(--measure, 40em); margin: 0 auto; }
+  .article .kicker { font-size: 12.5px; letter-spacing: .25em; color: var(--skin-muted); font-family: var(--font-kicker, var(--font-ui)); }
+  .article h1 { font-family: var(--font-title); font-size: var(--title-size, 32px); line-height: 1.4; margin-top: 10px; color: var(--skin-fg); }
+  .article .meta { margin-top: 12px; font-size: 13px; color: var(--skin-muted); display: flex; gap: 14px; }
+  .article .meta .sep::before { content: '·'; margin-right: 14px; color: var(--skin-line); }
+  .article .body { margin-top: 40px; }
+  .article .body p { font-family: var(--font-body); font-size: var(--body-size, 16.5px); line-height: var(--body-leading, 2); color: var(--skin-fg); text-align: var(--body-align, left); margin-bottom: var(--para-gap, 1.6em); }
+  .article blockquote {
+    margin: 2.2em 0; padding: var(--quote-pad, 18px 22px);
+    background: var(--quote-bg); border: var(--quote-border, none);
+    border-radius: var(--quote-radius, 2px);
+    font-family: var(--font-quote); font-size: var(--quote-size, 15.5px);
+    line-height: var(--quote-leading, 2.1); color: var(--quote-fg);
+    text-align: var(--quote-align, left);
+  }
+  .article blockquote .cite { display: block; margin-top: 10px; font-size: 12.5px; color: var(--skin-muted); font-family: var(--font-ui); }
+  .article .end { text-align: center; color: var(--skin-muted); font-family: var(--font-serif); margin-top: 48px; letter-spacing: .5em; }
+
+  /* ---- 皮肤 A：essay-classical ---- */
+  [data-skin='essay-classical'] {
+    --skin-bg: #faf7ef; --skin-fg: #3b3627; --skin-muted: #8d8367; --skin-line: #e6dcc2;
+    --font-title: var(--font-serif); --font-kicker: var(--font-serif); --font-body: var(--font-serif);
+    --title-size: 30px; --body-size: 16.5px; --body-leading: 2.05; --para-gap: 1.5em;
+    --measure: 37em;
+    --quote-bg: #f3edd9; --quote-border: none; --quote-radius: 2px;
+    --font-quote: 'LXGW WenKai', 'Kaiti SC', 'KaiTi', 'STKaiti', var(--font-serif);
+    --quote-size: 16px; --quote-leading: 2.2; --quote-fg: #57492a;
+    --quote-align: center; --quote-pad: 26px 30px;
+  }
+  [data-theme='dark'][data-skin='essay-classical'] {
+    --skin-bg: #17150f; --skin-fg: #d8d2bf; --skin-muted: #97906f; --skin-line: #302b1e;
+    --quote-bg: #201d14; --quote-fg: #cfc5a4;
+  }
+
+  /* ---- 皮肤 B：essay-modern ---- */
+  [data-skin='essay-modern'] {
+    --skin-bg: #ffffff; --skin-fg: #24292f; --skin-muted: #6a737d; --skin-line: #e1e4e8;
+    --font-title: var(--font-ui); --font-kicker: var(--font-mono); --font-body: var(--font-serif);
+    --title-size: 34px; --body-size: 16px; --body-leading: 1.85; --para-gap: 1.35em;
+    --measure: 40em;
+    --quote-bg: #f6f8fa; --quote-border: left 3px solid #d0d7de; --quote-radius: 0;
+    --font-quote: var(--font-serif); --quote-size: 15px; --quote-leading: 1.9; --quote-fg: #444d56;
+    --quote-align: left; --quote-pad: 4px 18px;
+  }
+  [data-theme='dark'][data-skin='essay-modern'] {
+    --skin-bg: #0f1116; --skin-fg: #dce1e6; --skin-muted: #8b949e; --skin-line: #262b32;
+    --quote-bg: #161a21; --quote-fg: #a9b2bb;
+  }
+
+  /* 阅读区背景吃皮肤变量 */
+  .page { background: var(--skin-bg); }
+  [data-theme='dark'] .page { background: var(--skin-bg); }
+
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) { .topnav { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a href="#">研究</a><a href="#">项目</a><a href="#">技术笔记</a><a href="#">散文</a><a href="#">诗词</a><a href="#">发布</a><a href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <div class="toolbar">
+      <div class="seg" id="skinSeg">
+        <button data-skin-btn="essay-classical" class="on">古典</button>
+        <button data-skin-btn="essay-modern">现代</button>
+      </div>
+      <button class="theme-btn" id="themeBtn">◐</button>
+    </div>
+  </div>
+</header>
+
+<section class="page">
+  <article class="article shell">
+    <p class="kicker">散文 / 高中作品小记</p>
+    <h1>江城忆（一）楼林</h1>
+    <div class="meta"><span>2021-02-15</span><span class="sep">散文</span><span class="sep">贺云翔</span></div>
+    <div class="body">
+      <blockquote>
+        他们怀念乡村的草木清新，殊不知我们在棱角分明的楼林间成长，回到原始而质朴的怀抱。
+        <span class="cite">——《楼林》</span>
+      </blockquote>
+      <p>武汉有个绰号叫“江城”，又有人说武汉是“百湖之城”。每当坐飞机飞向天河机场的时候，俯瞰下的城市总是被倾斜交错的江与河划分成一块又一块，让这城市如纵横错落的荒原；荒原上又有一棵棵枯树屹立，像是人们将给时光立下的纪念碑。</p>
+      <p>古人没有飞机：他们的楼肯定很矮，既因为那时尚没有高楼的建筑工艺，又使得他们只需要登上黄鹤楼就能极目远眺，将千里风光尽收眼底。现在则不行：即使现在你于晴天登上武昌那座四百米的世界高楼，也只能看到丛立而起的大厦高楼层层叠叠，遮住了地面的人来人往、灯红酒绿，那是人类给大地穿上的装甲。</p>
+      <p>我小时候武汉还不曾有那么多高楼，他们和我一同长大，最终矗立在每一寸天边，站成一座坚实厚重又流光溢彩的钢铁森林：</p>
+      <p>这是机械对自然的解构，又是城市孩子的浪漫。如果说过去中国人成长在草原和山川，那现在我们长于森林——楼的森林。我们在森林里攀援上下，每日忙碌不止的去觅食，争斗或求偶，我们在自己创造的全新自然中返祖，又回到数千万年前。那时候人们在丛林和荒原中寻找火种，一如当下的我们寻找全新的精神怀抱。</p>
+      <p>突然想到动物世界开场的时候，万类霜天，正如同早晨的城市；我们看似在钢铁城市里却也在森林中，很多人逃避自己的原始却不知我们回到的正是原始的怀抱。</p>
+      <blockquote>
+        与上一个时代相比，掩体世界远不是理想社会，向太阳系边缘的大移民使得早已消失的一些社会形态又出现了，但这不是倒退而是螺旋形上升，是开拓新疆域必然出现的东西。
+        <span class="cite">——《三体》</span>
+      </blockquote>
+      <p>深夜的楼林浸没在暮色里，黝黑只看见重叠的影，似在风中摇曳又厚重如山川。走在楼下时仰起头，楼檐与深蓝色的天空融为一体，像一口没有尽头的井。一抹抹霓虹被随意地抹在云上，幽幽的闪烁着。</p>
+      <p>每日每夜我穿行在楼林间，像原始森林上下攀爬的猿猴。想到乡土作家们感叹乡村应该是所有人的故乡，我又暗自哂笑他们自以为代表了人类。他们怀念乡村的自然和清新，殊不知我们在横平竖直又纵横穿插的楼林间出生和成长，回到茂密的原始森林的质朴怀抱，在沉睡间寻找到我们的故乡。</p>
+      <p class="end">（完）</p>
+    </div>
+  </article>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const root = document.documentElement;
+  document.querySelectorAll('[data-skin-btn]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      root.dataset.skin = btn.dataset.skinBtn;
+      document.querySelectorAll('[data-skin-btn]').forEach((b) => b.classList.toggle('on', b === btn));
+    });
+  });
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+</script>
+</body>
+</html>

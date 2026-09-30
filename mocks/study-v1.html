@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="study">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 学习档案门：学期时间线 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · study-v1
+  - 学习档案：课程论文、创意写作、读书报告、文学发表，按学期排布。
+  - 皮肤：档案馆的绿色调，学期做横轨，条目做紧凑行。类型徽章区分 coursework/review/creative/literary。
+-->
+<style>
+  /* ============ 壳：与 home-v1 同一套 ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    --shell-max: 1180px;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: #4a6b4f; font-weight: 600; }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 皮肤：study ============ */
+  html[data-skin='study'] {
+    --gate: #4a6b4f; --gate-deep: #22351f;
+    --skin-bg: #f3f5f0; --skin-line: #dbe2d5; --skin-muted: #77836f;
+  }
+  html[data-theme='dark'][data-skin='study'] {
+    --skin-bg: #121511; --skin-line: #2a3327; --skin-muted: #96a48d;
+  }
+  .skin { background: var(--skin-bg); border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line); }
+  .gate-head { padding: 52px 0 8px; }
+  .gate-head .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--gate); }
+  .gate-head h1 { font-size: 34px; color: var(--gate-deep); margin-top: 8px; }
+  html[data-theme='dark'] .gate-head h1 { color: var(--fg); }
+  .gate-head p { color: var(--skin-muted); margin-top: 8px; max-width: 46em; font-size: 14.5px; }
+
+  /* ---- 学期时间线 ---- */
+  .terms { padding: 26px 0 64px; }
+  .term { display: grid; grid-template-columns: 130px 1fr; gap: 26px; position: relative; padding-bottom: 30px; }
+  .term::before { content: ''; position: absolute; left: 141px; top: 6px; bottom: -6px; width: 2px; background: var(--skin-line); }
+  .term:last-child::before { bottom: auto; height: calc(100% - 12px); }
+  .term .t-label { text-align: right; font-family: var(--font-mono); font-size: 12.5px; color: var(--gate); padding-top: 2px; }
+  .term .t-label .yr { display: block; font-size: 17px; color: var(--fg); font-weight: 700; }
+  .term .t-label .sem { letter-spacing: .2em; }
+  .term .t-items { display: flex; flex-direction: column; gap: 8px; }
+  .srow {
+    background: var(--panel); border: 1px solid var(--skin-line); border-radius: 4px;
+    padding: 11px 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 14px; align-items: baseline;
+    transition: border-color .16s, transform .16s; position: relative;
+  }
+  .srow:hover { border-color: var(--gate); transform: translateX(3px); }
+  .srow::before { content: ''; position: absolute; left: -30px; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--gate); transform: translateY(-50%); box-shadow: 0 0 0 3px var(--skin-bg); }
+  .srow h3 { font-family: var(--font-serif); font-size: 15px; font-weight: 600; line-height: 1.5; }
+  .srow .course { font-size: 12px; color: var(--skin-muted); }
+  .srow .type { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; color: var(--gate); border: 1px solid var(--skin-line); border-radius: 2px; padding: 1px 8px; }
+
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .term { grid-template-columns: 1fr; gap: 10px; }
+    .term::before { display: none; }
+    .term .t-label { text-align: left; }
+    .srow::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a href="#">研究</a><a href="#">项目</a><a href="#">技术笔记</a><a href="#">散文</a><a href="#">诗词</a><a href="#">发布</a><a class="here" href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn">◐ theme</button>
+  </div>
+</header>
+
+<section class="skin">
+  <div class="shell">
+    <div class="gate-head">
+      <p class="kicker">STUDY / 学习档案</p>
+      <h1>学习档案</h1>
+      <p>本科四年人文课程写下的东西：课程论文、读书报告、创意写作，以及一篇侥幸发表的文学小论文。按学期归档。</p>
+    </div>
+
+    <div class="terms">
+      <div class="term">
+        <div class="t-label"><span class="yr">2025</span><span class="sem">学年</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>论中国古代诗词中的"加餐"</h3>
+            <span class="course">《古典文学知识》2025 年第 12 期</span>
+            <span class="type">文学发表</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="t-label"><span class="yr">2024</span><span class="sem">秋</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>你见过停滞在空中的云吗？</h3>
+            <span class="course">唐前诗文之美 · 创意写作</span>
+            <span class="type">创意写作</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="t-label"><span class="yr">2024</span><span class="sem">春</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>智能的逆流与边界：AI 浪潮下的"为何"与"如何"</h3>
+            <span class="course">科技文明通论 · 期末论文</span>
+            <span class="type">课程论文</span>
+          </a>
+          <a class="srow" href="#">
+            <h3>《不醒人之梦》创作手记</h3>
+            <span class="course">宋词导读 · 讨论课</span>
+            <span class="type">创作手记</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="t-label"><span class="yr">2023</span><span class="sem">秋</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>宋词中的感性和理性</h3>
+            <span class="course">宋词导读 · 读书报告</span>
+            <span class="type">读书报告</span>
+          </a>
+          <a class="srow" href="#">
+            <h3>没有人记得，就没有人忘记</h3>
+            <span class="course">宋词导读 · 拍照配词</span>
+            <span class="type">创意写作</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="t-label"><span class="yr">2023</span><span class="sem">春</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>婉约词中的风骨</h3>
+            <span class="course">唐宋文学精华 · 期末论文</span>
+            <span class="type">课程论文</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="t-label"><span class="yr">2022</span><span class="sem">春</span></div>
+        <div class="t-items">
+          <a class="srow" href="#">
+            <h3>元代之后陆上丝绸之路凋敝的必然性</h3>
+            <span class="course">中华文明通论 · 期末论文</span>
+            <span class="type">课程论文</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+</script>
+</body>
+</html>

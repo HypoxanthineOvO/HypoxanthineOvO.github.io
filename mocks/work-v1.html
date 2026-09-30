@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="engineering">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 项目门：精选大卡片 + 详情页 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · work-v1
+  - 上半：项目门列表——精选项目大卡片（封面 + 名称 + 状态灯 + 状态短语），悬浮感强。
+  - 下半：详情页——GitHub 信息卡（构建时烙快照 + 加载时刷新）、正文、开发日记时间线。
+  - 项目门皮肤 = 工程终端感：面板常带一点点暗色终端气质，但不整页变黑（那是首页卡片的特权）。
+  - 无封面图的项目用渐变 + 字标占位（cover 字段可选的实现方式）。
+-->
+<style>
+  /* ============ 壳：与 home-v1 同一套 ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    --shell-max: 1180px;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: #2f9e6e; font-weight: 600; }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 皮肤：engineering ============ */
+  html[data-skin='engineering'] {
+    --gate: #2f9e6e; --gate-deep: #0e2b1e;
+    --skin-bg: #f3f5f2; --skin-line: #dbe4dd; --skin-muted: #6f8177;
+    --term-bg: #0d1117; --term-line: #30363d; --term-fg: #e6edf3; --term-muted: #8b949e; --term-green: #3fb950; --term-yellow: #d29922;
+  }
+  html[data-theme='dark'][data-skin='engineering'] {
+    --skin-bg: #101511; --skin-line: #263329; --skin-muted: #8ba394;
+  }
+  .skin { background: var(--skin-bg); border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line); }
+  .gate-head { padding: 52px 0 8px; }
+  .gate-head .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--gate); }
+  .gate-head h1 { font-size: 34px; color: var(--gate-deep); margin-top: 8px; }
+  html[data-theme='dark'] .gate-head h1 { color: var(--fg); }
+  .gate-head p { color: var(--skin-muted); margin-top: 8px; max-width: 46em; font-size: 14.5px; }
+
+  /* ---- 精选大卡片 ---- */
+  .bignets { padding: 26px 0 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bignet {
+    position: relative; border-radius: 8px; overflow: hidden; background: var(--panel);
+    border: 1px solid var(--skin-line); display: flex; flex-direction: column;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  .bignet:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(10,40,25,.14); }
+  .bignet .cover { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; position: relative; }
+  .bignet .cover.img { background-size: cover; background-position: center; }
+  .bignet .cover.ph { background: linear-gradient(150deg, #0d1117 0%, #12261c 60%, #1c3a2a 100%); color: #7ee787; font-family: var(--font-mono); font-size: 22px; letter-spacing: .12em; }
+  .bignet .cover .badge { position: absolute; top: 10px; left: 10px; font-family: var(--font-mono); font-size: 10.5px; background: rgba(13,17,23,.78); color: #d2f8e4; padding: 2px 9px; border-radius: 3px; backdrop-filter: blur(3px); }
+  .bignet .body { padding: 14px 16px 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .bignet h3 { font-size: 17.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .bignet p.desc { font-size: 13px; color: var(--skin-muted); line-height: 1.65; }
+  .bignet .meta { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--skin-line); display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--skin-muted); font-family: var(--font-mono); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .dot--green { background: var(--term-green); box-shadow: 0 0 8px rgba(63,185,80,.55); }
+  .dot--yellow { background: var(--term-yellow); box-shadow: 0 0 8px rgba(210,153,34,.55); }
+  .bignet .meta .note { color: var(--fg); font-family: var(--font-ui); }
+  .bignet .meta .arrow { margin-left: auto; color: var(--gate); }
+
+  /* ---- 详情页 ---- */
+  .detail { padding: 26px 0 70px; }
+  .detail .wrap { max-width: 880px; margin: 0 auto; }
+  .crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--skin-muted); }
+  .crumbs a { color: var(--gate); }
+  .detail h1 { font-size: 32px; margin-top: 10px; display: flex; align-items: center; gap: 12px; }
+  .detail .lead { color: var(--skin-muted); margin-top: 8px; font-size: 15px; }
+  .detail .cols { display: grid; grid-template-columns: 1fr 300px; gap: 26px; margin-top: 26px; align-items: start; }
+  .detail .doc { font-size: 15px; line-height: 2; }
+  .detail .doc p { margin-bottom: 1.1em; }
+  .detail .doc h2 { font-size: 18px; margin: 1.8em 0 .8em; padding-left: 12px; border-left: 3px solid var(--gate); }
+
+  /* GitHub 信息卡（构建时快照 + 运行时刷新，失败静默回退） */
+  .ghcard {
+    background: var(--term-bg); border: 1px solid var(--term-line); border-radius: 8px;
+    color: var(--term-fg); font-family: var(--font-mono); font-size: 12.5px; overflow: hidden;
+  }
+  .ghcard .gh-head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: 1px solid var(--term-line); }
+  .ghcard .gh-head .repo { color: #7ee787; }
+  .ghcard dl { display: grid; grid-template-columns: 1fr 1fr; }
+  .ghcard dl > div { padding: 10px 14px; border-bottom: 1px solid #21262d; }
+  .ghcard dl > div:nth-child(odd) { border-right: 1px solid #21262d; }
+  .ghcard dt { font-size: 10.5px; color: var(--term-muted); letter-spacing: .12em; }
+  .ghcard dd { font-size: 16px; margin-top: 2px; }
+  .ghcard dd small { font-size: 11px; color: var(--term-muted); margin-left: 4px; }
+  .ghcard .gh-foot { padding: 9px 14px; color: var(--term-muted); font-size: 11px; display: flex; justify-content: space-between; }
+  .sidecard { margin-top: 14px; border: 1px solid var(--skin-line); border-radius: 8px; padding: 13px 15px; background: var(--panel); }
+  .sidecard h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; color: var(--gate); }
+  .sidecard .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .sidecard .chip { font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--skin-line); border-radius: 3px; padding: 1px 8px; color: var(--skin-muted); }
+
+  /* 开发日记时间线 */
+  .devlog { margin-top: 44px; }
+  .devlog h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: .18em; color: var(--gate); }
+  .tl { margin-top: 16px; border-left: 2px solid var(--skin-line); padding-left: 22px; display: flex; flex-direction: column; gap: 18px; }
+  .tl .entry { position: relative; }
+  .tl .entry::before { content: ''; position: absolute; left: -27.5px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--gate); box-shadow: 0 0 0 3px var(--skin-bg); }
+  .tl .entry.wip::before { background: var(--term-yellow); }
+  .tl .when { font-family: var(--font-mono); font-size: 11.5px; color: var(--skin-muted); }
+  .tl .entry h3 { font-size: 15.5px; margin-top: 2px; }
+  .tl .entry p { font-size: 13.5px; color: var(--skin-muted); margin-top: 3px; max-width: 52em; }
+  .tl .kind { font-family: var(--font-mono); font-size: 10.5px; border: 1px solid var(--skin-line); border-radius: 2px; padding: 0 6px; color: var(--gate); margin-left: 8px; vertical-align: 2px; }
+
+  .section-lbl { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .2em; color: var(--muted); text-align: center; padding: 56px 0 0; }
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .bignets { grid-template-columns: 1fr; }
+    .detail .cols { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a href="#">研究</a><a class="here" href="#">项目</a><a href="#">技术笔记</a><a href="#">散文</a><a href="#">诗词</a><a href="#">发布</a><a href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn">◐ theme</button>
+  </div>
+</header>
+
+<!-- ============ 列表：精选大卡片 ============ -->
+<section class="skin">
+  <div class="shell">
+    <div class="gate-head">
+      <p class="kicker">WORK / SELECTED PROJECTS</p>
+      <h1>项目</h1>
+      <p>主线之外长期维护的东西，多数与 AI 与 Agent 有关：每天在用的工具，和为把它们串起来而造的系统。只陈列精选，其余进档案。</p>
+    </div>
+    <div class="bignets">
+
+      <a class="bignet" href="#vspi">
+        <div class="cover ph">VSPi<span class="badge">RESEARCH</span></div>
+        <div class="body">
+          <h3>VSPi <i class="dot dot--green"></i></h3>
+          <p class="desc">面向 Pi coding agents 的中文终端界面，把多会话、模型切换与只读工作流状态收进一个紧凑 TUI。</p>
+          <div class="meta"><span class="note">自维护 agent core，每天在用</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+      <a class="bignet" href="#workflow">
+        <div class="cover img" style="background-image: linear-gradient(rgba(10,20,14,.25), rgba(10,20,14,.45)), url('../public/media/projects/hypo-workflow.webp');" >
+          <span class="badge">SYSTEMS</span>
+        </div>
+        <div class="body">
+          <h3>Hypo-Workflow <i class="dot dot--green"></i></h3>
+          <p class="desc">为 coding agents 提供文件化 Cycle、Discussion、Plan、Progress 与 Memory，让长任务可讨论、可恢复、可验收。</p>
+          <div class="meta"><span class="note">可恢复的 agent 工作流</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+      <a class="bignet" href="#hypodoc">
+        <div class="cover ph">HypoDoc<span class="badge">SYSTEMS</span></div>
+        <div class="body">
+          <h3>HypoDoc <i class="dot dot--green"></i></h3>
+          <p class="desc">结构化 Markdown 规范与 parser、Web/LaTeX renderer、Desktop 和 VS Code 产品工作区。</p>
+          <div class="meta"><span class="note">AI-first 文档系统</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+      <a class="bignet" href="#writer">
+        <div class="cover ph">Hypo-Writer<span class="badge">WRITING</span></div>
+        <div class="body">
+          <h3>Hypo-Writer <i class="dot dot--green"></i></h3>
+          <p class="desc">本地优先的中文创作系统，覆盖资料、事实卡、大纲、审阅以及公众号、小红书等多平台发布包。</p>
+          <div class="meta"><span class="note">发布门的内容都由它生产</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+      <a class="bignet" href="#">
+        <div class="cover ph">VSP-Codex<span class="badge">SYSTEMS</span></div>
+        <div class="body">
+          <h3>VSP-Codex <i class="dot dot--green"></i></h3>
+          <p class="desc">面向 VSP Lab 场景维护的 Codex source-build 版本，公开镜像与 GitLab 主线协同演化。</p>
+          <div class="meta"><span class="note">实验室在用的研究型编程 agent</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+      <a class="bignet" href="#cryo">
+        <div class="cover ph" style="background: linear-gradient(150deg, #0b1420 0%, #10293a 60%, #1d4a63 100%); color: #8fd3f4;">Cryo-GPU<span class="badge">RESEARCH</span></div>
+        <div class="body">
+          <h3>Cryo-GPU <i class="dot dot--yellow"></i></h3>
+          <p class="desc">面向 77 K GPU 架构的证据驱动设计空间探索，以可复现建模、参数合成与仿真连接器件变化和系统资源配置。</p>
+          <div class="meta"><span class="note">研究主线，进行中</span><span class="arrow">-&gt;</span></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<p class="section-lbl shell">—— 以下为项目详情页 ——</p>
+
+<!-- ============ 详情：VSPi ============ -->
+<section class="skin detail" id="vspi">
+  <div class="shell wrap">
+    <p class="crumbs"><a href="#">项目</a> / vspi</p>
+    <h1>VSPi <i class="dot dot--green"></i></h1>
+    <p class="lead">面向 Pi coding agents 的中文终端界面，把多会话、模型切换与只读工作流状态收进一个紧凑 TUI。</p>
+
+    <div class="cols">
+      <div class="doc">
+        <p>和 coding agent 对话的默认入口。多会话并行、模型按需切换、工作流状态只读呈现——一个终端窗口装下每天和 agent 协作的绝大部分操作。</p>
+        <p>它是自维护的 agent core：没有发布节奏，没有 roadmap，痒了就改。所有交互都按"我每天怎么用它"来取舍，因此它也成了其他 Hypo-* 工具最早的试验场。</p>
+        <h2>开发日记</h2>
+        <div class="devlog" style="margin-top:6px;">
+          <div class="tl">
+            <div class="entry wip">
+              <span class="when">2026-03 ~ 现在</span>
+              <h3>v3 重构<span class="kind">diary</span></h3>
+              <p>会话模型重写，把 workflow 状态从侧栏挪进只读面板；周报数据接 Hypo-Info。</p>
+            </div>
+            <div class="entry">
+              <span class="when">2026-01</span>
+              <h3>v2 发布<span class="kind">release</span></h3>
+              <p>模型切换、多会话并行、配置热加载上线；自用两周后稳定。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="ghcard" id="gh">
+          <div class="gh-head"><span>⌥</span><span class="repo">HypoxanthineOvO / VSPi</span></div>
+          <dl>
+            <div><dt>STARS</dt><dd>128</dd></div>
+            <div><dt>FORKS</dt><dd>9</dd></div>
+            <div><dt>LAST PUSH</dt><dd>2d<small>ago</small></dd></div>
+            <div><dt>RELEASE</dt><dd>v2.4.1</dd></div>
+          </dl>
+          <div class="gh-foot"><span>● live from API</span><span>fallback: build snapshot</span></div>
+        </div>
+        <div class="sidecard">
+          <h4>TECH</h4>
+          <div class="chips"><span class="chip">TypeScript</span><span class="chip">TUI</span><span class="chip">Agents</span></div>
+        </div>
+        <div class="sidecard">
+          <h4>STATUS</h4>
+          <p style="margin-top:8px;font-size:13.5px;"><i class="dot dot--green" style="display:inline-block;vertical-align:middle;margin-right:6px;"></i>活跃自用 · 2026 — NOW</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+</script>
+</body>
+</html>

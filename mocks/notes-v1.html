@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="notes">
+<head>
+<meta charset=" utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 技术笔记门：方格纸 + 诚实空态 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · notes-v1
+  - 技术笔记门：14 篇旧笔记全部待重写（draft），初期稀疏。
+  - 空状态诚实表述："这个栏目在重写"——不挂横幅、不装繁荣。
+  - 皮肤：方格纸（grid paper），蓝黑墨水感，笔记本质感。
+-->
+<style>
+  /* ============ 壳：与 home-v1 同一套 ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    --shell-max: 1180px;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: #3f6d9e; font-weight: 600; }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 皮肤：notes（方格纸） ============ */
+  html[data-skin='notes'] {
+    --gate: #3f6d9e; --gate-deep: #1d3a56;
+    --skin-bg: #fbfcfd; --skin-line: #d3dde6; --skin-muted: #6b7f92;
+    --grid: rgba(63,109,158,.09);
+  }
+  html[data-theme='dark'][data-skin='notes'] {
+    --skin-bg: #0f1319; --skin-line: #26313d; --skin-muted: #8496a8;
+    --grid: rgba(110,160,210,.07);
+  }
+  .skin {
+    background-color: var(--skin-bg);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 22px 22px;
+    border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line);
+  }
+  .gate-head { padding: 52px 0 8px; }
+  .gate-head .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--gate); }
+  .gate-head h1 { font-size: 34px; color: var(--gate-deep); margin-top: 8px; }
+  html[data-theme='dark'] .gate-head h1 { color: var(--fg); }
+  .gate-head p { color: var(--skin-muted); margin-top: 8px; max-width: 46em; font-size: 14.5px; }
+
+  /* ---- 诚实空态 ---- */
+  .empty { padding: 34px 0 30px; display: flex; justify-content: center; }
+  .empty .card {
+    max-width: 560px; background: color-mix(in srgb, var(--skin-bg) 80%, #fff 20%);
+    border: 1px solid var(--skin-line); border-radius: 4px; padding: 30px 34px;
+    font-family: var(--font-mono);
+  }
+  html[data-theme='dark'] .empty .card { background: color-mix(in srgb, var(--skin-bg) 75%, #000 15%); }
+  .empty h2 { font-size: 16px; font-weight: 600; color: var(--gate-deep); }
+  html[data-theme='dark'] .empty h2 { color: var(--fg); }
+  .empty p { font-size: 13px; color: var(--skin-muted); margin-top: 10px; line-height: 2; }
+  .empty .progress { margin-top: 16px; font-size: 11.5px; }
+  .empty .progress .bar { display: flex; gap: 3px; margin-top: 8px; }
+  .empty .progress .bar i { flex: 1; height: 8px; border-radius: 2px; background: color-mix(in srgb, var(--gate) 14%, transparent); }
+  .empty .progress .bar i.done { background: var(--gate); }
+
+  /* ---- 已重写上架的笔记（将来会有，先摆一张示例） ---- */
+  .shelf { padding: 10px 0 64px; }
+  .shelf .lbl { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .2em; color: var(--gate); margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .note-card {
+    background: color-mix(in srgb, var(--skin-bg) 80%, #fff 20%);
+    border: 1px solid var(--skin-line); border-radius: 4px; padding: 15px 17px;
+    font-family: var(--font-mono); transition: border-color .16s, transform .16s;
+  }
+  html[data-theme='dark'] .note-card { background: color-mix(in srgb, var(--skin-bg) 75%, #000 15%); }
+  .note-card:hover { border-color: var(--gate); transform: translateY(-2px); }
+  .note-card .src { font-size: 10.5px; color: var(--gate); letter-spacing: .1em; }
+  .note-card h3 { font-family: var(--font-ui); font-size: 15px; margin-top: 6px; }
+  .note-card p { font-size: 12px; color: var(--skin-muted); margin-top: 6px; line-height: 1.8; font-family: var(--font-ui); }
+  .note-card .foot { margin-top: 10px; font-size: 11px; color: var(--skin-muted); display: flex; justify-content: space-between; }
+
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a href="#">研究</a><a href="#">项目</a><a class="here" href="#">技术笔记</a><a href="#">散文</a><a href="#">诗词</a><a href="#">发布</a><a href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn">◐ theme</button>
+  </div>
+</header>
+
+<section class="skin">
+  <div class="shell">
+    <div class="gate-head">
+      <p class="kicker">NOTES / 技术笔记</p>
+      <h1>技术笔记</h1>
+      <p>读书笔记与工程备忘，写给未来的自己。</p>
+    </div>
+
+    <!-- 空状态：诚实 -->
+    <div class="empty">
+      <div class="card">
+        <h2>这个栏目在重写</h2>
+        <p>旧库里有 14 篇笔记（CUDA、LaTeX、NeRF 系列读书笔记等），
+        大多写于本科低年级，如今自己都读不下去。它们不会以旧样子回来，
+        我会按主题逐篇重写，写完一篇上一篇。</p>
+        <div class="progress">
+          <span>重写进度 0 / 14</span>
+          <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 上架区：现在为空，将来放重写完的笔记（演示一张） -->
+    <div class="shelf">
+      <p class="lbl">SHELF / 已上架 —— 演示样式，当前为空</p>
+      <div class="grid">
+        <a class="note-card" href="#">
+          <span class="src">PAPER NOTE</span>
+          <h3>Instant-NGP 到底 instant 在哪</h3>
+          <p>从 hash encoding 的多分辨率结构读起，拆出它省掉的是什么、省不掉的是什么。</p>
+          <div class="foot"><span>2026-09</span><span>reading</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+</script>
+</body>
+</html>

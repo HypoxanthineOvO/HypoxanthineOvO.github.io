@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-skin="research">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mock v1 · 研究门：论文 demo 墙 + paper 皮肤详情 — hypox.cn 重设计</title>
+<!--
+  重设计 Mock · research-v1
+  - 上半：研究门列表页——论文当 demo 墙，紧凑卡片，按年份倒序，不做重介绍。
+  - 下半：论文详情页（paper 皮肤）——LaTeX 式版式：serif 标题、居中作者行、
+    两端摘要、一行式题录、PDF/code/bibtex 三个动作。
+  - 亮暗两套皮肤变量都在，右上角可切。
+-->
+<style>
+  /* ============ 壳：与 home-v1 同一套 ============ */
+  :root {
+    --bg: #f6f6f3; --panel: #ffffff; --fg: #1d1d1a; --muted: #6e6e66; --line: #e2e2db;
+    --font-ui: 'Noto Sans SC', 'Noto Sans CJK SC', 'PingFang SC', system-ui, sans-serif;
+    --font-serif: 'Noto Serif SC', 'Noto Serif CJK SC', 'Songti SC', serif;
+    --font-mono: 'JetBrains Mono', 'Noto Sans Mono CJK SC', ui-monospace, monospace;
+    --shell-max: 1180px;
+  }
+  [data-theme='dark'] { --bg: #121214; --panel: #1b1b1e; --fg: #ecece8; --muted: #9b9b92; --line: #2c2c30; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); font-size: 15px; line-height: 1.7; transition: background .25s, color .25s; }
+  a { color: inherit; text-decoration: none; }
+  .shell { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; }
+
+  .topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .topbar__inner { max-width: var(--shell-max); margin: 0 auto; padding: 0 22px; height: 52px; display: flex; align-items: center; gap: 22px; }
+  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
+  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
+  .topnav a { color: var(--muted); } .topnav a:hover { color: var(--fg); }
+  .topnav a.here { color: var(--gate, #3d7a93); font-weight: 600; }
+  .theme-btn { border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; cursor: pointer; }
+
+  /* ============ 皮肤：research（进门沾色） ============ */
+  html[data-skin='research'] {
+    --gate: #3d7a93; --gate-deep: #16323e;
+    --skin-bg: #f2f5f4; --skin-line: #d6e0e2; --skin-muted: #6c838c;
+  }
+  html[data-theme='dark'][data-skin='research'] {
+    --skin-bg: #111517; --skin-line: #26333a; --skin-muted: #8fa3ac;
+  }
+  .skin { background: var(--skin-bg); border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line); }
+
+  /* ---- 门头（各门列表页共用结构） ---- */
+  .gate-head { padding: 52px 0 8px; }
+  .gate-head .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--gate); }
+  .gate-head h1 { font-family: var(--font-serif); font-size: 34px; color: var(--gate-deep); margin-top: 8px; }
+  html[data-theme='dark'] .gate-head h1 { color: var(--fg); }
+  .gate-head p { color: var(--skin-muted); margin-top: 8px; max-width: 46em; font-size: 14.5px; }
+
+  /* ---- demo 墙：按年份分组，论文当展品 ---- */
+  .wall { padding: 18px 0 64px; display: grid; grid-template-columns: 64px 1fr; gap: 0 26px; }
+  .rail { font-family: var(--font-mono); font-size: 13px; color: var(--gate); position: sticky; top: 76px; align-self: start; padding-top: 4px; }
+  .rail::after { content: ''; display: block; width: 22px; height: 2px; background: var(--gate); margin-top: 8px; opacity: .5; }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .paper-card {
+    background: var(--panel); border: 1px solid var(--skin-line); border-radius: 4px;
+    padding: 16px 18px; display: flex; flex-direction: column; gap: 8px;
+    transition: border-color .18s, transform .18s;
+  }
+  .paper-card:hover { border-color: var(--gate); transform: translateY(-2px); }
+  .paper-card .venue { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; color: var(--gate); }
+  .paper-card h3 { font-family: var(--font-serif); font-size: 16px; line-height: 1.45; color: var(--fg); font-weight: 600; }
+  .paper-card .authors { font-size: 12.5px; color: var(--skin-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .paper-card .authors b { color: var(--gate); font-weight: 600; }
+  .paper-card .row { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--skin-muted); font-family: var(--font-mono); }
+  .paper-card .row a { color: var(--gate); }
+  .paper-card .row .spark { margin-left: auto; letter-spacing: 2px; color: var(--gate); opacity: .55; }
+  .first-author { position: relative; }
+  .first-author::before { content: '一作'; position: absolute; top: -9px; left: -8px; font-size: 10px; font-family: var(--font-ui); background: var(--gate); color: #fff; padding: 1px 7px; border-radius: 2px; letter-spacing: .1em; }
+
+  /* ============ paper 皮肤详情页 ============ */
+  html[data-skin='paper'] {
+    --gate: #3d7a93; --gate-deep: #16323e;
+    --skin-bg: #fbfaf7; --skin-line: #e3e0d6; --skin-muted: #857f6e;
+  }
+  html[data-theme='dark'][data-skin='paper'] {
+    --skin-bg: #141511; --skin-line: #2e2f28; --skin-muted: #9a958a;
+  }
+  .paperpage { padding: 60px 0 80px; }
+  .paperdoc { max-width: 44em; margin: 0 auto; font-family: var(--font-serif); color: #23211b; }
+  html[data-theme='dark'] .paperdoc { color: #e4e1d8; }
+  .paperdoc .doctype { text-align: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: .3em; color: var(--skin-muted); }
+  .paperdoc h1 { text-align: center; font-size: 25px; line-height: 1.5; margin-top: 18px; font-weight: 700; }
+  .paperdoc .byline { text-align: center; margin-top: 14px; font-size: 14.5px; }
+  .paperdoc .byline b { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gate); }
+  .paperdoc .byline .affil { display: block; font-size: 12.5px; color: var(--skin-muted); margin-top: 4px; font-style: italic; }
+  .paperdoc .abstract { margin: 30px auto 0; max-width: 40em; font-size: 14.5px; line-height: 1.95; }
+  .paperdoc .abstract .lbl { font-weight: 700; font-style: italic; }
+  .paperdoc .kw { text-align: center; font-size: 12.5px; color: var(--skin-muted); margin-top: 14px; font-style: italic; }
+  .paperdoc .body p { margin-top: 18px; font-size: 15px; line-height: 2; text-align: justify; }
+  .paperdoc .citebox {
+    margin-top: 40px; border-top: 1px solid var(--skin-line); border-bottom: 1px solid var(--skin-line);
+    padding: 14px 2px; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; color: var(--skin-muted);
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }
+  .paperdoc .citebox .acts { margin-left: auto; display: flex; gap: 8px; }
+  .act { font-family: var(--font-mono); font-size: 11.5px; border: 1px solid var(--gate); color: var(--gate); padding: 3px 12px; border-radius: 2px; }
+  .act:hover { background: var(--gate); color: #fff; }
+
+  .section-lbl { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .2em; color: var(--muted); text-align: center; padding: 56px 0 0; }
+
+  .mock-badge { position: fixed; right: 14px; bottom: 14px; z-index: 50; background: #111; color: #ffd666; font-family: var(--font-mono); font-size: 11px; padding: 5px 11px; border-radius: 4px; opacity: .82; }
+  @media (max-width: 960px) {
+    .topnav { display: none; }
+    .wall { grid-template-columns: 1fr; }
+    .rail { position: static; padding: 18px 0 0; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="brand">HYPOXANTHINE</span>
+    <nav class="topnav">
+      <a class="here" href="#">研究</a><a href="#">项目</a><a href="#">技术笔记</a><a href="#">散文</a><a href="#">诗词</a><a href="#">发布</a><a href="#">学习档案</a><a href="#">档案</a><a href="#">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn">◐ theme</button>
+  </div>
+</header>
+
+<!-- ============ 列表：demo 墙 ============ -->
+<section class="skin">
+  <div class="shell">
+    <div class="gate-head">
+      <p class="kicker">RESEARCH / PUBLICATIONS</p>
+      <h1>学术发表</h1>
+      <p>神经渲染加速器的软硬件协同设计：从采样策略、光线表示到无冲突编码。论文按 demo 墙陈列，点开看题录与 PDF。</p>
+    </div>
+    <div class="wall">
+      <div class="rail">2026</div>
+      <div class="cards">
+        <a class="paper-card first-author" href="#scar">
+          <span class="venue">ISCAS 2026 · LECTURE</span>
+          <h3>SCAR: A Neural Rendering Accelerator with Sparse-Aware Sampling and Conflict-Free Encoding</h3>
+          <span class="authors"><b>Yunxiang He</b>, Yongzhi Zhang, Quanyu Chen, Chaofan Li, Qihan Ding, Xin Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a><span class="spark">36× speedup</span></span>
+        </a>
+      </div>
+    </div>
+    <div class="wall">
+      <div class="rail">2025</div>
+      <div class="cards">
+        <a class="paper-card" href="#">
+          <span class="venue">IEEE TVLSI 2025</span>
+          <h3>A Neural Rendering Coprocessor With Optimized Ray Representation and Marching</h3>
+          <span class="authors">Z. Yuan, B. Yuan, C. Rao, Y. Zhu, <b>Yunxiang He</b>, P. Zhou, J. Yu, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+      </div>
+    </div>
+    <div class="wall">
+      <div class="rail">2024</div>
+      <div class="cards">
+        <a class="paper-card" href="#">
+          <span class="venue">IEEE TCSVT 2024</span>
+          <h3>Ray Reordering for Hardware-Accelerated Neural Volume Rendering</h3>
+          <span class="authors">J. Ding, <b>Yunxiang He</b>, B. Yuan, Z. Yuan, P. Zhou, J. Yu, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+        <a class="paper-card" href="#">
+          <span class="venue">IEEE CICC 2024</span>
+          <h3>A 0.59μJ/pixel High-throughput Energy-efficient Neural Volume Rendering Accelerator on FPGA</h3>
+          <span class="authors">Z. Yuan, B. Yuan, Y. Gu, Y. Zheng, <b>Yunxiang He</b>, X. Wang, C. Rao, P. Zhou, J. Yu, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+        <a class="paper-card first-author" href="#">
+          <span class="venue">ISCAS 2024</span>
+          <h3>Density Estimation-based Effective Sampling Strategy for Neural Rendering</h3>
+          <span class="authors"><b>Yunxiang He</b>, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+        <a class="paper-card" href="#">
+          <span class="venue">ISCAS 2024</span>
+          <h3>An Efficient Hardware Volume Renderer for Convolutional Neural Radiance Fields</h3>
+          <span class="authors">X. Wang, <b>Yunxiang He</b>, X. Zhang, P. Zhou, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+        <a class="paper-card" href="#">
+          <span class="venue">IEEE JOURNAL 2024</span>
+          <h3>An Energy-Efficient Edge Coprocessor for Neural Rendering With Explicit Data Reuse Strategies</h3>
+          <span class="authors">B. Yuan, X. Zhang, Z. Zheng, … <b>Yunxiang He</b>, … X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+      </div>
+    </div>
+    <div class="wall">
+      <div class="rail">2023</div>
+      <div class="cards">
+        <a class="paper-card" href="#">
+          <span class="venue">IEEE TCAS-I 2023</span>
+          <h3>Analysis and Design of Precision-scalable Computation Array for Efficient Neural Radiance Field Rendering</h3>
+          <span class="authors">K. Long, C. Rao, <b>Yunxiang He</b>, Z. Yuan, P. Zhou, J. Yu, X. Lou</span>
+          <span class="row"><a>PDF</a><span>·</span><a>BibTeX</a></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="section-lbl shell">—— 以下为论文详情页 · paper 皮肤 ——</p>
+
+<!-- ============ 详情：paper 皮肤 ============ -->
+<section class="skin" id="scar" data-paper>
+  <div class="shell paperpage">
+    <article class="paperdoc">
+      <p class="doctype">CONFERENCE PAPER · ISCAS 2026 · LECTURE</p>
+      <h1>SCAR: A Neural Rendering Accelerator with Sparse-Aware Sampling and Conflict-Free Encoding</h1>
+      <div class="byline">
+        <b>Yunxiang He</b>, Yongzhi Zhang, Quanyu Chen, Chaofan Li, Qihan Ding, Xin Lou
+        <span class="affil">ShanghaiTech University · VSP Lab</span>
+      </div>
+      <div class="abstract">
+        <span class="lbl">Abstract—</span>SCAR is a specialized accelerator for implicit neural representation-based
+        neural rendering, targeting the deployment bottlenecks on resource-constrained devices. We propose two key
+        innovations: (1) a sparse-aware sampling scheduler that combines iterative preprocessing with projection-based
+        sampling to boost ray–scene intersection efficiency; and (2) a renumbered block-based memory access strategy
+        that eliminates bank conflicts during feature encoding to maximize memory throughput. SCAR is implemented in
+        Verilog HDL with host-side scheduling and evaluated on a 40nm CMOS process.
+      </div>
+      <p class="kw">Keywords: neural rendering, implicit representation, ray casting, hash encoding, real-time rendering</p>
+      <div class="body">
+        <p>SCAR achieves a 36× speedup over the Jetson Xavier NX baseline, and delivers state-of-the-art energy
+        efficiency with superior rendering speed compared to existing neural rendering accelerators. Accepted as a
+        Lecture presentation at IEEE ISCAS 2026, Shanghai, China, May 24–27, 2026.</p>
+      </div>
+      <div class="citebox">
+        <span>Y. He et al., "SCAR: A Neural Rendering Accelerator…," ISCAS 2026.</span>
+        <span class="acts"><a class="act" href="#">PDF</a><a class="act" href="#">CODE</a><a class="act" href="#">BIBTEX</a></span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="mock-badge">MOCK v1 · 演示数据</div>
+
+<script>
+  const btn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  btn.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+  // 滚动到详情区块时把整页皮肤切成 paper，演示"进门沾色、进文变纸"
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => { if (e.isIntersecting) root.dataset.skin = 'paper'; else root.dataset.skin = 'research'; });
+  }, { threshold: .2 });
+  io.observe(document.querySelector('[data-paper]'));
+</script>
+</body>
+</html>
