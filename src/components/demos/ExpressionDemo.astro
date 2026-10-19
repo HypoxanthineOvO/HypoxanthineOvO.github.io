@@ -1,0 +1,150 @@
+---
+// Hypo-Expression：一段 AI 腔文字，逐处标出、划掉、改成人话
+// 每段：[原文片段, 替换文本(null=保持), 标签]
+type Seg = [string, string | null, string?];
+const samples: { prompt: string; segs: Seg[] }[] = [
+  {
+    prompt: '这次实验结果怎么样？',
+    segs: [
+      ['值得注意的是，', '', '空洞铺垫'],
+      ['在一定程度上，', '', '不敢下结论'],
+      ['新方案', null],
+      ['可能', '', '不敢下结论'],
+      ['带来了', null],
+      ['一定的', '23% 的', '模糊'],
+      ['能效提升。', null],
+      ['（已核验，SHA-256 一致，不能声称已全面验证。）', '', '自我辩护'],
+    ],
+  },
+  {
+    prompt: '帮我整理老师的作业要求。',
+    segs: [
+      ['好的，我先建立唯一基线，再进行可追溯整理。', '', 'AI 黑话'],
+      ['作业', null],
+      ['需要', null],
+      ['在相关时间节点前', '周五 18:00 前', '模糊'],
+      ['提交，', null],
+      ['不能擅自保证', '', '防御性'],
+      ['迟交', null],
+      ['不会产生扣分影响。', '每天扣 10%。', '防御性'],
+    ],
+  },
+  {
+    prompt: '这本书值得读吗？',
+    segs: [
+      ['这不仅仅是一本书，更是一次心灵的旅程。', '值得读。', '先反驳没说过的话'],
+      ['它', null],
+      ['以一种深刻而独特的方式', '', '空洞修饰'],
+      ['讲清楚了', null],
+      ['为什么好习惯难坚持', null],
+      ['，为读者提供了参照与启发。', '，第三章的例子尤其实用。', '套话'],
+    ],
+  },
+];
+---
+
+<div class="dm-exp" data-demo="expression" data-samples={JSON.stringify(samples)}>
+  <div class="dm-exp__head">
+    <span class="dm-exp__q" data-q></span>
+    <span class="dm-exp__badge" data-badge>AI 原文</span>
+  </div>
+  <p class="dm-exp__text" data-text></p>
+  <div class="dm-exp__tags" data-tags></div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion } from './loop';
+
+  type Seg = [string, string | null, string?];
+  each('[data-demo="expression"]', (root) => {
+    const samples: { prompt: string; segs: Seg[] }[] = JSON.parse(root.dataset.samples ?? '[]');
+    const q = root.querySelector<HTMLElement>('[data-q]')!;
+    const badge = root.querySelector<HTMLElement>('[data-badge]')!;
+    const text = root.querySelector<HTMLElement>('[data-text]')!;
+    const tags = root.querySelector<HTMLElement>('[data-tags]')!;
+
+    const build = (s: (typeof samples)[number]) => {
+      q.textContent = `问：${s.prompt}`;
+      text.innerHTML = '';
+      tags.innerHTML = '';
+      return s.segs.map(([orig, repl, tag]) => {
+        const span = document.createElement('span');
+        span.className = repl === null ? 'keep' : 'bad';
+        const del = document.createElement('del');
+        del.textContent = orig;
+        span.append(del);
+        if (repl) { const ins = document.createElement('ins'); ins.textContent = repl; span.append(ins); }
+        text.append(span);
+        return { span, tag: repl === null ? null : tag };
+      });
+    };
+    const finalState = (parts: ReturnType<typeof build>) => {
+      parts.forEach(({ span }) => span.classList.add('marked', 'cut', 'fixed'));
+      badge.textContent = '改写后';
+      badge.classList.add('ok');
+    };
+
+    if (reduceMotion()) { finalState(build(samples[0])); return; }
+    whenVisible(root, async () => {
+      for (let n = 0; ; n = (n + 1) % samples.length) {
+        badge.textContent = 'AI 原文';
+        badge.classList.remove('ok');
+        const parts = build(samples[n]);
+        await sleep(1500);
+        const seen = new Set<string>();
+        for (const { span, tag } of parts) {
+          if (!tag) continue;
+          span.classList.add('marked');
+          if (!seen.has(tag)) {
+            seen.add(tag);
+            const t = document.createElement('span');
+            t.textContent = tag;
+            tags.append(t);
+          }
+          await sleep(520);
+        }
+        await sleep(700);
+        badge.textContent = '改写中…';
+        for (const { span, tag } of parts) {
+          if (!tag) continue;
+          span.classList.add('cut');
+          await sleep(320);
+          span.classList.add('fixed');
+          await sleep(260);
+        }
+        badge.textContent = '改写后';
+        badge.classList.add('ok');
+        root.classList.add('clean');
+        await sleep(3200);
+        root.classList.remove('clean');
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-exp { container-type: inline-size; box-sizing: border-box; width: 100%; height: 100%; min-height: 200px; display: flex; flex-direction: column; padding: 14px 16px; border-radius: 12px; background: #fffdf9; border: 1px solid var(--line); text-align: left; }
+  .dm-exp__head { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
+  .dm-exp__badge { margin-left: auto; font-size: 11px; padding: 2px 9px; border-radius: 999px; background: var(--paper-2); color: var(--ink-2); transition: background .3s, color .3s; white-space: nowrap; }
+  .dm-exp__badge.ok { background: #e4f2e6; color: #2f7d42; }
+  .dm-exp__text { margin: 12px 0 0; font-size: 15px; line-height: 1.95; color: var(--fg); }
+  .dm-exp__text del { text-decoration: none; transition: background .3s, color .3s; }
+  .dm-exp__text ins { text-decoration: none; display: inline-block; max-width: 0; overflow: hidden; white-space: nowrap; vertical-align: bottom; color: #1d6b31; background: #e4f2e6; border-radius: 3px; transition: max-width .5s ease, padding .5s; }
+  .dm-exp__text .bad.marked del { background: var(--red-soft); color: var(--red); border-radius: 3px; }
+  .dm-exp__text .bad.cut del { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); background: transparent; }
+  .dm-exp__text .bad.fixed del { display: inline-block; max-width: 0; overflow: hidden; white-space: nowrap; vertical-align: bottom; }
+  .dm-exp__text .bad.fixed ins { max-width: 20em; padding: 0 3px; }
+  .dm-exp__tags { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; min-height: 26px; }
+  .dm-exp__tags span { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--red) 40%, transparent); color: var(--red); animation: dm-in .3s ease both; }
+  .dm-exp.clean .dm-exp__tags span { border-color: #b9dcc0; color: #2f7d42; }
+  @container (max-width: 300px) { .dm-exp__text { font-size: 13.5px; } }
+  @container (min-width: 640px) {
+    .dm-exp { padding: 28px 36px; }
+    .dm-exp__head { font-size: 14px; }
+    .dm-exp__text { font-size: 24px; line-height: 1.9; margin-top: 26px; font-family: var(--font-serif); }
+    .dm-exp__tags span { font-size: 13px; padding: 3px 12px; }
+    /* 宽屏时保留划掉的原文，改前改后同时可见 */
+    .dm-exp__text .bad.fixed del { display: inline; max-width: none; overflow: visible; white-space: normal; }
+    .dm-exp__text .bad.fixed ins { margin-left: 4px; }
+  }
+</style>

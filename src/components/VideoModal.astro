@@ -1,0 +1,47 @@
+---
+// 全站视频弹窗：任何带 data-video 的链接点击后就地播放，不跳页。
+---
+
+<div class="vmodal" id="vmodal" hidden>
+  <div class="vmodal__box">
+    <button class="vmodal__close" type="button" aria-label="关闭">×</button>
+    <video id="vmodalVideo" controls playsinline preload="none"></video>
+    <div class="vmodal__bar">
+      <b id="vmodalTitle"></b>
+      <a id="vmodalMore" href="#">详情与文字版 →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('vmodal')!;
+  const video = document.getElementById('vmodalVideo') as HTMLVideoElement;
+  const close = () => { video.pause(); modal.hidden = true; document.body.style.overflow = ''; };
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest<HTMLElement>('[data-video]');
+    if (!trigger) return;
+    e.preventDefault();
+    video.src = trigger.dataset.video!;
+    video.poster = trigger.dataset.poster ?? '';
+    document.getElementById('vmodalTitle')!.textContent = trigger.dataset.title ?? '';
+    (document.getElementById('vmodalMore') as HTMLAnchorElement).href = trigger.getAttribute('href') ?? '#';
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    video.play().catch(() => {});
+  });
+  modal.addEventListener('click', (e) => { if (e.target === modal || (e.target as HTMLElement).closest('.vmodal__close')) close(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+</script>
+
+<style>
+  .vmodal { position: fixed; inset: 0; z-index: 200; background: rgba(20, 18, 16, .78); backdrop-filter: blur(6px); display: grid; place-items: center; padding: 24px; }
+  .vmodal[hidden] { display: none; }
+  .vmodal__box { position: relative; width: min(1100px, 100%); border-radius: 16px; overflow: hidden; background: #111; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .7); animation: pop .35s var(--ease); }
+  @keyframes pop { from { transform: scale(.94); opacity: 0; } }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+  .vmodal__bar { display: flex; align-items: center; gap: 16px; padding: 14px 20px; color: #ece6da; font-size: 14px; }
+  .vmodal__bar b { font-family: var(--font-serif); font-size: 16px; }
+  .vmodal__bar a { margin-left: auto; color: #f2b8b0; }
+  .vmodal__close { position: absolute; right: 12px; top: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(0, 0, 0, .55); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
+  .vmodal__close:hover { background: var(--red); }
+</style>

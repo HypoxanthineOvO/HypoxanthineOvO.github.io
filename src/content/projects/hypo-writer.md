@@ -3,7 +3,7 @@ name: "Hypo-Writer"
 description: "本地优先的中文创作系统，覆盖资料、事实卡、大纲、审阅以及公众号、小红书等多平台发布包。"
 status: "active"
 statusNote: "发布门的内容都由它生产"
-featured: true
+featured: false
 cover: "/media/projects/hypo-writer.webp"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Writer"
 tech: ["TypeScript","Content Pipeline","WeChat"]

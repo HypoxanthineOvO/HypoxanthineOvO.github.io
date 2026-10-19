@@ -4,13 +4,15 @@ import '@fontsource/noto-sans-sc/500.css';
 import '@fontsource/noto-sans-sc/700.css';
 import '@fontsource/noto-serif-sc/400.css';
 import '@fontsource/noto-serif-sc/700.css';
+import '@fontsource/noto-serif-sc/900.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
 import 'katex/dist/katex.min.css';
 
 import '../styles/global.css';
-import { siteConfig } from '../lib/site';
+import { siteConfig, platforms } from '../lib/site';
 import { navLinks } from '../lib/gates';
+import VideoModal from '../components/VideoModal.astro';
 
 interface Props {
   title?: string;
@@ -24,29 +26,22 @@ const { title, description = siteConfig.description, image = siteConfig.avatar, 
 const pageTitle = title ? `${title} | ${siteConfig.title}` : siteConfig.title;
 const canonical = new URL(Astro.url.pathname, siteConfig.site);
 const currentPath = Astro.url.pathname;
-
-// 默认跟随系统，手动选择记忆在本地（DESIGN.md §6）
-const themeScript = `
-(() => {
-  const stored = localStorage.getItem('hypo-theme');
-  const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-})();
-`;
+const isHere = (match: string[]) => match.some((m) => currentPath === m || currentPath.startsWith(`${m}/`));
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Yunxiang He',
-  alternateName: ['贺云翔', 'Hypoxanthine'],
+  alternateName: ['贺云翔', 'Hypoxanthine', '飘零'],
   url: siteConfig.site,
   affiliation: { '@type': 'Organization', name: 'ShanghaiTech University VSP Lab' },
-  sameAs: [siteConfig.github],
+  sameAs: platforms.filter((p) => p.href).map((p) => p.href),
 };
+const footLinks = platforms.filter((p) => p.href);
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-theme="light" data-skin={skin}>
+<html lang="zh-CN" data-skin={skin} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -63,22 +58,22 @@ const personSchema = {
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href="/rss.xml" />
     <title>{pageTitle}</title>
-    <script is:inline set:html={themeScript} />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
     <slot name="head" />
   </head>
   <body>
-    <header class="topbar">
-      <div class="topbar__inner">
-        <a class="brand" href="/">HYPOXANTHINE</a>
+    <header class="nav" id="nav">
+      <div class="shell nav__inner">
+        <a class="brand" href="/"><img src={siteConfig.logo} alt="" width="26" height="26" />{siteConfig.brand} <small>{siteConfig.brandEn}</small></a>
         <nav class="topnav" aria-label="站内导航">
           {navLinks.map((link) => (
-            <a href={link.href} class:list={{ here: currentPath.startsWith(link.href) && link.href !== '/' }}>{link.label}</a>
+            <a href={link.href} class:list={{ here: isHere(link.match) }}>{link.label}</a>
           ))}
         </nav>
-        <button class="theme-btn" id="themeBtn" aria-label="切换亮暗主题">◐</button>
-        <button class="menu-btn" id="menuBtn" aria-label="展开菜单" aria-expanded="false">☰</button>
+        <button class="menu-btn" id="menuBtn" aria-label="展开菜单" aria-expanded="false">菜单</button>
       </div>
       <nav class="mobilenav" id="mobileNav" aria-label="移动端导航">
         {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
@@ -91,29 +86,34 @@ const personSchema = {
 
     <footer class="sitefoot">
       <div class="shell sitefoot__inner">
-        <span>© 2021–2026 {siteConfig.signature} · hypox.cn</span>
+        <img src={siteConfig.logo} alt="" width="18" height="18" />
+        <span>© 2021–2026 {siteConfig.brand} · {siteConfig.brandEn} · hypox.cn</span>
         <span class="sitefoot__links">
-          <a href={siteConfig.github}>GitHub</a>
+          {footLinks.map((p) => <a href={p.href} rel="noreferrer">{p.label}</a>)}
           <a href={`mailto:${siteConfig.email}`}>Email</a>
           <a href="/rss.xml">RSS</a>
         </span>
       </div>
     </footer>
 
+    <VideoModal />
+
     <script is:inline>
       (() => {
-        const root = document.documentElement;
-        const btn = document.getElementById('themeBtn');
-        btn.addEventListener('click', () => {
-          const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-          root.dataset.theme = next;
-          localStorage.setItem('hypo-theme', next);
-        });
+        const nav = document.getElementById('nav');
+        addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
         const menuBtn = document.getElementById('menuBtn');
-        const nav = document.getElementById('mobileNav');
+        const mobile = document.getElementById('mobileNav');
         menuBtn.addEventListener('click', () => {
-          const open = nav.classList.toggle('open');
+          const open = mobile.classList.toggle('open');
           menuBtn.setAttribute('aria-expanded', String(open));
+        });
+        const io = new IntersectionObserver((es) => es.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }), { threshold: 0.08 });
+        document.querySelectorAll('.rv').forEach((el, i) => {
+          el.style.transitionDelay = (i % 4) * 70 + 'ms';
+          io.observe(el);
         });
       })();
     </script>
@@ -121,40 +121,41 @@ const personSchema = {
 </html>
 
 <style>
-  .topbar {
-    position: sticky; top: 0; z-index: 20;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(1.2);
+    background: rgba(245, 241, 234, .8);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s;
   }
-  .topbar__inner {
-    max-width: var(--shell-max); margin: 0 auto; padding: 0 22px;
-    height: 52px; display: flex; align-items: center; gap: 22px;
+  .nav:global(.scrolled) { border-color: var(--line); }
+  .nav__inner { display: flex; align-items: center; height: 64px; gap: 28px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 900; font-size: 19px; }
+  .brand img { width: 26px; height: 26px; transition: transform .6s var(--ease); }
+  .brand:hover img { transform: rotate(-24deg) scale(1.1); }
+  .brand small { font-family: var(--font-ui); font-weight: 400; font-size: 13px; color: var(--muted); }
+  .topnav { display: flex; gap: 6px; margin-left: auto; }
+  .topnav a {
+    display: block; padding: 7px 14px; border-radius: 999px; font-size: 14.5px; color: var(--ink-2);
+    transition: background .2s, color .2s;
   }
-  .brand { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; }
-  .topnav { display: flex; gap: 15px; margin-left: auto; font-size: 13.5px; }
-  .topnav a { color: var(--muted); transition: color .15s; }
-  .topnav a:hover { color: var(--fg); }
-  .topnav a.here { color: var(--gate); font-weight: 600; }
-  .theme-btn, .menu-btn {
-    border: 1px solid var(--line); background: var(--panel); color: var(--muted);
-    font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border-radius: 999px;
-    cursor: pointer; line-height: 1.4;
+  .topnav a:hover { background: var(--fg); color: var(--bg); }
+  .topnav a.here { color: var(--red); font-weight: 500; }
+  .topnav a.here:hover { color: var(--bg); }
+  .menu-btn {
+    display: none; margin-left: auto; border: 1px solid var(--line); background: var(--panel); color: var(--ink-2);
+    font-size: 13px; padding: 5px 14px; border-radius: 999px; cursor: pointer;
   }
-  .menu-btn { display: none; }
-  .mobilenav {
-    display: none; flex-direction: column; padding: 4px 22px 12px;
-    border-top: 1px dashed var(--line);
-  }
-  .mobilenav a { padding: 8px 0; color: var(--muted); font-size: 14.5px; border-bottom: 1px dashed var(--line); }
-  .mobilenav.open { display: flex; }
+  .mobilenav { display: none; flex-direction: column; padding: 4px 18px 12px; border-top: 1px solid var(--line); background: var(--bg); }
+  .mobilenav a { padding: 10px 0; color: var(--ink-2); font-size: 15px; border-bottom: 1px dashed var(--line); }
+  .mobilenav:global(.open) { display: flex; }
 
-  .sitefoot { border-top: 1px solid var(--line); padding: 26px 0 46px; color: var(--muted); font-size: 12.5px; font-family: var(--font-mono); }
-  .sitefoot__inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  .sitefoot__links { display: flex; gap: 16px; }
+  .sitefoot { margin-top: 96px; border-top: 1px solid var(--line); padding: 28px 0 44px; font-size: 13px; color: var(--muted); }
+  .sitefoot__inner { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .sitefoot__links { margin-left: auto; display: flex; gap: 18px; flex-wrap: wrap; }
   .sitefoot__links a:hover { color: var(--fg); }
 
-  @media (max-width: 960px) {
+  @media (max-width: 860px) {
     .topnav { display: none; }
     .menu-btn { display: inline-block; }
   }

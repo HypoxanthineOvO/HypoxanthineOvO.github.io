@@ -1,9 +1,9 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import aiDailyRaw from '../data/ai-daily.json';
 
 // PREVIEW_DRAFTS=1 时草稿也进列表与路由（本地预览旧笔记用）
 export const PREVIEW_DRAFTS = process.env.PREVIEW_DRAFTS === '1';
 
+export type MediaEntry = CollectionEntry<'media'>;
 export type EssayEntry = CollectionEntry<'essays'>;
 export type PoetryEntry = CollectionEntry<'poetry'>;
 export type StudyEntry = CollectionEntry<'study'>;
@@ -46,7 +46,18 @@ export function formatDateShort(date: Date) {
   }).format(date);
 }
 
-// ---- 各门查询 ----
+export function formatMonthDay(date: Date) {
+  return `${date.getUTCMonth() + 1}·${date.getUTCDate()}`;
+}
+
+// ---- 各分区查询 ----
+
+// 已发布的在前，制作中的排在后面
+export async function getMedia() {
+  const all = sortByDateDesc(await getCollection('media'));
+  return [...all.filter((m) => m.data.status === 'published'), ...all.filter((m) => m.data.status !== 'published')];
+}
+
 
 export async function getEssays() {
   return sortByDateDesc(await getCollection('essays'));
@@ -93,80 +104,8 @@ export async function getPublishArticles() {
 }
 
 export async function getProjectLog(project: string) {
-  const entries = await getCollection('projectLog');
+  const entries = (await getCollection('projectLog')) ?? [];
   return sortByDateDesc(entries.filter((entry) => entry.data.project === project));
-}
-
-// ---- AI 日报 ----
-
-export interface AiDailyItem {
-  number: number;
-  title: string;
-  category: string;
-  body: string;
-  url?: string;
-}
-
-export interface AiDailyIssue {
-  date: string;
-  title: string;
-  summary: string;
-  published: boolean;
-  status: string;
-  cover?: string;
-  items: AiDailyItem[];
-}
-
-const aiDailyAll = aiDailyRaw as AiDailyIssue[];
-
-export function getAiDailyIssues() {
-  return [...aiDailyAll].sort((a, b) => (a.date < b.date ? 1 : -1));
-}
-
-export function getLatestAiDaily() {
-  return getAiDailyIssues()[0] ?? null;
-}
-
-export function getAiDailyIssue(date: string) {
-  return aiDailyAll.find((issue) => issue.date === date) ?? null;
-}
-
-// ---- 总档案（时间线 + 搜索的数据源） ----
-
-export interface ArchiveItem {
-  title: string;
-  description?: string;
-  date: Date | string;
-  href: string;
-  gate: string;
-  gateName: string;
-  extra?: string;
-}
-
-export async function getArchiveItems(): Promise<ArchiveItem[]> {
-  const [essays, poetry, study, notes, publish, publications] = await Promise.all([
-    getEssays(),
-    getPoetry(),
-    getStudy(),
-    getNotes(),
-    getPublishArticles(),
-    getPublications(),
-  ]);
-
-  const items: ArchiveItem[] = [
-    ...essays.map((e) => ({ title: e.data.title, description: e.data.description, date: e.data.date, href: `/essays/${e.id}`, gate: 'essays', gateName: '散文' })),
-    ...poetry.map((e) => ({ title: e.data.title, description: e.data.description, date: e.data.date, href: `/poetry/${e.id}`, gate: 'poetry', gateName: '诗词' })),
-    ...study.map((e) => ({ title: e.data.title, description: e.data.description, date: e.data.date, href: `/study/${e.id}`, gate: 'study', gateName: '学习档案', extra: e.data.course })),
-    ...notes.map((e) => ({ title: e.data.title, description: e.data.description, date: e.data.date, href: `/notes/${e.id}`, gate: 'notes', gateName: '技术笔记' })),
-    ...publish.map((e) => ({ title: e.data.title, description: e.data.description, date: e.data.date, href: `/publish/${e.id}`, gate: 'publish', gateName: '发布', extra: e.data.column })),
-    ...publications.map((e) => ({ title: e.data.title, date: String(e.data.year), href: `/research/${e.id}`, gate: 'research', gateName: '研究', extra: e.data.venue })),
-  ];
-
-  return items.sort((a, b) => {
-    const at = typeof a.date === 'string' ? a.date : a.date.toISOString();
-    const bt = typeof b.date === 'string' ? b.date : b.date.toISOString();
-    return bt.localeCompare(at);
-  });
 }
 
 export function getAdjacentEntries<T extends { id: string }>(entries: T[], id: string) {

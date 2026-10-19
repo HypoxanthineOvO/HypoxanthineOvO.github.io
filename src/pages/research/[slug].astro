@@ -23,7 +23,9 @@ const citation = `${(d.authors ?? []).map((a) => (isAuthor(a) ? 'Y. He' : a.spli
         <p class="doctype">{d.venue} · {d.year}{d.research_area ? ` · ${d.research_area}` : ''}</p>
         <h1>{d.title}</h1>
         <div class="byline">
-          {(d.authors ?? []).map((a, i) => (i > 0 ? '， ' : '') + (isAuthor(a) ? <b>{a}</b> : a))}
+          {(d.authors ?? []).map((a, i) => (
+            <>{i > 0 && '， '}{isAuthor(a) ? <b>{a}</b> : a}</>
+          ))}
           <span class="affil">ShanghaiTech University · VSP Lab</span>
         </div>
         <div class="body md-body">

@@ -90,6 +90,35 @@ const projects = defineCollection({
     tech: z.array(z.string()).default([]),
     period: z.string().optional(),
     category: z.enum(['research', 'systems', 'writing', 'tools']).optional(),
+    // 首页分组：productivity = 生产力工具；minecraft = MC 作品
+    group: z.enum(['productivity', 'minecraft']).optional(),
+    // stable 有详情页；developing 只上卡片
+    tier: z.enum(['stable', 'developing', 'rework']).default('developing'),
+    icon: z.string().optional(),
+    version: z.string().optional(),
+    order: z.number().default(99),
+    // 亮点数字，卡片和详情页顶部展示
+    highlights: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+  }),
+});
+
+// 内容：飘零账号的视频与文章。只收录作者确认过要上网站的条目。
+const media = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/media' }),
+  schema: z.object({
+    kind: z.enum(['video', 'article']),
+    title: z.string(),
+    date: z.date(),
+    series: z.string().optional(),
+    description: z.string(),
+    cover: z.string().optional(),
+    duration: z.string().optional(),
+    // 站内可直接播放的视频文件
+    video: z.string().optional(),
+    status: z.enum(['published', 'upcoming']).default('published'),
+    platforms: z.array(z.enum(['wechat', 'douyin', 'bilibili', 'channels', 'xiaohongshu'])).default([]),
+    // 视频对应的文字版（media 集合里的 id）
+    related: z.string().optional(),
   }),
 });
 
@@ -123,4 +152,4 @@ const projectLog = defineCollection({
   }),
 });
 
-export const collections = { essays, poetry, study, notes, publications, projects, publish, projectLog };
+export const collections = { media, essays, poetry, study, notes, publications, projects, publish, projectLog };

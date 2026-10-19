@@ -3,7 +3,7 @@ name: "Cryo-GPU"
 description: "面向 77 K GPU 架构的证据驱动设计空间探索，以可复现建模、参数合成与仿真连接器件变化和系统资源配置。"
 status: "wip"
 statusNote: "研究主线，进行中"
-featured: true
+featured: false
 tech: ["Cryogenic GPU","GPU Architecture","77 K","Accel-Sim","Modeling"]
 period: "2026 — NOW"
 category: "research"

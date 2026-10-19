@@ -2,9 +2,9 @@
 import { gates } from '../lib/gates';
 
 interface Props {
-  /** gates.ts 注册表里的门 slug；非门页面（如档案）可不传，改用 kicker 覆盖 */
+  /** gates.ts 注册表里的分区 slug；不在注册表里的页面传 kicker */
   gate?: string;
-  /** 覆盖注册表标题（如研究门显示"学术发表"） */
+  /** 覆盖注册表标题 */
   title?: string;
   blurb?: string;
   note?: string;
@@ -14,26 +14,24 @@ interface Props {
 
 const { gate, title, blurb, note, center = false, kicker } = Astro.props;
 const info = gates.find((g) => g.slug === gate);
-if (!info && !kicker) throw new Error(`unknown gate: ${gate} (pass kicker= for non-gate pages)`);
-const kickerText = kicker ?? `${info!.name} / ${info!.en}`;
+if (!info && !kicker) throw new Error(`unknown gate: ${gate} (pass kicker= for other pages)`);
+const kickerText = kicker ?? info!.en;
 ---
 
 <div class:list={['gate-head', { center }]}>
   <p class="kicker">{kickerText}{note ? ` · ${note}` : ''}</p>
   <h1>{title ?? info?.name}</h1>
-  {blurb && <p>{blurb}</p>}
+  {blurb && <p class="blurb">{blurb}</p>}
 </div>
 
 <style>
-  .gate-head { padding: 52px 0 8px; }
+  .gate-head { padding: 64px 0 20px; }
   .gate-head.center { text-align: center; }
-  .kicker { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .22em; color: var(--gate); }
-  .center .kicker { font-family: var(--font-serif); letter-spacing: .5em; font-size: 12.5px; }
-  h1 {
-    font-family: var(--font-serif); font-size: 34px; color: var(--gate-deep);
-    margin-top: 8px; font-weight: 700; letter-spacing: .05em;
-  }
-  .center h1 { letter-spacing: .25em; }
-  p { color: var(--skin-muted); margin-top: 10px; max-width: 46em; font-size: 14.5px; }
-  .center p { margin-left: auto; margin-right: auto; }
+  .kicker { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .14em; color: var(--gate); }
+  .center .kicker { font-family: var(--font-serif); letter-spacing: .5em; }
+  h1 { font-family: var(--font-serif); font-weight: 900; font-size: 52px; line-height: 1.1; color: var(--gate-deep); margin-top: 10px; }
+  .center h1 { letter-spacing: .2em; }
+  .blurb { color: var(--skin-muted); margin-top: 14px; max-width: 46em; font-size: 15px; }
+  .center .blurb { margin-left: auto; margin-right: auto; }
+  @media (max-width: 620px) { h1 { font-size: 38px; } .gate-head { padding-top: 40px; } }
 </style>

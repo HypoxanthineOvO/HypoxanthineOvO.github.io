@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GateHead from '../../components/GateHead.astro';
+import { getMedia, formatMonthDay } from '../../lib/content';
+import { platformLabel } from '../../lib/site';
+
+const media = await getMedia();
+const sections = [
+  { key: 'video', title: '视频', note: '抖音 · B站 · 视频号', items: media.filter((m) => m.data.kind === 'video') },
+  { key: 'article', title: '文章', note: '公众号 · 小红书', items: media.filter((m) => m.data.kind === 'article') },
+];
+---
+
+<BaseLayout skin="content" title="内容" description="飘零的视频与文章：AI 科普、AI 账本与评论。">
+  <div class="shell">
+    <GateHead gate="content" />
+    {sections.map((s) => (
+      <section class="group">
+        <div class="sub-head rv"><h2>{s.title}</h2><span>{s.note}</span></div>
+        <div class="list">
+          {s.items.map((m) => (
+            <a class="card item rv" href={`/content/${m.id}`} data-video={m.data.video} data-poster={m.data.cover} data-title={m.data.title}>
+              <div class:list={['thumb', { blank: !m.data.cover }]} style={m.data.cover ? `background-image:url(${m.data.cover})` : undefined}>
+                {m.data.video && <span class="play">▶</span>}
+                {m.data.duration && <span class="dur">{m.data.duration}</span>}
+                {!m.data.cover && <span class="soon">制作中</span>}
+              </div>
+              <div class="txt">
+                <div class="kick"><span class="tag">{m.data.series}</span>{m.data.status === 'upcoming' ? '制作中' : formatMonthDay(m.data.date)}</div>
+                <h3>{m.data.title}</h3>
+                <p>{m.data.description}</p>
+                <div class="plats">{m.data.platforms.map((p) => <span>{platformLabel[p]}</span>)}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .group { margin-top: 30px; }
+  .sub-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
+  .sub-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; }
+  .sub-head span { font-size: 13px; color: var(--muted); }
+  .list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .item { display: flex; flex-direction: column; }
+  .thumb { position: relative; aspect-ratio: 16 / 9; background: #f5f2ec center / cover no-repeat; border-bottom: 1px solid var(--line); }
+  .thumb.blank { background: repeating-linear-gradient(135deg, var(--paper-2) 0 12px, var(--panel) 12px 24px); display: grid; place-items: center; }
+  .soon { font-family: var(--font-serif); font-weight: 900; color: var(--muted); font-size: 18px; letter-spacing: .3em; }
+  .play {
+    position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px; border-radius: 50%;
+    display: grid; place-items: center; background: rgba(28, 27, 26, .82); color: #fff; font-size: 18px; transition: transform .3s var(--ease), background .3s;
+  }
+  .thumb.blank .play { display: none; }
+  .item:hover .play { transform: scale(1.12); background: var(--red); }
+  .dur { position: absolute; right: 10px; bottom: 10px; font-family: var(--font-mono); font-size: 12px; background: rgba(28, 27, 26, .8); color: #fff; padding: 2px 8px; border-radius: 6px; }
+  .txt { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+  .kick { display: flex; gap: 8px; font-size: 12.5px; color: var(--muted); }
+  .kick .tag { color: var(--red); font-weight: 500; }
+  h3 { font-family: var(--font-serif); font-weight: 900; font-size: 19px; line-height: 1.45; margin: 8px 0 8px; }
+  p { font-size: 13.5px; line-height: 1.75; color: var(--ink-2); }
+  .plats { margin-top: auto; padding-top: 14px; display: flex; gap: 6px; }
+  .plats span { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  @media (max-width: 960px) { .list { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .list { grid-template-columns: 1fr; } }
+</style>

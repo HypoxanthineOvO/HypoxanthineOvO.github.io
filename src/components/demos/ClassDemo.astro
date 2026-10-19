@@ -1,0 +1,69 @@
+---
+// Hypo-Class：录音波形 + 实时转录，重点被标出来
+const lines: { t: string; text: string; key?: string }[] = [
+  { t: '00:12', text: '今天我们讲宋词里的感性和理性。' },
+  { t: '00:31', text: '婉约词并不只是儿女情长，', key: '观点' },
+  { t: '00:44', text: '它的风骨藏在克制里。' },
+  { t: '01:05', text: '下周三之前交一篇读书报告。', key: '作业' },
+];
+---
+
+<div class="dm-class" data-demo="class" data-lines={JSON.stringify(lines)}>
+  <div class="dm-class__rec"><span class="dm-class__dot"></span>录音中<span class="dm-class__wave">{Array.from({ length: 22 }, () => <i></i>)}</span></div>
+  <div class="dm-class__list" data-list></div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion, typeInto } from './loop';
+
+  each('[data-demo="class"]', (root) => {
+    const lines: { t: string; text: string; key?: string }[] = JSON.parse(root.dataset.lines ?? '[]');
+    const list = root.querySelector<HTMLElement>('[data-list]')!;
+    const add = (l: (typeof lines)[number]) => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = '<span class="t"></span><span class="x"></span>';
+      row.querySelector('.t')!.textContent = l.t;
+      list.append(row);
+      return row;
+    };
+    const mark = (row: HTMLElement, key?: string) => {
+      if (!key) return;
+      row.classList.add('key');
+      const k = document.createElement('b');
+      k.textContent = key;
+      row.append(k);
+    };
+    if (reduceMotion()) { lines.forEach((l) => { const r = add(l); r.querySelector('.x')!.textContent = l.text; mark(r, l.key); }); return; }
+    whenVisible(root, async () => {
+      for (;;) {
+        list.innerHTML = '';
+        for (const l of lines) {
+          const row = add(l);
+          await typeInto(row.querySelector('.x')!, l.text, 55);
+          await sleep(350);
+          mark(row, l.key);
+          await sleep(600);
+        }
+        await sleep(2800);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-class { height: 100%; min-height: 200px; display: flex; flex-direction: column; border-radius: 12px; background: #fbf6ee; border: 1px solid #e8dcc6; overflow: hidden; text-align: left; }
+  .dm-class__rec { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #8f6b3a; border-bottom: 1px solid #ecdfc9; }
+  .dm-class__dot { width: 8px; height: 8px; border-radius: 50%; background: #d9433a; animation: blink 1.2s infinite; }
+  .dm-class__wave { margin-left: auto; display: flex; align-items: center; gap: 2px; height: 18px; }
+  .dm-class__wave i { width: 2px; height: 100%; border-radius: 1px; background: #c49a5a; animation: dm-wave 1s ease-in-out infinite; }
+  .dm-class__wave i:nth-child(3n) { animation-delay: -.3s; }
+  .dm-class__wave i:nth-child(3n+1) { animation-delay: -.6s; }
+  .dm-class__wave i:nth-child(4n) { animation-duration: .7s; }
+  .dm-class__list { flex: 1; padding: 8px 12px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; overflow: hidden; }
+  .dm-class__list .row { display: flex; gap: 8px; align-items: baseline; font-size: 13px; line-height: 1.6; color: #3c2c18; padding: 2px 4px; border-radius: 5px; transition: background .4s; animation: dm-in .3s ease both; }
+  .dm-class__list .row.key { background: #f6e3b8; }
+  .dm-class__list .t { font-family: var(--font-mono); font-size: 10.5px; color: #b59a72; flex: none; }
+  .dm-class__list b { margin-left: auto; flex: none; font-size: 10.5px; font-weight: 500; padding: 0 6px; border-radius: 4px; background: #8f6b3a; color: #fff; animation: dm-in .3s ease both; }
+  @keyframes dm-wave { 0%, 100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
+</style>

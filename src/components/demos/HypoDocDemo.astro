@@ -1,0 +1,182 @@
+---
+// HypoDoc：左边 Markdown 源码，右边同一份内容轮流渲染成文档 / Slides / 网页
+const source = [
+  ['k', '---'],
+  ['', 'title: 低温 GPU 组会汇报'],
+  ['', 'theme: school'],
+  ['k', '---'],
+  ['h', '# 研究动机'],
+  ['', '- 77 K 下漏电下降两个数量级'],
+  ['', '- 片上缓存可以做得更大'],
+  ['h', '## 能效对比'],
+  ['m', '$$E = P \\cdot t$$'],
+];
+---
+
+<div class="dm-doc" data-demo="hypodoc">
+  <div class="dm-doc__src">
+    <div class="dm-doc__tab"><span class="dm-dots"><i></i><i></i><i></i></span>report.md</div>
+    <pre data-src={JSON.stringify(source)}></pre>
+  </div>
+  <div class="dm-doc__out">
+    <div class="dm-doc__modes">
+      <button type="button" data-mode="pdf" class="on">文档 PDF</button>
+      <button type="button" data-mode="slides">Slides</button>
+      <button type="button" data-mode="web">网页</button>
+    </div>
+    <div class="dm-doc__stage">
+      <div class="dm-doc__view pdf on" data-view="pdf">
+        <div class="pdf-page">
+          <div class="pdf-title">低温 GPU 组会汇报</div>
+          <div class="pdf-sub">上海科技大学 · VSP Lab</div>
+          <div class="pdf-h">1 研究动机</div>
+          <div class="pdf-li">• 77 K 下漏电下降两个数量级</div>
+          <div class="pdf-li">• 片上缓存可以做得更大</div>
+          <div class="pdf-h">1.1 能效对比</div>
+          <div class="pdf-eq"><i>E</i> = <i>P</i> · <i>t</i></div>
+          <div class="pdf-lines"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="dm-doc__view slides" data-view="slides">
+        <div class="slide">
+          <div class="slide-top"><span>低温 GPU 组会汇报</span><span class="slide-nav"><b>研究动机</b> · 能效对比</span></div>
+          <div class="slide-h">研究动机</div>
+          <div class="slide-li">77 K 下漏电下降两个数量级</div>
+          <div class="slide-li">片上缓存可以做得更大</div>
+          <div class="slide-foot"><span>VSP Lab</span><span>2 / 6</span></div>
+        </div>
+      </div>
+      <div class="dm-doc__view web" data-view="web">
+        <div class="web-bar"><span class="dm-dots"><i></i><i></i><i></i></span><span class="web-url">docs / report</span></div>
+        <div class="web-body">
+          <div class="web-toc"><b>目录</b><span class="on">研究动机</span><span>能效对比</span></div>
+          <div class="web-main">
+            <div class="web-h">研究动机</div>
+            <div class="web-li">77 K 下漏电下降两个数量级</div>
+            <div class="web-li">片上缓存可以做得更大</div>
+            <div class="web-h sm">能效对比</div>
+            <div class="web-eq"><i>E</i> = <i>P</i> · <i>t</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dm-doc__cmd">$ hypolatex build report.md <span data-built></span></div>
+  </div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion } from './loop';
+
+  each('[data-demo="hypodoc"]', (root) => {
+    const pre = root.querySelector<HTMLElement>('pre')!;
+    const lines: [string, string][] = JSON.parse(pre.dataset.src ?? '[]');
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-mode]')];
+    const views = [...root.querySelectorAll<HTMLElement>('[data-view]')];
+    const built = root.querySelector<HTMLElement>('[data-built]')!;
+    const modes = ['pdf', 'slides', 'web'];
+    let mode = 0;
+    let manual = false;
+
+    const show = (i: number) => {
+      mode = i;
+      buttons.forEach((b, k) => b.classList.toggle('on', k === i));
+      views.forEach((v, k) => v.classList.toggle('on', k === i));
+      built.textContent = `✓ ${['report.pdf', 'slides.pdf', 'index.html'][i]}`;
+    };
+    buttons.forEach((b, i) => b.addEventListener('click', () => { manual = true; show(i); }));
+
+    const render = (count: number, partial = '') => {
+      pre.innerHTML = '';
+      lines.slice(0, count).forEach(([cls, text]) => {
+        const row = document.createElement('div');
+        row.className = cls;
+        row.textContent = text;
+        pre.append(row);
+      });
+      if (partial) {
+        const row = document.createElement('div');
+        row.className = lines[count][0];
+        row.textContent = partial;
+        const cur = document.createElement('span');
+        cur.className = 'cur';
+        row.append(cur);
+        pre.append(row);
+      }
+    };
+
+    if (reduceMotion()) { render(lines.length); show(0); return; }
+    whenVisible(root, async () => {
+      for (;;) {
+        show(0);
+        for (let i = 0; i < lines.length; i++) {
+          const text = lines[i][1];
+          for (let c = 1; c <= text.length; c += 2) { render(i, text.slice(0, c)); await sleep(22); }
+          render(i + 1);
+          await sleep(90);
+        }
+        for (let k = 0; k < 6; k++) {
+          await sleep(1900);
+          if (!manual) show((mode + 1) % modes.length);
+        }
+        manual = false;
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-doc {
+    container-type: inline-size; width: 100%; display: grid; grid-template-columns: 44% 1fr; height: 100%; min-height: 260px;
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--panel); text-align: left;
+  }
+  .dm-doc__src { background: #17181c; color: #d7d2c8; display: flex; flex-direction: column; min-width: 0; }
+  .dm-doc__tab { display: flex; align-items: center; gap: 10px; padding: 8px 12px; font-family: var(--font-mono); font-size: 11.5px; color: #8d877d; border-bottom: 1px solid #26282e; }
+  .dm-doc__src pre { margin: 0; padding: 10px 12px; font-family: var(--font-mono); font-size: 11.5px; line-height: 1.75; white-space: pre-wrap; flex: 1; overflow: hidden; }
+  .dm-doc__src pre .k { color: #6f6a62; }
+  .dm-doc__src pre .h { color: #f2b8b0; font-weight: 600; }
+  .dm-doc__src pre .m { color: #9fc8ff; }
+  .dm-doc__src pre .cur { display: inline-block; width: 6px; height: 13px; background: #9fe3a6; vertical-align: -2px; margin-left: 1px; }
+  .dm-doc__out { display: flex; flex-direction: column; min-width: 0; background: #ece6dc; }
+  .dm-doc__modes { display: flex; gap: 4px; padding: 7px 8px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  .dm-doc__modes button { font: inherit; font-size: 11.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink-2); cursor: pointer; transition: background .2s, color .2s; }
+  .dm-doc__modes button.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .dm-doc__stage { position: relative; flex: 1; min-height: 170px; }
+  .dm-doc__view { position: absolute; inset: 10px; display: grid; place-items: center; opacity: 0; transform: translateY(10px) scale(.97); transition: opacity .45s, transform .45s var(--ease); pointer-events: none; }
+  .dm-doc__view.on { opacity: 1; transform: none; pointer-events: auto; }
+  .dm-doc__cmd { font-family: var(--font-mono); font-size: 11px; padding: 6px 10px; color: var(--muted); background: var(--panel); border-top: 1px solid var(--line); white-space: nowrap; overflow: hidden; }
+  .dm-doc__cmd span { color: #2f7d42; }
+
+  .pdf-page { height: 100%; aspect-ratio: 1 / 1.3; max-width: 100%; background: #fff; box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); padding: 8% 9%; font-family: var(--font-serif); color: #222; overflow: hidden; }
+  .pdf-title { text-align: center; font-weight: 900; font-size: 13px; }
+  .pdf-sub { text-align: center; font-size: 8px; color: #777; margin: 2px 0 8px; }
+  .pdf-h { font-weight: 700; font-size: 10px; margin-top: 6px; }
+  .pdf-li { font-size: 8.5px; margin-top: 2px; }
+  .pdf-eq { text-align: center; font-size: 11px; margin: 6px 0; }
+  .pdf-lines i { display: block; height: 3px; background: #e6e6e6; margin-top: 5px; border-radius: 2px; }
+  .pdf-lines i:nth-child(2) { width: 85%; }
+  .pdf-lines i:nth-child(3) { width: 60%; }
+
+  .slide { width: 100%; aspect-ratio: 16 / 9; max-height: 100%; background: #fff; box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); display: flex; flex-direction: column; overflow: hidden; font-family: var(--font-ui); }
+  .slide-top { display: flex; justify-content: space-between; gap: 6px; padding: 4px 8px; background: #8a1f1f; color: #fff; font-size: 8px; }
+  .slide-nav { opacity: .75; } .slide-nav b { opacity: 1; font-weight: 600; }
+  .slide-h { font-family: var(--font-serif); font-weight: 900; font-size: 14px; color: #8a1f1f; padding: 8px 12px 4px; }
+  .slide-li { font-size: 10px; padding: 2px 12px 2px 22px; position: relative; color: #333; }
+  .slide-li::before { content: ''; position: absolute; left: 12px; top: 7px; width: 5px; height: 5px; background: #8a1f1f; }
+  .slide-foot { margin-top: auto; display: flex; justify-content: space-between; padding: 3px 8px; font-size: 7.5px; color: #fff; background: #3a3a3a; }
+
+  .web { place-items: stretch; }
+  .web-bar { display: flex; gap: 8px; align-items: center; padding: 5px 8px; background: #fff; border-radius: 8px 8px 0 0; border-bottom: 1px solid #eee; font-family: var(--font-mono); font-size: 9px; color: #888; }
+  .web-body { display: grid; grid-template-columns: 28% 1fr; background: #fff; border-radius: 0 0 8px 8px; box-shadow: 0 6px 18px -8px rgba(0,0,0,.35); min-height: 0; }
+  .web-toc { display: flex; flex-direction: column; gap: 4px; padding: 10px 8px; border-right: 1px solid #eee; font-size: 9px; color: #888; }
+  .web-toc b { color: #222; font-size: 9.5px; }
+  .web-toc .on { color: var(--red); font-weight: 600; }
+  .web-main { padding: 10px 12px; font-family: var(--font-ui); }
+  .web-h { font-family: var(--font-serif); font-weight: 900; font-size: 13px; color: #222; }
+  .web-h.sm { font-size: 11px; margin-top: 8px; }
+  .web-li { font-size: 9.5px; color: #444; margin-top: 3px; padding-left: 8px; border-left: 2px solid var(--red-soft); }
+  .web-eq { margin-top: 6px; padding: 5px; background: #f6f6f6; border-radius: 4px; text-align: center; font-family: var(--font-serif); font-size: 11px; }
+  @container (max-width: 420px) {
+    .dm-doc { grid-template-columns: 1fr; }
+    .dm-doc__src pre { max-height: 130px; }
+  }
+</style>

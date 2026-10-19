@@ -1,0 +1,18 @@
+---
+import VspiDemo from './VspiDemo.astro';
+import HypoDocDemo from './HypoDocDemo.astro';
+import ExpressionDemo from './ExpressionDemo.astro';
+import InfoDemo from './InfoDemo.astro';
+import ClassDemo from './ClassDemo.astro';
+import WorkflowDemo from './WorkflowDemo.astro';
+
+interface Props { id: string }
+const { id } = Astro.props;
+---
+
+{id === 'vspi' && <VspiDemo />}
+{id === 'hypodoc' && <HypoDocDemo />}
+{id === 'hypo-expression' && <ExpressionDemo />}
+{id === 'hypo-info' && <InfoDemo />}
+{id === 'hypo-class' && <ClassDemo />}
+{id === 'hypo-workflow' && <WorkflowDemo />}

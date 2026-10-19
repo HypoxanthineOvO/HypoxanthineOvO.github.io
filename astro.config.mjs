@@ -46,39 +46,58 @@ const projectsDir = join(root, 'src/content/projects');
 if (existsSync(projectsDir)) {
   for (const file of readdirSync(projectsDir)) {
     const slug = file.replace(/\.(md|mdx)$/, '');
-    redirects[`/projects/${slug}`] = `/work/${slug}`;
-    redirects[`/projects/${slug}/log`] = `/work/${slug}`;
+    const stable = /^tier:\s*stable\s*$/m.test(readFileSync(join(projectsDir, file), 'utf8'));
+    redirects[`/projects/${slug}`] = stable ? `/work/${slug}` : '/work';
+    redirects[`/projects/${slug}/log`] = stable ? `/work/${slug}` : '/work';
   }
 }
 
-// /wechat/articles/<slug> → /publish/<slug>
+// 旧公众号长文与 AI 日报已下线：所有旧地址（含公众号「阅读原文」深链）落到「内容」
 const publishDir = join(root, 'src/content/publish');
 if (existsSync(publishDir)) {
   for (const file of readdirSync(publishDir)) {
     const slug = file.replace(/\.(md|mdx)$/, '');
-    redirects[`/wechat/articles/${slug}`] = `/publish/${slug}`;
+    redirects[`/wechat/articles/${slug}`] = '/content';
+    redirects[`/publish/${slug}`] = '/content';
   }
 }
-
-// /wechat/daily/<date> → /publish/daily/<date>
 const dailyFile = join(root, 'src/data/ai-daily.json');
 if (existsSync(dailyFile)) {
   const issues = JSON.parse(readFileSync(dailyFile, 'utf8'));
   for (const issue of issues) {
-    redirects[`/wechat/daily/${issue.date}`] = `/publish/daily/${issue.date}`;
+    redirects[`/wechat/daily/${issue.date}`] = '/content';
+    redirects[`/publish/daily/${issue.date}`] = '/content';
   }
+}
+
+// 技术笔记栏目已下线
+const notesDir = join(root, 'src/content/notes');
+if (existsSync(notesDir)) {
+  for (const file of readdirSync(notesDir)) {
+    redirects[`/notes/${file.replace(/\.(md|mdx)$/, '')}`] = '/';
+  }
+}
+
+// 只保留稳定项目的详情页，其余项目旧地址回到项目列表
+for (const file of existsSync(projectsDir) ? readdirSync(projectsDir) : []) {
+  const slug = file.replace(/\.(md|mdx)$/, '');
+  if (!/^tier:\s*stable\s*$/m.test(readFileSync(join(projectsDir, file), 'utf8'))) redirects[`/work/${slug}`] = '/work';
 }
 
 // 旧导航与聚合页 → 归宿
 Object.assign(redirects, {
-  '/wechat': '/publish',
-  '/wechat/daily': '/publish/daily',
+  '/wechat': '/content',
+  '/wechat/daily': '/content',
+  '/publish': '/content',
+  '/publish/daily': '/content',
+  '/notes': '/',
+  '/archive': '/',
   '/projects': '/work',
   '/publications': '/research',
-  '/series': '/archive',
-  '/tags': '/archive',
+  '/series': '/',
+  '/tags': '/',
   '/courses': '/study',
-  '/search': '/archive',
+  '/search': '/',
   '/en': '/',
   '/en/about': '/about',
   '/en/research': '/research',
@@ -113,10 +132,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: 'shiki',
     shikiConfig: {
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
+      theme: 'github-dark',
       wrap: true,
     },
     remarkPlugins: [remarkMath, remarkBreaks, remarkDirective, remarkContainers],

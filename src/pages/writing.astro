@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GateHead from '../components/GateHead.astro';
+import { getEssays, getPoetry, getStudy } from '../lib/content';
+
+const [essays, poetry, study] = await Promise.all([getEssays(), getPoetry(), getStudy()]);
+const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '');
+const columns = [
+  {
+    href: '/poetry', name: '诗词', note: `${poetry.length} 部合集`, cls: 'poetry',
+    lead: poetry[0]?.data.picked,
+    items: poetry.map((p) => ({ href: `/poetry/${p.id}`, title: p.data.title })),
+  },
+  {
+    href: '/essays', name: '散文', note: `${essays.length} 篇`, cls: 'essays',
+    lead: essays.find((e) => e.id === '行见录-相逢篇')?.data.description?.split('——')[0].replace(/^[“"]/, '').replace(/[”"]\s*$/, ''),
+    items: essays.map((e) => ({ href: `/essays/${e.id}`, title: cleanTitle(e.data.title) })),
+  },
+  {
+    href: '/study', name: '学习档案', note: `${study.length} 篇 · 按学期`, cls: 'study',
+    lead: '人文课程论文、教评，及发表于《古典文学知识》的文章。',
+    items: study.slice(0, 5).map((s) => ({ href: `/study/${s.id}`, title: cleanTitle(s.data.title) })),
+  },
+];
+---
+
+<BaseLayout title="写作" description="诗词、散文与学习档案。">
+  <div class="shell">
+    <GateHead gate="writing" />
+    <div class="cols">
+      {columns.map((c) => (
+        <div class:list={['card col rv', c.cls]}>
+          <a class="head" href={c.href}><h2>{c.name}</h2><span>{c.note} →</span></a>
+          {c.lead && <p class="lead">{c.lead}</p>}
+          <ul>
+            {c.items.map((it) => <li><a href={it.href}>{it.title}</a></li>)}
+          </ul>
+          {c.cls === 'study' && <a class="all" href="/study">全部学期 →</a>}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .col { padding: 26px 26px 24px; display: flex; flex-direction: column; }
+  .col.poetry { background: #f4ead8; border-color: #e3d3b6; }
+  .head { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 12px; border-bottom: 1.5px solid var(--fg); }
+  .head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 28px; }
+  .head span { font-size: 13px; color: var(--muted); }
+  .head:hover span { color: var(--red); }
+  .lead { font-family: var(--font-serif); font-size: 16.5px; line-height: 2; color: #3c2c18; margin: 18px 0 8px; min-height: 4em; }
+  ul { list-style: none; margin-top: 8px; }
+  li a { display: block; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 15px; transition: color .2s, padding .2s var(--ease); }
+  li a:hover { color: var(--red); padding-left: 6px; }
+  .all { margin-top: 14px; font-size: 13.5px; color: var(--muted); }
+  .all:hover { color: var(--red); }
+  @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
+</style>

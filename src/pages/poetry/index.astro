@@ -12,7 +12,7 @@ const vols = await getPoetry();
       <GateHead
         gate="poetry"
         title="诗词合集"
-        blurb="按年结集。少年时爱律诗，后来多写词——言志与言情的比例，一年比一年诚实。"
+        blurb="按年结集。"
         note={`${vols.length} 部合集`}
         center
       />
@@ -38,7 +38,6 @@ const vols = await getPoetry();
     background: color-mix(in srgb, var(--skin-bg) 55%, #fff 45%);
     transition: transform .22s ease, box-shadow .22s ease;
   }
-  :global(html[data-theme='dark']) .vol { background: color-mix(in srgb, var(--skin-bg) 70%, #000 12%); }
   .vol::after {
     content: ''; position: absolute; inset: 6px;
     border: 1px solid color-mix(in srgb, var(--skin-line) 70%, transparent);

@@ -1,0 +1,143 @@
+---
+// VSPi：一个终端里多个 Agent 用不同模型协作
+const agents = [
+  { role: '主控', model: 'Claude Opus 5.5', color: '#e08a4f' },
+  { role: '执行 A', model: 'GPT-6.1 Sol', color: '#6bb4ff' },
+  { role: '执行 B', model: 'Kimi K3', color: '#9fe3a6' },
+  { role: '审查', model: 'GPT-6 Astra', color: '#f2b8b0' },
+];
+---
+
+<div class="dm-vspi" data-demo="vspi" data-agents={JSON.stringify(agents)}>
+  <div class="dm-vspi__bar">
+    <span class="dm-dots"><i></i><i></i><i></i></span>
+    <span class="dm-vspi__app">vspi</span>
+    <span class="dm-vspi__goal">/goal 首页加上项目演示动效</span>
+  </div>
+  <div class="dm-vspi__body">
+    <ul class="dm-vspi__agents">
+      {agents.map((a, i) => (
+        <li data-agent={i} style={`--c:${a.color}`}>
+          <span class="dm-vspi__dot"></span>
+          <div><b>{a.role}</b><small>{a.model}</small></div>
+          <em data-st>待命</em>
+          <span class="dm-vspi__prog"><i></i></span>
+        </li>
+      ))}
+    </ul>
+    <div class="dm-vspi__log" data-log></div>
+  </div>
+  <div class="dm-vspi__foot"><span data-clock>00:00</span><span>后台运行 · 关掉终端也不会中断</span></div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion } from './loop';
+
+  type Step = [agent: number, status: string, progress: number, log: string | null];
+  const STEPS: Step[] = [
+    [0, '规划中', 35, '拆成 3 个子任务：两个演示组件 + 一轮审查'],
+    [0, '分派中', 70, null],
+    [1, '编码中', 30, '编写多 Agent 面板组件'],
+    [2, '编码中', 25, '编写文档预览组件'],
+    [1, '编码中', 75, null],
+    [2, '测试中', 85, 'pnpm build ✓ 42 页'],
+    [1, '已完成', 100, '组件完成，提交审查'],
+    [3, '审查中', 55, '第 2 段文案有 AI 腔，退回修改'],
+    [1, '修改中', 70, '按审查意见改写'],
+    [1, '已完成', 100, null],
+    [2, '已完成', 100, null],
+    [3, '已通过', 100, '审查通过'],
+    [0, '已完成', 100, '✓ 目标完成'],
+  ];
+  const DONE = ['已完成', '已通过'];
+
+  each('[data-demo="vspi"]', (root) => {
+    const agents: { role: string; color: string }[] = JSON.parse(root.dataset.agents ?? '[]');
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-agent]')];
+    const log = root.querySelector<HTMLElement>('[data-log]')!;
+    const clock = root.querySelector<HTMLElement>('[data-clock]')!;
+
+    const reset = () => {
+      rows.forEach((r) => {
+        r.dataset.state = 'idle';
+        r.querySelector('[data-st]')!.textContent = '待命';
+        (r.querySelector('.dm-vspi__prog i') as HTMLElement).style.width = '0';
+      });
+      log.innerHTML = '';
+    };
+    const apply = ([a, status, progress, text]: Step, secs: number) => {
+      const r = rows[a];
+      r.dataset.state = DONE.includes(status) ? 'done' : 'run';
+      r.querySelector('[data-st]')!.textContent = status;
+      (r.querySelector('.dm-vspi__prog i') as HTMLElement).style.width = `${progress}%`;
+      if (text) {
+        const line = document.createElement('div');
+        line.innerHTML = `<span style="color:${agents[a].color}">[${agents[a].role}]</span> `;
+        line.append(text);
+        log.append(line);
+        while (log.children.length > 7) log.firstElementChild!.remove();
+      }
+      clock.textContent = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+    };
+
+    if (reduceMotion()) { reset(); STEPS.forEach((s, i) => apply(s, 760 * (i + 1) / STEPS.length | 0)); return; }
+    whenVisible(root, async () => {
+      for (;;) {
+        reset();
+        let secs = 0;
+        await sleep(600);
+        for (const step of STEPS) {
+          secs += 40 + Math.floor(Math.random() * 40);
+          apply(step, secs);
+          await sleep(950);
+        }
+        await sleep(2600);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-dots { display: inline-flex; gap: 5px; }
+  .dm-dots i { width: 8px; height: 8px; border-radius: 50%; background: #3a3d45; }
+  .dm-dots i:nth-child(1) { background: #e0605a; }
+  .dm-dots i:nth-child(2) { background: #e0b04a; }
+  .dm-dots i:nth-child(3) { background: #5fb85a; }
+
+  .dm-vspi {
+    container-type: inline-size; width: 100%; display: flex; flex-direction: column; height: 100%; min-height: 260px;
+    background: #0d0e11; border: 1px solid #2a2c33; border-radius: 12px; overflow: hidden;
+    font-family: var(--font-mono); font-size: 12px; color: #d7d2c8; text-align: left;
+  }
+  .dm-vspi__bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid #23252b; color: #8d877d; }
+  .dm-vspi__app { color: #fff; }
+  .dm-vspi__goal { color: #f2b8b0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .dm-vspi__body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(150px, 38%) 1fr; }
+  .dm-vspi__agents { list-style: none; margin: 0; padding: 8px; border-right: 1px solid #23252b; display: flex; flex-direction: column; gap: 6px; }
+  .dm-vspi__agents li {
+    display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 4px 8px;
+    padding: 7px 8px; border-radius: 8px; background: #15171b; border: 1px solid transparent; transition: border-color .3s, background .3s;
+  }
+  .dm-vspi__agents li[data-state='run'] { border-color: color-mix(in srgb, var(--c) 55%, transparent); background: #181b20; }
+  .dm-vspi__agents b { display: block; color: #fff; font-weight: 600; font-size: 12px; }
+  .dm-vspi__agents small { display: block; color: #8d877d; font-size: 10.5px; }
+  .dm-vspi__agents em { font-style: normal; font-size: 11px; color: #6f6a62; }
+  .dm-vspi__agents li[data-state='run'] em { color: #e0c060; }
+  .dm-vspi__agents li[data-state='done'] em { color: #7ee787; }
+  .dm-vspi__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); opacity: .45; }
+  .dm-vspi__agents li[data-state='run'] .dm-vspi__dot { opacity: 1; box-shadow: 0 0 0 0 var(--c); animation: dm-pulse 1.2s infinite; }
+  .dm-vspi__agents li[data-state='done'] .dm-vspi__dot { opacity: 1; }
+  .dm-vspi__prog { grid-column: 1 / -1; height: 3px; border-radius: 2px; background: #23252b; overflow: hidden; }
+  .dm-vspi__prog i { display: block; height: 100%; width: 0; background: var(--c); transition: width .7s ease; }
+  .dm-vspi__log { padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-end; gap: 5px; overflow: hidden; line-height: 1.55; }
+  .dm-vspi__log > div { animation: dm-in .35s ease both; }
+  .dm-vspi__foot { display: flex; gap: 12px; padding: 7px 12px; border-top: 1px solid #23252b; color: #6f6a62; font-size: 11px; }
+  .dm-vspi__foot span:first-child { color: #9fe3a6; }
+  @container (max-width: 420px) {
+    .dm-vspi__body { grid-template-columns: 1fr; }
+    .dm-vspi__agents { display: grid; grid-template-columns: 1fr 1fr; border-right: none; border-bottom: 1px solid #23252b; }
+    .dm-vspi__log { min-height: 110px; }
+  }
+  @keyframes dm-pulse { 70% { box-shadow: 0 0 0 6px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  @keyframes dm-in { from { opacity: 0; transform: translateY(6px); } }
+</style>

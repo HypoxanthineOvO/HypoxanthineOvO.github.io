@@ -1,16 +1,47 @@
 ---
 name: "HypoDoc"
-description: "结构化 Markdown 规范与 parser、Web/LaTeX renderer、Desktop 和 VS Code 产品工作区。"
 status: "active"
 statusNote: "AI-first 文档系统"
-featured: true
 cover: "/media/projects/hypodoc.webp"
 githubUrl: "https://github.com/HypoxanthineOvO/HypoDoc"
-tech: ["Markdown","Rust","TypeScript","LaTeX"]
 period: "2026 — NOW"
 category: "systems"
+group: productivity
+tier: stable
+icon: "/media/icons/hypodoc.webp"
+version: "v0.3.1"
+order: 2
+featured: true
+tech: ["Markdown","Pandoc","XeLaTeX","Beamer"]
+description: "把材料丢给 AI，三条命令出一份排版漂亮的 PDF 或 Slides。上科大主题开箱即用。"
+highlights:
+  - { value: "3", label: "条命令出 Slides" }
+  - { value: "3", label: "套 Slides 主题" }
+  - { value: "v0.3", label: "LaTeX 专项版" }
 ---
 
-给"AI 写、人读、机器渲染"三类消费者同时服务的文档系统：一套结构化 Markdown 规范，配 parser、Web 与 LaTeX 双渲染器，以及 Desktop 和 VS Code 两个编辑面。
+HypoDoc 是一套面向中文写作的文档与演示文稿生成工具。作者只需撰写结构化的 Markdown，即可由同一份源文件生成排版规范的 PDF 文档、Beamer 演示文稿与网页，无需手工维护任何 LaTeX 代码。
 
-目标是让同一份源文档既能变成网页，也能变成可打印的 LaTeX成品，还能被 agent 稳定地读写。
+工具在设计上考虑了与 AI 协作的场景：将仓库链接、素材与要求交给可执行终端命令的 AI，它即可按照文档完成环境准备、源文件撰写与构建。用户的工作集中在内容本身。
+
+## 使用方式
+
+```sh
+hypolatex init slides.md --template slides --theme school
+hypolatex doctor
+hypolatex build slides.md
+```
+
+除演示文稿外，还提供长文（`document`）、短文（`article`）、课程笔记（`notes`）与技术报告（`report`）等模板。
+
+## 演示文稿主题
+
+- **`school`**：上海科技大学标识，完整章节导航与双层页脚，提供标准与斜切两种封面
+- **`simple`**：浅色底、细线条，内容层级克制清晰
+- **`nature`**：自然摄影封面，浅色几何正文背景
+
+## 特点
+
+- 源文件始终为可读、可编辑、可比对的 Markdown
+- 一份源文件可输出文档、演示文稿与网页
+- 内置环境检查，缺少依赖时给出明确的安装指引

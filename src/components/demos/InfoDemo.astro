@@ -1,0 +1,65 @@
+---
+// Hypo-Info：新闻卡片一条条从顶部弹出
+const news = [
+  { src: '@deepseek_ai', tag: '模型', title: 'DeepSeek V4.1 Flash 更新到 1017：全端切换，价格不变' },
+  { src: '@OpenAI', tag: '产品', title: 'Codex 第 13 天完整重置用量，Tibo 回应五项改进清单' },
+  { src: '@AnthropicAI', tag: '公司', title: 'Anthropic 出让 5% 股份设公共福利基金' },
+  { src: '@pika_labs', tag: '产品', title: 'Pika 全套创作工具以插件接入 ChatGPT' },
+  { src: '@opencode', tag: '安全', title: 'OpenCode 披露安全事件：Console 里的第三方 API 密钥可能暴露' },
+  { src: '@deepseek_ai', tag: '吃瓜', title: '梁圣发金币了！DeepSeek 宕机，一周 API 费全返' },
+  { src: '@xai', tag: '吃瓜', title: '马老板大气！Grok 订票出错，SpaceX 全赔' },
+  { src: '@karpathy', tag: '观点', title: 'Karpathy：AI 认知鸿沟成了漏斗' },
+];
+---
+
+<div class="dm-info" data-demo="info" data-news={JSON.stringify(news)}>
+  <div class="dm-info__head"><span class="dm-info__live"><i></i>LIVE</span><span>正在关注 141 个账号</span><b data-count>0</b><span>条</span></div>
+  <div class="dm-info__feed" data-feed></div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion } from './loop';
+
+  each('[data-demo="info"]', (root) => {
+    const news: { src: string; tag: string; title: string }[] = JSON.parse(root.dataset.news ?? '[]');
+    const feed = root.querySelector<HTMLElement>('[data-feed]')!;
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    let total = 0;
+    const push = (n: (typeof news)[number], animate: boolean) => {
+      const card = document.createElement('div');
+      card.className = 'dm-info__card' + (animate ? ' new' : '');
+      card.innerHTML = `<div class="m"><span class="s"></span><span class="t"></span><span class="h"></span></div><div class="ti"></div>`;
+      card.querySelector('.s')!.textContent = n.src;
+      card.querySelector('.t')!.textContent = n.tag;
+      card.querySelector('.h')!.textContent = '刚刚';
+      card.querySelector('.ti')!.textContent = n.title;
+      feed.prepend(card);
+      while (feed.children.length > 5) feed.lastElementChild!.remove();
+      count.textContent = String(++total);
+    };
+    if (reduceMotion()) { news.slice(0, 4).forEach((n) => push(n, false)); return; }
+    whenVisible(root, async () => {
+      for (let i = 0; ; i = (i + 1) % news.length) {
+        push(news[i], true);
+        await sleep(1700);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-info { height: 100%; min-height: 200px; display: flex; flex-direction: column; border-radius: 12px; background: #0f1a14; border: 1px solid #1f3328; overflow: hidden; text-align: left; }
+  .dm-info__head { display: flex; align-items: center; gap: 6px; padding: 8px 12px; font-size: 11.5px; color: #8fb8a0; border-bottom: 1px solid #1f3328; }
+  .dm-info__head b { margin-left: auto; font-family: var(--font-mono); color: #d6f5e0; font-weight: 400; }
+  .dm-info__live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); color: #ff8a80; font-size: 10.5px; }
+  .dm-info__live i { width: 7px; height: 7px; border-radius: 50%; background: #ff5a4f; animation: blink 1.4s infinite; }
+  .dm-info__feed { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+  .dm-info__card { padding: 8px 10px; border-radius: 9px; background: #16261d; border: 1px solid #22392c; }
+  .dm-info__card.new { animation: dm-drop .5s cubic-bezier(.2,.9,.3,1.2) both; }
+  .dm-info__card .m { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: #7aa38a; }
+  .dm-info__card .t { padding: 0 6px; border-radius: 4px; background: #23402f; color: #b6ecc8; }
+  .dm-info__card .h { margin-left: auto; font-family: var(--font-mono); color: #f2c46d; }
+  .dm-info__card .ti { margin-top: 3px; font-size: 13px; line-height: 1.45; color: #eaf6ee; }
+  @keyframes dm-drop { from { opacity: 0; transform: translateY(-14px) scale(.96); background: #234a33; } }
+  @keyframes blink { 50% { opacity: .25; } }
+</style>

@@ -1,0 +1,98 @@
+---
+// Hypo-Workflow：左边是项目文档地图，右边终端演示 hw check 报警 → 补文档 → 通过 → BOARD 交接
+const files = [
+  { name: 'AGENTS.md', note: '通用干活方式' },
+  { name: 'RULES.md', note: '文档地图与规范' },
+  { name: 'STATUS.md', note: '进度与下一步' },
+  { name: 'BOARD.md', note: 'Agent 交接留言' },
+  { name: 'docs/需求/同步.md', note: '功能需求' },
+  { name: 'web/src/sync.js', note: '代码' },
+];
+---
+
+<div class="dm-wf" data-demo="workflow">
+  <ul class="dm-wf__map">
+    {files.map((f, i) => (
+      <li data-file={i}><span class="dm-wf__f">{f.name}</span><small>{f.note}</small></li>
+    ))}
+  </ul>
+  <div class="dm-wf__term">
+    <div class="dm-wf__bar"><span class="dm-dots"><i></i><i></i><i></i></span><span data-who>Claude · 会话 1</span></div>
+    <div class="dm-wf__log" data-log></div>
+  </div>
+</div>
+
+<script>
+  import { each, sleep, whenVisible, reduceMotion } from './loop';
+
+  // [文件高亮(-1 不变), 状态类, 行文本, 行样式]
+  type Step = { file?: number; state?: string; text?: string; cls?: string; who?: string; wait?: number };
+  const SCRIPT: Step[] = [
+    { file: 5, state: 'edit', text: '› 改写同步重试：按 opId 单独重试', cls: 'u' },
+    { text: '  编辑 web/src/sync.js  +18 −6', cls: 'dim' },
+    { text: '$ hw check', cls: 'cmd', wait: 900 },
+    { file: 4, state: 'warn', text: '报警  sync.js 改了，docs/需求/同步.md 没改', cls: 'warn' },
+    { text: '› 补写需求文档：重试规则、不能坏、牵连', cls: 'u' },
+    { file: 4, state: 'ok', text: '  编辑 docs/需求/同步.md  +4 −1', cls: 'dim' },
+    { text: '$ hw check', cls: 'cmd', wait: 900 },
+    { file: 5, state: 'ok', text: '通过  0 条报警', cls: 'ok' },
+    { file: 3, state: 'edit', text: '  写入 BOARD：做到冲突合并，下一步写测试', cls: 'dim' },
+    { text: '✕ 额度用完，会话结束', cls: 'warn', wait: 1200 },
+    { who: 'GPT · 会话 2', text: '› 继续', cls: 'u' },
+    { file: 3, state: 'ok', text: '  读取 BOARD：接着写冲突合并的测试', cls: 'dim' },
+    { file: 2, state: 'ok', text: '$ hw status  同步 4/5 · 等你决定 0 项', cls: 'cmd' },
+  ];
+
+  each('[data-demo="workflow"]', (root) => {
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-file]')];
+    const log = root.querySelector<HTMLElement>('[data-log]')!;
+    const who = root.querySelector<HTMLElement>('[data-who]')!;
+    const reset = () => { rows.forEach((r) => (r.dataset.state = '')); log.innerHTML = ''; who.textContent = 'Claude · 会话 1'; };
+    const apply = (s: Step) => {
+      if (s.who) who.textContent = s.who;
+      if (s.file !== undefined) rows[s.file].dataset.state = s.state ?? '';
+      if (s.text) {
+        const line = document.createElement('div');
+        line.className = s.cls ?? '';
+        line.textContent = s.text;
+        log.append(line);
+        while (log.children.length > 9) log.firstElementChild!.remove();
+      }
+    };
+    if (reduceMotion()) { reset(); SCRIPT.forEach(apply); return; }
+    whenVisible(root, async () => {
+      for (;;) {
+        reset();
+        await sleep(500);
+        for (const s of SCRIPT) { apply(s); await sleep(s.wait ?? 820); }
+        await sleep(3000);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .dm-wf { container-type: inline-size; box-sizing: border-box; width: 100%; height: 100%; min-height: 220px; display: grid; grid-template-columns: minmax(130px, 34%) 1fr; border-radius: 12px; overflow: hidden; border: 1px solid #2a2440; background: #141221; text-align: left; }
+  .dm-wf__map { list-style: none; margin: 0; padding: 10px 8px; display: flex; flex-direction: column; gap: 4px; background: #1b1830; border-right: 1px solid #2a2440; }
+  .dm-wf__map li { padding: 5px 8px; border-radius: 7px; border: 1px solid transparent; transition: background .3s, border-color .3s; }
+  .dm-wf__f { display: block; font-family: var(--font-mono); font-size: 11.5px; color: #d8d2f0; }
+  .dm-wf__map small { display: block; font-size: 10.5px; color: #807aa0; }
+  .dm-wf__map li[data-state='edit'] { background: #2a2550; border-color: #6b5bd2; }
+  .dm-wf__map li[data-state='warn'] { background: #3a1f24; border-color: #e0605a; }
+  .dm-wf__map li[data-state='ok'] { background: #1d3326; border-color: #4fae6a; }
+  .dm-wf__term { display: flex; flex-direction: column; min-width: 0; }
+  .dm-wf__bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid #2a2440; font-family: var(--font-mono); font-size: 11.5px; color: #b5aee0; }
+  .dm-wf__log { flex: 1; padding: 10px 12px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; overflow: hidden; font-family: var(--font-mono); font-size: 12px; line-height: 1.55; color: #d8d2f0; }
+  .dm-wf__log > div { animation: dm-in .3s ease both; }
+  .dm-wf__log .u { color: #fff; }
+  .dm-wf__log .dim { color: #807aa0; }
+  .dm-wf__log .cmd { color: #b9a8ff; }
+  .dm-wf__log .warn { color: #ff8a80; }
+  .dm-wf__log .ok { color: #7ee787; }
+  @container (max-width: 420px) {
+    .dm-wf { grid-template-columns: 1fr; }
+    .dm-wf__map { display: grid; grid-template-columns: 1fr 1fr; border-right: none; border-bottom: 1px solid #2a2440; }
+    .dm-wf__map small { display: none; }
+    .dm-wf__log { min-height: 150px; }
+  }
+</style>

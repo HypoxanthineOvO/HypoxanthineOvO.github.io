@@ -1,73 +1,90 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GateHead from '../components/GateHead.astro';
-import { getFeaturedProjects } from '../lib/content';
+import { getProjects } from '../lib/content';
+import { mcShots } from '../data/home';
 
-const projects = await getFeaturedProjects();
-const statusDot = { active: 'green', wip: 'yellow', archived: 'gray' } as const;
-const catLabel = { research: 'RESEARCH', systems: 'SYSTEMS', writing: 'WRITING', tools: 'TOOLS' } as const;
+const projects = (await getProjects()).filter((p) => p.data.featured && p.data.group).sort((a, b) => a.data.order - b.data.order);
+type P = (typeof projects)[number];
+const groups = [
+  { key: 'productivity', title: '生产力', note: '' },
+  { key: 'minecraft', title: 'Minecraft', note: '开发中，内容会持续变化' },
+] as const;
+const hrefOf = (p: P) => (p.data.tier === 'stable' ? `/work/${p.id}` : p.data.githubUrl);
+const statusOf = (p: P) =>
+  p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: p.data.tier === 'rework' ? '准备重做' : '开发中' };
+const shotsOf = (id: string) => mcShots.filter((s) => s.work === id);
 ---
 
-<BaseLayout skin="engineering" title="项目">
-  <section class="skin">
-    <div class="shell">
-      <GateHead
-        gate="work"
-        blurb="主线之外长期维护的东西，多数与 AI 与 Agent 有关：每天在用的工具，和为把它们串起来而造的系统。只陈列精选，其余进档案。"
-        note="SELECTED"
-      />
-      <div class="bignets">
-        {projects.map((p) => (
-          <a class="bignet" href={`/work/${p.id}`}>
-            <div class:list={['cover', p.data.cover ? 'img' : 'ph']} style={p.data.cover ? `background-image:url('${p.data.cover}')` : undefined}>
-              <span class="badge">{p.data.category ? catLabel[p.data.category] : 'PROJECT'}</span>
-              {!p.data.cover && <span class="mono">{p.data.name}</span>}
-            </div>
-            <div class="body">
-              <h3>{p.data.name} <i class:list={['dot', `dot--${statusDot[p.data.status]}`]} /></h3>
-              <p class="desc">{p.data.description}</p>
-              <div class="meta">
-                <span class="note">{p.data.statusNote ?? (p.data.status === 'wip' ? '进行中' : p.data.status === 'archived' ? '已归档' : '活跃维护')}</span>
-                <span class="arrow">-&gt;</span>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+<BaseLayout title="项目" description="VSPi、HypoDoc、Hypo-Expression 等生产力工具，以及 Minecraft 整合包与模组。">
+  <div class="shell">
+    <GateHead gate="work" />
+    {groups.map((g) => (
+      <section class="group" id={g.key}>
+        <div class="sub-head rv"><h2>{g.title}</h2>{g.note && <span>{g.note}</span>}</div>
+        <div class:list={['grid', g.key]}>
+          {projects.filter((p) => p.data.group === g.key).map((p) => {
+            const st = statusOf(p);
+            const href = hrefOf(p);
+            const Tag = href ? 'a' : 'div';
+            const shots = shotsOf(p.id);
+            return (
+              <Tag class="card proj rv" href={href} rel={href?.startsWith('http') ? 'noreferrer' : undefined}>
+                {shots.length > 0 && (
+                  <div class="shots">{shots.slice(0, 3).map((s) => <img src={s.img} alt={s.name} loading="lazy" />)}</div>
+                )}
+                <div class="in">
+                  <div class="top">
+                    {p.data.icon && <img class="ic" src={p.data.icon} alt="" width="56" height="56" />}
+                    <span class="st"><i class={st.cls}></i>{st.text}</span>
+                  </div>
+                  <h3>{p.data.name}</h3>
+                  <p>{p.data.description}</p>
+                  {p.data.highlights.length > 0 && <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
+                  {shots.length > 0 && <div class="mods">{shots.map((s) => <span><i style={`--ic:${s.color}`}></i>{s.name}</span>)}</div>}
+                  <div class="foot">
+                    {p.data.tech.map((t) => <span>{t}</span>)}
+                    {href && <b>{p.data.tier === 'stable' ? '详情 →' : 'GitHub ↗'}</b>}
+                  </div>
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
 </BaseLayout>
 
 <style>
-  .bignets { padding: 26px 0 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .bignet {
-    position: relative; border-radius: 8px; overflow: hidden; background: var(--panel);
-    border: 1px solid var(--skin-line); display: flex; flex-direction: column;
-    transition: transform .22s ease, box-shadow .22s ease;
-  }
-  .bignet:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(10,40,25,.14); }
-  .cover { aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; position: relative; }
-  .cover.img { background-size: cover; background-position: center; }
-  .cover.ph {
-    background: linear-gradient(150deg, #0d1117 0%, #12261c 60%, #1c3a2a 100%);
-    color: #7ee787; font-family: var(--font-mono); font-size: 22px; letter-spacing: .12em;
-  }
-  .badge {
-    position: absolute; top: 10px; left: 10px; font-family: var(--font-mono); font-size: 10.5px;
-    background: rgba(13,17,23,.78); color: #d2f8e4; padding: 2px 9px; border-radius: 3px; backdrop-filter: blur(3px);
-  }
-  .body { padding: 14px 16px 15px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  h3 { font-size: 17.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-  .desc { font-size: 13px; color: var(--skin-muted); line-height: 1.65; }
-  .meta {
-    margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--skin-line);
-    display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--skin-muted); font-family: var(--font-mono);
-  }
-  .meta .note { color: var(--fg); font-family: var(--font-ui); }
-  .meta .arrow { margin-left: auto; color: var(--gate); }
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-  .dot--green { background: #3fb950; box-shadow: 0 0 8px rgba(63,185,80,.55); }
-  .dot--yellow { background: #d29922; box-shadow: 0 0 8px rgba(210,153,34,.55); }
-  .dot--gray { background: #8b949e; }
-  @media (max-width: 960px) { .bignets { grid-template-columns: 1fr; } }
+  .group { margin-top: 30px; }
+  .sub-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
+  .sub-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; }
+  .sub-head span { font-size: 13px; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .grid.minecraft { grid-template-columns: 1fr 1fr; }
+  .proj { display: flex; flex-direction: column; }
+  .in { padding: 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .top { display: flex; align-items: center; }
+  .ic { width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(40, 25, 10, .22)); transition: transform .4s var(--ease); }
+  .proj:hover .ic { transform: rotate(-6deg) scale(1.08); }
+  .st { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .st i { width: 7px; height: 7px; border-radius: 50%; background: #2fa84f; }
+  .st i.wip { background: #e0a020; }
+  h3 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; margin: 16px 0 6px; }
+  p { font-size: 14px; line-height: 1.75; color: var(--ink-2); }
+  .hl { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; }
+  .hl span { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .hl b { font-family: var(--font-serif); font-weight: 900; font-size: 20px; color: var(--red); }
+  .foot { margin-top: auto; padding-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .foot span { font-family: var(--font-mono); font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: var(--paper-2); color: var(--ink-2); }
+  .foot b { margin-left: auto; font-weight: 500; font-size: 13px; color: var(--red); }
+  .shots { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; height: 230px; background: #14171a; }
+  .shots img { width: 100%; height: 100%; object-fit: cover; }
+  .shots img:first-child { grid-row: span 2; }
+  .mods { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .mods span { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); }
+  .mods i { width: 9px; height: 9px; background: var(--ic); }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } .grid.minecraft { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
 </style>

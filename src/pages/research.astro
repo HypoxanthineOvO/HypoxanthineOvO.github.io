@@ -15,7 +15,7 @@ const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
         gate="research"
         title="学术发表"
         note={`${pubs.length} PAPERS`}
-        blurb="神经渲染加速器的软硬件协同设计：从采样策略、光线表示到无冲突编码。论文按 demo 墙陈列，点开看题录与 PDF。"
+        blurb="神经渲染加速器的软硬件协同设计：采样策略、光线表示与无冲突编码。"
       />
       <div class="wall">
         {byYear.map(({ key: year, items }) => (
@@ -27,7 +27,9 @@ const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
                   <span class="venue">{p.data.venue}</span>
                   <h3>{p.data.title}</h3>
                   <span class="authors">
-                    {(p.data.authors ?? []).map((a, i) => (i > 0 ? '，' : '') + (a === 'Yunxiang He' ? <b>{a}</b> : a))}
+                    {(p.data.authors ?? []).map((a, i) => (
+                      <>{i > 0 && '，'}{a === 'Yunxiang He' ? <b>{a}</b> : a}</>
+                    ))}
                   </span>
                   <span class="row">
                     {p.data.pdf && <span class="lnk">PDF</span>}
@@ -46,13 +48,13 @@ const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
 
 <style>
   .wall { padding: 18px 0 64px; display: flex; flex-direction: column; gap: 8px; }
-  .yearrow { display: grid; grid-template-columns: 64px 1fr; gap: 0 26px; }
+  .yearrow { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 26px; }
   .rail {
     font-family: var(--font-mono); font-size: 13px; color: var(--gate);
     position: sticky; top: 76px; align-self: start; padding-top: 4px;
   }
   .rail::after { content: ''; display: block; width: 22px; height: 2px; background: var(--gate); margin-top: 8px; opacity: .5; }
-  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .paper-card {
     position: relative;
     background: var(--panel); border: 1px solid var(--skin-line); border-radius: 4px;

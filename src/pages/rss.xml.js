@@ -1,33 +1,27 @@
 import rss from '@astrojs/rss';
 
-import { getEssays, getPoetry, getNotes, getPublishArticles } from '../lib/content';
+import { getMedia, getEssays, getPoetry } from '../lib/content';
 import { siteConfig } from '../lib/site';
 
-// RSS 覆盖散文、诗词、笔记、发布门长文（DESIGN.md §2.2）
+// RSS 覆盖内容（视频与文章）、散文、诗词
 export async function GET(context) {
-  const [essays, poetry, notes, articles] = await Promise.all([
-    getEssays(),
-    getPoetry(),
-    getNotes(),
-    getPublishArticles(),
-  ]);
+  const [media, essays, poetry] = await Promise.all([getMedia(), getEssays(), getPoetry()]);
 
-  const itemOf = (entry, gateHref) => ({
+  const itemOf = (entry, base) => ({
     title: entry.data.title,
     description: entry.data.description ?? '',
     pubDate: entry.data.date,
-    link: `${gateHref}/${entry.id}`,
+    link: `${base}/${entry.id}`,
   });
 
   const items = [
+    ...media.filter((e) => e.data.status === 'published').map((e) => itemOf(e, '/content')),
     ...essays.map((e) => itemOf(e, '/essays')),
     ...poetry.map((e) => itemOf(e, '/poetry')),
-    ...notes.map((e) => itemOf(e, '/notes')),
-    ...articles.map((e) => itemOf(e, '/publish')),
   ].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   return rss({
-    title: `${siteConfig.title} RSS`,
+    title: siteConfig.title,
     description: siteConfig.description,
     site: context.site ?? siteConfig.site,
     customData: `<language>zh-CN</language><author>${siteConfig.author}</author>`,

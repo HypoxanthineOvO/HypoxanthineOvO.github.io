@@ -1,24 +1,23 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDemo from '../../components/demos/ProjectDemo.astro';
 import { getProjects, getProjectLog } from '../../lib/content';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
-  return projects.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  return projects.filter((entry) => entry.data.tier === 'stable').map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 // 开发日记：预渲染正文组件
-const logEntries = await getProjectLog(entry.id);
+const logEntries = await getProjectLog(entry.id).catch(() => []);
 const logs = await Promise.all(
   logEntries.map(async (log) => ({ log, LogBody: (await render(log)).Content })),
 );
 
-const statusDot = { active: 'green', wip: 'yellow', archived: 'gray' } as const;
-const statusLabel = { active: '活跃自用', wip: '施工中', archived: '已归档' } as const;
 
 // GitHub 信息卡：构建时烙快照，页面加载时向 API 刷新一次，失败静默回退
 interface GhSnapshot {
@@ -31,12 +30,14 @@ let snapshot: GhSnapshot | null = null;
 if (d.githubUrl) {
   try {
     const repo = new URL(d.githubUrl).pathname.replace(/\/$/, '');
-    const res = await fetch(`https://api.github.com/repos${repo}`, { headers: { 'User-Agent': 'hypox.cn-build' } });
+    const headers: Record<string, string> = { 'User-Agent': 'hypox.cn-build' };
+    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+    const res = await fetch(`https://api.github.com/repos${repo}`, { headers });
     if (res.ok) {
       const data = await res.json();
       let release: string | null = null;
       try {
-        const relRes = await fetch(`https://api.github.com/repos${repo}/releases/latest`, { headers: { 'User-Agent': 'hypox.cn-build' } });
+        const relRes = await fetch(`https://api.github.com/repos${repo}/releases/latest`, { headers });
         if (relRes.ok) release = (await relRes.json()).tag_name ?? null;
       } catch { /* release 可选 */ }
       snapshot = { stars: data.stargazers_count, forks: data.forks_count, pushedAt: data.pushed_at, release };
@@ -46,12 +47,14 @@ if (d.githubUrl) {
 const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').replace(/\/$/, '') : '';
 ---
 
-<BaseLayout skin="engineering" title={d.name} description={d.description}>
-  <section class="skin detail">
+<BaseLayout title={d.name} description={d.description}>
+  <section class="detail">
     <div class="shell wrap">
-      <p class="crumbs"><a href="/work">项目</a> / {entry.id}</p>
-      <h1>{d.name} <i class:list={['dot', `dot--${statusDot[d.status]}`]} /></h1>
+      <p class="crumbs"><a href="/work">项目</a> / {d.name}</p>
+      <h1>{d.icon && <img class="ic" src={d.icon} alt="" width="64" height="64" />}{d.name}{d.version && <span class="ver">{d.version}</span>}</h1>
       <p class="lead">{d.description}</p>
+      <div class="bigdemo"><ProjectDemo id={entry.id} /></div>
+      {d.highlights.length > 0 && <div class="hl">{d.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
 
       {d.cover && (
         <div class="cover-big" style={`background-image:url('${d.cover}')`} role="img" aria-label={`${d.name} 封面`} />
@@ -81,31 +84,23 @@ const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').
             <div class="ghcard" data-repo={repoPath}>
               <div class="gh-head"><span class="oct">⌥</span><a class="repo" href={d.githubUrl} target="_blank" rel="noreferrer">{repoPath}</a></div>
               <dl>
-                <div><dt>STARS</dt><dd data-gh="stars">{snapshot?.stars ?? '—'}</dd></div>
-                <div><dt>FORKS</dt><dd data-gh="forks">{snapshot?.forks ?? '—'}</dd></div>
-                <div><dt>LAST PUSH</dt><dd data-gh="push">{snapshot?.pushedAt?.slice(0, 10) ?? '—'}</dd></div>
-                <div><dt>RELEASE</dt><dd data-gh="release">{snapshot?.release ?? '—'}</dd></div>
+                <div><dt>最新版本</dt><dd data-gh="release">{snapshot?.release ?? d.version ?? '—'}</dd></div>
+                <div><dt>最近更新</dt><dd data-gh="push">{snapshot?.pushedAt?.slice(0, 10) ?? '—'}</dd></div>
+                <div><dt>Stars</dt><dd data-gh="stars">{snapshot?.stars ?? '—'}</dd></div>
+                <div><dt>Forks</dt><dd data-gh="forks">{snapshot?.forks ?? '—'}</dd></div>
               </dl>
-              <div class="gh-foot"><span data-gh="state">{snapshot ? `snapshot @ build` : 'no snapshot'}</span><span>runtime refresh</span></div>
+              <a class="gh-foot" href={d.githubUrl} target="_blank" rel="noreferrer">在 GitHub 上查看 ↗</a>
             </div>
           )}
-          <div class="sidecard">
-            <h4>STATUS</h4>
-            <p class="statusline">
-              <i class:list={['dot', `dot--${statusDot[d.status]}`]} />
-              {statusLabel[d.status]}{d.period ? ` · ${d.period}` : ''}
-            </p>
-            {d.statusNote && <p class="statusnote">{d.statusNote}</p>}
-          </div>
           {d.tech.length > 0 && (
             <div class="sidecard">
-              <h4>TECH</h4>
+              <h4>标签</h4>
               <div class="chips">{d.tech.map((t) => <span class="chip">{t}</span>)}</div>
             </div>
           )}
           {d.url && (
             <div class="sidecard">
-              <h4>LINK</h4>
+              <h4>链接</h4>
               <a class="plainlink" href={d.url}>{d.url.startsWith('/') ? '站内页面' : d.url}</a>
             </div>
           )}
@@ -130,8 +125,6 @@ const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').
         set('stars', data.stargazers_count);
         set('forks', data.forks_count);
         set('push', data.pushed_at?.slice(0, 10));
-        const state = document.querySelector('[data-gh="state"]');
-        if (state) state.textContent = 'live from api';
         try {
           const relRes = await fetch(`https://api.github.com/repos/${repoPath}/releases/latest`);
           if (relRes.ok) set('release', (await relRes.json()).tag_name);
@@ -142,56 +135,50 @@ const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').
 </script>
 
 <style>
-  .detail { padding: 26px 0 70px; }
-  .wrap { max-width: 880px; }
-  .crumbs { font-family: var(--font-mono); font-size: 12px; color: var(--skin-muted); }
-  .crumbs a { color: var(--gate); }
-  h1 { font-size: 32px; margin-top: 10px; display: flex; align-items: center; gap: 12px; }
-  .lead { color: var(--skin-muted); margin-top: 8px; font-size: 15px; }
-  .cover-big { margin-top: 22px; aspect-ratio: 16 / 7; border-radius: 8px; background-size: cover; background-position: center; border: 1px solid var(--skin-line); }
-  .cols { display: grid; grid-template-columns: 1fr 300px; gap: 26px; margin-top: 26px; align-items: start; }
-  .doc { font-size: 15px; }
+  .detail { padding: 40px 0 40px; }
+  .wrap { max-width: 1000px; }
+  .crumbs { font-size: 13px; color: var(--muted); }
+  .crumbs a { color: var(--red); }
+  h1 { font-family: var(--font-serif); font-weight: 900; font-size: 44px; margin-top: 14px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  h1 .ic { width: 64px; height: 64px; filter: drop-shadow(0 8px 14px rgba(40, 25, 10, .25)); }
+  .ver { font-family: var(--font-mono); font-weight: 400; font-size: 14px; padding: 3px 10px; border-radius: 999px; background: #e4f2e6; color: #2f7d42; }
+  .lead { color: var(--ink-2); margin-top: 12px; font-size: 17px; font-family: var(--font-serif); }
+  .bigdemo { margin-top: 28px; height: 420px; display: flex; }
+  .bigdemo > :global(*) { flex: 1; width: 100%; min-width: 0; }
+  @media (max-width: 620px) { .bigdemo { height: 460px; } }
+  .hl { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 26px; padding: 22px 28px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+  .hl span { display: flex; flex-direction: column; font-size: 13px; color: var(--muted); }
+  .hl b { font-family: var(--font-serif); font-weight: 900; font-size: 34px; color: var(--red); line-height: 1.2; }
+  .cover-big { margin-top: 22px; aspect-ratio: 16 / 7; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid var(--line); }
+  .cols { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; margin-top: 30px; align-items: start; }
+  .doc { font-size: 15.5px; }
 
-  .devlog h2 { font-family: var(--font-mono); font-size: 13px; letter-spacing: .18em; color: var(--gate); }
-  .tl { margin-top: 16px; border-left: 2px solid var(--skin-line); padding-left: 22px; display: flex; flex-direction: column; gap: 18px; }
+  .devlog h2 { font-family: var(--font-serif); font-size: 20px; }
+  .tl { margin-top: 16px; border-left: 2px solid var(--line); padding-left: 22px; display: flex; flex-direction: column; gap: 18px; }
   .tl .entry { position: relative; }
-  .tl .entry::before {
-    content: ''; position: absolute; left: -27.5px; top: 7px; width: 9px; height: 9px;
-    border-radius: 50%; background: var(--gate); box-shadow: 0 0 0 3px var(--skin-bg);
-  }
+  .tl .entry::before { content: ''; position: absolute; left: -27.5px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 3px var(--bg); }
   .tl .entry.wip::before { background: #d29922; }
-  .tl .when { font-family: var(--font-mono); font-size: 11.5px; color: var(--skin-muted); }
+  .tl .when { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
   .tl h3 { font-size: 15.5px; margin-top: 2px; }
-  .tl .kind {
-    font-family: var(--font-mono); font-size: 10.5px; border: 1px solid var(--skin-line);
-    border-radius: 2px; padding: 0 6px; color: var(--gate); margin-left: 8px; vertical-align: 2px;
-  }
+  .tl .kind { font-family: var(--font-mono); font-size: 10.5px; border: 1px solid var(--line); border-radius: 2px; padding: 0 6px; color: var(--red); margin-left: 8px; vertical-align: 2px; }
   .logbody { font-size: 13.5px; }
 
-  .ghcard {
-    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
-    color: #e6edf3; font-family: var(--font-mono); font-size: 12.5px; overflow: hidden;
-  }
-  .gh-head { display: flex; align-items: center; gap: 8px; padding: 11px 14px; border-bottom: 1px solid #30363d; }
-  .gh-head .repo { color: #7ee787; }
+  aside { position: sticky; top: 84px; }
+  .ghcard { background: #15161a; border-radius: 16px; color: #e9e5dd; overflow: hidden; }
+  .gh-head { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #2a2c33; font-family: var(--font-mono); font-size: 12.5px; }
+  .gh-head .repo { color: #9fe3a6; }
   .ghcard dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; }
-  .ghcard dl > div { padding: 10px 14px; border-bottom: 1px solid #21262d; }
-  .ghcard dl > div:nth-child(odd) { border-right: 1px solid #21262d; }
-  .ghcard dt { font-size: 10.5px; color: #8b949e; letter-spacing: .12em; }
-  .ghcard dd { font-size: 16px; margin: 2px 0 0; }
-  .gh-foot { padding: 9px 14px; color: #8b949e; font-size: 11px; display: flex; justify-content: space-between; }
+  .ghcard dl > div { padding: 12px 18px; border-bottom: 1px solid #23252b; }
+  .ghcard dl > div:nth-child(odd) { border-right: 1px solid #23252b; }
+  .ghcard dt { font-size: 11.5px; color: #8d877d; }
+  .ghcard dd { font-family: var(--font-mono); font-size: 17px; margin: 3px 0 0; }
+  .gh-foot { display: block; padding: 12px 18px; color: #f2b8b0; font-size: 13px; }
+  .gh-foot:hover { color: #fff; }
 
-  .sidecard { margin-top: 14px; border: 1px solid var(--skin-line); border-radius: 8px; padding: 13px 15px; background: var(--panel); }
-  .sidecard h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; color: var(--gate); }
-  .statusline { margin-top: 8px; font-size: 13.5px; display: flex; align-items: center; gap: 8px; }
-  .statusnote { font-size: 12.5px; color: var(--skin-muted); margin-top: 4px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
-  .chip { font-family: var(--font-mono); font-size: 11px; border: 1px solid var(--skin-line); border-radius: 3px; padding: 1px 8px; color: var(--skin-muted); }
-  .plainlink { color: var(--gate); font-size: 13.5px; margin-top: 8px; display: inline-block; }
-
-  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
-  .dot--green { background: #3fb950; box-shadow: 0 0 8px rgba(63,185,80,.55); }
-  .dot--yellow { background: #d29922; box-shadow: 0 0 8px rgba(210,153,34,.55); }
-  .dot--gray { background: #8b949e; }
-  @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
+  .sidecard { margin-top: 14px; border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: var(--panel); }
+  .sidecard h4 { font-family: var(--font-serif); font-size: 15px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { font-family: var(--font-mono); font-size: 11.5px; border-radius: 6px; padding: 2px 8px; background: var(--paper-2); color: var(--ink-2); }
+  .plainlink { color: var(--red); font-size: 13.5px; margin-top: 8px; display: inline-block; }
+  @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } aside { position: static; } }
 </style>

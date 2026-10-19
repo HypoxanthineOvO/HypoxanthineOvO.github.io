@@ -1,0 +1,69 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getMedia, formatDate } from '../../lib/content';
+import { platforms, platformLabel } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const media = await getMedia();
+  return media.map((entry) => ({ params: { slug: entry.id }, props: { entry, all: media } }));
+}
+
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const isVideo = d.kind === 'video';
+const related = d.related ? all.find((m) => m.id === d.related) : all.find((m) => m.data.related === entry.id);
+const watchOn = platforms.filter((p) => d.platforms.includes(p.key as (typeof d.platforms)[number]));
+const metas = [
+  d.status === 'upcoming' ? '制作中' : formatDate(d.date),
+  ...(d.duration ? [d.duration] : []),
+  d.platforms.map((p) => platformLabel[p]).join(' · '),
+];
+---
+
+<ArticleLayout skin="content" kicker={`${isVideo ? '视频' : '文章'}${d.series ? ` · ${d.series}` : ''}`} title={d.title} metas={metas} description={d.description}>
+  {isVideo && (
+    <div class="vid">
+      {d.video
+        ? <video class="player" src={d.video} poster={d.cover} controls playsinline preload="metadata"></video>
+        : d.cover ? <img src={d.cover} alt={d.title} /> : <div class="blank">制作中</div>}
+      <div class="where">
+        <p>{d.description}</p>
+        {watchOn.length > 0 && <p class="also">也可以在这些平台看：</p>}
+        <div class="plats">
+          {watchOn.map((p) => p.href
+            ? <a href={p.href} rel="noreferrer">{p.label} ↗</a>
+            : <span>{p.label}<i>搜索「{p.key === 'douyin' ? '飘零聊科技' : p.handle}」</i></span>)}
+        </div>
+      </div>
+    </div>
+  )}
+  {!isVideo && d.cover && <img class="cover" src={d.cover} alt="" />}
+  <Content />
+  {related && (
+    <a class="related" href={`/content/${related.id}`}>
+      <span>{related.data.kind === 'video' ? '看视频版' : '读文字版'}</span>
+      <b>{related.data.title}</b>
+    </a>
+  )}
+  <p class="back"><a href="/content">← 全部内容</a></p>
+</ArticleLayout>
+
+<style>
+  .player { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; }
+  .vid img, .cover { width: 100%; border-radius: 14px; border: 1px solid var(--line); }
+  .blank { aspect-ratio: 16 / 9; border-radius: 14px; display: grid; place-items: center; background: repeating-linear-gradient(135deg, var(--paper-2) 0 12px, var(--panel) 12px 24px); font-family: var(--font-serif); font-weight: 900; letter-spacing: .3em; color: var(--muted); }
+  .where p { margin-top: 18px; }
+  .where .also { font-size: 13.5px; color: var(--muted); margin-top: 14px; }
+  .plats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .plats a, .plats span { font-size: 14px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); text-decoration: none; color: var(--fg); }
+  .plats a:hover { background: var(--fg); color: var(--bg); }
+  .plats i { font-style: normal; color: var(--muted); font-size: 12.5px; margin-left: 8px; }
+  .related { display: flex; flex-direction: column; gap: 4px; margin-top: 2.6em; padding: 18px 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); text-decoration: none; }
+  .related span { font-size: 12.5px; color: var(--red); }
+  .related b { font-family: var(--font-serif); font-size: 18px; color: var(--fg); }
+  .related:hover b { color: var(--red); }
+  .back { margin-top: 2.4em; font-size: 14px; }
+  .back a { color: var(--muted); text-decoration: none; }
+</style>

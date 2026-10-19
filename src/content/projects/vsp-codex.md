@@ -3,7 +3,7 @@ name: "VSP-Codex"
 description: "面向 VSP Lab 场景维护的 Codex source-build 版本，公开镜像与 GitLab 主线协同演化。"
 status: "active"
 statusNote: "实验室在用的研究型编程 agent"
-featured: true
+featured: false
 githubUrl: "https://github.com/HypoxanthineOvO/VSP-Codex"
 tech: ["Rust","TypeScript","Codex"]
 period: "2026 — NOW"
