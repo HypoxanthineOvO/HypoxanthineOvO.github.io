@@ -34,7 +34,10 @@ for (const demo of ['vspi', 'hypodoc', 'workflow', 'expression', 'info', 'class'
   ok(`home: ${demo} 演示在播放`, moving > 20, `len=${moving}`);
 }
 await page.click('#content .c-feature');
-await page.waitForTimeout(1500);
+await page.waitForFunction(() => {
+  const v = document.getElementById('vmodalVideo');
+  return !document.getElementById('vmodal').hidden && v.readyState >= 2 && v.duration > 300;
+}, null, { timeout: 15000 }).catch(() => {});
 ok('home: 视频弹窗播放', await page.evaluate(() => {
   const v = document.getElementById('vmodalVideo');
   return !document.getElementById('vmodal').hidden && v.readyState >= 2 && v.duration > 300;
