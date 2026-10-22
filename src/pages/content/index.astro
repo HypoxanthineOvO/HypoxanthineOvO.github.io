@@ -3,8 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GateHead from '../../components/GateHead.astro';
 import { getMedia, formatMonthDay } from '../../lib/content';
 import { platformLabel } from '../../lib/site';
+import { contentPillars } from '../../data/home';
 
 const media = await getMedia();
+const pillarSeries: Record<string, string> = { 'ai-basics': 'AI 科普', 'vector-life': '向量化人生', 'learn-with-ai': '用 AI 学习' };
+const videos = media.filter((m) => m.data.kind === 'video');
+const pillarCount = (key: string) => videos.filter((v) => v.data.series?.startsWith(pillarSeries[key])).length;
 const sections = [
   { key: 'video', title: '视频', note: '抖音 · B站 · 视频号', items: media.filter((m) => m.data.kind === 'video') },
   { key: 'article', title: '文章', note: '公众号 · 小红书', items: media.filter((m) => m.data.kind === 'article') },
@@ -13,7 +17,16 @@ const sections = [
 
 <BaseLayout skin="content" title="内容" description="飘零的视频与文章：AI 科普、AI 账本与评论。">
   <div class="shell">
-    <GateHead gate="content" />
+    <GateHead gate="content" blurb="三条旗舰主线：把 AI 圈的事讲透，用数学和系统视角看人生，再教你用 AI 学习与创造。" />
+    <div class="pillars">
+      {contentPillars.map((p) => (
+        <div class="pillar rv" data-pillar={p.key}>
+          <div class="pk"><span class="badge">{p.badge}</span><span class="cnt">{pillarCount(p.key) > 0 ? `${pillarCount(p.key)} 期视频` : '筹备中'}</span></div>
+          <h3>{p.title}</h3>
+          <p>{p.desc}</p>
+        </div>
+      ))}
+    </div>
     {sections.map((s) => (
       <section class="group">
         <div class="sub-head rv"><h2>{s.title}</h2><span>{s.note}</span></div>
@@ -40,6 +53,19 @@ const sections = [
 </BaseLayout>
 
 <style>
+  .pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 12px; }
+  .pillar { position: relative; overflow: hidden; padding: 18px 22px 20px; border-radius: 16px; border: 1px solid var(--line); background: linear-gradient(160deg, var(--panel), var(--paper-2)); }
+  .pillar::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
+  .pillar[data-pillar='vector-life']::after { background: #5b47c4; }
+  .pillar[data-pillar='learn-with-ai']::after { background: #2f7d42; }
+  .pillar .pk { display: flex; align-items: center; justify-content: space-between; }
+  .pillar .badge { font-family: var(--font-mono); font-size: 11.5px; color: var(--red); }
+  .pillar[data-pillar='vector-life'] .badge { color: #5b47c4; }
+  .pillar[data-pillar='learn-with-ai'] .badge { color: #2f7d42; }
+  .pillar .cnt { font-size: 11.5px; color: var(--muted); padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; }
+  .pillar h3 { font-family: var(--font-serif); font-weight: 900; font-size: 19px; line-height: 1.4; margin: 10px 0 6px; }
+  .pillar p { font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+  @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; } }
   .group { margin-top: 30px; }
   .sub-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
   .sub-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; }
@@ -50,7 +76,7 @@ const sections = [
   .thumb.blank { background: repeating-linear-gradient(135deg, var(--paper-2) 0 12px, var(--panel) 12px 24px); display: grid; place-items: center; }
   .soon { font-family: var(--font-serif); font-weight: 900; color: var(--muted); font-size: 18px; letter-spacing: .3em; }
   .play {
-    position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px; border-radius: 50%;
+    position: absolute; left: 76%; top: 50%; width: 52px; height: 52px; margin: -26px; border-radius: 50%;
     display: grid; place-items: center; background: rgba(28, 27, 26, .82); color: #fff; font-size: 18px; transition: transform .3s var(--ease), background .3s;
   }
   .thumb.blank .play { display: none; }

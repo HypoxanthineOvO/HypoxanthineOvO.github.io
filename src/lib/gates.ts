@@ -10,8 +10,8 @@ export interface Gate {
 
 export const gates: Gate[] = [
   { slug: 'content', name: '内容', en: 'CONTENT', href: '/content', accent: '#a3292a', blurb: '视频与文章' },
-  { slug: 'work', name: '项目', en: 'PROJECTS', href: '/work', accent: '#2f6b3a', blurb: '生产力工具与 Minecraft' },
-  { slug: 'research', name: '研究', en: 'RESEARCH', href: '/research', accent: '#2b4f86', blurb: '学术发表' },
+  { slug: 'work', name: '项目', en: 'PROJECTS', href: '/work', accent: '#2f6b3a', blurb: 'AI 能力树三层：Agent 底座、日常产品与 Minecraft' },
+  { slug: 'research', name: '研究', en: 'RESEARCH', href: '/research', accent: '#2b4f86', blurb: '神经渲染与 77 K 低温 GPU 双轨时间线' },
   { slug: 'writing', name: '写作', en: 'WRITING', href: '/writing', accent: '#8a5a2b', blurb: '诗词、散文与学习档案' },
   { slug: 'essays', name: '散文', en: 'ESSAYS', href: '/essays', accent: '#9e2b25', blurb: '散文随笔' },
   { slug: 'poetry', name: '诗词', en: 'POETRY', href: '/poetry', accent: '#8a5a2b', blurb: '诗词合集' },

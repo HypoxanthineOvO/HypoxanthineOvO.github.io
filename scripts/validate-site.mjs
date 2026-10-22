@@ -23,8 +23,13 @@ ok('home: 品牌名', (await page.locator('.hero h1').textContent())?.startsWith
 ok('home: 群像头像加载', await page.locator('.stage img.av').evaluate((el) => el.complete && el.naturalWidth > 10));
 ok('home: AI 名牌 8 个', (await page.locator('.tag-ai').count()) === 8);
 ok('home: 平台入口含 B站链接', (await page.locator('.platforms a[href*="bilibili.com"]').count()) === 1);
-ok('home: 内容区有主打视频与 2 篇文章', (await page.locator('#content .c-feature').count()) === 1 && (await page.locator('#content .art').count()) === 2);
-ok('home: 生产力项目 6 个', (await page.locator('#projects .show-row, #projects .trio-card, #projects .p.full').count()) === 6);
+ok('home: 内容区三主线导览', (await page.locator('#content .pillar').count()) === 3);
+ok('home: 视频区 1 主推 + 3 侧栏 + 1 制作中', (await page.locator('#content .v-lead').count()) === 1 && (await page.locator('#content .v-row').count()) === 3 && (await page.locator('#content .v-soon').count()) === 1);
+ok('home: 文章区 5 篇', (await page.locator('#content .art-lead, #content .art').count()) === 5);
+ok('home: 三层能力树', (await page.locator('#projects .layer').count()) === 3);
+ok('home: Level 01/02 项目 6 个', (await page.locator('#projects .show-row, #projects .trio-card').count()) === 6);
+ok('home: Minecraft 详情入口', (await page.locator('#projects a[href="/work/hypomc"]').count()) >= 1 && (await page.locator('#projects a[href="/work/panlong"]').count()) >= 1);
+ok('home: 研究双轨', (await page.locator('#research .rt-track').count()) === 2 && (await page.locator('#research #frost').count()) === 1);
 ok('home: 项目图标全部加载', await page.locator('#projects .ic').evaluateAll((els) => els.every((el) => el.complete && el.naturalWidth > 10)));
 for (const demo of ['vspi', 'hypodoc', 'workflow', 'expression', 'info', 'class']) {
   const el = page.locator(`#projects [data-demo="${demo}"]`);
@@ -33,7 +38,7 @@ for (const demo of ['vspi', 'hypodoc', 'workflow', 'expression', 'info', 'class'
   const moving = await el.evaluate((root) => root.textContent.length);
   ok(`home: ${demo} 演示在播放`, moving > 20, `len=${moving}`);
 }
-await page.click('#content .c-feature');
+await page.click('#content .v-lead');
 await page.waitForFunction(() => {
   const v = document.getElementById('vmodalVideo');
   return !document.getElementById('vmodal').hidden && v.readyState >= 2 && v.duration > 300;
@@ -54,7 +59,8 @@ ok('home: 无横向溢出', await noOverflow());
 
 // ---- 分区页 ----
 await goto('/content');
-ok('content: 视频与文章', (await page.locator('.item').count()) === 5);
+ok('content: 视频与文章', (await page.locator('.item').count()) === 10);
+ok('content: 三主线导览', (await page.locator('.pillar').count()) === 3);
 await goto('/content/ai-writing-tics');
 ok('content: 文章插图加载', await page.locator('.md-body img').evaluateAll((els) => els.length >= 5 && els.every((el) => el.complete && el.naturalWidth > 10)));
 await goto('/content/video-ai-flavor');
@@ -62,16 +68,22 @@ ok('content: 视频页链到文字版', (await page.locator('.related[href="/con
 
 await goto('/work');
 ok('work: 稳定项目链到详情', (await page.locator('a.proj[href="/work/vspi"]').count()) === 1);
-ok('work: Minecraft 两张卡', (await page.locator('#minecraft .proj').count()) === 2);
+ok('work: Minecraft 两张卡直达详情', (await page.locator('#minecraft a.proj[href="/work/hypomc"]').count()) === 1 && (await page.locator('#minecraft a.proj[href="/work/panlong"]').count()) === 1);
+ok('work: 三层结构', (await page.locator('.layer-head').count()) === 3);
 await goto('/work/vspi');
 ok('work: VSPi 详情有 GitHub 卡', (await page.locator('.ghcard').count()) === 1);
 ok('work: Workflow 3.0 有详情页', (await page.request.get(`${BASE_URL}/work/hypo-workflow`).then((r) => r.text())).includes('v3.0.0'));
 ok('work: VSPi 详情有演示', (await page.locator('.bigdemo [data-demo="vspi"]').count()) === 1);
-const hypoInfo = await page.request.get(`${BASE_URL}/work/hypo-info`);
-ok('work: 开发中项目不生成详情页', (await hypoInfo.text()).includes('url=/work'));
+await goto('/work/hypomc');
+ok('work: HypoMC 痛点矩阵', (await page.locator('.pain').count()) === 5 && (await page.locator('.mod').count()) >= 13 && (await page.locator('.gal-grid figure').count()) === 3);
+await goto('/work/panlong');
+ok('work: 盘龙 7 系法术矩阵', (await page.locator('.el').count()) === 7 && (await page.locator('.gal-grid figure').count()) === 5);
+await goto('/work/hypo-info');
+ok('work: Hypo-Info 详情页与演示', (await page.locator('.bigdemo [data-demo="info"]').count()) === 1);
 
 await goto('/research');
 ok('research: 论文卡片', (await page.locator('.paper-card').count()) >= 8);
+ok('research: 双轨时间线', (await page.locator('.rt-track').count()) === 2 && (await page.locator('.rt-axis li').count()) === 4);
 ok('research: 作者名正常', !(await page.locator('.wall').textContent()).includes('[object Object]'));
 ok('research: 无横向溢出', await noOverflow());
 
@@ -90,7 +102,7 @@ ok('poetry: 正文居中', await page.evaluate(() => {
 await goto('/study');
 ok('study: 学期分组', (await page.locator('.term').count()) >= 5);
 await goto('/about');
-ok('about: 导师', (await page.locator('.lead').textContent()).includes('娄鑫教授'));
+ok('about: 脱敏且无残留导师', await page.locator('.lead').textContent().then((t) => !t.includes('娄鑫') && !t.includes('贺云翔') && !t.includes('导师')));
 
 // ---- 移动端 ----
 const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });

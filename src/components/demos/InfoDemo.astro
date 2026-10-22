@@ -1,65 +1,176 @@
 ---
-// Hypo-Info：新闻卡片一条条从顶部弹出
-const news = [
-  { src: '@deepseek_ai', tag: '模型', title: 'DeepSeek V4.1 Flash 更新到 1017：全端切换，价格不变' },
-  { src: '@OpenAI', tag: '产品', title: 'Codex 第 13 天完整重置用量，Tibo 回应五项改进清单' },
-  { src: '@AnthropicAI', tag: '公司', title: 'Anthropic 出让 5% 股份设公共福利基金' },
-  { src: '@pika_labs', tag: '产品', title: 'Pika 全套创作工具以插件接入 ChatGPT' },
-  { src: '@opencode', tag: '安全', title: 'OpenCode 披露安全事件：Console 里的第三方 API 密钥可能暴露' },
-  { src: '@deepseek_ai', tag: '吃瓜', title: '梁圣发金币了！DeepSeek 宕机，一周 API 费全返' },
-  { src: '@xai', tag: '吃瓜', title: '马老板大气！Grok 订票出错，SpaceX 全赔' },
-  { src: '@karpathy', tag: '观点', title: 'Karpathy：AI 认知鸿沟成了漏斗' },
+// Hypo-Info：多源采集 → 相似度去重合并证据链 → AI 质量分级提纯
+const groups = ['companies', 'people', 'longtail', 'watchers', 'robotics', 'ic'];
+const channels = ['RSS', 'Newsletter'];
+const events = [
+  {
+    title: 'DeepSeek V4.1 Flash 更新到 1017：全端切换，价格不变',
+    evidence: [{ s: 'X·companies', g: 'companies' }, { s: '官方博客', g: 'RSS' }, { s: 'TLDR', g: 'Newsletter' }],
+    sim: 0.96, grade: 'A', note: '一手发布',
+  },
+  {
+    title: 'Codex 重置用量，Tibo 回应五项改进清单',
+    evidence: [{ s: 'X·people', g: 'people' }, { s: 'X·watchers', g: 'watchers' }],
+    sim: 0.93, grade: 'A', note: '一手回应',
+  },
+  {
+    title: 'OpenCode 披露安全事件：第三方 API 密钥可能暴露',
+    evidence: [{ s: 'X·companies', g: 'companies' }, { s: 'Simon Willison', g: 'Newsletter' }, { s: 'Hacker News', g: 'RSS' }],
+    sim: 0.94, grade: 'S', note: '硬核安全',
+  },
+  {
+    title: '具身智能新机器人发布，据称下月量产',
+    evidence: [{ s: 'X·robotics', g: 'robotics' }, { s: 'X·longtail', g: 'longtail' }],
+    sim: 0.92, grade: 'B', note: '待核实',
+  },
+  {
+    title: '新一代 GPU 互连带宽与功耗评测流出',
+    evidence: [{ s: 'X·ic', g: 'ic' }, { s: 'Latent Space', g: 'Newsletter' }, { s: 'Interconnects', g: 'Newsletter' }],
+    sim: 0.95, grade: 'A', note: '一手评测',
+  },
+  {
+    title: '「震惊！某模型即将超越一切」转发拼贴帖',
+    evidence: [{ s: 'X·longtail', g: 'longtail' }],
+    sim: 0, grade: 'drop', note: '低信息密度，已拦截',
+  },
 ];
 ---
 
-<div class="dm-info" data-demo="info" data-news={JSON.stringify(news)}>
-  <div class="dm-info__head"><span class="dm-info__live"><i></i>LIVE</span><span>正在关注 141 个账号</span><b data-count>0</b><span>条</span></div>
+<div class="dm-info" data-demo="info" data-groups={JSON.stringify([...groups, ...channels])} data-events={JSON.stringify(events)}>
+  <div class="dm-info__head">
+    <span class="dm-info__live"><i></i>LIVE</span>
+    <span>6 组 X 网页会话 + RSS / Newsletter</span>
+    <b>抓取 <em data-raw>0</em> → 合并 <em data-merged>0</em></b>
+  </div>
+  <div class="dm-info__src" data-src>
+    {groups.map((g) => <span data-g={g} class="x">X·{g}</span>)}
+    {channels.map((c) => <span data-g={c} class="ch">{c}</span>)}
+  </div>
+  <div class="dm-info__stages"><span data-st="0">① 采集</span><i>›</i><span data-st="1">② 去重合并证据链</span><i>›</i><span data-st="2">③ AI 质量分级</span></div>
   <div class="dm-info__feed" data-feed></div>
 </div>
 
 <script>
   import { each, sleep, whenVisible, reduceMotion } from './loop';
 
+  type Ev = { title: string; evidence: { s: string; g: string }[]; sim: number; grade: string; note: string };
+
   each('[data-demo="info"]', (root) => {
-    const news: { src: string; tag: string; title: string }[] = JSON.parse(root.dataset.news ?? '[]');
+    const events: Ev[] = JSON.parse(root.dataset.events ?? '[]');
     const feed = root.querySelector<HTMLElement>('[data-feed]')!;
-    const count = root.querySelector<HTMLElement>('[data-count]')!;
-    let total = 0;
-    const push = (n: (typeof news)[number], animate: boolean) => {
+    const rawEl = root.querySelector<HTMLElement>('[data-raw]')!;
+    const mergedEl = root.querySelector<HTMLElement>('[data-merged]')!;
+    const stages = [...root.querySelectorAll<HTMLElement>('[data-st]')];
+    const chips = (g: string) => root.querySelector<HTMLElement>(`[data-src] [data-g="${g}"]`);
+    let raw = 0, merged = 0;
+
+    const setStage = (n: number) => stages.forEach((s, i) => s.classList.toggle('on', i === n));
+    const build = (ev: Ev) => {
       const card = document.createElement('div');
-      card.className = 'dm-info__card' + (animate ? ' new' : '');
-      card.innerHTML = `<div class="m"><span class="s"></span><span class="t"></span><span class="h"></span></div><div class="ti"></div>`;
-      card.querySelector('.s')!.textContent = n.src;
-      card.querySelector('.t')!.textContent = n.tag;
-      card.querySelector('.h')!.textContent = '刚刚';
-      card.querySelector('.ti')!.textContent = n.title;
-      feed.prepend(card);
-      while (feed.children.length > 5) feed.lastElementChild!.remove();
-      count.textContent = String(++total);
+      card.className = 'dm-info__card new';
+      const ti = document.createElement('div');
+      ti.className = 'ti';
+      ti.textContent = ev.title;
+      const evi = document.createElement('div');
+      evi.className = 'evi';
+      card.append(ti, evi);
+      return { card, evi };
     };
-    if (reduceMotion()) { news.slice(0, 4).forEach((n) => push(n, false)); return; }
+    const addEvidence = (evi: HTMLElement, e: { s: string }) => {
+      const c = document.createElement('span');
+      c.className = 'e';
+      c.textContent = e.s;
+      evi.append(c);
+    };
+    const finish = (card: HTMLElement, ev: Ev) => {
+      const tail = document.createElement('div');
+      tail.className = 'tail';
+      const sim = document.createElement('span');
+      sim.className = 'sim';
+      sim.textContent = ev.grade === 'drop' ? '未入库' : `相似度 ${ev.sim.toFixed(2)} · 合并 ${ev.evidence.length} 条`;
+      const g = document.createElement('span');
+      g.className = `grade g-${ev.grade}`;
+      g.textContent = ev.grade === 'drop' ? '拦截' : ev.grade;
+      const n = document.createElement('span');
+      n.className = 'note';
+      n.textContent = ev.note;
+      tail.append(sim, n, g);
+      card.append(tail);
+      card.classList.toggle('dropped', ev.grade === 'drop');
+    };
+    const trim = () => { while (feed.children.length > 3) feed.lastElementChild!.remove(); };
+
+    if (reduceMotion()) {
+      events.slice(0, 3).forEach((ev) => {
+        const { card, evi } = build(ev);
+        card.classList.remove('new');
+        ev.evidence.forEach((e) => addEvidence(evi, e));
+        finish(card, ev);
+        feed.append(card);
+      });
+      rawEl.textContent = '48';
+      mergedEl.textContent = '3';
+      setStage(2);
+      return;
+    }
+
     whenVisible(root, async () => {
-      for (let i = 0; ; i = (i + 1) % news.length) {
-        push(news[i], true);
-        await sleep(1700);
+      for (let i = 0; ; i = (i + 1) % events.length) {
+        const ev = events[i];
+        setStage(0);
+        const { card, evi } = build(ev);
+        ev.evidence.forEach((e) => chips(e.g)?.classList.add('hit'));
+        raw += ev.evidence.length * 4 + 2;
+        rawEl.textContent = String(raw);
+        await sleep(650);
+
+        setStage(1);
+        feed.prepend(card);
+        trim();
+        for (const e of ev.evidence) { addEvidence(evi, e); await sleep(260); }
+        if (ev.grade !== 'drop') mergedEl.textContent = String(++merged);
+        await sleep(420);
+
+        setStage(2);
+        finish(card, ev);
+        root.querySelectorAll('[data-src] .hit').forEach((c) => c.classList.remove('hit'));
+        await sleep(1500);
       }
     });
   });
 </script>
 
 <style is:global>
-  .dm-info { height: 100%; min-height: 200px; display: flex; flex-direction: column; border-radius: 12px; background: #0f1a14; border: 1px solid #1f3328; overflow: hidden; text-align: left; }
-  .dm-info__head { display: flex; align-items: center; gap: 6px; padding: 8px 12px; font-size: 11.5px; color: #8fb8a0; border-bottom: 1px solid #1f3328; }
+  .dm-info { height: 100%; min-height: 240px; display: flex; flex-direction: column; border-radius: 12px; background: #0f1a14; border: 1px solid #1f3328; overflow: hidden; text-align: left; }
+  .dm-info__head { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 11.5px; color: #8fb8a0; border-bottom: 1px solid #1f3328; flex-wrap: wrap; }
   .dm-info__head b { margin-left: auto; font-family: var(--font-mono); color: #d6f5e0; font-weight: 400; }
+  .dm-info__head em { font-style: normal; color: #f2c46d; }
   .dm-info__live { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); color: #ff8a80; font-size: 10.5px; }
   .dm-info__live i { width: 7px; height: 7px; border-radius: 50%; background: #ff5a4f; animation: blink 1.4s infinite; }
-  .dm-info__feed { flex: 1; padding: 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+  .dm-info__src { display: flex; flex-wrap: wrap; gap: 5px; padding: 8px 10px 4px; }
+  .dm-info__src span { font-family: var(--font-mono); font-size: 10px; padding: 2px 7px; border-radius: 5px; background: #16261d; color: #6f9a80; border: 1px solid #22392c; transition: background .25s, color .25s, border-color .25s, transform .25s; }
+  .dm-info__src span.ch { background: #1d2b22; color: #9cc3a9; }
+  .dm-info__src span.hit { background: #2c5a40; color: #eaf6ee; border-color: #5fc98a; transform: translateY(-2px); }
+  .dm-info__stages { display: flex; align-items: center; gap: 6px; padding: 4px 12px 6px; font-size: 10.5px; color: #57806a; }
+  .dm-info__stages i { font-style: normal; color: #3a5c49; }
+  .dm-info__stages span { transition: color .25s; }
+  .dm-info__stages span.on { color: #f2c46d; }
+  .dm-info__feed { flex: 1; padding: 4px 8px 8px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
   .dm-info__card { padding: 8px 10px; border-radius: 9px; background: #16261d; border: 1px solid #22392c; }
   .dm-info__card.new { animation: dm-drop .5s cubic-bezier(.2,.9,.3,1.2) both; }
-  .dm-info__card .m { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: #7aa38a; }
-  .dm-info__card .t { padding: 0 6px; border-radius: 4px; background: #23402f; color: #b6ecc8; }
-  .dm-info__card .h { margin-left: auto; font-family: var(--font-mono); color: #f2c46d; }
-  .dm-info__card .ti { margin-top: 3px; font-size: 13px; line-height: 1.45; color: #eaf6ee; }
+  .dm-info__card .ti { font-size: 12.5px; line-height: 1.45; color: #eaf6ee; }
+  .dm-info__card .evi { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; min-height: 18px; }
+  .dm-info__card .e { font-family: var(--font-mono); font-size: 10px; padding: 1px 6px; border-radius: 4px; background: #23402f; color: #b6ecc8; animation: dm-pop .3s ease both; }
+  .dm-info__card .tail { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 10.5px; color: #7aa38a; animation: dm-pop .3s ease both; }
+  .dm-info__card .sim { font-family: var(--font-mono); }
+  .dm-info__card .note { margin-left: auto; color: #9cc3a9; }
+  .dm-info__card .grade { font-family: var(--font-mono); font-weight: 600; padding: 0 7px; border-radius: 4px; background: #23402f; color: #b6ecc8; }
+  .dm-info__card .grade.g-S { background: #f2c46d; color: #2b1d02; }
+  .dm-info__card .grade.g-A { background: #5fc98a; color: #04210f; }
+  .dm-info__card .grade.g-B { background: #3a4a42; color: #cfe3d6; }
+  .dm-info__card .grade.g-drop { background: #5a2a26; color: #ffb4a8; }
+  .dm-info__card.dropped { opacity: .55; }
   @keyframes dm-drop { from { opacity: 0; transform: translateY(-14px) scale(.96); background: #234a33; } }
+  @keyframes dm-pop { from { opacity: 0; transform: translateY(4px); } }
   @keyframes blink { 50% { opacity: .25; } }
 </style>

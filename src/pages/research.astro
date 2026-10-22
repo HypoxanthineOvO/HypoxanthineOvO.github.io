@@ -1,22 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GateHead from '../components/GateHead.astro';
+import ResearchTimeline from '../components/ResearchTimeline.astro';
 import { getPublications, groupBy } from '../lib/content';
 
 const pubs = await getPublications();
 const byYear = groupBy(pubs, (p) => String(p.data.year));
 const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
+const firstCount = pubs.filter((p) => firstAuthor(p.data.authors)).length;
 ---
 
-<BaseLayout skin="research" title="研究 · 学术发表">
+<BaseLayout skin="research" title="研究 · 双轨时间线与学术发表" description="神经渲染加速器与表示复杂性、77 K 低温 GPU 架构与周期级模拟器：两条科研线的演化时间轴与 8 篇学术论文。">
   <section class="skin">
     <div class="shell">
       <GateHead
         gate="research"
-        title="学术发表"
-        note={`${pubs.length} PAPERS`}
-        blurb="神经渲染加速器的软硬件协同设计：采样策略、光线表示与无冲突编码。"
+        title="研究"
+        note="TWO TRACKS"
+        blurb="2022 年 8 月（大二）进组后，科研从神经渲染加速器出发，在 2025 年底 / 2026 年初分叉出 77 K 低温 GPU 主线，神经渲染则延伸出表示复杂性的理论支线。"
       />
+      <div class="tl-wrap"><ResearchTimeline papers={false} /></div>
+
+      <div class="wall-head">
+        <h2>学术发表</h2>
+        <span>{pubs.length} 篇论文 · {firstCount} 篇一作 · 神经渲染线</span>
+      </div>
       <div class="wall">
         {byYear.map(({ key: year, items }) => (
           <div class="yearrow">
@@ -47,7 +55,11 @@ const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
 </BaseLayout>
 
 <style>
-  .wall { padding: 18px 0 64px; display: flex; flex-direction: column; gap: 8px; }
+  .tl-wrap { margin-top: 16px; }
+  .wall-head { display: flex; align-items: baseline; gap: 14px; margin-top: 56px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
+  .wall-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 26px; }
+  .wall-head span { font-size: 13px; color: var(--skin-muted); }
+  .wall { padding: 22px 0 64px; display: flex; flex-direction: column; gap: 8px; }
   .yearrow { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 26px; }
   .rail {
     font-family: var(--font-mono); font-size: 13px; color: var(--gate);
@@ -75,7 +87,7 @@ const firstAuthor = (authors?: string[]) => authors?.[0] === 'Yunxiang He';
     padding: 1px 7px; border-radius: 2px; letter-spacing: .1em;
   }
   @media (max-width: 960px) {
-    .yearrow { grid-template-columns: 1fr; }
+    .yearrow { grid-template-columns: minmax(0, 1fr); }
     .rail { position: static; padding: 18px 0 0; }
     .cards { grid-template-columns: 1fr; }
   }

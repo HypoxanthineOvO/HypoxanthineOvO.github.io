@@ -92,6 +92,8 @@ const projects = defineCollection({
     category: z.enum(['research', 'systems', 'writing', 'tools']).optional(),
     // 首页分组：productivity = 生产力工具；minecraft = MC 作品
     group: z.enum(['productivity', 'minecraft']).optional(),
+    // AI 能力树三层结构：ai-foundation = 改造 AI 本身（Agent底座/工作流/Skill）；ai-product = 用 AI 造的日常产品；minecraft = 用 AI 造的游戏体验优化
+    layer: z.enum(['ai-foundation', 'ai-product', 'minecraft']).optional(),
     // stable 有详情页；developing 只上卡片
     tier: z.enum(['stable', 'developing', 'rework']).default('developing'),
     icon: z.string().optional(),

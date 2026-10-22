@@ -7,11 +7,12 @@ tech: ["Agent Skill","写作","改稿"]
 period: "2026 — NOW"
 category: "tools"
 group: productivity
+layer: ai-foundation
 tier: stable
 icon: "/media/icons/hypo-expression.webp"
 version: "v1.1.0"
 order: 4
-description: "专治 AI 腔。从半年真实对话里提炼的中文表达规范，让 AI 说人话、敢下结论。"
+description: "赋予 AI 自然沟通能力的基础 Skill：从半年高强度真实对话中提炼的中文表达规范，消解机械防御腔，让 AI 与人舒服、坦诚地交流。"
 highlights:
   - { value: "6", label: "条表达原则" }
   - { value: "4", label: "大类文体细则" }

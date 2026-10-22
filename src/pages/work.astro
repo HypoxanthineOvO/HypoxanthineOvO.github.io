@@ -1,38 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GateHead from '../components/GateHead.astro';
+import ProjectDemo from '../components/demos/ProjectDemo.astro';
 import { getProjects } from '../lib/content';
-import { mcShots } from '../data/home';
+import { mcShots, projectLayers } from '../data/home';
 
-const projects = (await getProjects()).filter((p) => p.data.featured && p.data.group).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getProjects()).filter((p) => p.data.featured && p.data.layer).sort((a, b) => a.data.order - b.data.order);
 type P = (typeof projects)[number];
-const groups = [
-  { key: 'productivity', title: '生产力', note: '' },
-  { key: 'minecraft', title: 'Minecraft', note: '开发中，内容会持续变化' },
-] as const;
 const hrefOf = (p: P) => (p.data.tier === 'stable' ? `/work/${p.id}` : p.data.githubUrl);
 const statusOf = (p: P) =>
-  p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: p.data.tier === 'rework' ? '准备重做' : '开发中' };
+  p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: '开发中' };
 const shotsOf = (id: string) => mcShots.filter((s) => s.work === id);
+const hasDemo = (id: string) => ['vspi', 'hypodoc', 'hypo-expression', 'hypo-info', 'hypo-class', 'hypo-workflow'].includes(id);
 ---
 
-<BaseLayout title="项目" description="VSPi、HypoDoc、Hypo-Expression 等生产力工具，以及 Minecraft 整合包与模组。">
+<BaseLayout title="项目" description="高阶 AI 能力树：VSPi / Hypo-Workflow / HypoDoc / Hypo-Expression，Hypo-Info 与 Hypo-Class，以及 HypoMC 与盘龙 Minecraft 作品。">
   <div class="shell">
     <GateHead gate="work" />
-    {groups.map((g) => (
-      <section class="group" id={g.key}>
-        <div class="sub-head rv"><h2>{g.title}</h2>{g.note && <span>{g.note}</span>}</div>
-        <div class:list={['grid', g.key]}>
-          {projects.filter((p) => p.data.group === g.key).map((p) => {
+    {projectLayers.map((layer) => (
+      <section class="group" id={layer.key}>
+        <div class="layer-head rv">
+          <span class:list={['lv', layer.key]}>{layer.no}</span>
+          <div><h2>{layer.title}</h2><p>{layer.subtitle}</p></div>
+        </div>
+        <div class:list={['grid', layer.key]}>
+          {projects.filter((p) => p.data.layer === layer.key).map((p) => {
             const st = statusOf(p);
             const href = hrefOf(p);
             const Tag = href ? 'a' : 'div';
             const shots = shotsOf(p.id);
             return (
-              <Tag class="card proj rv" href={href} rel={href?.startsWith('http') ? 'noreferrer' : undefined}>
+              <Tag class:list={['card proj rv', { wide: layer.key === 'ai-product' && p.id === 'hypo-info' }]} href={href} rel={href?.startsWith('http') ? 'noreferrer' : undefined}>
                 {shots.length > 0 && (
                   <div class="shots">{shots.slice(0, 3).map((s) => <img src={s.img} alt={s.name} loading="lazy" />)}</div>
                 )}
+                {shots.length === 0 && hasDemo(p.id) && <div class="demo"><ProjectDemo id={p.id} /></div>}
                 <div class="in">
                   <div class="top">
                     {p.data.icon && <img class="ic" src={p.data.icon} alt="" width="56" height="56" />}
@@ -57,13 +59,19 @@ const shotsOf = (id: string) => mcShots.filter((s) => s.work === id);
 </BaseLayout>
 
 <style>
-  .group { margin-top: 30px; }
-  .sub-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
-  .sub-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; }
-  .sub-head span { font-size: 13px; color: var(--muted); }
-  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .grid.minecraft { grid-template-columns: 1fr 1fr; }
+  .group { margin-top: 38px; }
+  .layer-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1.5px solid var(--fg); }
+  .lv { flex: none; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: #fff; background: var(--red); padding: 4px 12px; border-radius: 6px; margin-top: 4px; }
+  .lv.ai-product { background: #2f7d42; }
+  .lv.minecraft { background: #5fae3a; color: #0d1a07; }
+  .layer-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 22px; line-height: 1.4; }
+  .layer-head p { margin-top: 4px; font-size: 14px; line-height: 1.75; color: var(--ink-2); max-width: 52em; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .grid.ai-foundation { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid.ai-product { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .proj { display: flex; flex-direction: column; }
+  .demo { height: 240px; padding: 12px 12px 0; display: flex; }
+  .demo > :global(*) { flex: 1; width: 100%; min-width: 0; }
   .in { padding: 22px 24px; display: flex; flex-direction: column; flex: 1; }
   .top { display: flex; align-items: center; }
   .ic { width: 56px; height: 56px; filter: drop-shadow(0 6px 10px rgba(40, 25, 10, .22)); transition: transform .4s var(--ease); }
@@ -79,12 +87,11 @@ const shotsOf = (id: string) => mcShots.filter((s) => s.work === id);
   .foot { margin-top: auto; padding-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   .foot span { font-family: var(--font-mono); font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: var(--paper-2); color: var(--ink-2); }
   .foot b { margin-left: auto; font-weight: 500; font-size: 13px; color: var(--red); }
-  .shots { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; height: 230px; background: #14171a; }
+  .shots { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; height: 260px; background: #14171a; }
   .shots img { width: 100%; height: 100%; object-fit: cover; }
   .shots img:first-child { grid-row: span 2; }
   .mods { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .mods span { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); }
   .mods i { width: 9px; height: 9px; background: var(--ic); }
-  @media (max-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } .grid.minecraft { grid-template-columns: 1fr; } }
-  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { .grid, .grid.ai-foundation, .grid.ai-product { grid-template-columns: 1fr; } .layer-head { flex-direction: column; gap: 8px; } }
 </style>

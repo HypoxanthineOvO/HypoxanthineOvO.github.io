@@ -1,0 +1,212 @@
+---
+// 科研双轨分叉演化时间轴：顶部时间主轴 + 神经渲染线（暖金）+ 77 K 低温 GPU 线（冰蓝，带冰晶粒子）
+import { researchTracks, researchAxis } from '../data/home';
+import { getPublications } from '../lib/content';
+
+interface Props {
+  /** 是否在神经渲染线下方列出代表作论文 */
+  papers?: boolean;
+}
+const { papers = true } = Astro.props;
+
+const pubs = await getPublications();
+const isMe = (a?: string) => a === 'Yunxiang He';
+const reps = pubs.filter((p) => p.data.featured).slice(0, 3);
+const venueShort = (v?: string) => v?.match(/\(([^)]+)\)/)?.[1] ?? v ?? '';
+const { neural, cryo } = researchTracks;
+---
+
+<div class="rt">
+  <ol class="rt-axis" aria-label="科研时间主轴">
+    {researchAxis.map((a, i) => (
+      <li class:list={{ fork: a.fork, now: i === researchAxis.length - 1 }}>
+        <b>{a.time}</b>
+        <span>{a.label}</span>
+      </li>
+    ))}
+  </ol>
+
+  <div class="rt-tracks">
+    <section class="rt-track a">
+      <header>
+        <span class="badge">{neural.badge}</span>
+        <h3>{neural.title}</h3>
+        <div class="period">{neural.period}</div>
+        <p>{neural.lead}</p>
+      </header>
+      <ol class="rt-steps">
+        {neural.milestones.map((m, i) => (
+          <li>
+            <span class="node">{i + 1}</span>
+            <div class="body">
+              <div class="meta"><i>{m.time}</i><em>{m.tag}</em></div>
+              <h4>{m.title}</h4>
+              <p>{m.desc}</p>
+              <div class="facts">{m.facts.map((f) => <span><small>{f.k}</small><b>{f.v}</b></span>)}</div>
+            </div>
+          </li>
+        ))}
+      </ol>
+      {papers && (
+        <div class="rt-papers">
+          <div class="pl">代表作 · 共 {pubs.length} 篇</div>
+          {reps.map((p) => (
+            <a href={`/research/${p.id}`}>
+              <span class="y">{p.data.year}</span>
+              <div>
+                <h5>{p.data.title}</h5>
+                <small>{isMe(p.data.authors?.[0]) && <><span class="first">一作</span> · </>}{venueShort(p.data.venue)}</small>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </section>
+
+    <section class="rt-track b">
+      <canvas id="frost" class="rt-frost" aria-hidden="true"></canvas>
+      <div class="inner">
+        <header>
+          <span class="badge">{cryo.badge}</span>
+          <div class="temp">77<small>K</small></div>
+          <h3>{cryo.title}</h3>
+          <div class="period">{cryo.period}</div>
+          <p>{cryo.lead}</p>
+        </header>
+        <ol class="rt-steps">
+          {cryo.milestones.map((m, i) => (
+            <li>
+              <span class="node">{i + 1}</span>
+              <div class="body">
+                <div class="meta"><i>{m.time}</i><em>{m.tag}</em></div>
+                <h4>{m.title}</h4>
+                <p>{m.desc}</p>
+                <div class="facts">{m.facts.map((f) => <span><small>{f.k}</small><b>{f.v}</b></span>)}</div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLCanvasElement>('.rt-frost').forEach((cv) => {
+    if (reduce) return;
+    const cx = cv.getContext('2d')!;
+    const host = cv.parentElement!;
+    let W = 0, H = 0, mx = -1, my = -1;
+    let flakes: { x: number; y: number; r: number; v: number; a: number }[] = [];
+    const size = () => {
+      const r = cv.getBoundingClientRect(); const dpr = devicePixelRatio || 1;
+      W = cv.width = r.width * dpr; H = cv.height = r.height * dpr;
+      flakes = Array.from({ length: 70 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.8 + 0.4) * dpr, v: Math.random() * 0.35 + 0.1, a: Math.random() * 0.6 + 0.2 }));
+    };
+    host.addEventListener('mousemove', (e) => { const r = cv.getBoundingClientRect(); const d = devicePixelRatio || 1; mx = (e.clientX - r.left) * d; my = (e.clientY - r.top) * d; });
+    host.addEventListener('mouseleave', () => { mx = -1; });
+    const frame = () => {
+      cx.clearRect(0, 0, W, H);
+      for (const f of flakes) {
+        f.y -= f.v; f.x += Math.sin(f.y / 40) * 0.2;
+        if (mx > 0) { const dx = f.x - mx, dy = f.y - my, d = Math.hypot(dx, dy); if (d < 90) { f.x += (dx / d) * 1.4; f.y += (dy / d) * 1.4; } }
+        if (f.y < -5) { f.y = H + 5; f.x = Math.random() * W; }
+        cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 7); cx.fillStyle = `rgba(190,220,255,${f.a})`; cx.fill();
+      }
+      requestAnimationFrame(frame);
+    };
+    size(); frame(); addEventListener('resize', size);
+  });
+</script>
+
+<style>
+  .rt-axis { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 22px; padding: 0; position: relative; }
+  .rt-axis::before { content: ''; position: absolute; left: 0; right: 0; top: 9px; height: 2px; background: linear-gradient(90deg, #d6a84a 0%, #d6a84a 45%, #6aa9e0 100%); opacity: .55; }
+  .rt-axis li { position: relative; padding-top: 28px; padding-right: 14px; }
+  .rt-axis li::before { content: ''; position: absolute; left: 0; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 3px solid #d6a84a; }
+  .rt-axis li.fork::before { border-color: #3b86d1; box-shadow: 0 0 0 4px rgba(59, 134, 209, .18); }
+  .rt-axis li.now::before { background: #2fa84f; border-color: #2fa84f; animation: rt-pulse 1.8s infinite; }
+  .rt-axis li::after { content: '►'; position: absolute; right: 6px; top: 3px; font-size: 11px; color: #9a8f7a; }
+  .rt-axis li.now::after { display: none; }
+  .rt-axis b { display: block; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: var(--fg); }
+  .rt-axis span { display: block; margin-top: 3px; font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+  .rt-axis li.fork b { color: #2d6fb5; }
+  @keyframes rt-pulse { 50% { box-shadow: 0 0 0 6px rgba(47, 168, 79, .15); } }
+
+  .rt-tracks { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+  .rt-track { position: relative; border-radius: 18px; padding: 26px 28px 28px; overflow: hidden; }
+  .rt-track header .badge { display: inline-block; font-family: var(--font-mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; letter-spacing: .02em; }
+  .rt-track h3 { font-family: var(--font-serif); font-weight: 900; font-size: 24px; line-height: 1.35; margin: 12px 0 4px; }
+  .rt-track .period { font-family: var(--font-mono); font-size: 12.5px; }
+  .rt-track header p { margin-top: 10px; font-size: 14.5px; line-height: 1.8; }
+
+  .rt-steps { list-style: none; margin: 22px 0 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 18px; }
+  .rt-steps::before { content: ''; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 2px; background: currentColor; opacity: .18; }
+  .rt-steps li { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 14px; }
+  .rt-steps .node { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; position: relative; z-index: 1; }
+  .rt-steps .meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; font-size: 12px; }
+  .rt-steps .meta i { font-style: normal; font-family: var(--font-mono); }
+  .rt-steps .meta em { font-style: normal; padding: 0 8px; border-radius: 999px; }
+  .rt-steps h4 { font-family: var(--font-serif); font-weight: 900; font-size: 16.5px; line-height: 1.45; margin: 5px 0 4px; }
+  .rt-steps .body p { font-size: 13.5px; line-height: 1.8; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .facts span { display: flex; flex-direction: column; padding: 6px 11px; border-radius: 10px; }
+  .facts small { font-size: 11px; opacity: .75; }
+  .facts b { font-family: var(--font-serif); font-weight: 900; font-size: 14.5px; line-height: 1.35; }
+
+  /* 主线 A：暖金 / 朱红 */
+  .rt-track.a { background: linear-gradient(160deg, #fcf3e2 0%, #f8e7c9 100%); border: 1px solid #e8d2a4; color: #3a2a12; }
+  .a .badge { background: #a3292a; color: #fff; }
+  .a .period { color: #a3292a; }
+  .a header p, .a .body p { color: #5b4a30; }
+  .a .rt-steps { color: #a3292a; }
+  .a .rt-steps .node { background: #a3292a; color: #fff; box-shadow: 0 0 0 4px #f8e7c9; }
+  .a .meta i { color: #8a6a2c; }
+  .a .meta em { background: #f1d9a6; color: #7a4d10; }
+  .a h4 { color: #2d1f0c; }
+  .a .facts span { background: rgba(255, 255, 255, .6); border: 1px solid #ead7ab; }
+  .a .facts b { color: #a3292a; }
+  .rt-papers { margin-top: 22px; padding-top: 14px; border-top: 1px dashed #d9bd85; }
+  .rt-papers .pl { font-family: var(--font-mono); font-size: 12px; color: #8a6a2c; margin-bottom: 4px; }
+  .rt-papers a { display: grid; grid-template-columns: 46px 1fr; gap: 10px; padding: 9px 0; border-top: 1px solid #ecd9b0; font-size: 14px; }
+  .rt-papers a:first-of-type { border-top: none; }
+  .rt-papers h5 { font-weight: 500; line-height: 1.5; transition: color .2s; }
+  .rt-papers a:hover h5 { color: #a3292a; }
+  .rt-papers .y { font-family: var(--font-mono); font-size: 12px; color: #8a6a2c; padding-top: 2px; }
+  .rt-papers small { display: block; font-size: 12px; color: #8a6a2c; margin-top: 2px; }
+  .rt-papers .first { color: #a3292a; font-weight: 600; }
+
+  /* 主线 B：冰蓝深色 */
+  .rt-track.b { background: radial-gradient(120% 90% at 85% 10%, #2a4f86 0%, #13233d 45%, #0b1322 100%); color: #e8f1ff; border: 1px solid #13233d; }
+  .rt-frost { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; pointer-events: none; }
+  .rt-track.b .inner { position: relative; z-index: 1; }
+  .b .badge { background: rgba(156, 194, 255, .18); color: #bcd7ff; border: 1px solid rgba(156, 194, 255, .4); }
+  .b .temp { font-family: var(--font-mono); font-size: 64px; line-height: 1; margin-top: 14px; color: #fff; letter-spacing: -.02em; }
+  .b .temp small { font-size: 22px; color: #9cc2ff; margin-left: 6px; }
+  .b h3 { margin-top: 10px; }
+  .b .period { color: #9cc2ff; }
+  .b header p, .b .body p { color: #c3d4ee; }
+  .b .rt-steps { color: #9cc2ff; }
+  .b .rt-steps .node { background: #3b86d1; color: #fff; box-shadow: 0 0 0 4px #14274a; }
+  .b .meta i { color: #9cc2ff; }
+  .b .meta em { background: rgba(156, 194, 255, .16); color: #cfe2ff; }
+  .b h4 { color: #fff; }
+  .b .facts span { background: rgba(156, 194, 255, .1); border: 1px solid rgba(156, 194, 255, .25); }
+  .b .facts b { color: #e8f1ff; }
+
+  @media (max-width: 980px) {
+    .rt-tracks { grid-template-columns: 1fr; }
+    .rt-axis { grid-template-columns: 1fr 1fr; row-gap: 14px; }
+    .rt-axis::before { display: none; }
+    .rt-axis li::after { display: none; }
+  }
+  @media (max-width: 620px) {
+    .rt-axis { grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+    .rt-axis::before { display: block; left: 7px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; background: linear-gradient(180deg, #d6a84a 0%, #d6a84a 45%, #6aa9e0 100%); }
+    .rt-axis li { padding: 0 0 0 30px; }
+    .rt-axis li::after { display: none; }
+    .rt-track { padding: 22px 20px; }
+    .rt-track h3 { font-size: 21px; }
+  }
+</style>

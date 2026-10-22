@@ -6,13 +6,14 @@ githubUrl: "https://github.com/HypoxanthineOvO/VSPi"
 period: "2026 — NOW"
 category: "systems"
 group: productivity
+layer: ai-foundation
 tier: stable
 icon: "/media/icons/vspi.webp"
-version: "v2.8.1"
+version: "v3.0-pre"
 order: 1
 featured: true
-tech: ["TypeScript","TUI","Subagents","Goal"]
-description: "一个终端，指挥一整队 AI。规划、执行、审查各派最强的模型，关掉窗口任务照跑。"
+tech: ["TypeScript","Agent Core","Multi-Model","Goal"]
+description: "深入研究 Agent 实现机制、融合各家模型特性打造的终端编码底座：规划、执行、审查各派最合适的模型，后台常驻随时续接。"
 highlights:
   - { value: "1800+", label: "次提交" }
   - { value: "47", label: "个发布版本" }

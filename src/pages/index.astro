@@ -2,31 +2,49 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/home.css';
 import ProjectDemo from '../components/demos/ProjectDemo.astro';
+import ResearchTimeline from '../components/ResearchTimeline.astro';
 import { siteConfig, platforms } from '../lib/site';
 import { getMedia, getProjects, getPublications, getEssays, getPoetry, getStudy, formatMonthDay } from '../lib/content';
-import { avatarTags, recent, mcWorks, mcShots, researchNow, facets } from '../data/home';
+import { avatarTags, recent, contentPillars, projectLayers, mcWorks, mcShots, facets } from '../data/home';
 
+// ---- 内容 ----
 const media = await getMedia();
-const videos = media.filter((m) => m.data.kind === 'video');
-const articles = media.filter((m) => m.data.kind === 'article' && m.data.status === 'published');
-const leadVideo = videos.find((v) => v.data.status === 'published');
-const moreVideos = videos.filter((v) => v !== leadVideo).slice(0, 2);
+const publishedVideos = media.filter((m) => m.data.kind === 'video' && m.data.status === 'published');
+const upcomingVideos = media.filter((m) => m.data.kind === 'video' && m.data.status === 'upcoming');
+const leadVideo = publishedVideos.find((v) => v.id === 'video-vector-life-01') ?? publishedVideos[0];
+const otherVideos = publishedVideos.filter((v) => v !== leadVideo);
+const allVideos = media.filter((m) => m.data.kind === 'video');
+const pillarSeries: Record<string, string> = { 'ai-basics': 'AI 科普', 'vector-life': '向量化人生', 'learn-with-ai': '用 AI 学习' };
+const pillarCount = (key: string) => allVideos.filter((v) => v.data.series?.startsWith(pillarSeries[key])).length;
 
-const projects = (await getProjects()).filter((p) => p.data.group === 'productivity' && p.data.featured);
+const articleIds = ['slow-research', 'ai-writing-tics', 'distill-fingerprint', 'vibe-coding-for-everyone', 'traditional-company-ai'];
+const articles = articleIds
+  .map((id) => media.find((m) => m.id === id && m.data.kind === 'article'))
+  .filter((a): a is NonNullable<typeof a> => a !== undefined);
+const [artLead, ...artRest] = articles;
+
+// ---- 项目：三层能力树 ----
+const projects = (await getProjects()).filter((p) => p.data.featured && p.data.layer);
 const byOrder = [...projects].sort((a, b) => a.data.order - b.data.order);
-const wides = byOrder.filter((p) => ['vspi', 'hypodoc', 'hypo-workflow'].includes(p.id));
-const smalls = byOrder.filter((p) => !wides.includes(p) && p.data.tier !== 'rework');
-const reworks = byOrder.filter((p) => p.data.tier === 'rework');
-const projectHref = (p: (typeof byOrder)[number]) =>
-  p.data.tier === 'stable' ? `/work/${p.id}` : (p.data.githubUrl ?? '/work');
-const statusOf = (p: (typeof byOrder)[number]) =>
-  p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: p.data.tier === 'rework' ? '准备重做' : '开发中' };
+type P = (typeof byOrder)[number];
+const layerProjects = (key: string) => byOrder.filter((p) => p.data.layer === key);
+const wideIds: Record<string, string[]> = { 'ai-foundation': ['vspi', 'hypo-workflow'], 'ai-product': ['hypo-info'] };
+const projectHref = (p: P) => (p.data.tier === 'stable' ? `/work/${p.id}` : (p.data.githubUrl ?? '/work#ai-product'));
+const statusOf = (p: P) =>
+  p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: '开发中' };
+const showCls = (p: P, i: number) => ({
+  flip: i % 2 === 1,
+  dark: p.id === 'vspi',
+  violet: p.id === 'hypo-workflow',
+  green: p.id === 'hypo-info',
+});
 
+// ---- 研究 ----
 const pubs = await getPublications();
-const isMe = (a: string) => a === 'Yunxiang He';
-const firstCount = pubs.filter((p) => isMe(p.data.authors?.[0] ?? '')).length;
-const reps = pubs.filter((p) => p.data.featured).slice(0, 3);
+const firstCount = pubs.filter((p) => p.data.authors?.[0] === 'Yunxiang He').length;
+const venueCount = new Set(pubs.map((p) => p.data.venue)).size;
 
+// ---- 写作 ----
 const [essays, poetry, study] = await Promise.all([getEssays(), getPoetry(), getStudy()]);
 const essayIds = ['行见录-遗憾篇', '灯河'];
 const essayCards = essayIds.map((id) => essays.find((e) => e.id === id)).filter((e) => e !== undefined);
@@ -43,7 +61,7 @@ const essayMeta: Record<string, { tag: string; meta: string }> = {
   灯河: { tag: '江城忆', meta: '高中作品' },
 };
 const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^江城忆（[一二]）\s*/, '');
-
+const first = mcShots[0];
 ---
 
 <BaseLayout>
@@ -53,9 +71,9 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
       <div class="rv">
         <div class="tagline"><span class="stamp">飘零聊科技</span> {siteConfig.tagline}</div>
         <h1>{siteConfig.brand}<span class="dot">.</span></h1>
-        <div class="names"><b>{siteConfig.name}</b> {siteConfig.brandEn} · {siteConfig.affil}</div>
-        <p class="pitch">把 AI 圈的事讲清楚，<br />顺便讲讲<em>为什么</em>。</p>
-        <p class="bio">博士生，研究 <b>77 K 低温 GPU</b>。开发了 <b>VSPi</b> 等一系列 agent 工具。</p>
+        <div class="names"><b>{siteConfig.brandEn}</b> · {siteConfig.affil} 博士在读</div>
+        <p class="pitch">深入模型脾气与 Agent 底座，<br />把 AI 圈的事<em>讲透、造出来</em>。</p>
+        <p class="bio">博士在读，研究 <b>77 K 低温 GPU 架构</b> 与 <b>神经渲染</b>。不止于用 AI 写代码——自研 <b>VSPi</b> 等 Agent 底座与原生 Skill，并用这套体系独立造出信息引擎与 Minecraft 整合包/模组。</p>
         <div class="platforms">
           {platforms.map((p) => {
             const Tag = p.href ? 'a' : 'span';
@@ -101,11 +119,28 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
         <a class="more" href="/content">全部内容 →</a>
       </div>
 
-      <div class="sub-head rv"><h3>视频</h3><span>抖音 · B站 · 视频号</span></div>
-      <div class="content-grid">
+      <div class="pillars">
+        {contentPillars.map((p) => {
+          const n = pillarCount(p.key);
+          return (
+            <a class="tilt pillar rv" href="/content" data-pillar={p.key}>
+              <div class="pk"><span class="badge">{p.badge}</span><span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </a>
+          );
+        })}
+      </div>
+
+      <div class="sub-head rv"><h3>视频</h3><span>抖音 · B站 · 视频号 · 点击封面站内播放</span></div>
+      <div class="vid-wrap">
         {leadVideo && (
-          <a class="tilt c-feature rv" href={`/content/${leadVideo.id}`} data-video={leadVideo.data.video} data-poster={leadVideo.data.cover} data-title={leadVideo.data.title}>
-            <div class="img vid" style={`background-image:url(${leadVideo.data.cover})`}><span class="playbig">▶</span>{leadVideo.data.duration && <span class="dur">{leadVideo.data.duration}</span>}</div>
+          <a class="tilt v-lead rv" href={`/content/${leadVideo.id}`} data-video={leadVideo.data.video} data-poster={leadVideo.data.cover} data-title={leadVideo.data.title}>
+            <div class="vthumb" style={`background-image:url(${leadVideo.data.cover})`}>
+              <span class="playbig">▶</span>
+              {leadVideo.data.duration && <span class="dur">{leadVideo.data.duration}</span>}
+              <span class="flag">主推 · 最新旗舰</span>
+            </div>
             <div class="txt">
               <div class="kick"><span class="tag">{leadVideo.data.series}</span>{formatMonthDay(leadVideo.data.date)}</div>
               <h3>{leadVideo.data.title}</h3>
@@ -113,18 +148,46 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
             </div>
           </a>
         )}
-        {moreVideos.map((v, i) => (
-          <a class:list={['tilt c-card rv', i === 0 ? 'dark' : 'red']} href={`/content/${v.id}`} data-video={v.data.video} data-poster={v.data.cover} data-title={v.data.title}>
-            <div class="kick"><span class="tag" style={i === 0 ? 'color:#f2b8b0' : undefined}>{v.data.series}</span>{v.data.status === 'upcoming' ? '制作中' : formatMonthDay(v.data.date)}</div>
-            <h3>{v.data.title}</h3>
-            <div class="meta"><span>{v.data.description}</span>{v.data.video ? <span class="play">▶</span> : <span class="soon">制作中</span>}</div>
-          </a>
-        ))}
+        <div class="v-side">
+          {otherVideos.map((v) => (
+            <a class="tilt v-row rv" href={`/content/${v.id}`} data-video={v.data.video} data-poster={v.data.cover} data-title={v.data.title}>
+              <div class="vthumb" style={`background-image:url(${v.data.cover})`}>
+                <span class="play">▶</span>
+                {v.data.duration && <span class="dur">{v.data.duration}</span>}
+              </div>
+              <div class="txt">
+                <div class="kick"><span class="tag">{v.data.series}</span>{formatMonthDay(v.data.date)}</div>
+                <h4>{v.data.title}</h4>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
+      {upcomingVideos.map((v) => (
+        <a class="tilt v-soon rv" href={`/content/${v.id}`}>
+          <span class="soon-badge">制作中</span>
+          <div class="soon-txt">
+            <div class="kick"><span class="tag">{v.data.series}</span>即将发布</div>
+            <h4>{v.data.title}</h4>
+            <p>{v.data.description}</p>
+          </div>
+          <span class="soon-go">看企划 →</span>
+        </a>
+      ))}
 
       <div class="sub-head rv"><h3>文章</h3><span>公众号 · 小红书</span></div>
+      {artLead && (
+        <a class="tilt art-lead rv" href={`/content/${artLead.id}`}>
+          <div class="img" style={`background-image:url(${artLead.data.cover})`}></div>
+          <div class="txt">
+            <div class="kick"><span class="tag">{artLead.data.series}</span>{formatMonthDay(artLead.data.date)}</div>
+            <h3>{artLead.data.title}</h3>
+            <p>{artLead.data.description}</p>
+          </div>
+        </a>
+      )}
       <div class="articles">
-        {articles.map((a) => (
+        {artRest.map((a) => (
           <a class="tilt art rv" href={`/content/${a.id}`}>
             <div class="img" style={`background-image:url(${a.data.cover})`}></div>
             <div class="txt">
@@ -143,73 +206,93 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
     <div class="shell">
       <div class="sec-head rv">
         <span class="no">02</span><h2>项目</h2>
+        <p>高阶 AI 能力树：先改造 AI 本身，再用它造产品，最后拿去优化游戏体验</p>
         <a class="more" href="/work">全部项目 →</a>
       </div>
 
-      <div class="sub-head rv"><h3>生产力</h3></div>
-      <div class="showcase">
-        {wides.map((p, i) => (
-          <a class:list={['tilt show-row rv', { flip: i % 2 === 1, dark: p.id === 'vspi', violet: p.id === 'hypo-workflow' }]} href={projectHref(p)}>
-            <div class="show-txt">
-              <div class="top"><img class="ic" src={p.data.icon} alt="" width="56" height="56" /><span class="st"><i></i>{p.data.version}</span></div>
-              <h3>{p.data.name}</h3>
-              <p>{p.data.description}</p>
-              <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>
-              <span class="go">了解更多 →</span>
+      {projectLayers.filter((l) => l.key !== 'minecraft').map((layer) => {
+        const list = layerProjects(layer.key);
+        const wides = list.filter((p) => (wideIds[layer.key] ?? []).includes(p.id));
+        const smalls = list.filter((p) => !wides.includes(p));
+        return (
+          <div class="layer" id={layer.key}>
+            <div class="layer-head rv">
+              <span class="lv">{layer.no}</span>
+              <div><h3>{layer.title}</h3><p>{layer.subtitle}</p></div>
             </div>
-            <div class="show-demo"><ProjectDemo id={p.id} /></div>
-          </a>
-        ))}
-      </div>
-      <div class="trio">
-        {smalls.map((p) => {
-          const st = statusOf(p);
-          return (
-            <a class="tilt trio-card rv" href={projectHref(p)} rel={projectHref(p).startsWith('http') ? 'noreferrer' : undefined}>
-              <div class="trio-demo"><ProjectDemo id={p.id} /></div>
-              <div class="trio-txt">
-                <div class="top"><img class="ic sm" src={p.data.icon} alt="" width="40" height="40" /><h3>{p.data.name}</h3><span class="st"><i class={st.cls}></i>{st.text}</span></div>
-                <p>{p.data.description}</p>
+            <div class="showcase">
+              {wides.map((p, i) => (
+                <a class:list={['tilt show-row rv', showCls(p, i)]} href={projectHref(p)}>
+                  <div class="show-txt">
+                    <div class="top"><img class="ic" src={p.data.icon} alt="" width="56" height="56" /><span class="st"><i></i>{p.data.version}</span></div>
+                    <h3>{p.data.name}</h3>
+                    <p>{p.data.description}</p>
+                    <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>
+                    <span class="go">了解更多 →</span>
+                  </div>
+                  <div class="show-demo"><ProjectDemo id={p.id} /></div>
+                </a>
+              ))}
+            </div>
+            {smalls.length > 0 && (
+              <div class:list={['trio duo', { one: smalls.length === 1 }]}>
+                {smalls.map((p) => {
+                  const st = statusOf(p);
+                  const href = projectHref(p);
+                  return (
+                    <a class="tilt trio-card rv" href={href} rel={href.startsWith('http') ? 'noreferrer' : undefined}>
+                      <div class="trio-demo"><ProjectDemo id={p.id} /></div>
+                      <div class="trio-txt">
+                        <div class="top"><img class="ic sm" src={p.data.icon} alt="" width="40" height="40" /><h3>{p.data.name}</h3><span class="st"><i class={st.cls}></i>{st.text}</span></div>
+                        <p>{p.data.description}</p>
+                        {p.data.highlights.length > 0 && <div class="hl sm">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
+                      </div>
+                    </a>
+                  );
+                })}
               </div>
-            </a>
-          );
-        })}
-      </div>
-      {reworks.map((p) => (
-        <a class="tilt p full rv" href={projectHref(p)} rel="noreferrer">
-          <div class="top"><img class="ic" src={p.data.icon} alt="" width="52" height="52" /></div>
-          <div class="mid"><h3>{p.data.name} <small class="wipnote">准备重做</small></h3><p>{p.data.description}</p></div>
-          <div class="foot">{p.data.tech.map((t) => <span>{t}</span>)}</div>
-        </a>
-      ))}
+            )}
+          </div>
+        );
+      })}
 
-      <div class="sub-head rv" id="minecraft"><h3>Minecraft</h3><span>开发中，内容会持续变化</span></div>
-      <div class="mc-show rv" id="mcshow" data-works={JSON.stringify(mcWorks)} data-shots={JSON.stringify(mcShots)}>
-        <div class="mc-view">
-          <div class="mc-imgs" id="mcimgs">
-            {mcShots.map((s, i) => <img src={s.img} alt={s.name} loading="lazy" class:list={{ on: i === 0 }} />)}
-          </div>
-          <div class="mc-cap">
-            <div class="mc-title">
-              <img class="mc-ic" id="mcic" src={mcWorks[mcShots[0].work].icon} alt="" width="44" height="44" />
-              <span class="mc-badge" id="mcbadge">{mcWorks[mcShots[0].work].badge}</span>
-              <h3 id="mcwork">{mcWorks[mcShots[0].work].title}</h3>
-              <span class="st"><i class="wip"></i>开发中</span>
-            </div>
-            <div class="mc-now"><b id="mcname">{mcShots[0].name}</b><span id="mcdesc">{mcShots[0].desc}</span></div>
-          </div>
+      <div class="layer" id="minecraft">
+        <div class="layer-head rv">
+          <span class="lv">{projectLayers[2].no}</span>
+          <div><h3>{projectLayers[2].title}</h3><p>{projectLayers[2].subtitle}</p></div>
         </div>
-        <div class="mc-side">
-          {(Object.keys(mcWorks) as (keyof typeof mcWorks)[]).map((w) => (
-            <div class="mc-group">
-              <div class="mc-gl">{mcWorks[w].badge} · {mcWorks[w].title}</div>
-              <div class="mc-tabs">
-                {mcShots.map((s, i) => s.work === w && (
-                  <button class:list={['mc-tab', { on: i === 0 }]} data-i={i} type="button"><i style={`--ic:${s.color}`}></i>{s.name}<span class="bar"></span></button>
-                ))}
-              </div>
+        <div class="mc-show rv" id="mcshow" data-works={JSON.stringify(mcWorks)} data-shots={JSON.stringify(mcShots)}>
+          <div class="mc-view">
+            <div class="mc-imgs" id="mcimgs">
+              {mcShots.map((s, i) => <img src={s.img} alt={s.name} loading="lazy" class:list={{ on: i === 0 }} />)}
             </div>
-          ))}
+            <div class="mc-cap">
+              <div class="mc-title">
+                <img class="mc-ic" id="mcic" src={mcWorks[first.work].icon} alt="" width="44" height="44" />
+                <span class="mc-badge" id="mcbadge">{mcWorks[first.work].badge}</span>
+                <h3 id="mcwork">{mcWorks[first.work].title}</h3>
+                <a class="mc-go" id="mcgo" href={mcWorks[first.work].href}>{mcWorks[first.work].cta}</a>
+              </div>
+              <div class="mc-now"><b id="mcname">{first.name}</b><span id="mcdesc">{first.desc}</span></div>
+            </div>
+          </div>
+          <div class="mc-side">
+            {(Object.keys(mcWorks) as (keyof typeof mcWorks)[]).map((w) => (
+              <div class="mc-group">
+                <div class="mc-gl">{mcWorks[w].badge} · {mcWorks[w].title}</div>
+                <div class="mc-tabs">
+                  {mcShots.map((s, i) => s.work === w && (
+                    <button class:list={['mc-tab', { on: i === 0 }]} data-i={i} type="button"><i style={`--ic:${s.color}`}></i>{s.name}<span class="bar"></span></button>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <div class="mc-links">
+              {(Object.keys(mcWorks) as (keyof typeof mcWorks)[]).map((w) => (
+                <a class="mc-link" href={mcWorks[w].href}><img src={mcWorks[w].icon} alt="" width="28" height="28" /><span>{mcWorks[w].cta}</span></a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -220,38 +303,10 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
     <div class="shell">
       <div class="sec-head rv">
         <span class="no">03</span><h2>研究</h2>
-        <a class="more" href="/research">全部论文 →</a>
+        <p>{pubs.length} 篇论文 · {firstCount} 篇一作 · {venueCount} 个期刊与会议</p>
+        <a class="more" href="/research">完整时间线与论文墙 →</a>
       </div>
-      <div class="research">
-        <div class="tilt cryo rv">
-          <canvas id="frost"></canvas>
-          <div class="kick">现在</div>
-          <div class="temp">77<small>K</small></div>
-          <h3>{researchNow.cryo.title}</h3>
-          <p>{researchNow.cryo.desc}</p>
-          <div class="gpu">
-            <div class="gl">GPU 架构</div>
-            <h3>{researchNow.gpu.title}</h3>
-            <p>{researchNow.gpu.desc}</p>
-          </div>
-        </div>
-        <div class="tilt papers rv">
-          <div class="kick">此前 · 神经渲染加速器</div>
-          <div class="stats">
-            <div><b>{pubs.length}</b><span>篇论文</span></div>
-            <div><b>{firstCount}</b><span>篇一作</span></div>
-            <div><b>{new Set(pubs.map((p) => p.data.venue)).size}</b><span>个期刊与会议</span></div>
-          </div>
-          <div class="plist">
-            {reps.map((p) => (
-              <a href={`/research/${p.id}`}>
-                <span class="y">{p.data.year}</span>
-                <div><h4>{p.data.title}</h4><small>{isMe(p.data.authors?.[0] ?? '') && <><span class="first">一作</span> · </>}{p.data.venue?.match(/\(([^)]+)\)/)?.[1] ?? p.data.venue}</small></div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ResearchTimeline />
     </div>
   </section>
 
@@ -297,10 +352,10 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
       <div class="sec-head rv"><span class="no">05</span><h2>关于</h2><a class="more" href="/about">更多 →</a></div>
       <div class="about">
         <div class="tilt life rv">
-          <div class="kick">{siteConfig.name} · {siteConfig.brandEn} · {siteConfig.brand}</div>
-          <p class="lead">{siteConfig.name}，{siteConfig.affil}博士生，导师{siteConfig.advisor}。<mark>大二起加入课题组</mark>。</p>
-          <p>研究方向：<b>77 K 低温 GPU</b>、GPU 架构与模拟器。此前从事<b>神经渲染加速器</b>软硬件协同设计，发表论文 {pubs.length} 篇。</p>
-          <p>AI 工具深度使用者，开发了 <b>VSPi</b> 等一系列工具，在“{siteConfig.brand} · {siteConfig.brandEn}”账号分享 AI 使用经验。</p>
+          <div class="kick">{siteConfig.brand} · {siteConfig.brandEn}</div>
+          <p class="lead">{siteConfig.brand} · {siteConfig.brandEn}，{siteConfig.affil} 博士在读。<mark>大二（2022 年 8 月）起加入课题组</mark>。</p>
+          <p>科研有两条线：从大二持续至今的<b>神经渲染</b>（{pubs.length} 篇论文），以及 2025 年底分叉开启的 <b>77 K 低温 GPU 架构</b>。</p>
+          <p>AI 方面深入研究 Agent 细节、评测各类模型，自研 <b>VSPi</b> 等底座与 Workflow、HypoDoc、Expression，并造出信息引擎和游戏产品，在“{siteConfig.brand} · {siteConfig.brandEn}”账号分享。</p>
           <div class="facets">
             {facets.map((f) => <span><b>{f.title}</b>{f.text}</span>)}
           </div>
@@ -352,7 +407,7 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
   const poemEl = document.getElementById('poem');
   if (poemEl) new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { poemEl.classList.add('in'); o.disconnect(); } }, { threshold: 0.2 }).observe(poemEl);
 
-  // Minecraft 展示：切换截图与作品名
+  // Minecraft 展示：切换截图、作品名与详情入口
   const show = document.getElementById('mcshow');
   if (show) {
     const works = JSON.parse(show.dataset.works ?? '{}');
@@ -371,6 +426,9 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
       $('mcbadge').textContent = w.badge;
       $('mcwork').textContent = w.title;
       ($('mcic') as HTMLImageElement).src = w.icon;
+      const link = $('mcgo') as HTMLAnchorElement;
+      link.href = w.href;
+      link.textContent = w.cta;
     };
     const auto = () => { clearInterval(timer); if (!reduce) timer = window.setInterval(() => go((cur + 1) % shots.length), 4500); };
     tabs.forEach((t, i) => {
@@ -379,31 +437,5 @@ const cleanTitle = (t: string) => t.replace(/^【[^】]*】\s*/, '').replace(/^�
     });
     show.addEventListener('mouseleave', auto);
     auto();
-  }
-
-  // 77 K 卡片：冰晶粒子，躲开鼠标
-  const cv = document.getElementById('frost') as HTMLCanvasElement | null;
-  if (cv && !reduce) {
-    const cx = cv.getContext('2d')!;
-    let W = 0, H = 0, mx = -1, my = -1;
-    let flakes: { x: number; y: number; r: number; v: number; a: number }[] = [];
-    const size = () => {
-      const r = cv.getBoundingClientRect(); const dpr = devicePixelRatio || 1;
-      W = cv.width = r.width * dpr; H = cv.height = r.height * dpr;
-      flakes = Array.from({ length: 70 }, () => ({ x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.8 + 0.4) * dpr, v: Math.random() * 0.35 + 0.1, a: Math.random() * 0.6 + 0.2 }));
-    };
-    cv.parentElement!.addEventListener('mousemove', (e) => { const r = cv.getBoundingClientRect(); const d = devicePixelRatio || 1; mx = (e.clientX - r.left) * d; my = (e.clientY - r.top) * d; });
-    cv.parentElement!.addEventListener('mouseleave', () => { mx = -1; });
-    const frame = () => {
-      cx.clearRect(0, 0, W, H);
-      for (const f of flakes) {
-        f.y -= f.v; f.x += Math.sin(f.y / 40) * 0.2;
-        if (mx > 0) { const dx = f.x - mx, dy = f.y - my, d = Math.hypot(dx, dy); if (d < 90) { f.x += (dx / d) * 1.4; f.y += (dy / d) * 1.4; } }
-        if (f.y < -5) { f.y = H + 5; f.x = Math.random() * W; }
-        cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 7); cx.fillStyle = `rgba(190,220,255,${f.a})`; cx.fill();
-      }
-      requestAnimationFrame(frame);
-    };
-    size(); frame(); addEventListener('resize', size);
   }
 </script>

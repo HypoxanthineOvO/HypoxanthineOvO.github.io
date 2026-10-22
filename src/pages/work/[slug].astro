@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectDemo from '../../components/demos/ProjectDemo.astro';
 import { getProjects, getProjectLog } from '../../lib/content';
+import { mcShots, hypomcPainPoints, panlongSpells } from '../../data/home';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
@@ -12,6 +13,16 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const hasDemo = ['vspi', 'hypodoc', 'hypo-expression', 'hypo-info', 'hypo-class', 'hypo-workflow'].includes(entry.id);
+const isMc = entry.id === 'hypomc' || entry.id === 'panlong';
+const gallery = mcShots.filter((s) => s.work === entry.id);
+const moduleCount = hypomcPainPoints.reduce((n, c) => n + c.modules.length, 0);
+const spellCount = panlongSpells.reduce((n, e) => n + e.normal.length + 1, 0);
+// 法术行 "名称（说明）" 拆成两段
+const splitSpell = (s: string) => {
+  const m = s.match(/^(.+?)[（(](.+)[）)]$/);
+  return m ? { name: m[1], desc: m[2] } : { name: s, desc: '' };
+};
 // 开发日记：预渲染正文组件
 const logEntries = await getProjectLog(entry.id).catch(() => []);
 const logs = await Promise.all(
@@ -53,8 +64,73 @@ const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').
       <p class="crumbs"><a href="/work">项目</a> / {d.name}</p>
       <h1>{d.icon && <img class="ic" src={d.icon} alt="" width="64" height="64" />}{d.name}{d.version && <span class="ver">{d.version}</span>}</h1>
       <p class="lead">{d.description}</p>
-      <div class="bigdemo"><ProjectDemo id={entry.id} /></div>
+      {hasDemo && <div class="bigdemo"><ProjectDemo id={entry.id} /></div>}
       {d.highlights.length > 0 && <div class="hl">{d.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
+
+      {isMc && gallery.length > 0 && (
+        <section class="mcgal">
+          <h2>{entry.id === 'panlong' ? '盘龙禁咒实机画廊' : 'HypoMC 截图画廊'}</h2>
+          <div class:list={['gal-grid', { many: gallery.length > 3 }]}>
+            {gallery.map((s) => (
+              <figure style={`--ic:${s.color}`}>
+                <img src={s.img} alt={s.name} loading="lazy" />
+                <figcaption><b><i></i>{s.name}</b><span>{s.desc}</span></figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {entry.id === 'hypomc' && (
+        <section class="matrix">
+          <h2>5 大原版痛点 → {moduleCount} 项核心模块</h2>
+          <p class="sub">每一组先说原版哪里难受，再列出对应模块的代号、版本与具体机制。</p>
+          {hypomcPainPoints.map((c) => (
+            <div class="pain">
+              <div class="pain-head">
+                <h3>{c.category}</h3>
+                <p><span>原版痛点</span>{c.pain}</p>
+              </div>
+              <div class="mods">
+                {c.modules.map((m) => (
+                  <article class="mod">
+                    <div class="mod-top"><code>{m.id}</code><span class="mv">{m.ver}</span></div>
+                    <h4>{m.name}</h4>
+                    <p>{m.summary}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {entry.id === 'panlong' && (
+        <section class="matrix">
+          <h2>七大元素 · {spellCount} 种法术全览</h2>
+          <p class="sub">每个元素包含若干普通法术与 1 个毁天灭地的禁咒；<code>Z</code> 切换普通 / 禁咒，<code>X</code> 切换元素，<code>C</code> 切换法术。</p>
+          <div class="spells">
+            {panlongSpells.map((e) => {
+              const f = splitSpell(e.forbidden);
+              return (
+                <article class="el" style={`--ec:${e.color}`}>
+                  <header><span class="dot"></span><h3>{e.element}</h3><em>{e.normal.length + 1} 种</em></header>
+                  <ul>
+                    {e.normal.map((n) => {
+                      const s = splitSpell(n);
+                      return <li><b>{s.name}</b>{s.desc && <span>{s.desc}</span>}<small>普通</small></li>;
+                    })}
+                  </ul>
+                  <div class="forbid">
+                    <div class="ft"><b>{f.name}</b><small>禁咒</small></div>
+                    <span>{f.desc}</span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {d.cover && (
         <div class="cover-big" style={`background-image:url('${d.cover}')`} role="img" aria-label={`${d.name} 封面`} />
@@ -149,6 +225,51 @@ const repoPath = d.githubUrl ? new URL(d.githubUrl).pathname.replace(/^\//, '').
   .hl { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 26px; padding: 22px 28px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
   .hl span { display: flex; flex-direction: column; font-size: 13px; color: var(--muted); }
   .hl b { font-family: var(--font-serif); font-weight: 900; font-size: 34px; color: var(--red); line-height: 1.2; }
+  .mcgal { margin-top: 28px; }
+  .mcgal h2, .matrix h2 { font-family: var(--font-serif); font-weight: 900; font-size: 22px; }
+  .gal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+  .gal-grid.many { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .gal-grid.many figure { grid-column: span 2; }
+  .gal-grid.many figure:nth-child(-n+2) { grid-column: span 3; }
+  .gal-grid figure { margin: 0; border-radius: 14px; overflow: hidden; background: #14171a; color: #ece6da; border: 1px solid #14171a; }
+  .gal-grid img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .gal-grid figcaption { padding: 12px 14px 14px; font-size: 12.5px; line-height: 1.65; color: #cfc8bc; }
+  .gal-grid figcaption b { display: flex; align-items: center; gap: 8px; font-family: var(--font-serif); font-size: 15px; color: #fff; margin-bottom: 3px; }
+  .gal-grid figcaption i { width: 10px; height: 10px; background: var(--ic); box-shadow: 0 0 10px var(--ic); }
+  .matrix { margin-top: 34px; }
+  .matrix .sub { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+  .matrix .sub code { font-family: var(--font-mono); font-size: 12px; padding: 0 5px; border-radius: 4px; background: var(--paper-2); }
+  .pain { margin-top: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); overflow: hidden; }
+  .pain-head { padding: 16px 20px; background: #f3efe6; border-bottom: 1px solid var(--line); }
+  .pain-head h3 { font-family: var(--font-serif); font-weight: 900; font-size: 17px; color: #2f6b2a; }
+  .pain-head p { margin-top: 6px; font-size: 13.5px; line-height: 1.8; color: var(--ink-2); }
+  .pain-head p span { display: inline-block; font-size: 11.5px; color: #fff; background: var(--red); padding: 0 8px; border-radius: 4px; margin-right: 8px; }
+  .mods { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; padding: 14px; }
+  .mod { padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+  .mod-top { display: flex; align-items: center; gap: 8px; }
+  .mod-top code { font-family: var(--font-mono); font-size: 11.5px; padding: 1px 8px; border-radius: 5px; background: #e4f2e6; color: #2f7d42; }
+  .mod-top .mv { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .mod h4 { font-family: var(--font-serif); font-weight: 900; font-size: 15.5px; line-height: 1.45; margin: 8px 0 4px; }
+  .mod p { font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+  .spells { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; align-items: stretch; }
+  .el:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .el:last-child:nth-child(odd) ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .el { display: flex; flex-direction: column; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--ec) 45%, var(--line)); background: color-mix(in srgb, var(--ec) 6%, var(--panel)); overflow: hidden; border-top: 4px solid var(--ec); }
+  .el header { display: flex; align-items: center; gap: 10px; padding: 14px 18px 8px; }
+  .el .dot { width: 12px; height: 12px; background: var(--ec); box-shadow: 0 0 12px var(--ec); }
+  .el h3 { font-family: var(--font-serif); font-weight: 900; font-size: 19px; }
+  .el header em { margin-left: auto; font-style: normal; font-size: 12px; color: var(--muted); }
+  .el ul { list-style: none; margin: 0; padding: 0 18px; }
+  .el li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 2px 8px; padding: 7px 0; border-top: 1px dashed var(--line); font-size: 13px; line-height: 1.65; }
+  .el li b { font-family: var(--font-serif); font-weight: 900; font-size: 14px; }
+  .el li span { grid-column: 1 / -1; grid-row: 2; color: var(--ink-2); }
+  .el li small, .forbid small { font-size: 10.5px; padding: 0 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); margin-left: auto; }
+  .forbid { margin: 10px 0 0; padding: 12px 18px 16px; background: #1b1620; color: #ece6da; border-top: 2px solid var(--ec); font-size: 13px; line-height: 1.7; }
+  .forbid .ft { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .forbid .ft b { font-family: var(--font-serif); font-weight: 900; font-size: 15px; color: var(--ec); }
+  .forbid small { border-color: var(--ec); color: var(--ec); }
+  .forbid span { color: #cfc8bc; }
+  @media (max-width: 760px) { .gal-grid, .gal-grid.many { grid-template-columns: 1fr; } .gal-grid.many figure, .gal-grid.many figure:nth-child(-n+2) { grid-column: auto; } .spells { grid-template-columns: 1fr; } }
   .cover-big { margin-top: 22px; aspect-ratio: 16 / 7; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid var(--line); }
   .cols { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; margin-top: 30px; align-items: start; }
   .doc { font-size: 15.5px; }

@@ -7,13 +7,14 @@ githubUrl: "https://github.com/HypoxanthineOvO/HypoDoc"
 period: "2026 — NOW"
 category: "systems"
 group: productivity
+layer: ai-foundation
 tier: stable
 icon: "/media/icons/hypodoc.webp"
 version: "v0.3.1"
-order: 2
+order: 3
 featured: true
-tech: ["Markdown","Pandoc","XeLaTeX","Beamer"]
-description: "把材料丢给 AI，三条命令出一份排版漂亮的 PDF 或 Slides。上科大主题开箱即用。"
+tech: ["Agent Skill","Markdown","XeLaTeX","Beamer"]
+description: "给 AI 用的专业文档排版 Skill：让 AI 直接调用现成的高审美版式体系，同一份 Markdown 同时输出精美网页、学术 PDF 与演示文稿。"
 highlights:
   - { value: "3", label: "条命令出 Slides" }
   - { value: "3", label: "套 Slides 主题" }

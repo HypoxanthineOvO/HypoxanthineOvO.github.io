@@ -4,12 +4,13 @@ status: "active"
 githubUrl: "https://github.com/HypoxanthineOvO/Hypo-Workflow"
 period: "2026 — NOW"
 category: "systems"
-description: "文档和代码，一直对得上。一套给 Agent 项目的文档约定，加一个只读检查工具 hw：改了代码忘改文档，当场报警。"
+description: "架在 Agent 之上的长周期协作与文档工程工作流：一张地图四个文件，配合只读检查工具 hw，跨 7 种 Agent 宿主断点续传、拒绝上下文失忆。"
 group: productivity
+layer: ai-foundation
 tier: stable
 icon: "/media/icons/hypo-workflow.webp"
 version: "v3.0.0"
-order: 3
+order: 2
 featured: true
 tech: ["Python","零依赖","7 种宿主"]
 highlights:
