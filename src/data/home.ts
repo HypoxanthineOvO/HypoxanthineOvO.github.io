@@ -372,3 +372,24 @@ export const facets = [
   { title: '文学与人文', text: '诗词三部合集、散文四篇、文史课程随笔' },
   { title: '游戏与运动', text: 'Minecraft 模组创造者 · 乒乓球业余选手' },
 ];
+
+// 科研：两句话说明 + 论文/模拟器卡片
+export const researchIntro = {
+  neural: '大二起跟着做神经渲染加速器的软硬件协同设计：把 NeRF、3DGS 这些渲染流程拆开，想一想哪些能挪进硅片里。',
+  cryo: '低温下器件的性质发生剧变，GPU 的架构到底会面临怎样的改变？',
+};
+
+export const simulators = [
+  {
+    id: 'ngp-cmodel',
+    tag: 'C++ 参考模型',
+    name: 'Instant-NGP C-Model',
+    desc: 'Instant-NGP 的周期级 C++ 参考模型，只依赖 Eigen，写完可以直接对着它写 RTL。',
+  },
+  {
+    id: 'vsp-gpu-sim',
+    tag: '周期级模拟器',
+    name: 'VSP GPU SIM',
+    desc: '现代 GPU 的周期级模拟器，在 RTX 3090 Ti、4090、5090 和 A100 上逐卡标定。',
+  },
+];

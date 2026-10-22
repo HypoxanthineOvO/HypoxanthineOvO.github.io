@@ -26,10 +26,10 @@ ok('home: 平台入口含 B站链接', (await page.locator('.platforms a[href*="
 ok('home: 内容区三主线导览', (await page.locator('#content .pillar').count()) === 3);
 ok('home: 视频区 1 主推 + 3 侧栏 + 1 制作中', (await page.locator('#content .v-lead').count()) === 1 && (await page.locator('#content .v-row').count()) === 3 && (await page.locator('#content .v-soon').count()) === 1);
 ok('home: 文章区 5 篇', (await page.locator('#content .art-lead, #content .art').count()) === 5);
-ok('home: 三层能力树', (await page.locator('#projects .layer').count()) === 3);
-ok('home: Level 01/02 项目 6 个', (await page.locator('#projects .show-row, #projects .trio-card').count()) === 6);
+ok('home: 项目不再分组', (await page.locator('#projects .layer').count()) === 0);
+ok('home: 项目 6 张卡', (await page.locator('#projects .show-row, #projects .trio-card').count()) === 6);
 ok('home: Minecraft 详情入口', (await page.locator('#projects a[href="/work/hypomc"]').count()) >= 1 && (await page.locator('#projects a[href="/work/panlong"]').count()) >= 1);
-ok('home: 研究双轨', (await page.locator('#research .rt-track').count()) === 2 && (await page.locator('#research #frost').count()) === 1);
+ok('home: 研究小卡片', (await page.locator('#research .res-card').count()) === 4);
 ok('home: 项目图标全部加载', await page.locator('#projects .ic').evaluateAll((els) => els.every((el) => el.complete && el.naturalWidth > 10)));
 for (const demo of ['vspi', 'hypodoc', 'workflow', 'expression', 'info', 'class']) {
   const el = page.locator(`#projects [data-demo="${demo}"]`);
@@ -68,8 +68,8 @@ ok('content: 视频页链到文字版', (await page.locator('.related[href="/con
 
 await goto('/work');
 ok('work: 稳定项目链到详情', (await page.locator('a.proj[href="/work/vspi"]').count()) === 1);
-ok('work: Minecraft 两张卡直达详情', (await page.locator('#minecraft a.proj[href="/work/hypomc"]').count()) === 1 && (await page.locator('#minecraft a.proj[href="/work/panlong"]').count()) === 1);
-ok('work: 三层结构', (await page.locator('.layer-head').count()) === 3);
+ok('work: Minecraft 两张卡直达详情', (await page.locator('a.proj[href="/work/hypomc"]').count()) === 1 && (await page.locator('a.proj[href="/work/panlong"]').count()) === 1);
+ok('work: 项目不再分组', (await page.locator('.layer-head').count()) === 0 && (await page.locator('.proj').count()) === 8);
 await goto('/work/vspi');
 ok('work: VSPi 详情有 GitHub 卡', (await page.locator('.ghcard').count()) === 1);
 ok('work: Workflow 3.0 有详情页', (await page.request.get(`${BASE_URL}/work/hypo-workflow`).then((r) => r.text())).includes('v3.0.0'));
@@ -82,9 +82,9 @@ await goto('/work/hypo-info');
 ok('work: Hypo-Info 详情页与演示', (await page.locator('.bigdemo [data-demo="info"]').count()) === 1);
 
 await goto('/research');
-ok('research: 论文卡片', (await page.locator('.paper-card').count()) >= 8);
-ok('research: 双轨时间线', (await page.locator('.rt-track').count()) === 2 && (await page.locator('.rt-axis li').count()) === 4);
-ok('research: 作者名正常', !(await page.locator('.wall').textContent()).includes('[object Object]'));
+ok('research: 论文与模拟器卡片', (await page.locator('.paper-card').count()) === 4);
+ok('research: 其他参与列表', (await page.locator('.others li').count()) === 6);
+ok('research: 作者名正常', !(await page.locator('.cards').textContent()).includes('[object Object]'));
 ok('research: 无横向溢出', await noOverflow());
 
 await goto('/writing');

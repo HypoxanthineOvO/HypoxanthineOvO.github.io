@@ -477,3 +477,27 @@ footer nav { margin-left: auto; display: flex; gap: 18px; }
   .layer-head h3 { font-size: 20px; }
   .mc-title .mc-go { margin-left: 0; }
 }
+
+/* ---------- 03 研究：两句话 + 小卡片 ---------- */
+.res { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: 44px; align-items: start; }
+.res-say p { font-family: var(--font-serif); font-size: 17px; line-height: 1.95; color: var(--ink-2); }
+.res-say p + p { margin-top: 20px; font-size: 20px; line-height: 1.85; color: var(--fg); }
+.res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.res-card {
+  display: flex; flex-direction: column; gap: 8px; padding: 16px 18px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  transition: transform .3s var(--ease), border-color .2s, box-shadow .3s;
+}
+a.res-card:hover { transform: translateY(-3px); border-color: #cfc5b5; box-shadow: 0 18px 36px -24px rgba(60, 40, 20, .45); }
+.res-card .rtag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: var(--red); }
+.res-card h4 { font-family: var(--font-serif); font-weight: 700; font-size: 15px; line-height: 1.5; color: var(--fg); }
+.res-card .ryear { margin-top: auto; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.res-card.sim p { font-size: 12.5px; line-height: 1.7; color: var(--ink-2); }
+.res-card.sim .rtag { color: #2b4f86; }
+
+@media (max-width: 980px) {
+  .res { grid-template-columns: 1fr; gap: 22px; }
+}
+@media (max-width: 620px) {
+  .res-grid { grid-template-columns: 1fr; }
+}

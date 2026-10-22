@@ -2,10 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/home.css';
 import ProjectDemo from '../components/demos/ProjectDemo.astro';
-import ResearchTimeline from '../components/ResearchTimeline.astro';
 import { siteConfig, platforms } from '../lib/site';
 import { getMedia, getProjects, getPublications, getEssays, getPoetry, getStudy, formatMonthDay } from '../lib/content';
-import { avatarTags, recent, contentPillars, projectLayers, mcWorks, mcShots, facets } from '../data/home';
+import { avatarTags, recent, contentPillars, mcWorks, mcShots, facets, researchIntro, simulators } from '../data/home';
 
 // ---- 内容 ----
 const media = await getMedia();
@@ -23,13 +22,14 @@ const articles = articleIds
   .filter((a): a is NonNullable<typeof a> => a !== undefined);
 const [artLead, ...artRest] = articles;
 
-// ---- 项目：三层能力树 ----
+// ---- 项目 ----
 const projects = (await getProjects()).filter((p) => p.data.featured && p.data.layer);
 const byOrder = [...projects].sort((a, b) => a.data.order - b.data.order);
 type P = (typeof byOrder)[number];
-const layerProjects = (key: string) => byOrder.filter((p) => p.data.layer === key);
-const wideIds: Record<string, string[]> = { 'ai-foundation': ['vspi', 'hypo-workflow'], 'ai-product': ['hypo-info'] };
-const projectHref = (p: P) => (p.data.tier === 'stable' ? `/work/${p.id}` : (p.data.githubUrl ?? '/work#ai-product'));
+const wideIds = ['vspi', 'hypo-workflow', 'hypo-info'];
+const wideProjects = byOrder.filter((p) => wideIds.includes(p.id));
+const smallProjects = byOrder.filter((p) => !wideIds.includes(p.id) && p.data.layer !== 'minecraft');
+const projectHref = (p: P) => (p.data.tier === 'stable' ? `/work/${p.id}` : (p.data.githubUrl ?? '/work'));
 const statusOf = (p: P) =>
   p.data.tier === 'stable' ? { cls: '', text: p.data.version ?? '稳定' } : { cls: 'wip', text: '开发中' };
 const showCls = (p: P, i: number) => ({
@@ -41,8 +41,8 @@ const showCls = (p: P, i: number) => ({
 
 // ---- 研究 ----
 const pubs = await getPublications();
-const firstCount = pubs.filter((p) => p.data.authors?.[0] === 'Yunxiang He').length;
-const venueCount = new Set(pubs.map((p) => p.data.venue)).size;
+const firstPubs = pubs.filter((p) => p.data.authors?.[0] === 'Yunxiang He');
+const shortVenue = (v?: string) => v?.match(/\(([^)]+)\)/)?.[1] ?? v ?? '';
 
 // ---- 写作 ----
 const [essays, poetry, study] = await Promise.all([getEssays(), getPoetry(), getStudy()]);
@@ -206,61 +206,42 @@ const first = mcShots[0];
     <div class="shell">
       <div class="sec-head rv">
         <span class="no">02</span><h2>项目</h2>
-        <p>高阶 AI 能力树：先改造 AI 本身，再用它造产品，最后拿去优化游戏体验</p>
+        <p>自己写的 Agent 工具和日常产品，还有两个 Minecraft 作品</p>
         <a class="more" href="/work">全部项目 →</a>
       </div>
 
-      {projectLayers.filter((l) => l.key !== 'minecraft').map((layer) => {
-        const list = layerProjects(layer.key);
-        const wides = list.filter((p) => (wideIds[layer.key] ?? []).includes(p.id));
-        const smalls = list.filter((p) => !wides.includes(p));
-        return (
-          <div class="layer" id={layer.key}>
-            <div class="layer-head rv">
-              <span class="lv">{layer.no}</span>
-              <div><h3>{layer.title}</h3><p>{layer.subtitle}</p></div>
+      <div class="showcase">
+        {wideProjects.map((p, i) => (
+          <a class:list={['tilt show-row rv', showCls(p, i)]} href={projectHref(p)}>
+            <div class="show-txt">
+              <div class="top"><img class="ic" src={p.data.icon} alt="" width="56" height="56" /><span class="st"><i></i>{p.data.version}</span></div>
+              <h3>{p.data.name}</h3>
+              <p>{p.data.description}</p>
+              <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>
+              <span class="go">了解更多 →</span>
             </div>
-            <div class="showcase">
-              {wides.map((p, i) => (
-                <a class:list={['tilt show-row rv', showCls(p, i)]} href={projectHref(p)}>
-                  <div class="show-txt">
-                    <div class="top"><img class="ic" src={p.data.icon} alt="" width="56" height="56" /><span class="st"><i></i>{p.data.version}</span></div>
-                    <h3>{p.data.name}</h3>
-                    <p>{p.data.description}</p>
-                    <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>
-                    <span class="go">了解更多 →</span>
-                  </div>
-                  <div class="show-demo"><ProjectDemo id={p.id} /></div>
-                </a>
-              ))}
-            </div>
-            {smalls.length > 0 && (
-              <div class:list={['trio duo', { one: smalls.length === 1 }]}>
-                {smalls.map((p) => {
-                  const st = statusOf(p);
-                  const href = projectHref(p);
-                  return (
-                    <a class="tilt trio-card rv" href={href} rel={href.startsWith('http') ? 'noreferrer' : undefined}>
-                      <div class="trio-demo"><ProjectDemo id={p.id} /></div>
-                      <div class="trio-txt">
-                        <div class="top"><img class="ic sm" src={p.data.icon} alt="" width="40" height="40" /><h3>{p.data.name}</h3><span class="st"><i class={st.cls}></i>{st.text}</span></div>
-                        <p>{p.data.description}</p>
-                        {p.data.highlights.length > 0 && <div class="hl sm">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        );
-      })}
-
-      <div class="layer" id="minecraft">
-        <div class="layer-head rv">
-          <span class="lv">{projectLayers[2].no}</span>
-          <div><h3>{projectLayers[2].title}</h3><p>{projectLayers[2].subtitle}</p></div>
+            <div class="show-demo"><ProjectDemo id={p.id} /></div>
+          </a>
+        ))}
+      </div>
+      {smallProjects.length > 0 && (
+        <div class="trio">
+          {smallProjects.map((p) => {
+            const st = statusOf(p);
+            const href = projectHref(p);
+            return (
+              <a class="tilt trio-card rv" href={href} rel={href.startsWith('http') ? 'noreferrer' : undefined}>
+                <div class="trio-demo"><ProjectDemo id={p.id} /></div>
+                <div class="trio-txt">
+                  <div class="top"><img class="ic sm" src={p.data.icon} alt="" width="40" height="40" /><h3>{p.data.name}</h3><span class="st"><i class={st.cls}></i>{st.text}</span></div>
+                  <p>{p.data.description}</p>
+                  {p.data.highlights.length > 0 && <div class="hl sm">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
+                </div>
+              </a>
+            );
+          })}
         </div>
+      )}
         <div class="mc-show rv" id="mcshow" data-works={JSON.stringify(mcWorks)} data-shots={JSON.stringify(mcShots)}>
           <div class="mc-view">
             <div class="mc-imgs" id="mcimgs">
@@ -303,10 +284,30 @@ const first = mcShots[0];
     <div class="shell">
       <div class="sec-head rv">
         <span class="no">03</span><h2>研究</h2>
-        <p>{pubs.length} 篇论文 · {firstCount} 篇一作 · {venueCount} 个期刊与会议</p>
-        <a class="more" href="/research">完整时间线与论文墙 →</a>
+        <a class="more" href="/research">全部论文 →</a>
       </div>
-      <ResearchTimeline />
+      <div class="res rv">
+        <div class="res-say">
+          <p>{researchIntro.neural}</p>
+          <p>{researchIntro.cryo}</p>
+        </div>
+        <div class="res-grid">
+          {firstPubs.map((p) => (
+            <a class="res-card" href={`/research/${p.id}`}>
+              <span class="rtag">一作 · {shortVenue(p.data.venue)}</span>
+              <h4>{p.data.title}</h4>
+              <span class="ryear">{p.data.year}</span>
+            </a>
+          ))}
+          {simulators.map((s) => (
+            <div class="res-card sim">
+              <span class="rtag">{s.tag}</span>
+              <h4>{s.name}</h4>
+              <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 

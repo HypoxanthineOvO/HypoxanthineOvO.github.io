@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GateHead from '../components/GateHead.astro';
 import ProjectDemo from '../components/demos/ProjectDemo.astro';
 import { getProjects } from '../lib/content';
-import { mcShots, projectLayers } from '../data/home';
+import { mcShots } from '../data/home';
 
 const projects = (await getProjects()).filter((p) => p.data.featured && p.data.layer).sort((a, b) => a.data.order - b.data.order);
 type P = (typeof projects)[number];
@@ -14,47 +14,39 @@ const shotsOf = (id: string) => mcShots.filter((s) => s.work === id);
 const hasDemo = (id: string) => ['vspi', 'hypodoc', 'hypo-expression', 'hypo-info', 'hypo-class', 'hypo-workflow'].includes(id);
 ---
 
-<BaseLayout title="项目" description="高阶 AI 能力树：VSPi / Hypo-Workflow / HypoDoc / Hypo-Expression，Hypo-Info 与 Hypo-Class，以及 HypoMC 与盘龙 Minecraft 作品。">
+<BaseLayout title="项目" description="VSPi、Hypo-Workflow、HypoDoc、Hypo-Expression，Hypo-Info 与 Hypo-Class，以及 HypoMC 与盘龙。">
   <div class="shell">
     <GateHead gate="work" />
-    {projectLayers.map((layer) => (
-      <section class="group" id={layer.key}>
-        <div class="layer-head rv">
-          <span class:list={['lv', layer.key]}>{layer.no}</span>
-          <div><h2>{layer.title}</h2><p>{layer.subtitle}</p></div>
-        </div>
-        <div class:list={['grid', layer.key]}>
-          {projects.filter((p) => p.data.layer === layer.key).map((p) => {
-            const st = statusOf(p);
-            const href = hrefOf(p);
-            const Tag = href ? 'a' : 'div';
-            const shots = shotsOf(p.id);
-            return (
-              <Tag class:list={['card proj rv', { wide: layer.key === 'ai-product' && p.id === 'hypo-info' }]} href={href} rel={href?.startsWith('http') ? 'noreferrer' : undefined}>
-                {shots.length > 0 && (
-                  <div class="shots">{shots.slice(0, 3).map((s) => <img src={s.img} alt={s.name} loading="lazy" />)}</div>
-                )}
-                {shots.length === 0 && hasDemo(p.id) && <div class="demo"><ProjectDemo id={p.id} /></div>}
-                <div class="in">
-                  <div class="top">
-                    {p.data.icon && <img class="ic" src={p.data.icon} alt="" width="56" height="56" />}
-                    <span class="st"><i class={st.cls}></i>{st.text}</span>
-                  </div>
-                  <h3>{p.data.name}</h3>
-                  <p>{p.data.description}</p>
-                  {p.data.highlights.length > 0 && <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
-                  {shots.length > 0 && <div class="mods">{shots.map((s) => <span><i style={`--ic:${s.color}`}></i>{s.name}</span>)}</div>}
-                  <div class="foot">
-                    {p.data.tech.map((t) => <span>{t}</span>)}
-                    {href && <b>{p.data.tier === 'stable' ? '详情 →' : 'GitHub ↗'}</b>}
-                  </div>
-                </div>
-              </Tag>
-            );
-          })}
-        </div>
-      </section>
-    ))}
+    <div class="grid">
+      {projects.map((p) => {
+        const st = statusOf(p);
+        const href = hrefOf(p);
+        const Tag = href ? 'a' : 'div';
+        const shots = shotsOf(p.id);
+        return (
+          <Tag class:list={['card proj rv', { wide: p.id === 'hypo-info' }]} href={href} rel={href?.startsWith('http') ? 'noreferrer' : undefined}>
+            {shots.length > 0 && (
+              <div class="shots">{shots.slice(0, 3).map((s) => <img src={s.img} alt={s.name} loading="lazy" />)}</div>
+            )}
+            {shots.length === 0 && hasDemo(p.id) && <div class="demo"><ProjectDemo id={p.id} /></div>}
+            <div class="in">
+              <div class="top">
+                {p.data.icon && <img class="ic" src={p.data.icon} alt="" width="56" height="56" />}
+                <span class="st"><i class={st.cls}></i>{st.text}</span>
+              </div>
+              <h3>{p.data.name}</h3>
+              <p>{p.data.description}</p>
+              {p.data.highlights.length > 0 && <div class="hl">{p.data.highlights.map((h) => <span><b>{h.value}</b>{h.label}</span>)}</div>}
+              {shots.length > 0 && <div class="mods">{shots.map((s) => <span><i style={`--ic:${s.color}`}></i>{s.name}</span>)}</div>}
+              <div class="foot">
+                {p.data.tech.map((t) => <span>{t}</span>)}
+                {href && <b>{p.data.tier === 'stable' ? '详情 →' : 'GitHub ↗'}</b>}
+              </div>
+            </div>
+          </Tag>
+        );
+      })}
+    </div>
   </div>
 </BaseLayout>
 
