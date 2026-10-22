@@ -72,8 +72,8 @@ const first = mcShots[0];
         <div class="tagline"><span class="stamp">飘零聊科技</span> {siteConfig.tagline}</div>
         <h1>{siteConfig.brand}<span class="dot">.</span></h1>
         <div class="names"><b>{siteConfig.brandEn}</b> · {siteConfig.affil} 博士在读</div>
-        <p class="pitch">深入模型脾气与 Agent 底座，<br />把 AI 圈的事<em>讲透、造出来</em>。</p>
-        <p class="bio">博士在读，研究 <b>77 K 低温 GPU 架构</b> 与 <b>神经渲染</b>。不止于用 AI 写代码——自研 <b>VSPi</b> 等 Agent 底座与原生 Skill，并用这套体系独立造出信息引擎与 Minecraft 整合包/模组。</p>
+        <p class="pitch">前沿 AI 深度使用者、<br /><em>努力成为 AI 时代的超级个体</em></p>
+        <p class="bio">博士在读，研究兴趣是 <b>神经渲染加速芯片</b> 与 <b>低温 GPU 架构</b>。AI 时代，没有人能独善其身，在深入使用和体验前沿 AI 工具后，我自研了 Agent 底座 <b>VSPi</b> 和 <b>Hypo-Workflow</b> 等 AI 工作流，也用它们制作了很多独属于我的工具。希望能将我对 AI 的理解分享给大家。</p>
         <div class="platforms">
           {platforms.map((p) => {
             const Tag = p.href ? 'a' : 'span';
@@ -124,7 +124,7 @@ const first = mcShots[0];
           const n = pillarCount(p.key);
           return (
             <a class="tilt pillar rv" href="/content" data-pillar={p.key}>
-              <div class="pk"><span class="badge">{p.badge}</span><span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
+              <div class="pk">{p.badge && <span class="badge">{p.badge}</span>}<span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
             </a>

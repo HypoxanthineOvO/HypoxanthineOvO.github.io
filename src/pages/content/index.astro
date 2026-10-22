@@ -15,13 +15,13 @@ const sections = [
 ];
 ---
 
-<BaseLayout skin="content" title="内容" description="飘零的视频与文章：AI 科普、AI 账本与评论。">
+<BaseLayout skin="content" title="内容" description="飘零的视频与文章：AI 科普、向量化人生与 AI 造物。">
   <div class="shell">
-    <GateHead gate="content" blurb="三条旗舰主线：把 AI 圈的事讲透，用数学和系统视角看人生，再教你用 AI 学习与创造。" />
+    <GateHead gate="content" blurb="AI 科普 · 深入浅出，向量化人生，AI 造物。" />
     <div class="pillars">
       {contentPillars.map((p) => (
         <div class="pillar rv" data-pillar={p.key}>
-          <div class="pk"><span class="badge">{p.badge}</span><span class="cnt">{pillarCount(p.key) > 0 ? `${pillarCount(p.key)} 期视频` : '筹备中'}</span></div>
+          <div class="pk">{p.badge && <span class="badge">{p.badge}</span>}<span class="cnt">{pillarCount(p.key) > 0 ? `${pillarCount(p.key)} 期视频` : '筹备中'}</span></div>
           <h3>{p.title}</h3>
           <p>{p.desc}</p>
         </div>

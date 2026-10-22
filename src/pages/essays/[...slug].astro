@@ -18,7 +18,7 @@ const { newer, older } = getAdjacentEntries(essays, entry.id);
   skin={`essay-${entry.data.style}`}
   kicker={`散文 / ${entry.data.style === 'classical' ? '古典' : '现代'}`}
   title={entry.data.title}
-  metas={[formatDate(entry.data.date), '飘零']}
+  metas={[formatDate(entry.data.date)]}
   description={entry.data.description}
 >
   <Content />

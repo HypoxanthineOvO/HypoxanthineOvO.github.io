@@ -381,7 +381,7 @@ footer nav { margin-left: auto; display: flex; gap: 18px; }
 .pillar::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); opacity: .85; }
 .pillar[data-pillar='vector-life']::after { background: #5b47c4; }
 .pillar[data-pillar='learn-with-ai']::after { background: #2f7d42; }
-.pillar .pk { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pillar .pk { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 .pillar .badge { font-family: var(--font-mono); font-size: 11.5px; color: var(--red); letter-spacing: .04em; }
 .pillar[data-pillar='vector-life'] .badge { color: #5b47c4; }
 .pillar[data-pillar='learn-with-ai'] .badge { color: #2f7d42; }
