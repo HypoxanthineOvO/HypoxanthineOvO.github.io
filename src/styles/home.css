@@ -427,19 +427,8 @@ footer nav { margin-left: auto; display: flex; gap: 18px; }
 .articles .art h3 { font-size: 16.5px; }
 .articles .art p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-/* ---------- 02 项目：三层能力树 ---------- */
+/* ---------- 02 项目 ---------- */
 .sec-head p { max-width: 36em; }
-.layer { margin-top: 40px; }
-.layer:first-of-type { margin-top: 8px; }
-.layer-head { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1.5px solid var(--fg); }
-.layer-head .lv {
-  flex: none; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: #fff; background: var(--red);
-  padding: 4px 12px; border-radius: 6px; margin-top: 4px; letter-spacing: .04em;
-}
-#ai-product .layer-head .lv { background: #2f7d42; }
-#minecraft .layer-head .lv { background: #5fae3a; color: #0d1a07; }
-.layer-head h3 { font-family: var(--font-serif); font-weight: 900; font-size: 23px; line-height: 1.4; }
-.layer-head p { margin-top: 4px; font-size: 14px; line-height: 1.75; color: var(--ink-2); }
 .show-row.green { background: #eef6f0; border-color: #cfe3d4; }
 .show-row.green .hl b { color: #2f7d42; }
 .show-row.green .go { color: #2f7d42; }
@@ -473,8 +462,6 @@ footer nav { margin-left: auto; display: flex; gap: 18px; }
   .v-row { grid-template-columns: 1fr; }
   .v-row .txt { padding: 12px 6px 4px; }
   .v-soon { flex-wrap: wrap; }
-  .layer-head { flex-direction: column; gap: 8px; }
-  .layer-head h3 { font-size: 20px; }
   .mc-title .mc-go { margin-left: 0; }
 }
 

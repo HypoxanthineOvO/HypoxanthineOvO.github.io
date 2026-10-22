@@ -51,16 +51,7 @@ const hasDemo = (id: string) => ['vspi', 'hypodoc', 'hypo-expression', 'hypo-inf
 </BaseLayout>
 
 <style>
-  .group { margin-top: 38px; }
-  .layer-head { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1.5px solid var(--fg); }
-  .lv { flex: none; font-family: var(--font-mono); font-weight: 600; font-size: 13px; color: #fff; background: var(--red); padding: 4px 12px; border-radius: 6px; margin-top: 4px; }
-  .lv.ai-product { background: #2f7d42; }
-  .lv.minecraft { background: #5fae3a; color: #0d1a07; }
-  .layer-head h2 { font-family: var(--font-serif); font-weight: 900; font-size: 22px; line-height: 1.4; }
-  .layer-head p { margin-top: 4px; font-size: 14px; line-height: 1.75; color: var(--ink-2); max-width: 52em; }
-  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .grid.ai-foundation { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid.ai-product { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
   .proj { display: flex; flex-direction: column; }
   .demo { height: 240px; padding: 12px 12px 0; display: flex; }
   .demo > :global(*) { flex: 1; width: 100%; min-width: 0; }
@@ -85,5 +76,5 @@ const hasDemo = (id: string) => ['vspi', 'hypodoc', 'hypo-expression', 'hypo-inf
   .mods { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .mods span { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); }
   .mods i { width: 9px; height: 9px; background: var(--ic); }
-  @media (max-width: 960px) { .grid, .grid.ai-foundation, .grid.ai-product { grid-template-columns: 1fr; } .layer-head { flex-direction: column; gap: 8px; } }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } }
 </style>
