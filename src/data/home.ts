@@ -375,7 +375,7 @@ export const facets = [
 
 // 科研：两句话说明 + 论文/模拟器卡片
 export const researchIntro = {
-  neural: '大二起跟着做神经渲染加速器的软硬件协同设计：把 NeRF、3DGS 这些渲染流程拆开，想一想哪些能挪进硅片里。',
+  neural: '从大二开始，我参与了 NeRF 等神经渲染算法的硬件加速研究，通过算法与架构的协同设计，提高渲染速度和能效。',
   cryo: '低温下器件的性质发生剧变，GPU 的架构到底会面临怎样的改变？',
 };
 
@@ -384,12 +384,12 @@ export const simulators = [
     id: 'ngp-cmodel',
     tag: 'C++ 参考模型',
     name: 'Instant-NGP C-Model',
-    desc: 'Instant-NGP 的周期级 C++ 参考模型，只依赖 Eigen，写完可以直接对着它写 RTL。',
+    desc: '用 C++ 实现 Instant-NGP 的渲染流程，便于理解算法，也为 RTL 硬件实现提供参考。',
   },
   {
     id: 'vsp-gpu-sim',
     tag: '周期级模拟器',
     name: 'VSP GPU SIM',
-    desc: '现代 GPU 的周期级模拟器，在 RTX 3090 Ti、4090、5090 和 A100 上逐卡标定。',
+    desc: '通过回放 GPU 程序的执行轨迹，模拟计算与访存过程，并与真机测量对照，改进性能预测的准确性。',
   },
 ];

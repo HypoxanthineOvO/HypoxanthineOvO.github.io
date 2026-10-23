@@ -1,0 +1,93 @@
+---
+import { getPublications } from '../lib/content';
+import { researchMilestones } from '../data/research';
+import { researchIntro } from '../data/home';
+
+interface Props {
+  detailed?: boolean;
+}
+const { detailed = false } = Astro.props;
+const publications = await getPublications();
+const milestones = researchMilestones.map((milestone) => ({
+  ...milestone,
+  papers: (milestone.publications ?? []).map((paper) => {
+    const entry = publications.find((p) => p.id === paper.id);
+    if (!entry) throw new Error(`Missing research publication: ${paper.id}`);
+    return { ...paper, entry };
+  }),
+}));
+---
+
+<div class:list={['research-timeline', { detailed }]}>
+  <p class="research-intro">{researchIntro.neural}</p>
+  <ol class="milestones">
+    {milestones.map((milestone) => (
+      <li class="milestone" data-milestone={milestone.id}>
+        <span class="milestone-time">{milestone.time}</span>
+        <div class="milestone-content">
+          <h3 class="milestone-title">{milestone.title}</h3>
+          {milestone.note && <p class:list={['milestone-note', { question: milestone.ongoing }]}>{milestone.note}</p>}
+          <div class="milestone-cards">
+            {milestone.papers.map(({ entry, role, venue, description }) => (
+              <a class="research-card" href={`/research/${entry.id}`}>
+                <span class="card-tag">{role} · {venue} {entry.data.year}</span>
+                <h4>{entry.data.title}</h4>
+                {(description ?? entry.data.description) && <p>{description ?? entry.data.description}</p>}
+                {detailed && <span class="authors">{(entry.data.authors ?? []).join('，')}</span>}
+                <span class="card-more">详情 →</span>
+              </a>
+            ))}
+            {(milestone.simulators ?? []).map((simulator) => (
+              <div class="research-card sim">
+                <span class="card-tag">{simulator.tag}</span>
+                <h4>{simulator.name}</h4>
+                <p>{simulator.desc}</p>
+              </div>
+            ))}
+          </div>
+          {milestone.ongoing && <p class="continuation">未完待续</p>}
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .research-timeline { --timeline-color: var(--gate, var(--red)); }
+  .research-intro { max-width: 46em; margin-bottom: 30px; font-family: var(--font-serif); font-size: 17px; line-height: 1.95; color: var(--ink-2); }
+  .milestones { list-style: none; padding: 0; margin: 0; }
+  .milestone { position: relative; display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 34px; padding-bottom: 30px; }
+  .milestone::before { content: ''; position: absolute; left: 151px; top: 10px; bottom: -10px; width: 1px; background: var(--skin-line, var(--line)); }
+  .milestone::after { content: ''; position: absolute; left: 147px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--timeline-color); }
+  .milestone:last-child::before { bottom: 25px; border-left: 1px dashed var(--skin-line, var(--line)); background: none; }
+  .milestone:last-child { padding-bottom: 0; }
+  .milestone-time { padding-top: 1px; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; color: var(--skin-muted, var(--muted)); }
+  .milestone-content { min-width: 0; max-width: 620px; }
+  .milestone-title { margin: 0 0 12px; font-family: var(--font-serif); font-size: 17px; line-height: 1.5; font-weight: 600; color: var(--fg); }
+  .milestone-note { margin: -3px 0 14px; color: var(--ink-2); font-size: 14px; line-height: 1.8; }
+  .milestone-note.question { font-family: var(--font-serif); font-size: 19px; color: var(--fg); }
+  .milestone-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .research-card { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; background: var(--panel); border: 1px solid var(--skin-line, var(--line)); border-radius: 12px; transition: transform .3s var(--ease), border-color .2s, box-shadow .3s; }
+  a.research-card:hover { transform: translateY(-3px); border-color: #cfc5b5; box-shadow: 0 18px 36px -24px rgba(60, 40, 20, .45); }
+  .card-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: var(--timeline-color); }
+  .research-card h4 { font-family: var(--font-serif); font-weight: 700; font-size: 15px; line-height: 1.5; color: var(--fg); }
+  .research-card p { font-size: 12.5px; line-height: 1.7; color: var(--ink-2); }
+  .research-card.sim .card-tag { color: #2b4f86; }
+  .authors { font-size: 12.5px; line-height: 1.6; color: var(--skin-muted, var(--muted)); }
+  .card-more { align-self: flex-end; font-family: var(--font-mono); font-size: 12px; color: var(--timeline-color); opacity: .7; }
+  .continuation { margin-top: 16px; font-family: var(--font-serif); font-size: 14px; color: var(--skin-muted, var(--muted)); }
+  .detailed .research-card { padding: 18px 20px; border-radius: 10px; gap: 9px; }
+  .detailed .milestone-content { max-width: 760px; }
+  .detailed .research-card h4 { font-size: 16px; }
+  .detailed .research-card p { font-size: 13px; line-height: 1.75; }
+  .detailed .research-card.sim { background: var(--paper-2); }
+  @media (max-width: 620px) {
+    .milestone { display: block; padding: 0 0 28px 23px; }
+    .milestone::before { left: 4px; }
+    .milestone::after { left: 0; }
+    .milestone-time { display: block; margin-bottom: 7px; }
+    .milestone-title { font-size: 16px; }
+    .milestone-note.question { font-size: 18px; }
+    .research-card, .detailed .research-card { padding: 16px; }
+  }
+</style>

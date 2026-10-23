@@ -61,6 +61,7 @@ const publications = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/publications' }),
   schema: z.object({
     title: z.string(),
+    description: z.string().optional(),
     authors: z.array(z.string()).optional(),
     venue: z.string().optional(),
     year: z.number().int(),

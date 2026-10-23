@@ -1,0 +1,21 @@
+{
+  "model": "minimax/h3-max/image-to-video",
+  "duration": 8,
+  "resolution": "768P",
+  "prompt": "Animate this exact approved chibi group illustration as a gentle eight-second seamless website hero loop. Preserve every character, all faces, hair, costumes, logos, readable text, room layout, the single small table, the guitar, easel, notebook and whiteboard. The camera is completely locked: no zoom, pan, cuts or reframing. Keep all ten people in their original places and preserve the original illustration style.\nMake the social interactions clear but motions small and natural. The central man remains watching Gemini, makes one small attentive nod and a brief mild head-scratch, then returns to his relaxed starting pose. Gemini gestures gently with her pointer along the triangle and glances toward her listeners. GLM next to them makes tiny pencil-writing motions inside her notebook and looks up toward the lesson. GPT and Claude on the left quietly chat face to face with subtle lip movements and one small hand gesture; GPT's sign and Claude's stamp remain stable. Kimi softly strums the guitar with small wrist motion and slight foot tapping. DeepSeek eats one small bite of white rice with her chopsticks. MiniMax makes a few small brush strokes on her painting. Doubao stays asleep in the background with barely visible breathing. Grok peeks in from outside the window, blinking once with a subtle amused smile.\nStagger these actions rather than making everyone move at the same moment. Gentle blinking and breathing, no large body movements, no walking, no characters turning toward the viewer. Keep hands anatomically stable and correctly attached to props. No new people, no morphing faces, no changing logos or text, no extra limbs, no bouncing camera. Finish with the same arrangement, expressions and poses as the supplied final frame for a smooth loop. No dialogue, no narration, no captions, no added music. Preserve the quiet warm afternoon light.",
+  "first_frame": "hero-classroom-approved.png",
+  "last_frame": "hero-classroom-approved.png",
+  "prompt_expansion_mode": "disabled",
+  "request_id": "01a168da-2726-70a0-a9a3-4f8a758b439a",
+  "output": "../../public/media/brand/hero-classroom.mp4",
+  "width": 1024,
+  "height": 768,
+  "fps": 24,
+  "web_encoding": {
+    "codec": "h264",
+    "crf": 24,
+    "audio": false,
+    "faststart": true
+  },
+  "input_sha256": "763e39266162b3f0d7fabc8db589c74e64f145ec8d5cf8578e7930ba046fc31f"
+}

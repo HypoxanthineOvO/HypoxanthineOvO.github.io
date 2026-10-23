@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroScene from '../components/HeroScene.astro';
 import '../styles/home.css';
 import ProjectDemo from '../components/demos/ProjectDemo.astro';
+import ResearchTimeline from '../components/ResearchTimeline.astro';
 import { siteConfig, platforms } from '../lib/site';
 import { getMedia, getProjects, getPublications, getEssays, getPoetry, getStudy, formatMonthDay } from '../lib/content';
-import { avatarTags, recent, contentPillars, mcWorks, mcShots, facets, researchIntro, simulators } from '../data/home';
+import { recent, contentPillars, mcWorks, mcShots, facets } from '../data/home';
 
 // ---- 内容 ----
 const media = await getMedia();
@@ -41,8 +43,6 @@ const showCls = (p: P, i: number) => ({
 
 // ---- 研究 ----
 const pubs = await getPublications();
-const firstPubs = pubs.filter((p) => p.data.authors?.[0] === 'Yunxiang He');
-const shortVenue = (v?: string) => v?.match(/\(([^)]+)\)/)?.[1] ?? v ?? '';
 
 // ---- 写作 ----
 const [essays, poetry, study] = await Promise.all([getEssays(), getPoetry(), getStudy()]);
@@ -86,16 +86,7 @@ const first = mcShots[0];
         </div>
       </div>
 
-      <div class="stage rv" id="stage">
-        <div class="disc" id="disc">
-          <div class="halo"></div>
-          <div class="ring"></div>
-          <img class="av" src={siteConfig.avatar} alt="Q 版的我和七个 AI" width="900" height="900" />
-          {avatarTags.map((t) => (
-            <span class="tag-ai" style={`left:${t.x}%;top:${t.y}%;--c:${t.color}`}>{t.name}<small>{t.org}</small></span>
-          ))}
-        </div>
-      </div>
+      <HeroScene />
     </div>
   </section>
 
@@ -124,8 +115,7 @@ const first = mcShots[0];
           const n = pillarCount(p.key);
           return (
             <a class="tilt pillar rv" href="/content" data-pillar={p.key}>
-              <div class="pk">{p.badge && <span class="badge">{p.badge}</span>}<span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
-              <h3>{p.title}</h3>
+              <div class="pk"><h3>{p.title}</h3><span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
               <p>{p.desc}</p>
             </a>
           );
@@ -284,29 +274,10 @@ const first = mcShots[0];
     <div class="shell">
       <div class="sec-head rv">
         <span class="no">03</span><h2>研究</h2>
-        <a class="more" href="/research">全部论文 →</a>
+        <a class="more" href="/research">研究详情 →</a>
       </div>
-      <div class="res rv">
-        <div class="res-say">
-          <p>{researchIntro.neural}</p>
-          <p>{researchIntro.cryo}</p>
-        </div>
-        <div class="res-grid">
-          {firstPubs.map((p) => (
-            <a class="res-card" href={`/research/${p.id}`}>
-              <span class="rtag">一作 · {shortVenue(p.data.venue)}</span>
-              <h4>{p.data.title}</h4>
-              <span class="ryear">{p.data.year}</span>
-            </a>
-          ))}
-          {simulators.map((s) => (
-            <div class="res-card sim">
-              <span class="rtag">{s.tag}</span>
-              <h4>{s.name}</h4>
-              <p>{s.desc}</p>
-            </div>
-          ))}
-        </div>
+      <div class="rv">
+        <ResearchTimeline />
       </div>
     </div>
   </section>
@@ -377,20 +348,6 @@ const first = mcShots[0];
 
 <script>
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // 群像：名牌轮流高亮，鼠标带动轻微倾斜
-  const stage = document.getElementById('stage')!;
-  const disc = document.getElementById('disc')!;
-  const tags = [...document.querySelectorAll<HTMLElement>('.tag-ai')];
-  setTimeout(() => stage.classList.add('ready'), 500);
-  let ti = 0;
-  if (!reduce) setInterval(() => { tags.forEach((t, i) => t.classList.toggle('on', i === ti % tags.length)); ti++; }, 1600);
-  stage.addEventListener('mousemove', (e) => {
-    const r = stage.getBoundingClientRect();
-    const dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
-    disc.style.transform = `rotateY(${dx * 10}deg) rotateX(${-dy * 10}deg)`;
-  });
-  stage.addEventListener('mouseleave', () => { disc.style.transform = ''; });
 
   // 卡片倾斜与光泽
   document.querySelectorAll<HTMLElement>('.tilt').forEach((el) => {

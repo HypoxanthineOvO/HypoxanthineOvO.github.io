@@ -21,8 +21,7 @@ const sections = [
     <div class="pillars">
       {contentPillars.map((p) => (
         <div class="pillar rv" data-pillar={p.key}>
-          <div class="pk">{p.badge && <span class="badge">{p.badge}</span>}<span class="cnt">{pillarCount(p.key) > 0 ? `${pillarCount(p.key)} 期视频` : '筹备中'}</span></div>
-          <h3>{p.title}</h3>
+          <div class="pk"><h3>{p.title}</h3><span class="cnt">{pillarCount(p.key) > 0 ? `${pillarCount(p.key)} 期视频` : '筹备中'}</span></div>
           <p>{p.desc}</p>
         </div>
       ))}
@@ -58,13 +57,10 @@ const sections = [
   .pillar::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); }
   .pillar[data-pillar='vector-life']::after { background: #5b47c4; }
   .pillar[data-pillar='learn-with-ai']::after { background: #2f7d42; }
-  .pillar .pk { display: flex; align-items: center; justify-content: space-between; }
-  .pillar .badge { font-family: var(--font-mono); font-size: 11.5px; color: var(--red); }
-  .pillar[data-pillar='vector-life'] .badge { color: #5b47c4; }
-  .pillar[data-pillar='learn-with-ai'] .badge { color: #2f7d42; }
-  .pillar .cnt { font-size: 11.5px; color: var(--muted); padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; }
-  .pillar h3 { font-family: var(--font-serif); font-weight: 900; font-size: 19px; line-height: 1.4; margin: 10px 0 6px; }
-  .pillar p { font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+  .pillar .pk { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .pillar .cnt { flex: none; white-space: nowrap; font-size: 11.5px; color: var(--muted); padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; }
+  .pillar h3 { font-family: var(--font-serif); font-weight: 900; font-size: 19px; line-height: 1.4; margin: 0; }
+  .pillar p { margin-top: 6px; font-size: 13px; line-height: 1.75; color: var(--ink-2); }
   @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; } }
   .group { margin-top: 30px; }
   .sub-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--fg); }
