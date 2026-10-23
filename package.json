@@ -8,10 +8,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/build-site.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "benchmark": "node scripts/benchmark-performance.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
@@ -36,6 +37,7 @@
     "jpeg-js": "^0.4.4",
     "playwright": "^1.59.1",
     "pngjs": "^7.0.0",
+    "sharp": "^0.35.5",
     "typescript": "5.9.3"
   }
 }

@@ -423,3 +423,9 @@ footer nav { margin-left: auto; display: flex; gap: 18px; }
   .v-soon { flex-wrap: wrap; }
   .mc-title .mc-go { margin-left: 0; }
 }
+
+/* Real image elements retain the former background crop while loading on demand. */
+.image-frame { position: relative; overflow: hidden; }
+.cover-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.collab .cover-image { object-position: center 30%; }
+.mc-show.paused .mc-tab.on .bar::after { animation-play-state: paused; }

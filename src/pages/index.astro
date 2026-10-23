@@ -68,7 +68,7 @@ const first = mcShots[0];
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="shell">
-      <div class="rv">
+      <div class="rv in">
         <div class="tagline"><span class="stamp">飘零聊科技</span> {siteConfig.tagline}</div>
         <h1>{siteConfig.brand}<span class="dot">.</span></h1>
         <div class="names"><b>{siteConfig.brandEn}</b> · {siteConfig.affil} 博士在读</div>
@@ -126,7 +126,7 @@ const first = mcShots[0];
       <div class="vid-wrap">
         {leadVideo && (
           <a class="tilt v-lead rv" href={`/content/${leadVideo.id}`} data-video={leadVideo.data.video} data-poster={leadVideo.data.cover} data-title={leadVideo.data.title}>
-            <div class="vthumb" style={`background-image:url(${leadVideo.data.cover})`}>
+            <div class="vthumb"><img class="cover-image" src={leadVideo.data.cover} alt="" loading="lazy" decoding="async" sizes="(max-width: 980px) calc(100vw - 48px), 720px" />
               <span class="playbig">▶</span>
               {leadVideo.data.duration && <span class="dur">{leadVideo.data.duration}</span>}
               <span class="flag">主推 · 最新旗舰</span>
@@ -141,7 +141,7 @@ const first = mcShots[0];
         <div class="v-side">
           {otherVideos.map((v) => (
             <a class="tilt v-row rv" href={`/content/${v.id}`} data-video={v.data.video} data-poster={v.data.cover} data-title={v.data.title}>
-              <div class="vthumb" style={`background-image:url(${v.data.cover})`}>
+              <div class="vthumb"><img class="cover-image" src={v.data.cover} alt="" loading="lazy" decoding="async" sizes="(max-width: 620px) calc(100vw - 68px), 400px" />
                 <span class="play">▶</span>
                 {v.data.duration && <span class="dur">{v.data.duration}</span>}
               </div>
@@ -168,7 +168,7 @@ const first = mcShots[0];
       <div class="sub-head rv"><h3>文章</h3><span>公众号 · 小红书</span></div>
       {artLead && (
         <a class="tilt art-lead rv" href={`/content/${artLead.id}`}>
-          <div class="img" style={`background-image:url(${artLead.data.cover})`}></div>
+          <div class="img image-frame"><img class="cover-image" src={artLead.data.cover} alt="" loading="lazy" decoding="async" sizes="(max-width: 980px) calc(100vw - 48px), 660px" /></div>
           <div class="txt">
             <div class="kick"><span class="tag">{artLead.data.series}</span>{formatMonthDay(artLead.data.date)}</div>
             <h3>{artLead.data.title}</h3>
@@ -179,7 +179,7 @@ const first = mcShots[0];
       <div class="articles">
         {artRest.map((a) => (
           <a class="tilt art rv" href={`/content/${a.id}`}>
-            <div class="img" style={`background-image:url(${a.data.cover})`}></div>
+            <div class="img image-frame"><img class="cover-image" src={a.data.cover} alt="" loading="lazy" decoding="async" sizes="(max-width: 620px) calc(100vw - 48px), (max-width: 980px) 45vw, 300px" /></div>
             <div class="txt">
               <div class="kick"><span class="tag">{a.data.series}</span>{formatMonthDay(a.data.date)}</div>
               <h3>{a.data.title}</h3>
@@ -235,11 +235,11 @@ const first = mcShots[0];
         <div class="mc-show rv" id="mcshow" data-works={JSON.stringify(mcWorks)} data-shots={JSON.stringify(mcShots)}>
           <div class="mc-view">
             <div class="mc-imgs" id="mcimgs">
-              {mcShots.map((s, i) => <img src={s.img} alt={s.name} loading="lazy" class:list={{ on: i === 0 }} />)}
+              {mcShots.map((s, i) => <img src={i === 0 ? s.img : undefined} data-src={i === 0 ? undefined : s.img} alt={s.name} loading="lazy" decoding="async" sizes="(max-width: 980px) calc(100vw - 48px), 900px" class:list={{ on: i === 0 }} />)}
             </div>
             <div class="mc-cap">
               <div class="mc-title">
-                <img class="mc-ic" id="mcic" src={mcWorks[first.work].icon} alt="" width="44" height="44" />
+                <img data-no-optimize class="mc-ic" id="mcic" src={mcWorks[first.work].icon} alt="" width="44" height="44" />
                 <span class="mc-badge" id="mcbadge">{mcWorks[first.work].badge}</span>
                 <h3 id="mcwork">{mcWorks[first.work].title}</h3>
                 <a class="mc-go" id="mcgo" href={mcWorks[first.work].href}>{mcWorks[first.work].cta}</a>
@@ -333,7 +333,7 @@ const first = mcShots[0];
           </div>
         </div>
         <div class="tilt collab rv">
-          <div class="img" style="background-image:url(/media/brand/banner.webp)"></div>
+          <div class="img image-frame"><img class="cover-image" src="/media/brand/banner.webp" alt="" loading="lazy" decoding="async" sizes="(max-width: 980px) calc(100vw - 48px), 640px" /></div>
           <div class="in">
             <div class="kick"><span class="tag">合作</span></div>
             <h3>一起做点什么</h3>
@@ -373,8 +373,17 @@ const first = mcShots[0];
     const imgs = [...show.querySelectorAll<HTMLImageElement>('.mc-imgs img')];
     const tabs = [...show.querySelectorAll<HTMLButtonElement>('.mc-tab')].sort((a, b) => Number(a.dataset.i) - Number(b.dataset.i));
     const $ = (id: string) => document.getElementById(id)!;
-    let cur = 0, timer = 0;
+    let cur = 0, timer = 0, visible = false;
+    const prepare = (i: number) => {
+      const img = imgs[i];
+      if (!img?.dataset.src) return;
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    };
     const go = (i: number) => {
+      prepare(i);
+      prepare((i + 1) % shots.length);
       cur = i;
       tabs.forEach((t, k) => t.classList.toggle('on', k === i));
       imgs.forEach((im, k) => im.classList.toggle('on', k === i));
@@ -388,12 +397,22 @@ const first = mcShots[0];
       link.href = w.href;
       link.textContent = w.cta;
     };
-    const auto = () => { clearInterval(timer); if (!reduce) timer = window.setInterval(() => go((cur + 1) % shots.length), 4500); };
+    const auto = () => {
+      clearInterval(timer);
+      show.classList.toggle('paused', !visible || document.hidden || reduce);
+      if (visible && !document.hidden && !reduce) timer = window.setInterval(() => go((cur + 1) % shots.length), 4500);
+    };
     tabs.forEach((t, i) => {
       t.addEventListener('mouseenter', () => { go(i); clearInterval(timer); });
       t.addEventListener('click', () => { go(i); auto(); });
     });
     show.addEventListener('mouseleave', auto);
+    document.addEventListener('visibilitychange', auto);
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) prepare((cur + 1) % shots.length);
+      auto();
+    }, { threshold: 0.05 }).observe(show);
     auto();
   }
 </script>

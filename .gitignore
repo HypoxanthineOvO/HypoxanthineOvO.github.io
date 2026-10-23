@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea/
 # local validation screenshots (regen: node scripts/shoot-site.mjs)
 shots/
+
+# Isolated, automatically provisioned font build tools
+.venv-build/
+__pycache__/

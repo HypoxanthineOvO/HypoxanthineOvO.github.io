@@ -31,13 +31,24 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Setup Python for font subsetting
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Check source
+        run: pnpm check
 
       - name: Build site
         run: pnpm build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify font subsetting regression cases
+        run: .venv-build/bin/python scripts/font-subsets.test.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

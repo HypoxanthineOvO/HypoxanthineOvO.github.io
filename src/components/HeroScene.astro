@@ -1,93 +1,13 @@
 ---
 const poster = '/media/brand/hero-classroom.webp';
-const video = '/media/brand/hero-classroom.mp4';
 const description = '飘零听 Gemini 讲解，GLM 在旁记笔记；GPT 与 Claude 聊天，Kimi 弹吉他，DeepSeek 吃饭，MiniMax 画画，豆包在后排睡觉，Grok 从窗外探头。';
 ---
 
-<div class="hero-scene rv" data-hero-scene>
-  <img class="scene-poster" src={poster} alt={description} width="1448" height="1086" fetchpriority="high" />
-  <video class="scene-video" data-src={video} poster={poster} muted loop playsinline preload="none" aria-hidden="true"></video>
-  <button class="scene-toggle" type="button" hidden aria-label="播放动态封面">
-    <span data-symbol aria-hidden="true">▶</span><span data-label>播放</span>
-  </button>
+<div class="hero-scene" data-hero-scene>
+  <img class="scene-poster" src={poster} alt={description} width="1448" height="1086" sizes="(max-width: 620px) calc(100vw - 36px), (max-width: 980px) min(640px, calc(100vw - 64px)), 535px" fetchpriority="high" decoding="async" />
 </div>
-
-<script>
-  document.querySelectorAll<HTMLElement>('[data-hero-scene]').forEach((root) => {
-    const video = root.querySelector<HTMLVideoElement>('video')!;
-    const button = root.querySelector<HTMLButtonElement>('button')!;
-    const symbol = button.querySelector<HTMLElement>('[data-symbol]')!;
-    const label = button.querySelector<HTMLElement>('[data-label]')!;
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    let visible = true;
-    let userPaused = false;
-    let manuallyStarted = false;
-    let failed = false;
-
-    const syncButton = () => {
-      const paused = video.paused;
-      symbol.textContent = paused ? '▶' : 'Ⅱ';
-      label.textContent = paused ? '播放' : '暂停';
-      button.setAttribute('aria-label', paused ? '播放动态封面' : '暂停动态封面');
-    };
-    const shouldPlay = () => !failed && visible && !document.hidden && !userPaused && (!reducedMotion.matches || manuallyStarted);
-    const updatePlayback = () => {
-      if (!shouldPlay()) {
-        video.pause();
-        return;
-      }
-      if (!video.getAttribute('src')) video.src = video.dataset.src!;
-      video.muted = true;
-      void video.play().then(() => {
-        // A tab, viewport or motion preference can change while play() is pending.
-        if (!shouldPlay()) video.pause();
-      }).catch(() => {
-        // Keep the still image visible when autoplay is unavailable.
-        syncButton();
-      });
-    };
-
-    button.hidden = false;
-    button.addEventListener('click', () => {
-      if (video.paused) {
-        manuallyStarted = true;
-        userPaused = false;
-      } else {
-        userPaused = true;
-      }
-      updatePlayback();
-    });
-    video.addEventListener('playing', () => {
-      root.classList.add('has-video');
-      syncButton();
-    });
-    video.addEventListener('pause', syncButton);
-    video.addEventListener('error', () => {
-      failed = true;
-      root.classList.remove('has-video');
-      button.hidden = true;
-    });
-    reducedMotion.addEventListener('change', () => {
-      manuallyStarted = false;
-      if (reducedMotion.matches) root.classList.remove('has-video');
-      updatePlayback();
-    });
-    document.addEventListener('visibilitychange', updatePlayback);
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      updatePlayback();
-    }, { threshold: 0.05 }).observe(root);
-    updatePlayback();
-  });
-</script>
 
 <style>
   .hero-scene { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); }
-  .scene-poster, .scene-video { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .scene-video { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
-  .has-video .scene-video { opacity: 1; }
-  .scene-toggle { position: absolute; right: 12px; bottom: 12px; z-index: 1; display: inline-flex; align-items: center; gap: 7px; padding: 7px 11px; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; background: rgba(28,27,26,.72); color: white; font: inherit; font-size: 12px; cursor: pointer; }
-  .scene-toggle[hidden] { display: none; }
-  .scene-toggle:hover { background: rgba(28,27,26,.9); }
-  .scene-toggle:focus-visible { outline: 2px solid var(--red); outline-offset: -3px; }
+  .scene-poster { display: block; width: 100%; height: 100%; object-fit: contain; }
 </style>

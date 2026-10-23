@@ -61,6 +61,7 @@ img { max-width: 100%; height: auto; }
 }
 a.card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -28px rgba(60, 40, 20, .45); border-color: #cfc5b5; }
 .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.hero .rv { opacity: 1; transform: none; transition: none; }
 .rv.in { opacity: 1; transform: none; }
 .no-js .rv { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {

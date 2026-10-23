@@ -1,0 +1,205 @@
+{
+  "baselineCommit": "86852ea8c4988b0e4a5029f8085149bcb1dea021",
+  "conditions": {
+    "downloadBitsPerSecond": 1600000,
+    "latencyMs": 150,
+    "cpuSlowdown": 4,
+    "windowMs": 30000,
+    "runs": 3,
+    "cache": "disabled",
+    "compression": "gzip for text; native image/font encoding",
+    "note": "Local origin; no DNS/TLS/CDN delay. Bytes include partial requests; LCP observed only within fixed window."
+  },
+  "before": {
+    "desktop": {
+      "fcpMs": 4720,
+      "lcpMs": 27340,
+      "receivedBytes": 5858480,
+      "unfinished": 1,
+      "categories": {
+        "html": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 17321,
+          "completedBytes": 17321
+        },
+        "css": {
+          "requests": 3,
+          "completed": 3,
+          "receivedBytes": 333689,
+          "completedBytes": 333689
+        },
+        "image": {
+          "requests": 18,
+          "completed": 18,
+          "receivedBytes": 1362950,
+          "completedBytes": 1362950
+        },
+        "js": {
+          "requests": 7,
+          "completed": 7,
+          "receivedBytes": 6241,
+          "completedBytes": 6241
+        },
+        "font": {
+          "requests": 96,
+          "completed": 96,
+          "receivedBytes": 3369635,
+          "completedBytes": 3369635
+        },
+        "media": {
+          "requests": 1,
+          "completed": 0,
+          "receivedBytes": 768242,
+          "completedBytes": 0
+        },
+        "other": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 402,
+          "completedBytes": 402
+        }
+      }
+    },
+    "mobile": {
+      "fcpMs": 4728,
+      "lcpMs": 5612,
+      "receivedBytes": 5858508,
+      "unfinished": 1,
+      "categories": {
+        "html": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 17321,
+          "completedBytes": 17321
+        },
+        "css": {
+          "requests": 3,
+          "completed": 3,
+          "receivedBytes": 333689,
+          "completedBytes": 333689
+        },
+        "image": {
+          "requests": 18,
+          "completed": 18,
+          "receivedBytes": 1362950,
+          "completedBytes": 1362950
+        },
+        "js": {
+          "requests": 7,
+          "completed": 7,
+          "receivedBytes": 6241,
+          "completedBytes": 6241
+        },
+        "font": {
+          "requests": 96,
+          "completed": 96,
+          "receivedBytes": 3369635,
+          "completedBytes": 3369635
+        },
+        "media": {
+          "requests": 1,
+          "completed": 0,
+          "receivedBytes": 768270,
+          "completedBytes": 0
+        },
+        "other": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 402,
+          "completedBytes": 402
+        }
+      }
+    }
+  },
+  "after": {
+    "desktop": {
+      "fcpMs": 992,
+      "lcpMs": 3152,
+      "receivedBytes": 1332342,
+      "unfinished": 0,
+      "categories": {
+        "html": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 17986,
+          "completedBytes": 17986
+        },
+        "css": {
+          "requests": 4,
+          "completed": 4,
+          "receivedBytes": 23908,
+          "completedBytes": 23908
+        },
+        "image": {
+          "requests": 15,
+          "completed": 15,
+          "receivedBytes": 372650,
+          "completedBytes": 372650
+        },
+        "js": {
+          "requests": 7,
+          "completed": 7,
+          "receivedBytes": 6241,
+          "completedBytes": 6241
+        },
+        "font": {
+          "requests": 15,
+          "completed": 15,
+          "receivedBytes": 911155,
+          "completedBytes": 911155
+        },
+        "other": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 402,
+          "completedBytes": 402
+        }
+      }
+    },
+    "mobile": {
+      "fcpMs": 864,
+      "lcpMs": 864,
+      "receivedBytes": 1116746,
+      "unfinished": 0,
+      "categories": {
+        "html": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 17986,
+          "completedBytes": 17986
+        },
+        "css": {
+          "requests": 4,
+          "completed": 4,
+          "receivedBytes": 23908,
+          "completedBytes": 23908
+        },
+        "image": {
+          "requests": 11,
+          "completed": 11,
+          "receivedBytes": 157054,
+          "completedBytes": 157054
+        },
+        "js": {
+          "requests": 7,
+          "completed": 7,
+          "receivedBytes": 6241,
+          "completedBytes": 6241
+        },
+        "font": {
+          "requests": 15,
+          "completed": 15,
+          "receivedBytes": 911155,
+          "completedBytes": 911155
+        },
+        "other": {
+          "requests": 1,
+          "completed": 1,
+          "receivedBytes": 402,
+          "completedBytes": 402
+        }
+      }
+    }
+  }
+}

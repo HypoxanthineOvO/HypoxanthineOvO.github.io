@@ -21,16 +21,7 @@ const noOverflow = () => page.evaluate(() => document.documentElement.scrollWidt
 await goto('/');
 ok('home: 品牌名', (await page.locator('.hero h1').textContent())?.startsWith('飘零'));
 ok('home: 完整群像封面加载', await page.locator('.scene-poster').evaluate((el) => el.complete && el.naturalWidth > 10));
-await page.waitForFunction(() => {
-  const video = document.querySelector('.scene-video');
-  return video && !video.paused && video.currentTime > .2;
-}, undefined, { timeout: 15000 });
-ok('home: 封面静音循环播放', await page.locator('.scene-video').evaluate((el) => el.muted && el.loop && el.playsInline && el.videoWidth > 0));
-await page.getByRole('button', { name: '暂停动态封面' }).click();
-ok('home: 封面可以暂停', await page.locator('.scene-video').evaluate((el) => el.paused));
-await page.getByRole('button', { name: '播放动态封面' }).click();
-await page.waitForFunction(() => !document.querySelector('.scene-video').paused);
-ok('home: 封面可以恢复播放', await page.locator('.scene-video').evaluate((el) => !el.paused));
+ok('home: 封面不使用视频', await page.locator('.hero-scene video').count() === 0);
 ok('home: 平台入口含 B站链接', (await page.locator('.platforms a[href*="bilibili.com"]').count()) === 1);
 ok('home: 内容区三主线导览', (await page.locator('#content .pillar').count()) === 3);
 ok('home: 视频区 1 主推 + 3 侧栏 + 1 制作中', (await page.locator('#content .v-lead').count()) === 1 && (await page.locator('#content .v-row').count()) === 3 && (await page.locator('#content .v-soon').count()) === 1);
@@ -126,15 +117,13 @@ const still = await browser.newPage({ reducedMotion: 'reduce' });
 let heroVideoRequested = false;
 still.on('request', (request) => { if (request.url().endsWith('/hero-classroom.mp4')) heroVideoRequested = true; });
 await still.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
-ok('motion: 减少动态效果时不加载封面视频', !heroVideoRequested && await still.locator('.scene-video').evaluate((el) => el.paused && !el.getAttribute('src')));
+ok('motion: 减少动态效果时不加载封面视频', !heroVideoRequested && await still.locator('.hero-scene video').count() === 0);
 ok('motion: 静态封面完整显示', await still.locator('.scene-poster').evaluate((el) => el.complete && el.naturalWidth > 0));
 await still.close();
 
-const fallback = await browser.newPage();
-await fallback.route('**/hero-classroom.mp4', (route) => route.abort());
+const fallback = await browser.newPage({ javaScriptEnabled: false });
 await fallback.goto(BASE_URL + '/', { waitUntil: 'networkidle' });
-await fallback.waitForFunction(() => document.querySelector('.scene-video').error !== null);
-ok('motion: 视频失败后保留静态封面', !(await fallback.locator('.hero-scene').getAttribute('class')).includes('has-video') && await fallback.locator('.scene-poster').evaluate((el) => el.complete && el.naturalWidth > 0));
+ok('home: 无脚本时首屏仍完整显示', await fallback.locator('.scene-poster').evaluate((el) => el.complete && el.naturalWidth > 0) && await fallback.locator('.hero h1').isVisible());
 await fallback.close();
 
 // ---- 旧地址跳转（meta-refresh 页，用 HTTP 请求直查内容） ----
