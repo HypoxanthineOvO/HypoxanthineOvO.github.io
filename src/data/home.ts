@@ -313,7 +313,7 @@ export const researchTracks = {
     id: 'cryo-gpu',
     color: 'cyan',
     period: '2025 底 / 2026 初 — 至今',
-    badge: '主线 B · 博士核心主线',
+    badge: '主线 B · 低温 GPU 研究',
     title: '77 K 低温 GPU 架构与周期级模拟器',
     lead: '2025 年底至 2026 年初分叉开启的新主线：探索 77 K 液氮温区下的 GPU 架构设计空间（远期研究目标：综合能效提升 15 倍），当前聚焦底层器件映射与现代 GPU 模拟器校准基建。',
     milestones: [

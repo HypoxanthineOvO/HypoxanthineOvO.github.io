@@ -1,7 +1,7 @@
 export const siteConfig = {
   site: 'https://hypox.cn',
   title: '飘零 · Hypoxanthine',
-  description: '飘零（Hypoxanthine）：AI 加速器博士在读，深度 AI 使用者。研究神经渲染加速芯片与低温 GPU 架构，自研 VSPi 等 Agent 工具。',
+  description: '飘零（Hypoxanthine）：AI 加速器硕士研究生在读，深度 AI 使用者。研究神经渲染加速芯片与低温 GPU 架构，自研 VSPi 等 Agent 工具。',
   author: 'Hypoxanthine',
   name: '飘零',
   brand: '飘零',

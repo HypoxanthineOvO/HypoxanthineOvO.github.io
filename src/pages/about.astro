@@ -8,13 +8,13 @@ import { facets } from '../data/home';
 const pubs = await getPublications();
 ---
 
-<BaseLayout title="关于" description={`${siteConfig.brand} · ${siteConfig.brandEn}，${siteConfig.affil}博士在读，研究 77 K 低温 GPU 与神经渲染，深度研究 AI Agent 与各类模型。`}>
+<BaseLayout title="关于" description={`${siteConfig.brand} · ${siteConfig.brandEn}，${siteConfig.affil}硕士研究生在读，研究 77 K 低温 GPU 与神经渲染，深度研究 AI Agent 与各类模型。`}>
   <div class="shell">
     <GateHead kicker="ABOUT" title="关于" />
     <div class="about">
       <div class="card main rv">
         <p class="names">{siteConfig.brand} · {siteConfig.brandEn}</p>
-        <p class="lead">Yunxiang He（贺云翔），{siteConfig.affil}博士在读。<mark>2022 年 8 月、大二起加入课题组</mark>，至今没有离开过。</p>
+        <p class="lead">Yunxiang He（贺云翔），{siteConfig.affil}硕士研究生在读。<mark>2022 年 8 月、大二起加入课题组</mark>，至今没有离开过。</p>
         <p>日常是两种身份的叠加：白天做<b>硬件架构科研</b>，其余时间做<b>高阶 AI 实践</b>。科研上有两条时间线——从大二持续至今的<b>神经渲染线</b>（软硬件协同设计、Instant-NGP 周期级 C-Model、{pubs.length} 篇论文，以及 AI 辅助的场景复杂性理论支线），和 2025 年底分叉开启的 <b>77 K 低温 GPU 线</b>（液氮温区的架构设计空间、Cryo-Model 器件映射与 VSP GPU 模拟器）。</p>
         <p>AI 方面不止于「用 AI 写代码」：我花大量时间研究 <b>Agent 的实现细节</b>，体验和评测各家模型的脾气秉性，并动手改造 AI 本身——自研 <b>VSPi</b> Agent 底座、<b>Hypo-Workflow</b> 断点续传工作流、<b>HypoDoc</b> 排版 Skill 与 <b>Hypo-Expression</b> 自然表达扩展；再用这套体系造出 <b>Hypo-Info</b> 信息引擎、<b>Hypo-Class</b> 课堂助教，以及 <b>HypoMC</b> 生存整合包与<b>盘龙</b>魔法模组等游戏产品。</p>
         <p>这些经验会整理成视频和文章，发在「{siteConfig.brand} · {siteConfig.brandEn}」各平台账号：讲透 AI 圈的事，也把做出来的东西公开给大家用。</p>
