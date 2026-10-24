@@ -1,4 +1,5 @@
 ---
+import PillarArtwork from '../components/PillarArtwork.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroScene from '../components/HeroScene.astro';
 import '../styles/home.css';
@@ -115,6 +116,7 @@ const first = mcShots[0];
           const n = pillarCount(p.key);
           return (
             <a class="tilt pillar rv" href="/content" data-pillar={p.key}>
+              <PillarArtwork src={p.image} />
               <div class="pk"><h3>{p.title}</h3><span class="cnt">{n > 0 ? `${n} 期视频` : '视频筹备中'}</span></div>
               <p>{p.desc}</p>
             </a>

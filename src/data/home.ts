@@ -26,18 +26,21 @@ export const recent = [
 export const contentPillars = [
   {
     key: 'ai-basics',
+    image: '/media/pillars/ai-basics.webp',
     badge: '',
     title: 'AI 科普 · 深入浅出',
     desc: '绝非仅仅浅尝辄止的介绍 AI 工具，而是带你深入 AI 的本质，带你走进前沿 AI 的大门。',
   },
   {
     key: 'vector-life',
+    image: '/media/pillars/vector-life.webp',
     badge: '',
     title: '向量化人生',
     desc: '你的人生，绝不仅仅是一串数字。每个人的人生都是一个丰富的高维向量，在深邃的高维空间里，你的人生永远还有无限可能。',
   },
   {
     key: 'learn-with-ai',
+    image: '/media/pillars/ai-making.webp',
     badge: '',
     title: 'AI 造物',
     desc: '带你走进 AI 时代：每个人都可以创造属于自己的数字工具。',

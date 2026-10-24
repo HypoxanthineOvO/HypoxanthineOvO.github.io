@@ -1,0 +1,8 @@
+---
+interface Props { src: string; }
+const { src } = Astro.props;
+---
+<img class="pillar-artwork" src={src} alt="" width="1536" height="1024" loading="lazy" decoding="async" sizes="(max-width: 620px) calc(100vw - 82px), (max-width: 980px) calc(100vw - 110px), 325px" />
+<style>
+  .pillar-artwork { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; border-radius: 10px; margin-bottom: 14px; }
+</style>

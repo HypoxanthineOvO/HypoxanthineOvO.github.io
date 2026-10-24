@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "status": "approved; used by homepage and content category cards",
+  "prompts": [
+    {
+      "name": "vector-life",
+      "prompt": "Edit the supplied category illustration. Preserve the approved warm ivory paper, hand-painted gouache and fine ink drawing style, burgundy and slate blue palette, landscape 3:2 format. This is one of a matching series of website card illustrations. Keep readable at small size, purposeful negative space. No heading, no watermark, no brand logos. 保留小人物与温暖的纸面插画风，但彻底去掉山峰、城市、海岸、树林、房屋、旅行背包与弯曲道路，不要旅游选路线。画面改成清楚的三维坐标空间：三根纤细有刻度且带箭头的坐标轴从共同原点出发，三个淡淡的网格平面交汇。一个普通人自然站在原点附近，一根醒目的暗红色向量从原点指向空间中的一个点，另两根灰蓝向量指向不同方向。用细虚线把红色向量终点投影到坐标平面，显示分量关系；点线有明确几何关系，箭头清晰。人物有生活气息，数学空间有想象力但不画风景目的地。无字母、无公式、无标题。"
+    },
+    {
+      "name": "ai-basics",
+      "prompt": "Edit the supplied category illustration. Preserve the approved warm ivory paper, hand-painted gouache and fine ink drawing style, burgundy and slate blue palette, landscape 3:2 format. This is one of a matching series of website card illustrations. Keep readable at small size, purposeful negative space. No heading, no watermark, no brand logos. 保留打开模型外壳和手指讲解的概念、原画风和色彩，重画内部：让人第一眼就看到人工神经网络，而不是机械玩具或分子模型。主体是悬浮在打开外壳内的五层垂直排列的二维节点阵列，以侧透视展示输入层到多层隐藏层再到输出层；节点小而清晰，各相邻层之间有大量细连接形成整齐的神经网络拓扑，少量暗红色激活节点和连线显示信号穿过网络。外壳只是小小的底座和掀开的盖子，不遮挡网络。删掉原来三层厚平台、机械立柱、管道和积木块。手指自然指向一个中间层。网络是绝对视觉主体，疏密有序，像在揭开AI模型黑箱。不要脑子、齿轮或机器人脸，不要文字。"
+    },
+    {
+      "name": "ai-making",
+      "prompt": "Edit the supplied category illustration. Preserve the approved warm ivory paper, hand-painted gouache and fine ink drawing style, burgundy and slate blue palette, landscape 3:2 format. This is one of a matching series of website card illustrations. Keep readable at small size, purposeful negative space. No heading, no watermark, no brand logos. 保留原图同一个女性创作者、暗红毛衣、木桌、笔记本电脑和温暖插画风，但把手工堆积木改为清楚的AI辅助创造数字工具过程。她一只手在笔记本触控板上引导，另一只手自然指向电脑旁逐步生成的一个小型个人工具界面。电脑屏幕清楚呈现简洁对话输入框和一个由相连节点组成的小AI网络标记，允许唯一简短文字“AI”。从屏幕延伸出几条纤细的蓝红色数据线，连接半透明的草图界面，再连接到一个完成的清晰工具卡片，体现想法经过AI成为可用工具。完成卡片上是明确的简单列表、滑块和小按钮，不要乱字。让这条生成关系紧凑明了，图中数字界面仍是手绘纸感，避免科幻霓虹全息大片。删掉桌上无关的齿轮、云、聊天积木，把空间让给人、AI对话与生成工具的关系。不要把成果画成实体机器人。"
+    }
+  ],
+  "publishedSources": "/media/pillars/*.webp"
+}
